@@ -104,6 +104,76 @@ Add to `%APPDATA%\Claude\claude_desktop_config.json`:
 }
 ```
 
+#### For Cline (VS Code Extension)
+
+To use this server with Cline in VS Code, you need to configure the MCP settings:
+
+1. **Locate the Cline MCP configuration file:**
+
+   **macOS:**
+   ```
+   ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+   ```
+
+   **Windows:**
+   ```
+   %APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\cline_mcp_settings.json
+   ```
+
+   **Linux:**
+   ```
+   ~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+   ```
+
+2. **Add the RateSpot MCP server configuration:**
+
+   Open the `cline_mcp_settings.json` file and add the following configuration:
+
+   ```json
+   {
+     "mcpServers": {
+       "ratespot": {
+         "autoApprove": [],
+         "disabled": false,
+         "timeout": 60,
+         "command": "node",
+         "args": [
+           "/full/path/to/ratespot-mcp/ratespot_mcp_server.js"
+         ],
+         "env": {
+           "RATESPOT_API_KEY": "your_actual_api_key_here"
+         },
+         "transportType": "stdio"
+       }
+     }
+   }
+   ```
+
+   **Important Notes:**
+   - Replace `/full/path/to/ratespot-mcp/` with the actual absolute path to your ratespot-mcp directory
+   - Replace `your_actual_api_key_here` with your RateSpot API key
+   - If you already have other MCP servers configured, add the "ratespot" entry to the existing "mcpServers" object
+
+3. **Restart VS Code and Cline:**
+   - Close VS Code completely
+   - Reopen VS Code
+   - Start a new Cline conversation
+
+4. **Verify the installation:**
+   
+   In Cline, you can test the installation by asking:
+   ```
+   Can you use the ratespot MCP server to get current mortgage rates for a $400,000 loan?
+   ```
+
+   If configured correctly, Cline will have access to all the RateSpot mortgage tools and can help you with mortgage rate queries, loan comparisons, and payment calculations.
+
+**Configuration Options:**
+- `autoApprove`: Array of tool names that don't require user approval (leave empty for manual approval of all tools)
+- `disabled`: Set to `true` to temporarily disable this MCP server
+- `timeout`: Timeout in seconds for tool operations (default: 60)
+- `transportType`: Communication method (always use "stdio" for this server)
+
 ## Available Tools
 
 ### get-mortgage-rates

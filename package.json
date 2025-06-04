@@ -14,7 +14,8 @@
     "clean": "rm -f ratespot_mcp_server.js",
     "prebuild": "npm run clean",
     "check": "tsc --noEmit --skipLibCheck ratespot_mcp_server.ts",
-    "test": "node test_server.js"
+    "test": "node test_server.js",
+    "test-python": "python3 test_ratespot_mcp.py"
   },
   "keywords": [
     "mcp",
