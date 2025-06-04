@@ -78,7 +78,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "ratespot": {
       "command": "node",
-      "args": ["/path/to/ratespot-mcp-server/ratespot_mcp_server.js"],
+      "args": ["/path/to/ratespot-mcp/ratespot_mcp_server.js"],
       "env": {
         "RATESPOT_API_KEY": "your_api_key_here"
       }
@@ -95,7 +95,7 @@ Add to `%APPDATA%\Claude\claude_desktop_config.json`:
   "mcpServers": {
     "ratespot": {
       "command": "node",
-      "args": ["C:\\path\\to\\ratespot-mcp-server\\ratespot_mcp_server.js"],
+      "args": ["C:\\path\\to\\ratespot-mcp\\ratespot_mcp_server.js"],
       "env": {
         "RATESPOT_API_KEY": "your_api_key_here"
       }
@@ -209,11 +209,14 @@ Access historical mortgage rate data.
 
 ### Project Structure
 ```
-ratespot-mcp-server/
+ratespot-mcp/
 ├── package.json              # Project configuration and dependencies
 ├── tsconfig.json            # TypeScript configuration
 ├── ratespot_mcp_server.ts   # Main server implementation
 ├── .env.example             # Environment variable template
+├── setup.sh                 # Setup script for Linux/macOS
+├── setup.bat                # Setup script for Windows
+├── test_server.js           # Basic functionality test
 └── README.md               # This file
 ```
 
