@@ -309,10 +309,20 @@ The server includes comprehensive error handling for:
 
 ## Security
 
-- API keys are managed through environment variables
+- **API Key Protection**: API keys are managed through environment variables and never committed to the repository
+- **Environment Files**: The `.env` file containing your actual API key is ignored by git and should never be committed
+- **Example Files**: The `.env.example` file contains only placeholder values for reference
 - All API requests use secure HTTPS connections
 - Input validation using Zod schemas
 - Error messages sanitized to prevent information leakage
+
+### Important Security Notes
+
+⚠️ **Never commit your actual API keys to version control**
+- Always use `.env` files for sensitive credentials
+- Ensure `.env` is listed in your `.gitignore` file
+- Only commit `.env.example` files with placeholder values
+- Rotate API keys if they are accidentally exposed
 
 ## Support
 
