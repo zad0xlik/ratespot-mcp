@@ -25,14 +25,14 @@ The RateSpot MCP Server provides the following tools:
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
-- RateSpot API key
+- RateSpot API key (get yours at [https://app.ratespot.io/account-settings](https://app.ratespot.io/account-settings) or create a free account at [https://app.ratespot.io](https://app.ratespot.io))
 
 ### Setup
 
 1. **Clone or download this repository**
    ```bash
-   git clone <repository-url>
-   cd ratespot-mcp-server
+   git clone https://github.com/zad0xlik/ratespot-mcp.git
+   cd ratespot-mcp
    ```
 
 2. **Install dependencies**
@@ -40,7 +40,11 @@ The RateSpot MCP Server provides the following tools:
    npm install
    ```
 
-3. **Configure environment variables**
+3. **Get your RateSpot API key**
+   - If you have an existing account: Visit [https://app.ratespot.io/account-settings](https://app.ratespot.io/account-settings) to find your API key
+   - If you need an account: Sign up for free at [https://app.ratespot.io](https://app.ratespot.io) (no charge for initial plan with moderate volume of requests)
+
+4. **Configure environment variables**
    ```bash
    cp .env.example .env
    ```
@@ -50,12 +54,12 @@ The RateSpot MCP Server provides the following tools:
    RATESPOT_API_KEY=your_actual_api_key_here
    ```
 
-4. **Build the server**
+5. **Build the server**
    ```bash
    npm run build
    ```
 
-5. **Test the server**
+6. **Test the server**
    ```bash
    npm run dev
    ```
