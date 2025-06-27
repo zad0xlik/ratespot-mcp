@@ -1,0 +1,293 @@
+#!/bin/bash
+
+# RateSpot MCP Installer - Main Executable
+# This is the main entry point for the macOS app bundle
+
+set -e  # Exit on any error
+
+# Get the directory containing this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RESOURCES_DIR="$SCRIPT_DIR/../Resources"
+
+# Source all helper scripts
+source "$RESOURCES_DIR/ui_helpers.sh"
+source "$RESOURCES_DIR/validation.sh"
+source "$RESOURCES_DIR/install_core.sh"
+
+# Global variables
+INSTALL_PATH=""
+API_KEY=""
+LOG_FILE="/tmp/ratespot_installer.log"
+
+# Initialize log file
+echo "=== RateSpot MCP Installer Started at $(date) ===" > "$LOG_FILE"
+
+# Error handler
+handle_error() {
+    local exit_code=$?
+    local line_number=$1
+    
+    log "ERROR: Installation failed at line $line_number with exit code $exit_code"
+    
+    show_error "Installation failed!
+
+An error occurred during installation. 
+
+Check the log file for details:
+$LOG_FILE
+
+Would you like to view the log?" "Installation Failed"
+    
+    # Offer to show log
+    if [[ $? -eq 0 ]]; then
+        open -a "Console" "$LOG_FILE" 2>/dev/null || open -a "TextEdit" "$LOG_FILE" 2>/dev/null
+    fi
+    
+    exit $exit_code
+}
+
+# Set up error handling
+trap 'handle_error $LINENO' ERR
+
+# Main installation workflow
+main() {
+    log "Starting RateSpot MCP Installer"
+    
+    # Step 1: Show welcome dialog
+    log "Showing welcome dialog"
+    if ! show_welcome; then
+        log "User cancelled at welcome screen"
+        exit 0
+    fi
+    
+    # Step 2: Run pre-installation checks
+    log "Running pre-installation checks"
+    show_progress "Checking system requirements..."
+    
+    if ! run_preinstall_checks > /tmp/precheck_results.txt 2>&1; then
+        local issues=$(cat /tmp/precheck_results.txt)
+        log "Pre-installation checks failed: $issues"
+        
+        # Handle Node.js missing specifically
+        if echo "$issues" | grep -q "Node.js not installed"; then
+            local nodejs_choice
+            show_nodejs_install
+            nodejs_choice=$?
+            
+            case $nodejs_choice in
+                0)  # Cancel
+                    log "User cancelled due to Node.js requirement"
+                    exit 0
+                    ;;
+                1)  # Continue anyway
+                    log "User chose to continue without Node.js"
+                    show_error "Warning: Installation will likely fail without Node.js.
+
+Please install Node.js from https://nodejs.org and try again." "Node.js Required"
+                    ;;
+                2)  # Download Node.js
+                    log "User chose to download Node.js"
+                    show_success "Node.js download page opened.
+
+Please install Node.js and run this installer again." "Download Started"
+                    exit 0
+                    ;;
+            esac
+        else
+            show_error "System requirements not met:
+
+$issues
+
+Please resolve these issues and try again." "System Check Failed"
+            exit 1
+        fi
+    fi
+    
+    # Step 3: Get installation location
+    log "Getting installation location"
+    INSTALL_PATH=$(get_install_location)
+    if [[ $? -ne 0 ]]; then
+        log "User cancelled at installation location selection"
+        exit 0
+    fi
+    
+    log "Installation path selected: $INSTALL_PATH"
+    
+    # Validate installation path
+    local path_validation
+    path_validation=$(validate_install_path "$INSTALL_PATH")
+    local path_status=$?
+    
+    if [[ $path_status -eq 1 ]]; then
+        show_error "Invalid installation path:
+
+$path_validation
+
+Please choose a different location." "Invalid Path"
+        exit 1
+    elif [[ $path_status -eq 2 ]]; then
+        # Directory exists, ask for confirmation
+        if ! show_confirmation "Directory already exists:
+
+$INSTALL_PATH
+
+Do you want to overwrite it?
+
+Warning: This will delete all existing files in this directory." "Directory Exists"; then
+            log "User cancelled due to existing directory"
+            exit 0
+        fi
+        
+        # Remove existing directory
+        log "Removing existing directory: $INSTALL_PATH"
+        rm -rf "$INSTALL_PATH"
+    fi
+    
+    # Step 4: Get and validate API key
+    log "Getting API key from user"
+    local api_key_attempts=0
+    local max_attempts=3
+    
+    while [[ $api_key_attempts -lt $max_attempts ]]; do
+        API_KEY=$(get_api_key)
+        if [[ $? -ne 0 ]]; then
+            log "User cancelled at API key input"
+            exit 0
+        fi
+        
+        log "Validating API key (attempt $((api_key_attempts + 1)))"
+        show_progress "Validating API key..."
+        
+        local validation_result
+        validation_result=$(validate_api_key "$API_KEY")
+        local validation_status=$?
+        
+        case $validation_status in
+            0)  # Valid
+                log "API key validation successful"
+                break
+                ;;
+            1)  # Invalid
+                log "API key validation failed: $validation_result"
+                ((api_key_attempts++))
+                
+                if [[ $api_key_attempts -ge $max_attempts ]]; then
+                    show_error "API key validation failed after $max_attempts attempts:
+
+$validation_result
+
+Please check your API key and try again." "API Key Invalid"
+                    exit 1
+                else
+                    if ! show_retry "API key validation failed:
+
+$validation_result" "API key validation"; then
+                        log "User cancelled after API key validation failure"
+                        exit 0
+                    fi
+                fi
+                ;;
+            2)  # Inconclusive
+                log "API key validation inconclusive: $validation_result"
+                if show_confirmation "API key validation was inconclusive:
+
+$validation_result
+
+This might be due to network issues or API changes.
+Do you want to continue with the installation anyway?" "Validation Inconclusive"; then
+                    log "User chose to continue despite inconclusive validation"
+                    break
+                else
+                    log "User cancelled due to inconclusive API validation"
+                    exit 0
+                fi
+                ;;
+        esac
+    done
+    
+    # Step 5: Confirm installation
+    log "Showing installation confirmation"
+    if ! show_confirmation "Ready to install RateSpot MCP Server
+
+Installation location: $INSTALL_PATH
+API key: ${API_KEY:0:10}...
+
+The installer will:
+• Download and build the MCP server
+• Configure Claude Desktop automatically
+• Configure Cline (if available)
+• Create an uninstaller
+
+Continue with installation?" "Confirm Installation"; then
+        log "User cancelled at final confirmation"
+        exit 0
+    fi
+    
+    # Step 6: Perform the installation
+    log "Starting main installation process"
+    show_progress "Installing RateSpot MCP Server..."
+    
+    local install_result
+    perform_installation "$INSTALL_PATH" "$API_KEY"
+    install_result=$?
+    
+    # Step 7: Handle installation results
+    case $install_result in
+        0)  # Success
+            log "Installation completed successfully"
+            
+            # Show final success dialog with options
+            show_final_success "$INSTALL_PATH"
+            local final_choice=$?
+            
+            case $final_choice in
+                2)  # Test installation
+                    log "User requested installation test"
+                    show_progress "Testing installation..."
+                    
+                    local test_message
+                    if test_message=$(test_mcp_server "$INSTALL_PATH" "$API_KEY" 2>&1); then
+                        show_test_results "true" "$test_message"
+                    else
+                        show_test_results "false" "$test_message"
+                    fi
+                    ;;
+            esac
+            
+            log "Installation workflow completed successfully"
+            ;;
+            
+        1)  # Error
+            log "Installation failed"
+            show_error "Installation failed!
+
+Please check the log file for details:
+$LOG_FILE
+
+You may need to:
+• Check your internet connection
+• Verify your API key
+• Ensure you have proper permissions
+• Try a different installation location" "Installation Failed"
+            exit 1
+            ;;
+            
+        2)  # Warning
+            log "Installation completed with warnings"
+            show_success "Installation completed with warnings.
+
+The RateSpot MCP server has been installed but some tests failed.
+It may still work correctly.
+
+Installation location: $INSTALL_PATH
+
+Check the log file for details:
+$LOG_FILE" "Installation Complete (with warnings)"
+            ;;
+    esac
+    
+    log "RateSpot MCP Installer finished successfully"
+}
+
+# Run the main function
+main "$@"
