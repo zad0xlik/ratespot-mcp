@@ -123,9 +123,15 @@ codesign --deep --force --verify --verbose \
 
 ### **Common Issues & Solutions**
 
-**"Cannot be opened because it is from an unidentified developer"**
-- Right-click → "Open" → "Open" (bypass Gatekeeper)
+**🔒 "Apple could not verify RateSpot-MCP-Installer is free of malware"**
+This is **normal** for unsigned apps! Easy fixes:
+- **Right-click** the app → **"Open"** → **"Open"** (easiest method)
 - Or: System Preferences → Security & Privacy → "Open Anyway"
+- Or: Terminal: `xattr -d com.apple.quarantine RateSpot-MCP-Installer.app`
+- See `GATEKEEPER_BYPASS_GUIDE.md` for detailed instructions
+
+**"Cannot be opened because it is from an unidentified developer"**
+- Same as above - use the right-click method to bypass safely
 
 **Installation fails**
 - Check internet connection

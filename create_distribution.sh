@@ -27,6 +27,7 @@ cp -R "RateSpot-MCP-Installer.app" "$DIST_DIR/"
 # Copy documentation
 echo "📄 Copying documentation..."
 cp "INSTALLER_README.md" "$DIST_DIR/README.md"
+cp "GATEKEEPER_BYPASS_GUIDE.md" "$DIST_DIR/"
 
 # Create a simple user guide
 echo "📝 Creating user guide..."
