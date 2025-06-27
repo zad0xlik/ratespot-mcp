@@ -66,10 +66,12 @@ echo ""
 echo "🎉 Setup complete!"
 echo ""
 echo "📝 Next steps:"
-echo "1. Edit .env and add your RATESPOT_API_KEY:"
+echo "1. Get your RateSpot API key from: https://app.ratespot.io/account-settings"
+echo ""
+echo "2. Edit .env and add your RATESPOT_API_KEY:"
 echo "   RATESPOT_API_KEY=your_actual_api_key_here"
 echo ""
-echo "2. Add to your MCP client configuration:"
+echo "3. Add to your MCP client configuration:"
 echo "   For Claude Desktop (macOS): ~/Library/Application Support/Claude/claude_desktop_config.json"
 echo "   For Claude Desktop (Windows): %APPDATA%\\Claude\\claude_desktop_config.json"
 echo ""
@@ -80,13 +82,17 @@ echo '       "ratespot": {'
 echo '         "command": "node",'
 echo "         \"args\": [\"$(pwd)/ratespot_mcp_server.js\"],"
 echo '         "env": {'
-echo '           "RATESPOT_API_KEY": "your_api_key_here"'
+echo '           "RATESPOT_API_KEY": "your_actual_api_key_here"'
 echo '         }'
 echo '       }'
 echo '     }'
 echo '   }'
 echo ""
-echo "3. Restart your MCP client to load the server"
+echo "4. Restart your MCP client to load the server"
+echo ""
+echo "📋 For detailed installation instructions, see:"
+echo "   - CLAUDE_DESKTOP_INSTALLATION.md (Claude Desktop setup)"
+echo "   - README.md (Complete documentation)"
 echo ""
 echo "🔧 Available commands:"
 echo "   npm run build  - Build the server"

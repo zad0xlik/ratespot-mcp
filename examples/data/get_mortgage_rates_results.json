@@ -1,0 +1,23 @@
+[
+  {
+    "event": "mortgage_product",
+    "data": {
+      "mat_years_fixed": 30,
+      "rate_desc": "30-year fixed",
+      "lender_name": "SunnyHill Financial, Inc.",
+      "rate_lock_used": 30,
+      "rate": 5.375,
+      "apr": 5.666,
+      "mo_payment": 2799.86,
+      "points": 1.688,
+      "upfront_costs": 15785,
+      "purchase_price": 625000,
+      "down_payment": 125000,
+      "mortgage_balance": 500000,
+      "credit_score": 740,
+      "zipcode": "94949",
+      "mortgage_type": "purchase",
+      "loan_type": "VA"
+    }
+  }
+]

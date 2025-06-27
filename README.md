@@ -70,6 +70,8 @@ The RateSpot MCP Server provides the following tools:
 
 To use this server with an MCP client (like Claude Desktop), add the following configuration:
 
+📋 **For detailed Claude Desktop installation instructions, see [CLAUDE_DESKTOP_INSTALLATION.md](CLAUDE_DESKTOP_INSTALLATION.md)**
+
 #### For Claude Desktop (macOS)
 Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
@@ -280,14 +282,23 @@ Access historical mortgage rate data.
 ### Project Structure
 ```
 ratespot-mcp/
-├── package.json              # Project configuration and dependencies
-├── tsconfig.json            # TypeScript configuration
-├── ratespot_mcp_server.ts   # Main server implementation
-├── .env.example             # Environment variable template
-├── setup.sh                 # Setup script for Linux/macOS
-├── setup.bat                # Setup script for Windows
-├── test_server.js           # Basic functionality test
-└── README.md               # This file
+├── package.json                    # Project configuration and dependencies
+├── tsconfig.json                  # TypeScript configuration
+├── ratespot_mcp_server.ts         # Main server implementation
+├── .env.example                   # Environment variable template
+├── setup.sh                       # Setup script for Linux/macOS
+├── setup.bat                      # Setup script for Windows
+├── CLAUDE_DESKTOP_INSTALLATION.md # Detailed Claude Desktop setup guide
+├── README.md                      # This file
+├── test/                          # Test files directory
+│   ├── test_server.js            # Basic functionality test
+│   ├── test_ratespot_mcp.py      # Python MCP test
+│   ├── debug_api_params.py       # API parameter debugging
+│   └── *.py                      # Additional test files
+└── examples/                      # Example usage files
+    ├── get_mortgage_rates.py     # Example rate queries
+    ├── test_direct_api.py        # Direct API testing
+    └── data/                     # Sample data files
 ```
 
 ## API Integration
@@ -323,6 +334,31 @@ The server includes comprehensive error handling for:
 - Ensure `.env` is listed in your `.gitignore` file
 - Only commit `.env.example` files with placeholder values
 - Rotate API keys if they are accidentally exposed
+
+### Security Audit Completed ✅
+
+**Latest Security Review (v1.0.2)**: A comprehensive security audit has been completed with the following results:
+
+- ✅ **No hardcoded API keys found** - Scanned all Python, TypeScript, and JavaScript files
+- ✅ **All API keys properly externalized** - Keys are managed through environment variables and configuration files only
+- ✅ **Secure installation process** - Comprehensive installation guides ensure proper API key management
+- ✅ **Version control protection** - Enhanced .gitignore prevents accidental key commits
+- ✅ **Test files secured** - All test files use environment variables instead of hardcoded credentials
+
+### Security Improvements (v1.0.1-1.0.2)
+
+This version includes important security improvements:
+- ✅ **Removed all hardcoded API keys** from source code
+- ✅ **Updated test files** to use environment variables instead of hardcoded keys
+- ✅ **Cleaned up generated files** that contained API keys
+- ✅ **Enhanced .gitignore** to prevent accidental key commits
+- ✅ **Added comprehensive installation guides** for secure setup
+- ✅ **Completed full codebase security audit** - No hardcoded credentials found
+
+All API keys are now properly managed through:
+1. Environment variables (`.env` file for development)
+2. MCP client configuration files (for production use with Claude Desktop/Cline)
+3. Never stored in source code or committed to version control
 
 ## Support
 

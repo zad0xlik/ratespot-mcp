@@ -306,19 +306,37 @@ npm run build
 
 ## Security Best Practices
 
+⚠️ **CRITICAL SECURITY REQUIREMENTS**
+
 1. **API Key Management:**
-   - Store API keys in environment variables, not in code
+   - **NEVER hardcode API keys in source code**
+   - Store API keys in environment variables or configuration files only
    - Use different keys for development and production
    - Regularly rotate API keys
+   - Ensure `.env` files are in `.gitignore` and never committed to version control
 
 2. **File Permissions:**
    - Ensure MCP server files have appropriate permissions
    - Don't store sensitive data in publicly accessible locations
+   - Keep configuration files with API keys local and secure
 
 3. **Network Security:**
    - Use HTTPS for all API communications
    - Validate and sanitize all inputs
    - Implement proper error handling
+
+4. **Version Control Security:**
+   - Always use `.env.example` files with placeholder values for documentation
+   - Never commit actual API keys or sensitive credentials
+   - Review all commits to ensure no sensitive data is included
+   - Use proper `.gitignore` configurations
+
+### Security Checklist for MCP Server Installation:
+- ✅ API keys stored in environment variables or local config files only
+- ✅ No hardcoded credentials in source code
+- ✅ `.env` files properly ignored by git
+- ✅ Configuration files kept local and not shared
+- ✅ Regular API key rotation schedule established
 
 ---
 
