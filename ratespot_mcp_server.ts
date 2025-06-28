@@ -2,6 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import * as dotenv from "dotenv";
+import * as fs from "fs";
+import * as path from "path";
+import * as http from "http";
 
 // Load environment variables
 dotenv.config();
@@ -15,73 +18,211 @@ if (!RATESPOT_API_KEY) {
   process.exit(1);
 }
 
+// Create data directory if it doesn't exist
+// Use __dirname to ensure the data directory is created relative to the script location
+const DATA_DIR = path.join(__dirname, 'data');
+
+// Add debugging information
+console.error(`Current working directory: ${process.cwd()}`);
+console.error(`Script directory: ${__dirname}`);
+console.error(`Data directory will be: ${DATA_DIR}`);
+
+// Create directory with improved error handling
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    console.error(`Created data directory: ${DATA_DIR}`);
+  } else {
+    console.error(`Data directory already exists: ${DATA_DIR}`);
+  }
+} catch (error) {
+  console.error(`Failed to create data directory: ${error instanceof Error ? error.message : String(error)}`);
+  console.error(`Attempted path: ${DATA_DIR}`);
+  console.error(`This error suggests a permissions issue or invalid path.`);
+  process.exit(1);
+}
+
+// Simple HTTP server for file downloads
+let fileServer: http.Server | null = null;
+const FILE_SERVER_PORT = 3001;
+
+// Helper function to save CSV file
+async function saveCSVFile(csvData: string, fileType: string, searchParams?: any): Promise<{ filePath: string, fileName: string, downloadUrl: string }> {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T');
+  const dateStr = timestamp[0];
+  const timeStr = timestamp[1].split('-')[0] + timestamp[1].split('-')[1];
+  
+  const fileName = `${fileType}_${dateStr}_${timeStr}.csv`;
+  const filePath = path.join(DATA_DIR, fileName);
+  
+  // Add metadata header to CSV
+  let csvWithMetadata = '';
+  if (searchParams) {
+    csvWithMetadata += `# Generated on: ${new Date().toISOString()}\n`;
+    csvWithMetadata += `# Search Parameters: ${JSON.stringify(searchParams)}\n`;
+    csvWithMetadata += `# File Type: ${fileType}\n`;
+    csvWithMetadata += '\n';
+  }
+  csvWithMetadata += csvData;
+  
+  // Write file
+  await fs.promises.writeFile(filePath, csvWithMetadata, 'utf8');
+  
+  // Start file server if not already running
+  if (!fileServer) {
+    startFileServer();
+  }
+  
+  const downloadUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
+  
+  return {
+    filePath,
+    fileName,
+    downloadUrl
+  };
+}
+
+// Start HTTP server for file downloads
+function startFileServer(): void {
+  if (fileServer) return;
+  
+  fileServer = http.createServer((req, res) => {
+    const url = new URL(req.url!, `http://localhost:${FILE_SERVER_PORT}`);
+    
+    if (url.pathname.startsWith('/download/')) {
+      const fileName = url.pathname.replace('/download/', '');
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (fs.existsSync(filePath)) {
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        
+        const fileStream = fs.createReadStream(filePath);
+        fileStream.pipe(res);
+      } else {
+        res.statusCode = 404;
+        res.end('File not found');
+      }
+    } else if (url.pathname === '/list') {
+      // List available files
+      try {
+        const files = fs.readdirSync(DATA_DIR)
+          .filter(file => file.endsWith('.csv'))
+          .map(file => {
+            const filePath = path.join(DATA_DIR, file);
+            const stats = fs.statSync(filePath);
+            return {
+              name: file,
+              size: stats.size,
+              created: stats.birthtime,
+              downloadUrl: `http://localhost:${FILE_SERVER_PORT}/download/${file}`
+            };
+          });
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.end(JSON.stringify(files, null, 2));
+      } catch (error) {
+        res.statusCode = 500;
+        res.end('Error listing files');
+      }
+    } else {
+      res.statusCode = 404;
+      res.end('Not found');
+    }
+  });
+  
+  fileServer.listen(FILE_SERVER_PORT, () => {
+    console.error(`File server running on http://localhost:${FILE_SERVER_PORT}`);
+  });
+}
+
 // Create MCP server
 const server = new McpServer({
   name: "RateSpot Mortgage Server",
   version: "1.0.0"
 });
 
-// Helper function to format mortgage products as a table
-function formatMortgageProductsAsTable(events: any[], maxResults: number = 20): string {
-  // Filter to only mortgage product events
-  const mortgageProducts = events.filter(e => e.event === 'mortgage_product');
-  
-  if (mortgageProducts.length === 0) {
-    return "No mortgage products found.";
-  }
-
-  // Sort by rate (lowest first)
-  mortgageProducts.sort((a, b) => (a.data.rate || 999) - (b.data.rate || 999));
-  
-  // Limit results
-  const limitedProducts = mortgageProducts.slice(0, maxResults);
-  
-  // Create table header
-  let table = "MORTGAGE RATES COMPARISON\n";
-  table += "=".repeat(80) + "\n\n";
-  
-  // Add summary
-  table += `Found ${mortgageProducts.length} mortgage products (showing top ${limitedProducts.length})\n\n`;
-  
-  // Table headers
-  table += "┌─────────────────────────────────┬──────┬──────┬───────────┬────────┬─────────────┬──────────┬──────────┐\n";
-  table += "│ Lender                          │ Rate │ APR  │ Payment   │ Points │ Upfront     │ Type     │ Quote    │\n";
-  table += "├─────────────────────────────────┼──────┼──────┼───────────┼────────┼─────────────┼──────────┼──────────┤\n";
-  
-  // Add rows
-  for (const product of limitedProducts) {
-    const data = product.data;
-    const lender = (data.lender_name || 'Unknown').substring(0, 30).padEnd(31);
-    const rate = (data.rate ? data.rate.toFixed(3) + '%' : 'N/A').padStart(6);
-    const apr = (data.apr ? data.apr.toFixed(3) + '%' : 'N/A').padStart(6);
-    const payment = (data.mo_payment ? '$' + data.mo_payment.toLocaleString() : 'N/A').padStart(11);
-    const points = (data.points ? data.points.toFixed(2) : '0.00').padStart(8);
-    const upfront = (data.upfront_costs ? '$' + data.upfront_costs.toLocaleString() : 'N/A').padStart(13);
-    const loanType = (data.loan_type || 'Conv').substring(0, 8).padEnd(10);
-    const quoteType = (data.quote_type === 'ws' ? 'Wholesale' : 'Retail').substring(0, 8).padEnd(10);
+// Helper function to get all CSV files with metadata
+function getAllCSVFiles(): Array<{name: string, path: string, size: number, created: Date, type: string}> {
+  try {
+    const files = fs.readdirSync(DATA_DIR)
+      .filter(file => file.endsWith('.csv'))
+      .map(file => {
+        const filePath = path.join(DATA_DIR, file);
+        const stats = fs.statSync(filePath);
+        const type = file.split('_')[0]; // Extract type from filename
+        return {
+          name: file,
+          path: filePath,
+          size: stats.size,
+          created: stats.birthtime,
+          type: type
+        };
+      })
+      .sort((a, b) => b.created.getTime() - a.created.getTime()); // Sort by newest first
     
-    table += `│ ${lender}│ ${rate}│ ${apr}│ ${payment}│ ${points}│ ${upfront}│ ${loanType}│ ${quoteType}│\n`;
+    return files;
+  } catch (error) {
+    console.error('Error reading CSV files:', error);
+    return [];
   }
-  
-  table += "└─────────────────────────────────┴──────┴──────┴───────────┴────────┴─────────────┴──────────┴──────────┘\n\n";
-  
-  // Add best rate summary
-  if (limitedProducts.length > 0) {
-    const bestRate = limitedProducts[0].data;
-    table += "BEST RATE DETAILS:\n";
-    table += `-----------------\n`;
-    table += `Lender: ${bestRate.lender_name || 'Unknown'}\n`;
-    table += `Rate: ${bestRate.rate ? bestRate.rate.toFixed(3) + '%' : 'N/A'}\n`;
-    table += `APR: ${bestRate.apr ? bestRate.apr.toFixed(3) + '%' : 'N/A'}\n`;
-    table += `Monthly Payment: ${bestRate.mo_payment ? '$' + bestRate.mo_payment.toLocaleString() : 'N/A'}\n`;
-    table += `Points: ${bestRate.points || 0}\n`;
-    table += `Upfront Costs: ${bestRate.upfront_costs ? '$' + bestRate.upfront_costs.toLocaleString() : 'N/A'}\n`;
-    table += `Loan Type: ${bestRate.loan_type || 'Conventional'}\n`;
-    table += `Rate Lock: ${bestRate.rate_lock_used || 'N/A'} days\n`;
-  }
-  
-  return table;
 }
+
+// Helper function to parse CSV file content
+function parseCSVFile(filePath: string): {headers: string[], rows: any[], metadata: any} {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.split('\n');
+    
+    // Extract metadata from comment lines
+    const metadata: any = {};
+    const dataLines: string[] = [];
+    
+    for (const line of lines) {
+      if (line.startsWith('#')) {
+        if (line.includes('Generated on:')) {
+          metadata.generated = line.split('Generated on:')[1].trim();
+        } else if (line.includes('Search Parameters:')) {
+          try {
+            metadata.searchParams = JSON.parse(line.split('Search Parameters:')[1].trim());
+          } catch (e) {
+            metadata.searchParams = line.split('Search Parameters:')[1].trim();
+          }
+        } else if (line.includes('File Type:')) {
+          metadata.fileType = line.split('File Type:')[1].trim();
+        }
+      } else if (line.trim()) {
+        dataLines.push(line);
+      }
+    }
+    
+    if (dataLines.length === 0) {
+      return { headers: [], rows: [], metadata };
+    }
+    
+    // Parse CSV data
+    const headers = dataLines[0].split(',').map(h => h.replace(/"/g, '').trim());
+    const rows = dataLines.slice(1).map(line => {
+      const values = line.split(',').map(v => v.replace(/"/g, '').trim());
+      const row: any = {};
+      headers.forEach((header, index) => {
+        row[header] = values[index] || '';
+      });
+      return row;
+    });
+    
+    return { headers, rows, metadata };
+  } catch (error) {
+    console.error('Error parsing CSV file:', error);
+    return { headers: [], rows: [], metadata: {} };
+  }
+}
+
+// Note: MCP resources will be added in a future update once the SDK API is clarified
+// For now, the enhanced tools below provide direct file access and analysis capabilities
+
 
 // Helper function to properly escape CSV fields according to RFC 4180
 function escapeCSVField(value: any): string {
@@ -249,6 +390,137 @@ async function makeRateSpotRequest(params: any) {
   }
 }
 
+// Helper function to parse mortgage results into structured format
+function parseMortgageResults(events: any[], searchParams: any): any {
+  // Filter to only mortgage product events
+  const mortgageProducts = events.filter(e => e.event === 'mortgage_product');
+  
+  if (mortgageProducts.length === 0) {
+    return {
+      rates: [],
+      best_rate: null,
+      total_products: 0,
+      search_params: searchParams
+    };
+  }
+
+  // Sort by rate (lowest first)
+  mortgageProducts.sort((a, b) => (a.data.rate || 999) - (b.data.rate || 999));
+  
+  // Parse rates into structured format
+  const rates = mortgageProducts.map(product => {
+    const data = product.data;
+    return {
+      lender: data.lender_name || '',
+      rate: data.rate ? `${data.rate.toFixed(3)}%` : 'N/A',
+      apr: data.apr ? `${data.apr.toFixed(3)}%` : 'N/A',
+      payment: data.mo_payment ? `$${data.mo_payment.toLocaleString()}` : 'N/A',
+      points: data.points || 0,
+      upfront_costs: data.upfront_costs ? `$${data.upfront_costs.toLocaleString()}` : 'N/A',
+      loan_type: data.loan_type || '',
+      quote_type: data.quote_type === 'ws' ? 'Wholesale' : 'Retail',
+      rate_lock_days: data.rate_lock_used || 30,
+      raw_payment: data.mo_payment || 0,
+      raw_rate: data.rate || 0,
+      raw_apr: data.apr || 0,
+      raw_upfront: data.upfront_costs || 0
+    };
+  });
+
+  const bestRate = rates.length > 0 ? rates[0] : null;
+
+  return {
+    rates: rates,
+    best_rate: bestRate,
+    total_products: rates.length,
+    search_params: searchParams
+  };
+}
+
+// Helper function to format as structured JSON
+function formatStructuredJson(data: any): string {
+  return JSON.stringify(data, null, 2);
+}
+
+// Helper function to format as markdown table
+function formatMarkdownTable(data: any): string {
+  const rates = data.rates.slice(0, 20); // Top 20
+  
+  let table = "# Mortgage Rates Comparison\n\n";
+  table += `**Found ${data.total_products} mortgage products (showing top ${rates.length})**\n\n`;
+  
+  table += "| Lender | Rate | APR | Payment | Points | Upfront | Loan Type | Quote Type | Rate Lock |\n";
+  table += "|--------|------|-----|---------|--------|---------|-----------|------------|----------|\n";
+  
+  for (const rate of rates) {
+    table += `| ${rate.lender} | ${rate.rate} | ${rate.apr} | ${rate.payment} | ${rate.points} | ${rate.upfront_costs} | ${rate.loan_type} | ${rate.quote_type} | ${rate.rate_lock_days} days |\n`;
+  }
+  
+  if (data.best_rate) {
+    const best = data.best_rate;
+    table += `\n## Best Rate Details\n\n`;
+    table += `**Lender:** ${best.lender}\n`;
+    table += `**Rate:** ${best.rate}\n`;
+    table += `**APR:** ${best.apr}\n`;
+    table += `**Monthly Payment:** ${best.payment}\n`;
+    table += `**Points:** ${best.points}\n`;
+    table += `**Upfront Costs:** ${best.upfront_costs}\n`;
+    table += `**Loan Type:** ${best.loan_type}\n`;
+    table += `**Quote Type:** ${best.quote_type}\n`;
+    table += `**Rate Lock:** ${best.rate_lock_days} days\n`;
+  }
+  
+  return table;
+}
+
+// Helper function to format CSV from structured data
+function formatStructuredCSV(data: any): string {
+  const rates = data.rates;
+  
+  let csv = "Lender,Rate,APR,Payment,Points,Upfront_Costs,Loan_Type,Quote_Type\n";
+  
+  for (const rate of rates) {
+    const row = [
+      escapeCSVField(rate.lender),
+      escapeCSVField(rate.rate),
+      escapeCSVField(rate.apr),
+      escapeCSVField(rate.payment),
+      escapeCSVField(rate.points),
+      escapeCSVField(rate.upfront_costs),
+      escapeCSVField(rate.loan_type),
+      escapeCSVField(rate.quote_type)
+    ].join(',');
+    
+    csv += row + '\n';
+  }
+  
+  return csv;
+}
+
+// Helper function to format pipe-delimited from structured data
+function formatStructuredPipe(data: any): string {
+  const rates = data.rates;
+  
+  let output = "Lender|Rate|APR|Payment|Points|Upfront_Costs|Loan_Type|Quote_Type\n";
+  
+  for (const rate of rates) {
+    const row = [
+      (rate.lender || '').replace(/\|/g, '-'),
+      rate.rate || '',
+      rate.apr || '',
+      rate.payment || '',
+      rate.points || '',
+      rate.upfront_costs || '',
+      (rate.loan_type || '').replace(/\|/g, '-'),
+      (rate.quote_type || '').replace(/\|/g, '-')
+    ].join('|');
+    
+    output += row + '\n';
+  }
+  
+  return output;
+}
+
 // Get Mortgage Rates Tool
 server.tool(
   "get-mortgage-rates",
@@ -264,7 +536,7 @@ server.tool(
     zipCode: z.string().optional().describe("ZIP code"),
     loanTerm: z.number().optional().describe("Loan term in years (15, 30, etc.)"),
     rateType: z.string().optional().describe("Rate type (fixed, arm)"),
-    format: z.string().optional().default("table").describe("Output format: 'table' for formatted table view, 'csv' for CSV download, or 'pipe' for pipe-delimited format")
+    format: z.enum(["structured", "markdown", "csv", "pipe"]).optional().default("markdown").describe("Output format: 'structured' for JSON, 'markdown' for markdown table, 'csv' for CSV, or 'pipe' for pipe-delimited")
   },
   async (params) => {
     try {
@@ -290,29 +562,53 @@ server.tool(
 
       const result = await makeRateSpotRequest(queryParams);
 
+      // Create search parameters object for structured formats
+      const searchParams = {
+        propertyValue: propertyValue,
+        downPayment: downPaymentAmount,
+        loanAmount: params.loanAmount,
+        creditScore: params.creditScore || 790,
+        loanType: params.loanType,
+        propertyType: params.propertyType || "single_family",
+        occupancy: params.occupancy || "primary",
+        zipCode: params.zipCode || "90210",
+        loanTerm: params.loanTerm,
+        rateType: params.rateType,
+        state: params.state
+      };
+
       // Format the response based on the requested format
       let formattedResponse: string;
-      if (params.format === "csv") {
-        formattedResponse = "MORTGAGE RATES DATA (CSV FORMAT)\n";
-        formattedResponse += "Copy the data below and save as .csv file:\n\n";
-        formattedResponse += formatMortgageProductsAsCSV(result);
+      if (params.format === "structured") {
+        // Parse into structured format and return as JSON
+        const structuredData = parseMortgageResults(result, searchParams);
+        formattedResponse = formatStructuredJson(structuredData);
+      } else if (params.format === "csv") {
+        // Save CSV file and provide download link
+        const structuredData = parseMortgageResults(result, searchParams);
+        const csvData = formatStructuredCSV(structuredData);
+        const fileInfo = await saveCSVFile(csvData, "mortgage_rates", searchParams);
+        
+        formattedResponse = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
+        formattedResponse += `📁 **File:** ${fileInfo.fileName}\n`;
+        formattedResponse += `📍 **Location:** ${fileInfo.filePath}\n`;
+        formattedResponse += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
+        formattedResponse += `📊 **Summary:** Found ${structuredData.total_products} mortgage products\n`;
+        formattedResponse += `🏆 **Best Rate:** ${structuredData.best_rate?.rate || 'N/A'} from ${structuredData.best_rate?.lender || 'N/A'}\n\n`;
+        formattedResponse += `💡 **How to access:**\n`;
+        formattedResponse += `• Click the download link above\n`;
+        formattedResponse += `• Or visit: http://localhost:3001/list to see all saved files\n`;
+        formattedResponse += `• File is also available in the local 'data' folder\n`;
       } else if (params.format === "pipe") {
+        // Use new structured pipe format
+        const structuredData = parseMortgageResults(result, searchParams);
         formattedResponse = "MORTGAGE RATES DATA (PIPE-DELIMITED FORMAT)\n";
         formattedResponse += "Copy the data below and save as .txt file:\n\n";
-        formattedResponse += formatMortgageProductsAsPipe(result);
+        formattedResponse += formatStructuredPipe(structuredData);
       } else {
-        // Default to table format
-        formattedResponse = formatMortgageProductsAsTable(result);
-        
-        // Add search parameters for context
-        formattedResponse += "\nSEARCH PARAMETERS:\n";
-        formattedResponse += "-".repeat(20) + "\n";
-        formattedResponse += `Property Value: $${propertyValue.toLocaleString()}\n`;
-        formattedResponse += `Down Payment: $${downPaymentAmount.toLocaleString()} (${downPaymentPercent}%)\n`;
-        formattedResponse += `Credit Score: ${params.creditScore || 790}\n`;
-        formattedResponse += `ZIP Code: ${params.zipCode || "90210"}\n`;
-        formattedResponse += `Property Type: ${params.propertyType || "single_family"}\n`;
-        formattedResponse += `Occupancy: ${params.occupancy || "primary"}\n`;
+        // Default to markdown format
+        const structuredData = parseMortgageResults(result, searchParams);
+        formattedResponse = formatMarkdownTable(structuredData);
       }
 
       return {
@@ -344,7 +640,7 @@ server.tool(
     zipCode: z.string().describe("ZIP code"),
     propertyType: z.string().optional().default("single_family").describe("Property type"),
     occupancy: z.string().optional().default("primary").describe("Property use (primary, secondary, investment)"),
-    format: z.string().optional().default("table").describe("Output format: 'table' for formatted table view, 'csv' for CSV download, or 'pipe' for pipe-delimited format")
+    format: z.enum(["markdown", "csv", "pipe"]).optional().default("markdown").describe("Output format: 'markdown' for markdown table, 'csv' for CSV download, or 'pipe' for pipe-delimited format")
   },
   async ({ loanAmount, creditScore, downPayment, propertyValue, zipCode, propertyType, occupancy, format }) => {
     try {
@@ -367,30 +663,58 @@ server.tool(
 
       const result = await makeRateSpotRequest(queryParams);
 
+      // Create search parameters object for structured formats
+      const searchParams = {
+        propertyValue: propertyValue,
+        downPayment: downPayment,
+        loanAmount: loanAmount,
+        creditScore: creditScore,
+        loanType: undefined,
+        propertyType: propertyType,
+        occupancy: occupancy,
+        zipCode: zipCode,
+        loanTerm: undefined,
+        rateType: undefined,
+        state: undefined
+      };
+
       // Format the response based on the requested format
       let formattedResponse: string;
       if (format === "csv") {
-        formattedResponse = "LOAN PRODUCT COMPARISON DATA (CSV FORMAT)\n";
-        formattedResponse += "Copy the data below and save as .csv file:\n\n";
-        formattedResponse += formatMortgageProductsAsCSV(result);
+        // Save CSV file and provide download link
+        const csvData = formatMortgageProductsAsCSV(result);
+        const fileInfo = await saveCSVFile(csvData, "loan_comparison", searchParams);
+        
+        formattedResponse = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
+        formattedResponse += `📁 **File:** ${fileInfo.fileName}\n`;
+        formattedResponse += `📍 **Location:** ${fileInfo.filePath}\n`;
+        formattedResponse += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
+        formattedResponse += `📊 **Summary:** Found ${result.filter(e => e.event === 'mortgage_product').length} loan products\n`;
+        formattedResponse += `💰 **Loan Amount:** $${loanAmount.toLocaleString()}\n`;
+        formattedResponse += `🏠 **Property Value:** $${propertyValue.toLocaleString()}\n`;
+        formattedResponse += `💵 **Down Payment:** $${downPayment.toLocaleString()} (${Math.round((downPayment / propertyValue) * 100)}%)\n\n`;
+        formattedResponse += `💡 **How to access:**\n`;
+        formattedResponse += `• Click the download link above\n`;
+        formattedResponse += `• Or visit: http://localhost:3001/list to see all saved files\n`;
+        formattedResponse += `• File is also available in the local 'data' folder\n`;
       } else if (format === "pipe") {
         formattedResponse = "LOAN PRODUCT COMPARISON DATA (PIPE-DELIMITED FORMAT)\n";
         formattedResponse += "Copy the data below and save as .txt file:\n\n";
         formattedResponse += formatMortgageProductsAsPipe(result);
       } else {
-        // Default to table format
-        formattedResponse = formatMortgageProductsAsTable(result);
+        // Default to markdown format
+        const structuredData = parseMortgageResults(result, searchParams);
+        formattedResponse = formatMarkdownTable(structuredData);
         
         // Add search parameters for context
-        formattedResponse += "\nSEARCH PARAMETERS:\n";
-        formattedResponse += "-".repeat(20) + "\n";
-        formattedResponse += `Loan Amount: $${loanAmount.toLocaleString()}\n`;
-        formattedResponse += `Property Value: $${propertyValue.toLocaleString()}\n`;
-        formattedResponse += `Down Payment: $${downPayment.toLocaleString()} (${downPaymentPercent}%)\n`;
-        formattedResponse += `Credit Score: ${creditScore}\n`;
-        formattedResponse += `ZIP Code: ${zipCode}\n`;
-        formattedResponse += `Property Type: ${propertyType}\n`;
-        formattedResponse += `Occupancy: ${occupancy}\n`;
+        formattedResponse += "\n## Search Parameters\n\n";
+        formattedResponse += `**Loan Amount:** $${loanAmount.toLocaleString()}\n`;
+        formattedResponse += `**Property Value:** $${propertyValue.toLocaleString()}\n`;
+        formattedResponse += `**Down Payment:** $${downPayment.toLocaleString()} (${downPaymentPercent}%)\n`;
+        formattedResponse += `**Credit Score:** ${creditScore}\n`;
+        formattedResponse += `**ZIP Code:** ${zipCode}\n`;
+        formattedResponse += `**Property Type:** ${propertyType}\n`;
+        formattedResponse += `**Occupancy:** ${occupancy}\n`;
       }
 
       return {
@@ -456,17 +780,41 @@ server.tool(
 
       let formattedResponse: string;
       if (format === "csv") {
-        formattedResponse = "MONTHLY PAYMENT CALCULATION (CSV FORMAT)\n";
-        formattedResponse += "Copy the data below and save as .csv file:\n\n";
-        formattedResponse += "Component,Monthly Amount ($),Annual Amount ($)\n";
-        formattedResponse += `"Principal & Interest",${breakdown.principalAndInterest},${breakdown.principalAndInterest * 12}\n`;
-        formattedResponse += `"Property Tax",${breakdown.propertyTax},${breakdown.propertyTax * 12}\n`;
-        formattedResponse += `"Home Insurance",${breakdown.homeInsurance},${breakdown.homeInsurance * 12}\n`;
-        formattedResponse += `"PMI",${breakdown.pmi},${breakdown.pmi * 12}\n`;
-        formattedResponse += `"HOA Fees",${breakdown.hoaFees},${breakdown.hoaFees * 12}\n`;
-        formattedResponse += `"Total Monthly Payment",${breakdown.totalMonthlyPayment},${breakdown.totalMonthlyPayment * 12}\n`;
-        formattedResponse += `"Total Interest Paid (${loanTerm} years)",${breakdown.totalInterestPaid},\n`;
-        formattedResponse += `"Total Amount Paid (${loanTerm} years)",${breakdown.totalAmountPaid},\n`;
+        // Save CSV file and provide download link
+        let csvData = "Component,Monthly Amount ($),Annual Amount ($)\n";
+        csvData += `"Principal & Interest",${breakdown.principalAndInterest},${breakdown.principalAndInterest * 12}\n`;
+        csvData += `"Property Tax",${breakdown.propertyTax},${breakdown.propertyTax * 12}\n`;
+        csvData += `"Home Insurance",${breakdown.homeInsurance},${breakdown.homeInsurance * 12}\n`;
+        csvData += `"PMI",${breakdown.pmi},${breakdown.pmi * 12}\n`;
+        csvData += `"HOA Fees",${breakdown.hoaFees},${breakdown.hoaFees * 12}\n`;
+        csvData += `"Total Monthly Payment",${breakdown.totalMonthlyPayment},${breakdown.totalMonthlyPayment * 12}\n`;
+        csvData += `"Total Interest Paid (${loanTerm} years)",${breakdown.totalInterestPaid},\n`;
+        csvData += `"Total Amount Paid (${loanTerm} years)",${breakdown.totalAmountPaid},\n`;
+        
+        const searchParams = {
+          loanAmount,
+          interestRate,
+          loanTerm,
+          propertyTax,
+          homeInsurance,
+          pmi,
+          hoaFees
+        };
+        
+        const fileInfo = await saveCSVFile(csvData, "payment_calculation", searchParams);
+        
+        formattedResponse = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
+        formattedResponse += `📁 **File:** ${fileInfo.fileName}\n`;
+        formattedResponse += `📍 **Location:** ${fileInfo.filePath}\n`;
+        formattedResponse += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
+        formattedResponse += `📊 **Summary:** Monthly payment calculation for $${loanAmount.toLocaleString()} loan\n`;
+        formattedResponse += `💰 **Total Monthly Payment:** $${breakdown.totalMonthlyPayment.toLocaleString()}\n`;
+        formattedResponse += `📈 **Interest Rate:** ${interestRate}%\n`;
+        formattedResponse += `⏰ **Loan Term:** ${loanTerm} years\n\n`;
+        formattedResponse += `💡 **How to access:**\n`;
+        formattedResponse += `• Click the download link above\n`;
+        formattedResponse += `• Or visit: http://localhost:3001/list to see all saved files\n`;
+        formattedResponse += `• File is also available in the local 'data' folder\n`;
       } else if (format === "pipe") {
         formattedResponse = "MONTHLY PAYMENT CALCULATION (PIPE-DELIMITED FORMAT)\n";
         formattedResponse += "Copy the data below and save as .txt file:\n\n";
@@ -523,6 +871,840 @@ server.tool(
   }
 );
 
+
+// List Saved Files Tool
+server.tool(
+  "list-saved-files",
+  {
+    fileType: z.string().optional().describe("Filter by file type (mortgage_rates, loan_comparison, payment_calculation)")
+  },
+  async ({ fileType }) => {
+    try {
+      const files = fs.readdirSync(DATA_DIR)
+        .filter(file => file.endsWith('.csv'))
+        .filter(file => fileType ? file.startsWith(fileType) : true)
+        .map(file => {
+          const filePath = path.join(DATA_DIR, file);
+          const stats = fs.statSync(filePath);
+          return {
+            name: file,
+            size: stats.size,
+            created: stats.birthtime.toISOString(),
+            downloadUrl: `http://localhost:${FILE_SERVER_PORT}/download/${file}`,
+            localPath: filePath
+          };
+        })
+        .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+
+      let response = `📁 **SAVED CSV FILES** (${files.length} files)\n\n`;
+      
+      if (files.length === 0) {
+        response += "No CSV files found. Generate some data first using the mortgage tools with format='csv'.\n";
+      } else {
+        response += `🌐 **File Server:** http://localhost:${FILE_SERVER_PORT}/list\n\n`;
+        
+        for (const file of files) {
+          const sizeKB = Math.round(file.size / 1024 * 100) / 100;
+          const createdDate = new Date(file.created).toLocaleString();
+          
+          response += `📄 **${file.name}**\n`;
+          response += `   📊 Size: ${sizeKB} KB\n`;
+          response += `   📅 Created: ${createdDate}\n`;
+          response += `   🔗 Download: ${file.downloadUrl}\n`;
+          response += `   📍 Local: ${file.localPath}\n\n`;
+        }
+        
+        response += `💡 **Quick Actions:**\n`;
+        response += `• Visit http://localhost:${FILE_SERVER_PORT}/list for JSON list\n`;
+        response += `• Click any download link above to get the CSV file\n`;
+        response += `• Files are also available in the local 'data' folder\n`;
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing files: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Get Download Link Tool
+server.tool(
+  "get-download-link",
+  {
+    fileName: z.string().describe("Name of the CSV file to get download link for")
+  },
+  async ({ fileName }) => {
+    try {
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (!fs.existsSync(filePath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${fileName}\n\nUse the 'list-saved-files' tool to see available files.`
+          }],
+          isError: true
+        };
+      }
+
+      const stats = fs.statSync(filePath);
+      const downloadUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
+      
+      // Start file server if not already running
+      if (!fileServer) {
+        startFileServer();
+      }
+
+      const response = `✅ **Download Link Generated**\n\n`;
+      const sizeKB = Math.round(stats.size / 1024 * 100) / 100;
+      
+      return {
+        content: [{
+          type: "text",
+          text: response + 
+            `📁 **File:** ${fileName}\n` +
+            `📊 **Size:** ${sizeKB} KB\n` +
+            `📅 **Created:** ${stats.birthtime.toLocaleString()}\n` +
+            `🔗 **Download Link:** ${downloadUrl}\n\n` +
+            `💡 **How to use:**\n` +
+            `• Click the link above to download\n` +
+            `• Or copy the URL to your browser\n` +
+            `• File will download automatically\n`
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error generating download link: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Delete CSV File Tool
+server.tool(
+  "delete-csv-file",
+  {
+    fileName: z.string().describe("Name of the CSV file to delete")
+  },
+  async ({ fileName }) => {
+    try {
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (!fs.existsSync(filePath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${fileName}\n\nUse the 'list-saved-files' tool to see available files.`
+          }],
+          isError: true
+        };
+      }
+
+      // Get file info before deletion
+      const stats = fs.statSync(filePath);
+      const sizeKB = Math.round(stats.size / 1024 * 100) / 100;
+      
+      // Delete the file
+      fs.unlinkSync(filePath);
+
+      const response = `✅ **File Deleted Successfully**\n\n`;
+      
+      return {
+        content: [{
+          type: "text",
+          text: response + 
+            `📁 **Deleted:** ${fileName}\n` +
+            `📊 **Size:** ${sizeKB} KB\n` +
+            `📅 **Was Created:** ${stats.birthtime.toLocaleString()}\n\n` +
+            `💡 **Note:** File has been permanently removed from the data folder.\n`
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error deleting file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Analyze CSV File Tool
+server.tool(
+  "analyze-csv-file",
+  {
+    fileName: z.string().describe("Name of the CSV file to analyze"),
+    analysisType: z.enum(["summary", "detailed", "rates", "comparison"]).optional().default("summary").describe("Type of analysis to perform")
+  },
+  async ({ fileName, analysisType }) => {
+    try {
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (!fs.existsSync(filePath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${fileName}\n\nUse the 'list-saved-files' tool to see available files.`
+          }],
+          isError: true
+        };
+      }
+
+      const parsed = parseCSVFile(filePath);
+      const stats = fs.statSync(filePath);
+      
+      if (parsed.rows.length === 0) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **No data found in file:** ${fileName}`
+          }],
+          isError: true
+        };
+      }
+
+      let response = `📊 **CSV FILE ANALYSIS: ${fileName}**\n\n`;
+      
+      // Basic file info
+      response += `📁 **File Information:**\n`;
+      response += `• Size: ${Math.round(stats.size / 1024 * 100) / 100} KB\n`;
+      response += `• Created: ${stats.birthtime.toLocaleString()}\n`;
+      response += `• Rows: ${parsed.rows.length}\n`;
+      response += `• Columns: ${parsed.headers.length}\n\n`;
+      
+      // Metadata if available
+      if (parsed.metadata.searchParams) {
+        response += `🔍 **Search Parameters:**\n`;
+        const params = parsed.metadata.searchParams;
+        if (typeof params === 'object') {
+          Object.entries(params).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+              response += `• ${key}: ${value}\n`;
+            }
+          });
+        } else {
+          response += `• ${params}\n`;
+        }
+        response += '\n';
+      }
+      
+      response += `📋 **Columns:** ${parsed.headers.join(', ')}\n\n`;
+      
+      if (analysisType === "summary") {
+        // Basic summary
+        response += `📈 **Data Summary:**\n`;
+        response += `• Total records: ${parsed.rows.length}\n`;
+        
+        // Try to identify rate data
+        const rateColumn = parsed.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+        if (rateColumn) {
+          const rates = parsed.rows
+            .map(row => parseFloat(row[rateColumn]?.toString().replace('%', '') || '0'))
+            .filter(r => r > 0);
+          
+          if (rates.length > 0) {
+            response += `• Rate range: ${Math.min(...rates).toFixed(3)}% - ${Math.max(...rates).toFixed(3)}%\n`;
+            response += `• Average rate: ${(rates.reduce((a, b) => a + b, 0) / rates.length).toFixed(3)}%\n`;
+          }
+        }
+        
+        // Try to identify lender data
+        const lenderColumn = parsed.headers.find(h => h.toLowerCase().includes('lender'));
+        if (lenderColumn) {
+          const lenders = Array.from(new Set(parsed.rows.map(row => row[lenderColumn]).filter(l => l)));
+          response += `• Unique lenders: ${lenders.length}\n`;
+        }
+        
+      } else if (analysisType === "detailed") {
+        // Detailed analysis
+        response += `📊 **Detailed Analysis:**\n\n`;
+        
+        // Analyze each column
+        for (const header of parsed.headers) {
+          const values = parsed.rows.map(row => row[header]).filter(v => v && v !== '');
+          const uniqueValues = Array.from(new Set(values));
+          
+          response += `**${header}:**\n`;
+          response += `• Total values: ${values.length}\n`;
+          response += `• Unique values: ${uniqueValues.length}\n`;
+          
+          // Try to parse as numbers
+          const numericValues = values
+            .map(v => parseFloat(v.toString().replace(/[$,%]/g, '')))
+            .filter(n => !isNaN(n));
+          
+          if (numericValues.length > 0 && numericValues.length === values.length) {
+            response += `• Range: ${Math.min(...numericValues)} - ${Math.max(...numericValues)}\n`;
+            response += `• Average: ${(numericValues.reduce((a, b) => a + b, 0) / numericValues.length).toFixed(2)}\n`;
+          } else if (uniqueValues.length <= 10) {
+            response += `• Values: ${uniqueValues.slice(0, 5).join(', ')}${uniqueValues.length > 5 ? '...' : ''}\n`;
+          }
+          response += '\n';
+        }
+        
+      } else if (analysisType === "rates") {
+        // Focus on rate analysis
+        response += `📈 **Rate Analysis:**\n\n`;
+        
+        const rateColumn = parsed.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+        const aprColumn = parsed.headers.find(h => h.toLowerCase().includes('apr'));
+        const lenderColumn = parsed.headers.find(h => h.toLowerCase().includes('lender'));
+        
+        if (rateColumn) {
+          const rateData = parsed.rows
+            .map(row => ({
+              rate: parseFloat(row[rateColumn]?.toString().replace('%', '') || '0'),
+              apr: aprColumn ? parseFloat(row[aprColumn]?.toString().replace('%', '') || '0') : 0,
+              lender: lenderColumn ? row[lenderColumn] : 'Unknown',
+              row: row
+            }))
+            .filter(d => d.rate > 0)
+            .sort((a, b) => a.rate - b.rate);
+          
+          if (rateData.length > 0) {
+            response += `🏆 **Best Rates (Top 5):**\n`;
+            rateData.slice(0, 5).forEach((item, index) => {
+              response += `${index + 1}. ${item.lender}: ${item.rate.toFixed(3)}%`;
+              if (item.apr > 0) response += ` (APR: ${item.apr.toFixed(3)}%)`;
+              response += '\n';
+            });
+            
+            response += `\n📊 **Rate Statistics:**\n`;
+            response += `• Best rate: ${rateData[0].rate.toFixed(3)}%\n`;
+            response += `• Worst rate: ${rateData[rateData.length - 1].rate.toFixed(3)}%\n`;
+            response += `• Average rate: ${(rateData.reduce((sum, item) => sum + item.rate, 0) / rateData.length).toFixed(3)}%\n`;
+            response += `• Rate spread: ${(rateData[rateData.length - 1].rate - rateData[0].rate).toFixed(3)}%\n`;
+          }
+        } else {
+          response += `❌ No rate column found in the data.\n`;
+        }
+        
+      } else if (analysisType === "comparison") {
+        // Comparison analysis
+        response += `🔄 **Comparison Analysis:**\n\n`;
+        
+        // Show first few rows as sample
+        response += `📋 **Sample Data (First 3 rows):**\n`;
+        for (let i = 0; i < Math.min(3, parsed.rows.length); i++) {
+          response += `\n**Row ${i + 1}:**\n`;
+          Object.entries(parsed.rows[i]).forEach(([key, value]) => {
+            response += `• ${key}: ${value}\n`;
+          });
+        }
+      }
+      
+      response += `\n💡 **Available Actions:**\n`;
+      response += `• Use 'get-download-link' to download this file\n`;
+      response += `• Use 'analyze-csv-file' with different analysisType for other views\n`;
+      response += `• Use MCP resources to access raw file content\n`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error analyzing file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Compare CSV Files Tool
+server.tool(
+  "compare-csv-files",
+  {
+    file1: z.string().describe("Name of the first CSV file to compare"),
+    file2: z.string().describe("Name of the second CSV file to compare"),
+    compareBy: z.enum(["rates", "lenders", "structure", "all"]).optional().default("rates").describe("What to compare between the files")
+  },
+  async ({ file1, file2, compareBy }) => {
+    try {
+      const filePath1 = path.join(DATA_DIR, file1);
+      const filePath2 = path.join(DATA_DIR, file2);
+      
+      if (!fs.existsSync(filePath1)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${file1}`
+          }],
+          isError: true
+        };
+      }
+      
+      if (!fs.existsSync(filePath2)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${file2}`
+          }],
+          isError: true
+        };
+      }
+
+      const parsed1 = parseCSVFile(filePath1);
+      const parsed2 = parseCSVFile(filePath2);
+      
+      let response = `🔄 **CSV FILES COMPARISON**\n\n`;
+      response += `📁 **File 1:** ${file1} (${parsed1.rows.length} rows)\n`;
+      response += `📁 **File 2:** ${file2} (${parsed2.rows.length} rows)\n\n`;
+      
+      if (compareBy === "structure" || compareBy === "all") {
+        response += `📋 **Structure Comparison:**\n`;
+        response += `• File 1 columns: ${parsed1.headers.length}\n`;
+        response += `• File 2 columns: ${parsed2.headers.length}\n`;
+        
+        const commonHeaders = parsed1.headers.filter(h => parsed2.headers.includes(h));
+        const uniqueToFile1 = parsed1.headers.filter(h => !parsed2.headers.includes(h));
+        const uniqueToFile2 = parsed2.headers.filter(h => !parsed1.headers.includes(h));
+        
+        response += `• Common columns: ${commonHeaders.length} (${commonHeaders.join(', ')})\n`;
+        if (uniqueToFile1.length > 0) {
+          response += `• Only in File 1: ${uniqueToFile1.join(', ')}\n`;
+        }
+        if (uniqueToFile2.length > 0) {
+          response += `• Only in File 2: ${uniqueToFile2.join(', ')}\n`;
+        }
+        response += '\n';
+      }
+      
+      if (compareBy === "rates" || compareBy === "all") {
+        const rateColumn1 = parsed1.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+        const rateColumn2 = parsed2.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+        
+        if (rateColumn1 && rateColumn2) {
+          const rates1 = parsed1.rows
+            .map(row => parseFloat(row[rateColumn1]?.toString().replace('%', '') || '0'))
+            .filter(r => r > 0);
+          const rates2 = parsed2.rows
+            .map(row => parseFloat(row[rateColumn2]?.toString().replace('%', '') || '0'))
+            .filter(r => r > 0);
+          
+          response += `📈 **Rate Comparison:**\n`;
+          response += `• File 1 - Best: ${Math.min(...rates1).toFixed(3)}%, Average: ${(rates1.reduce((a, b) => a + b, 0) / rates1.length).toFixed(3)}%\n`;
+          response += `• File 2 - Best: ${Math.min(...rates2).toFixed(3)}%, Average: ${(rates2.reduce((a, b) => a + b, 0) / rates2.length).toFixed(3)}%\n`;
+          response += `• Best rate difference: ${(Math.min(...rates2) - Math.min(...rates1)).toFixed(3)}%\n`;
+          response += `• Average rate difference: ${((rates2.reduce((a, b) => a + b, 0) / rates2.length) - (rates1.reduce((a, b) => a + b, 0) / rates1.length)).toFixed(3)}%\n\n`;
+        }
+      }
+      
+      if (compareBy === "lenders" || compareBy === "all") {
+        const lenderColumn1 = parsed1.headers.find(h => h.toLowerCase().includes('lender'));
+        const lenderColumn2 = parsed2.headers.find(h => h.toLowerCase().includes('lender'));
+        
+        if (lenderColumn1 && lenderColumn2) {
+          const lenders1 = Array.from(new Set(parsed1.rows.map(row => row[lenderColumn1]).filter(l => l)));
+          const lenders2 = Array.from(new Set(parsed2.rows.map(row => row[lenderColumn2]).filter(l => l)));
+          
+          const commonLenders = lenders1.filter(l => lenders2.includes(l));
+          const uniqueToFile1 = lenders1.filter(l => !lenders2.includes(l));
+          const uniqueToFile2 = lenders2.filter(l => !lenders1.includes(l));
+          
+          response += `🏦 **Lender Comparison:**\n`;
+          response += `• File 1 lenders: ${lenders1.length}\n`;
+          response += `• File 2 lenders: ${lenders2.length}\n`;
+          response += `• Common lenders: ${commonLenders.length}\n`;
+          if (uniqueToFile1.length > 0) {
+            response += `• Only in File 1: ${uniqueToFile1.slice(0, 5).join(', ')}${uniqueToFile1.length > 5 ? '...' : ''}\n`;
+          }
+          if (uniqueToFile2.length > 0) {
+            response += `• Only in File 2: ${uniqueToFile2.slice(0, 5).join(', ')}${uniqueToFile2.length > 5 ? '...' : ''}\n`;
+          }
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error comparing files: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Read CSV File Content Tool - Direct access to CSV data for Claude analysis
+server.tool(
+  "read-csv-file",
+  {
+    fileName: z.string().optional().describe("Name of the CSV file to read (leave empty to list available files)"),
+    includeMetadata: z.boolean().optional().default(true).describe("Include file metadata and search parameters"),
+    maxRows: z.number().optional().default(1000).describe("Maximum number of rows to return (default: 1000)")
+  },
+  async ({ fileName, includeMetadata, maxRows }) => {
+    try {
+      if (!fileName) {
+        // List available CSV files
+        const files = getAllCSVFiles();
+        
+        let response = `📁 **AVAILABLE CSV FILES** (${files.length} files)\n\n`;
+        
+        if (files.length === 0) {
+          response += "No CSV files found. Generate some data first using the mortgage tools with format='csv'.\n\n";
+          response += `💡 **To create CSV files:**\n`;
+          response += `• Use get-mortgage-rates with format="csv"\n`;
+          response += `• Use compare-loan-products with format="csv"\n`;
+          response += `• Use calculate-monthly-payment with format="csv"\n`;
+        } else {
+          for (const file of files) {
+            const parsed = parseCSVFile(file.path);
+            response += `📄 **${file.name}**\n`;
+            response += `   • ${Math.round(file.size / 1024 * 100) / 100} KB, ${parsed.rows.length} rows, ${parsed.headers.length} columns\n`;
+            response += `   • Created: ${file.created.toLocaleString()}\n`;
+            response += `   • Type: ${file.type}\n\n`;
+          }
+          
+          response += `💡 **To read a file:**\n`;
+          response += `• Use: read-csv-file with fileName="filename.csv"\n`;
+          response += `• This will load the full CSV content into Claude for analysis\n`;
+        }
+        
+        return {
+          content: [{
+            type: "text",
+            text: response
+          }]
+        };
+      }
+      
+      // Read specific file
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (!fs.existsSync(filePath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${fileName}\n\nUse 'read-csv-file' without fileName to see available files.`
+          }],
+          isError: true
+        };
+      }
+
+      // Read the raw file content
+      const rawContent = fs.readFileSync(filePath, 'utf8');
+      const stats = fs.statSync(filePath);
+      const parsed = parseCSVFile(filePath);
+      
+      let response = `📊 **CSV FILE LOADED: ${fileName}**\n\n`;
+      
+      if (includeMetadata) {
+        response += `📁 **File Information:**\n`;
+        response += `• Size: ${Math.round(stats.size / 1024 * 100) / 100} KB\n`;
+        response += `• Created: ${stats.birthtime.toLocaleString()}\n`;
+        response += `• Total Rows: ${parsed.rows.length}\n`;
+        response += `• Columns: ${parsed.headers.length}\n\n`;
+        
+        if (parsed.metadata.generated) {
+          response += `📅 **Generated:** ${parsed.metadata.generated}\n`;
+        }
+        
+        if (parsed.metadata.searchParams) {
+          response += `🔍 **Search Parameters:**\n`;
+          const params = parsed.metadata.searchParams;
+          if (typeof params === 'object') {
+            Object.entries(params).forEach(([key, value]) => {
+              if (value !== undefined && value !== null) {
+                response += `• ${key}: ${value}\n`;
+              }
+            });
+          } else {
+            response += `• ${params}\n`;
+          }
+          response += '\n';
+        }
+        
+        response += `📋 **Columns:** ${parsed.headers.join(', ')}\n\n`;
+      }
+      
+      // Limit rows if necessary
+      const rowsToShow = Math.min(maxRows, parsed.rows.length);
+      if (rowsToShow < parsed.rows.length) {
+        response += `📊 **Showing first ${rowsToShow} of ${parsed.rows.length} rows:**\n\n`;
+      } else {
+        response += `📊 **Complete Dataset (${parsed.rows.length} rows):**\n\n`;
+      }
+      
+      // Create clean CSV content for Claude analysis
+      let csvForAnalysis = parsed.headers.join(',') + '\n';
+      
+      for (let i = 0; i < rowsToShow; i++) {
+        const row = parsed.rows[i];
+        const values = parsed.headers.map(header => {
+          const value = row[header] || '';
+          // Escape commas and quotes for proper CSV format
+          if (value.toString().includes(',') || value.toString().includes('"')) {
+            return `"${value.toString().replace(/"/g, '""')}"`;
+          }
+          return value;
+        });
+        csvForAnalysis += values.join(',') + '\n';
+      }
+      
+      response += `\`\`\`csv\n${csvForAnalysis}\`\`\`\n\n`;
+      
+      // Add quick analysis
+      const rateColumn = parsed.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+      if (rateColumn && parsed.rows.length > 0) {
+        const rates = parsed.rows
+          .map(row => parseFloat(row[rateColumn]?.toString().replace('%', '') || '0'))
+          .filter(r => r > 0);
+        
+        if (rates.length > 0) {
+          response += `📈 **Quick Rate Analysis:**\n`;
+          response += `• Best rate: ${Math.min(...rates).toFixed(3)}%\n`;
+          response += `• Worst rate: ${Math.max(...rates).toFixed(3)}%\n`;
+          response += `• Average rate: ${(rates.reduce((a, b) => a + b, 0) / rates.length).toFixed(3)}%\n`;
+          response += `• Rate spread: ${(Math.max(...rates) - Math.min(...rates)).toFixed(3)}%\n\n`;
+        }
+      }
+      
+      response += `✅ **CSV data is now loaded and ready for analysis in Claude!**\n\n`;
+      response += `💡 **You can now:**\n`;
+      response += `• Ask questions about the data\n`;
+      response += `• Request specific analysis or comparisons\n`;
+      response += `• Have Claude create charts or summaries\n`;
+      response += `• Filter or sort the data as needed\n`;
+      
+      if (rowsToShow < parsed.rows.length) {
+        response += `\n⚠️ **Note:** Only showing first ${rowsToShow} rows. Use maxRows parameter to see more data.\n`;
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error reading CSV file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Copy CSV to Desktop Tool - Alternative way to access files
+server.tool(
+  "copy-csv-to-desktop",
+  {
+    fileName: z.string().describe("Name of the CSV file to copy to Desktop"),
+    newName: z.string().optional().describe("Optional new name for the copied file")
+  },
+  async ({ fileName, newName }) => {
+    try {
+      const filePath = path.join(DATA_DIR, fileName);
+      
+      if (!fs.existsSync(filePath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **File not found:** ${fileName}\n\nUse 'list-saved-files' to see available files.`
+          }],
+          isError: true
+        };
+      }
+
+      // Get user's home directory and Desktop path
+      const homeDir = process.env.HOME || process.env.USERPROFILE || '';
+      const desktopPath = path.join(homeDir, 'Desktop');
+      
+      if (!fs.existsSync(desktopPath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ **Desktop folder not found at:** ${desktopPath}`
+          }],
+          isError: true
+        };
+      }
+
+      const targetFileName = newName || fileName;
+      const targetPath = path.join(desktopPath, targetFileName);
+      
+      // Copy the file
+      fs.copyFileSync(filePath, targetPath);
+      
+      const stats = fs.statSync(targetPath);
+      const sizeKB = Math.round(stats.size / 1024 * 100) / 100;
+      
+      let response = `✅ **FILE COPIED TO DESKTOP**\n\n`;
+      response += `📁 **Source:** ${fileName}\n`;
+      response += `📍 **Desktop Location:** ${targetPath}\n`;
+      response += `📊 **Size:** ${sizeKB} KB\n\n`;
+      response += `💡 **Now you can:**\n`;
+      response += `• Drag and drop the file from Desktop into Claude Desktop\n`;
+      response += `• Double-click to open in Excel or other CSV viewer\n`;
+      response += `• Use the file in other applications\n`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error copying file to Desktop: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// Get File Summary Tool
+server.tool(
+  "get-file-summary",
+  {
+    fileName: z.string().optional().describe("Name of specific CSV file to summarize, or leave empty for all files")
+  },
+  async ({ fileName }) => {
+    try {
+      if (fileName) {
+        // Summary for specific file
+        const filePath = path.join(DATA_DIR, fileName);
+        
+        if (!fs.existsSync(filePath)) {
+          return {
+            content: [{
+              type: "text",
+              text: `❌ **File not found:** ${fileName}`
+            }],
+            isError: true
+          };
+        }
+
+        const parsed = parseCSVFile(filePath);
+        const stats = fs.statSync(filePath);
+        
+        let response = `📄 **FILE SUMMARY: ${fileName}**\n\n`;
+        response += `📊 **Quick Stats:**\n`;
+        response += `• Size: ${Math.round(stats.size / 1024 * 100) / 100} KB\n`;
+        response += `• Created: ${stats.birthtime.toLocaleString()}\n`;
+        response += `• Rows: ${parsed.rows.length}\n`;
+        response += `• Columns: ${parsed.headers.length}\n`;
+        
+        // Quick rate info if available
+        const rateColumn = parsed.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+        if (rateColumn && parsed.rows.length > 0) {
+          const rates = parsed.rows
+            .map(row => parseFloat(row[rateColumn]?.toString().replace('%', '') || '0'))
+            .filter(r => r > 0);
+          
+          if (rates.length > 0) {
+            response += `• Best rate: ${Math.min(...rates).toFixed(3)}%\n`;
+            response += `• Rate range: ${Math.min(...rates).toFixed(3)}% - ${Math.max(...rates).toFixed(3)}%\n`;
+          }
+        }
+        
+        if (parsed.metadata.searchParams) {
+          response += `\n🔍 **Search Context:** ${JSON.stringify(parsed.metadata.searchParams)}\n`;
+        }
+        
+        return {
+          content: [{
+            type: "text",
+            text: response
+          }]
+        };
+        
+      } else {
+        // Summary for all files
+        const files = getAllCSVFiles();
+        
+        let response = `📁 **ALL FILES SUMMARY** (${files.length} files)\n\n`;
+        
+        if (files.length === 0) {
+          response += "No CSV files found. Generate some data first using the mortgage tools with format='csv'.\n";
+        } else {
+          let totalSize = 0;
+          let totalRows = 0;
+          
+          for (const file of files) {
+            const parsed = parseCSVFile(file.path);
+            totalSize += file.size;
+            totalRows += parsed.rows.length;
+            
+            response += `📄 **${file.name}**\n`;
+            response += `   • ${Math.round(file.size / 1024 * 100) / 100} KB, ${parsed.rows.length} rows\n`;
+            response += `   • Created: ${file.created.toLocaleString()}\n`;
+            
+            // Quick rate info
+            const rateColumn = parsed.headers.find(h => h.toLowerCase().includes('rate') && !h.toLowerCase().includes('apr'));
+            if (rateColumn && parsed.rows.length > 0) {
+              const rates = parsed.rows
+                .map(row => parseFloat(row[rateColumn]?.toString().replace('%', '') || '0'))
+                .filter(r => r > 0);
+              
+              if (rates.length > 0) {
+                response += `   • Best rate: ${Math.min(...rates).toFixed(3)}%\n`;
+              }
+            }
+            response += '\n';
+          }
+          
+          response += `📊 **Totals:**\n`;
+          response += `• Total size: ${Math.round(totalSize / 1024 * 100) / 100} KB\n`;
+          response += `• Total rows: ${totalRows}\n`;
+          response += `• File types: ${Array.from(new Set(files.map(f => f.type))).join(', ')}\n`;
+        }
+        
+        return {
+          content: [{
+            type: "text",
+            text: response
+          }]
+        };
+      }
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error getting file summary: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
 
 // Start the server
 async function main() {

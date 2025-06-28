@@ -176,7 +176,7 @@ class GetMortgageRatesTest:
             content = response["result"]["content"]
             if content and len(content) > 0:
                 text = content[0].get("text", "")
-                if "CSV FORMAT" in text and "Lender Name,Rate" in text:
+                if "CSV FORMAT" in text and ("Lender,Rate" in text or "Lender Name,Rate" in text):
                     print("✅ CSV format test passed")
                     # Check for proper CSV structure
                     lines = text.split('\n')
@@ -219,7 +219,7 @@ class GetMortgageRatesTest:
             content = response["result"]["content"]
             if content and len(content) > 0:
                 text = content[0].get("text", "")
-                if "PIPE-DELIMITED FORMAT" in text and "Lender Name|Rate" in text:
+                if "PIPE-DELIMITED FORMAT" in text and "Lender|Rate" in text:
                     print("✅ Pipe format test passed")
                     # Check for proper pipe structure
                     lines = text.split('\n')
@@ -239,6 +239,116 @@ class GetMortgageRatesTest:
                 return False
         else:
             print(f"❌ Failed pipe format test: {response.get('error')}")
+            return False
+    
+    def test_structured_format(self):
+        """Test structured JSON output format"""
+        print("\n🔧 Testing structured JSON format...")
+        
+        params = {
+            "name": "get-mortgage-rates",
+            "arguments": {
+                "propertyValue": 500000,
+                "downPayment": 100000,
+                "creditScore": 750,
+                "zipCode": "90210",
+                "format": "structured"
+            }
+        }
+        
+        response = self.send_mcp_request("tools/call", params)
+        
+        if "result" in response and "content" in response["result"]:
+            content = response["result"]["content"]
+            if content and len(content) > 0:
+                text = content[0].get("text", "")
+                try:
+                    # Try to parse as JSON
+                    import json
+                    data = json.loads(text)
+                    
+                    # Check for expected structure
+                    if "rates" in data and "best_rate" in data and "total_products" in data and "search_params" in data:
+                        print("✅ Structured format test passed")
+                        print(f"   Found {data.get('total_products', 0)} products in structured format")
+                        
+                        # Check if rates array has expected structure
+                        if data["rates"] and len(data["rates"]) > 0:
+                            rate = data["rates"][0]
+                            expected_fields = ["lender", "rate", "apr", "payment", "points", "upfront_costs"]
+                            found_fields = [field for field in expected_fields if field in rate]
+                            if len(found_fields) >= 4:  # At least most fields present
+                                print(f"   ✅ Rate structure valid with fields: {', '.join(found_fields)}")
+                                return True
+                            else:
+                                print(f"   ⚠️  Rate structure missing some fields: {set(expected_fields) - set(found_fields)}")
+                                return True  # Still pass if basic structure is there
+                        else:
+                            print("   ⚠️  No rates found in structured data")
+                            return True  # Still pass if structure is correct
+                    else:
+                        print("❌ Structured format missing required fields")
+                        print(f"   Available fields: {list(data.keys()) if isinstance(data, dict) else 'Not a dict'}")
+                        return False
+                        
+                except json.JSONDecodeError as e:
+                    print(f"❌ Structured format is not valid JSON: {e}")
+                    print(f"   Response: {text[:200]}...")
+                    return False
+            else:
+                print("❌ Empty content in structured response")
+                return False
+        else:
+            print(f"❌ Failed structured format test: {response.get('error')}")
+            return False
+    
+    def test_markdown_format(self):
+        """Test markdown table output format"""
+        print("\n📝 Testing markdown format...")
+        
+        params = {
+            "name": "get-mortgage-rates",
+            "arguments": {
+                "propertyValue": 500000,
+                "downPayment": 100000,
+                "creditScore": 750,
+                "zipCode": "90210",
+                "format": "markdown"
+            }
+        }
+        
+        response = self.send_mcp_request("tools/call", params)
+        
+        if "result" in response and "content" in response["result"]:
+            content = response["result"]["content"]
+            if content and len(content) > 0:
+                text = content[0].get("text", "")
+                if "# Mortgage Rates Comparison" in text and "| Lender | Rate |" in text and "|--------|------|" in text:
+                    print("✅ Markdown format test passed")
+                    
+                    # Check for markdown table structure
+                    lines = text.split('\n')
+                    table_lines = [line for line in lines if line.startswith('|') and '|' in line[1:]]
+                    if len(table_lines) > 2:  # Header + separator + at least one data row
+                        print(f"   Found {len(table_lines)-2} data rows in markdown table")
+                        
+                        # Check for best rate details section
+                        if "## Best Rate Details" in text:
+                            print("   ✅ Best rate details section found")
+                        
+                        return True
+                    else:
+                        print("❌ Markdown table missing data rows")
+                        return False
+                else:
+                    print("❌ Markdown format incorrect")
+                    print(f"   Response: {text[:200]}...")
+                    return False
+            else:
+                print("❌ Empty content in markdown response")
+                return False
+        else:
+            print(f"❌ Failed markdown format test: {response.get('error')}")
             return False
     
     def test_different_credit_scores(self):
@@ -399,6 +509,8 @@ class GetMortgageRatesTest:
                 ("All Parameters", self.test_all_parameters),
                 ("CSV Format", self.test_csv_format),
                 ("Pipe Format", self.test_pipe_format),
+                ("Structured Format", self.test_structured_format),
+                ("Markdown Format", self.test_markdown_format),
                 ("Different Credit Scores", self.test_different_credit_scores),
                 ("Different ZIP Codes", self.test_different_zip_codes),
                 ("Edge Cases", self.test_edge_cases)

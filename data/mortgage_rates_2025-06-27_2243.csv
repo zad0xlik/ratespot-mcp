@@ -1,0 +1,1775 @@
+# Generated on: 2025-06-27T22:43:06.894Z
+# Search Parameters: {"propertyValue":500000,"downPayment":250000,"loanAmount":850000,"creditScore":760,"propertyType":"single_family","occupancy":"primary","zipCode":"94949"}
+# File Type: mortgage_rates
+
+Lender,Rate,APR,Payment,Points,Upfront_Costs,Loan_Type,Quote_Type
+District Lending,4.250%,4.747%,"$1,881",2.875,"$8,438",Conventional,Retail
+American VA Loans,4.250%,4.825%,"$1,881",2.664,"$9,880",VA,Retail
+District Lending,4.250%,4.916%,"$1,881",2.789,"$11,348",VA,Retail
+District Lending,4.250%,4.939%,"$2,561",2.75,"$8,125",Conventional,Retail
+District Lending,4.250%,5.684%,"$1,881",2.685,"$12,338",FHA,Retail
+District Lending,4.375%,4.800%,"$1,897",2.375,"$7,188",Conventional,Retail
+American VA Loans,4.375%,4.904%,"$1,897",2.332,"$9,050",VA,Retail
+District Lending,4.375%,4.960%,"$2,576",2.25,"$6,875",Conventional,Retail
+District Lending,4.375%,4.995%,"$1,897",2.457,"$10,518",VA,Retail
+District Lending,4.375%,5.758%,"$1,897",2.325,"$11,438",FHA,Retail
+District Lending,4.500%,5.831%,"$1,913",1.963,"$10,532",FHA,Retail
+American VA Loans,4.625%,5.060%,"$1,928",1.671,"$15,656.5",Conventional,Retail
+District Lending,4.625%,5.037%,"$2,607",1.422,"$4,805",Conventional,Retail
+American VA Loans,4.625%,5.060%,"$1,929",1.671,"$7,398",VA,Retail
+District Lending,4.625%,5.129%,"$2,607",1.854,"$5,885",Conventional,Retail
+District Lending,4.625%,5.152%,"$1,929",1.796,"$8,865",VA,Retail
+District Lending,4.750%,5.068%,"$1,945",1.625,"$13,455.5",Conventional,Retail
+Empire of America,4.750%,5.139%,"$1,945",2,"$15,576",Conventional,Retail
+American VA Loans,4.750%,5.098%,"$1,945",1.074,"$5,905",VA,Retail
+District Lending,4.750%,5.191%,"$1,945",1.199,"$7,372",VA,Retail
+District Lending,4.750%,5.957%,"$1,945",1.118,"$8,420",FHA,Retail
+District Lending,4.750%,5.068%,"$1,945",1.625,"$5,312",Conventional,Retail
+AimLoan.com,4.750%,5.141%,"$1,945",2.216,"$6,535",Conventional,Retail
+District Lending,4.750%,6.590%,"$2,622",2.907,"$12,892",FHA,Retail
+American VA Loans,4.875%,5.175%,"$1,961",0.742,"$11,011",Conventional,Retail
+District Lending,4.875%,5.268%,"$1,961",0.867,"$12,790.5",Conventional,Retail
+AimLoan.com,4.875%,5.212%,"$1,961",1.846,"$14,306",Conventional,Retail
+American VA Loans,4.875%,5.175%,"$1,961",0.742,"$5,075",VA,Retail
+District Lending,4.875%,5.268%,"$1,961",0.867,"$6,542",VA,Retail
+District Lending,4.875%,6.037%,"$1,961",0.822,"$7,680",FHA,Retail
+District Lending,4.875%,5.138%,"$1,961",1.25,"$4,375",Conventional,Retail
+AimLoan.com,4.875%,5.212%,"$1,961",1.846,"$5,610",Conventional,Retail
+District Lending,4.875%,5.832%,"$2,637",2.727,"$11,192",VA,Retail
+American VA Loans,4.990%,5.245%,"$1,976",0.437,"$4,312",VA,Retail
+District Lending,4.990%,5.282%,"$2,651",0.852,"$3,380",Conventional,Retail
+"Tomo Mortgage, LLC.",4.990%,5.431%,"$1,976",2.932,"$7,330",Conventional,Retail
+PenFed Credit Union,5.000%,6.212%,"$1,977",0.875,"$8,558",FHA,Retail
+AimLoan.com,5.000%,5.284%,"$1,977",1.482,"$4,700",Conventional,Retail
+District Lending,5.000%,5.855%,"$2,652",2.237,"$9,968",VA,Retail
+District Lending,5.000%,6.666%,"$2,652",2.067,"$10,792",FHA,Retail
+District Lending,5.000%,5.292%,"$1,343",2.848,"$8,370",Conventional,Retail
+Empire of America,5.125%,5.348%,"$1,993",0.875,"$9,950.5",Conventional,Retail
+NewRez LLC,5.125%,5.737%,"$2,028.184",-0.696,"$2,509.2",FHA,Wholesale
+NexBank,5.125%,5.768%,"$2,028.184",-0.7544999999999931,"$2,988.6",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.125%,5.821%,"$2,028.184",-0.314,"$3,829.4",FHA,Wholesale
+Pennymac TPO,5.125%,5.821%,"$2,028.184",-0.314,"$3,829.4",FHA,Wholesale
+Eleven Mortgage,5.125%,5.833%,"$2,028.184",0.9616,"$4,021.6",FHA,Wholesale
+Rocket Pro,5.125%,5.837%,"$2,028.184",-0.1700000000000017,"$4,093.9",FHA,Wholesale
+Click n' Close,5.125%,5.851%,"$2,028.184",-0.35675,"$4,305.6",FHA,Wholesale
+"VIP Mortgage, Inc.",5.125%,5.873%,"$2,028.184",-0.43174999999999386,"$4,661.7",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.125%,5.895%,"$2,028.184",-0.015,"$4,996.8",FHA,Wholesale
+Loan United Wholesale,5.125%,5.912%,"$2,028.184",0.0379999999999967,"$5,258.9",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.125%,5.921%,"$2,028.184",0.19594,"$5,406.3",FHA,Wholesale
+TPO GO,5.125%,5.926%,"$2,028.184",0.6779999999999973,"$5,487.9",FHA,Wholesale
+AFR Wholesale,5.125%,5.927%,"$2,028.184",0.06399999999999295,"$5,500.6",FHA,Wholesale
+Jet Advantage Mortgage,5.125%,5.929%,"$2,028.184",0.7210000000000036,"$5,533.6",FHA,Wholesale
+Forward Lending,5.125%,5.929%,"$2,028.184",0.7210000000000036,"$5,533.6",FHA,Wholesale
+AD Mortgage,5.125%,5.938%,"$2,028.184",0.25199999999999534,"$5,676",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.125%,5.989%,"$2,028.184",0.48813,"$6,467.5",FHA,Wholesale
+Kind Lending,5.125%,6.019%,"$2,028.184",0.79708,"$6,935.5",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.125%,6.019%,"$2,028.184",0.79708,"$6,935.5",FHA,Wholesale
+HomeBridge Wholesale,5.125%,6.032%,"$2,028.184",1.375,"$7,133.7",FHA,Wholesale
+JMAC Lending Inc.,5.125%,6.094%,"$2,028.184",1.1266,"$8,091.6",FHA,Wholesale
+Windsor Mortgage Solutions,5.125%,6.309%,"$2,028.184",2.191999999999993,"$11,374.1",FHA,Wholesale
+NewRez LLC,5.125%,5.789%,"$2,059.08",-0.706,"$2,669.5",VA,Wholesale
+Rocket Pro,5.125%,5.845%,"$2,059.08",-0.26200000000000045,"$3,550.1",VA,Wholesale
+Loan Factory Direct - Rocket,5.125%,5.845%,"$2,059.08",-0.26200000000000045,"$3,550.1",VA,Wholesale
+NexBank,5.125%,5.884%,"$2,059.08",-0.2949700000000064,"$4,175.1",VA,Wholesale
+Click n' Close,5.125%,5.894%,"$2,059.08",-0.35675,"$4,325.5",VA,Wholesale
+Pennymac TPO,5.125%,5.904%,"$2,059.08",-0.285,"$4,484.9",VA,Wholesale
+Loan Factory Direct - PennyMac,5.125%,5.904%,"$2,059.08",-0.285,"$4,484.9",VA,Wholesale
+"VIP Mortgage, Inc.",5.125%,5.912%,"$2,059.08",-0.441749999999999,"$4,609.6",VA,Wholesale
+Eleven Mortgage,5.125%,5.939%,"$2,059.08",1.1357,"$5,029",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.125%,5.980%,"$2,059.08",0.235,"$5,672.9",VA,Wholesale
+Plaza Home Mortgage Inc.,5.125%,5.983%,"$2,059.08",0.30594,"$5,727",VA,Wholesale
+Jet Advantage Mortgage,5.125%,6.032%,"$2,059.08",1.0759999999999934,"$6,489",VA,Wholesale
+Forward Lending,5.125%,6.032%,"$2,059.08",1.0759999999999934,"$6,489",VA,Wholesale
+Loan United Wholesale,5.125%,6.032%,"$2,059.08",0.35299999999999443,"$6,494.1",VA,Wholesale
+Sun West Mtg Co Wholesale,5.125%,6.055%,"$2,059.08",0.48813,"$6,843.1",VA,Wholesale
+Kind Lending,5.125%,6.056%,"$2,059.08",0.74708,"$6,866.2",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.125%,6.056%,"$2,059.08",0.74708,"$6,866.2",VA,Wholesale
+AFR Wholesale,5.125%,6.069%,"$2,059.08",0.8059999999999974,"$7,067.4",VA,Wholesale
+Union Home Mortgage,5.125%,6.196%,"$2,059.08",1.4860000000000042,"$9,032.7",VA,Wholesale
+JMAC Lending Inc.,5.125%,6.220%,"$2,059.08",1.6007,"$9,393.5",VA,Wholesale
+Windsor Mortgage Solutions,5.125%,6.350%,"$2,059.08",2.391999999999996,"$11,372.4",VA,Wholesale
+Guaranteed Rate,5.125%,6.360%,"$2,058.78",1.864,"$17,619.16",FHA,Retail
+District Lending,5.125%,5.277%,"$1,994",0.5,"$2,500",Conventional,Retail
+District Lending,5.125%,5.315%,"$2,667",0.375,"$2,188",Conventional,Retail
+District Lending,5.125%,5.424%,"$1,994",0.221,"$4,928",VA,Retail
+District Lending,5.125%,6.224%,"$1,994",0.404,"$6,635",FHA,Retail
+PenFed Credit Union,5.125%,6.263%,"$1,994",0.375,"$7,308",FHA,Retail
+District Lending,5.125%,5.880%,"$2,667",1.756,"$8,765",VA,Retail
+District Lending,5.125%,6.690%,"$2,667",1.586,"$9,590",FHA,Retail
+District Lending,5.125%,5.383%,"$1,362",2.435,"$7,338",Conventional,Retail
+District Lending,5.125%,6.601%,"$1,362",2.808,"$12,645",FHA,Retail
+Optimum First Mortgage,5.249%,5.611%,"$1,380.35",1.892,"$9,850",VA,Retail
+"SunnyHill Financial, Inc.",5.250%,5.547%,"$1,380.51",1.555,"$8,107.5",VA,Retail
+American VA Loans,5.250%,5.440%,"$2,010",0,"$7,301",Conventional,Retail
+AimLoan.com,5.250%,5.402%,"$2,010",0.6,"$8,076",Conventional,Retail
+NewRez LLC,5.250%,5.776%,"$2,044.864",-1.245,"$1,112.6",FHA,Wholesale
+NexBank,5.250%,5.859%,"$2,044.864",-0.967250000000007,"$2,447.5",FHA,Wholesale
+Rocket Pro,5.250%,5.861%,"$2,044.864",-0.8089999999999975,"$2,468.4",FHA,Wholesale
+AFR Wholesale,5.250%,5.883%,"$2,044.864",-0.9890000000000043,"$2,822",FHA,Wholesale
+Eleven Mortgage,5.250%,5.889%,"$2,044.864",-0.98348,"$2,914.9",FHA,Wholesale
+Jet Advantage Mortgage,5.250%,5.915%,"$2,044.864",-0.1490000000000009,"$3,320.6",FHA,Wholesale
+Forward Lending,5.250%,5.915%,"$2,044.864",-0.1490000000000009,"$3,320.6",FHA,Wholesale
+Click n' Close,5.250%,5.924%,"$2,044.864",-0.6878,"$3,463.5",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.250%,5.932%,"$2,044.864",-0.64134,"$3,594.4",FHA,Wholesale
+"VIP Mortgage, Inc.",5.250%,5.953%,"$2,044.864",-0.7217500000000001,"$3,924",FHA,Wholesale
+Pennymac TPO,5.250%,5.960%,"$2,044.864",-0.231,"$4,040.5",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.250%,5.960%,"$2,044.864",-0.231,"$4,040.5",FHA,Wholesale
+Loan United Wholesale,5.250%,5.973%,"$2,044.864",-0.3640000000000043,"$4,236.3",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.250%,5.976%,"$2,044.864",-0.293,"$4,289.7",FHA,Wholesale
+TPO GO,5.250%,5.990%,"$2,044.864",0.2890000000000015,"$4,498.3",FHA,Wholesale
+AD Mortgage,5.250%,5.992%,"$2,044.864",-0.19700000000000273,"$4,533.9",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.250%,5.999%,"$2,044.864",-0.10458,"$4,641.9",FHA,Wholesale
+Kind Lending,5.250%,6.017%,"$2,044.864",0.01025,"$4,934",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.250%,6.017%,"$2,044.864",0.01025,"$4,934",FHA,Wholesale
+HomeBridge Wholesale,5.250%,6.031%,"$2,044.864",0.594,"$5,147",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.250%,6.036%,"$2,044.864",0,"$5,225.8",FHA,Wholesale
+JMAC Lending Inc.,5.250%,6.249%,"$2,044.864",1.2948,"$8,519.4",FHA,Wholesale
+Open Mortgage,5.250%,6.289%,"$2,044.864",1.537,"$9,135.5",FHA,Wholesale
+Windsor Mortgage Solutions,5.250%,6.393%,"$2,044.864",1.9320000000000022,"$10,712.7",FHA,Wholesale
+NewRez LLC,5.250%,5.828%,"$2,076.014",-1.255,"$1,251.7",VA,Wholesale
+Loan Factory Direct - Rocket,5.250%,5.890%,"$2,076.014",-0.7690000000000055,"$2,240.8",VA,Wholesale
+Rocket Pro,5.250%,5.890%,"$2,076.014",-0.7690000000000055,"$2,240.8",VA,Wholesale
+Eleven Mortgage,5.250%,5.947%,"$2,076.014",-0.84348,"$3,145.9",VA,Wholesale
+NexBank,5.250%,5.967%,"$2,076.014",-0.5704499999999939,"$3,463.7",VA,Wholesale
+Click n' Close,5.250%,5.967%,"$2,076.014",-0.6878,"$3,470.6",VA,Wholesale
+Loan United Wholesale,5.250%,5.990%,"$2,076.014",-0.6779999999999973,"$3,831.6",VA,Wholesale
+"VIP Mortgage, Inc.",5.250%,5.992%,"$2,076.014",-0.7317500000000052,"$3,860.7",VA,Wholesale
+Jet Advantage Mortgage,5.250%,5.996%,"$2,076.014",0.08100000000000307,"$3,919.4",VA,Wholesale
+Forward Lending,5.250%,5.996%,"$2,076.014",0.08100000000000307,"$3,919.4",VA,Wholesale
+Sun West Mtg Co Wholesale,5.250%,5.996%,"$2,076.014",-0.64134,"$3,926.2",VA,Wholesale
+Pennymac TPO,5.250%,6.005%,"$2,076.014",-0.446,"$4,069.1",VA,Wholesale
+Loan Factory Direct - PennyMac,5.250%,6.005%,"$2,076.014",-0.446,"$4,069.1",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.250%,6.053%,"$2,076.014",-0.093,"$4,825.8",VA,Wholesale
+Plaza Home Mortgage Inc.,5.250%,6.061%,"$2,076.014",0.00542,"$4,950.9",VA,Wholesale
+Union Home Mortgage,5.250%,6.075%,"$2,076.014",-0.013999999999995794,"$5,158.9",VA,Wholesale
+AFR Wholesale,5.250%,6.081%,"$2,076.014",0.10200000000000387,"$5,249.3",VA,Wholesale
+Kind Lending,5.250%,6.120%,"$2,076.014",0.35943,"$5,865.1",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.250%,6.120%,"$2,076.014",0.35943,"$5,865.1",VA,Wholesale
+The Loan Store LLC,5.250%,6.192%,"$2,076.014",0.6400000000000006,"$6,977",VA,Wholesale
+JMAC Lending Inc.,5.250%,6.336%,"$2,076.014",1.5256,"$9,199.6",VA,Wholesale
+Open Mortgage,5.250%,6.381%,"$2,076.014",1.787,"$9,874.6",VA,Wholesale
+Windsor Mortgage Solutions,5.250%,6.435%,"$2,076.014",2.132000000000005,"$10,701",VA,Wholesale
+Guaranteed Rate,5.250%,6.003%,"$2,009.69",1.698,"$13,676.16",Conventional,Retail
+District Lending,5.250%,5.359%,"$2,683",0,"$1,250",Conventional,Retail
+American VA Loans,5.250%,5.440%,"$2,010",0,"$3,220",VA,Retail
+District Lending,5.250%,5.516%,"$2,010",0,"$4,375",VA,Retail
+District Lending,5.250%,6.287%,"$2,010",0,"$5,625",FHA,Retail
+AimLoan.com,5.250%,5.402%,"$2,010",0.6,"$2,495",Conventional,Retail
+District Lending,5.250%,5.910%,"$2,683",1.304,"$7,635",VA,Retail
+District Lending,5.250%,6.720%,"$2,683",1.134,"$8,460",FHA,Retail
+American VA Loans,5.250%,5.540%,"$1,381",2.03,"$8,295",VA,Retail
+District Lending,5.250%,5.595%,"$1,381",2.155,"$9,762",VA,Retail
+American VA Loans,5.250%,5.663%,"$1,685",2.208,"$8,740",VA,Retail
+District Lending,5.250%,5.737%,"$1,685",2.333,"$10,208",VA,Retail
+District Lending,5.250%,6.666%,"$1,381",2.118,"$10,920",FHA,Retail
+District Lending,5.250%,6.926%,"$1,685",2.257,"$11,268",FHA,Retail
+AimLoan.com,5.250%,5.608%,"$1,685",2.593,"$7,478",Conventional,Retail
+District Lending,5.250%,5.623%,"$1,685",2.613,"$7,782",Conventional,Retail
+Mutual of Omaha Mortgage,5.375%,6.200%,"$1,504.1",1.93,"$11,438",FHA,Retail
+Mutual of Omaha Mortgage,5.375%,5.755%,"$1,399.93",1.951,"$10,240.5",VA,Retail
+Us Bank,5.375%,5.782%,"$2,697.7",0.978,"$7,451.93",Conventional,Retail
+District Lending,5.375%,5.452%,"$2,026",0,"$5,331",Conventional,Retail
+Empire of America,5.375%,5.467%,"$2,026",0,"$5,576",Conventional,Retail
+District Lending,5.375%,5.563%,"$1,400",1.601,"$13,335.5",Conventional,Retail
+District Lending,5.375%,5.566%,"$1,400",1.637,"$13,515.5",Conventional,Retail
+American VA Loans,5.375%,5.627%,"$1,400",1.575,"$15,176.5",Conventional,Retail
+"Tomo Mortgage, LLC.",5.375%,5.642%,"$2,026",1.749,"$12,825.5",Conventional,Retail
+District Lending,5.375%,5.683%,"$1,400",1.7,"$16,956",Conventional,Retail
+Rocket Pro,5.375%,5.947%,"$2,061.621",-1.0589999999999975,"$1,832.5",FHA,Wholesale
+NewRez LLC,5.375%,5.949%,"$2,061.621",-0.949,"$1,865.6",FHA,Wholesale
+Pennymac TPO,5.375%,5.986%,"$2,061.621",-0.852,"$2,460.8",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.375%,5.986%,"$2,061.621",-0.852,"$2,460.8",FHA,Wholesale
+Eleven Mortgage,5.375%,5.995%,"$2,061.621",-1.10598,"$2,603.3",FHA,Wholesale
+Click n' Close,5.375%,6.000%,"$2,061.621",-0.99827,"$2,673.8",FHA,Wholesale
+AFR Wholesale,5.375%,6.013%,"$2,061.621",-0.965999999999994,"$2,880.5",FHA,Wholesale
+"VIP Mortgage, Inc.",5.375%,6.020%,"$2,061.621",-1.0879999999999939,"$2,992.4",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.375%,6.044%,"$2,061.621",-0.73062,"$3,367.3",FHA,Wholesale
+AD Mortgage,5.375%,6.046%,"$2,061.621",-0.6440000000000055,"$3,396.8",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.375%,6.048%,"$2,061.621",-0.57713,"$3,439.8",FHA,Wholesale
+Jet Advantage Mortgage,5.375%,6.051%,"$2,061.621",-0.08400000000000318,"$3,485.9",FHA,Wholesale
+Forward Lending,5.375%,6.051%,"$2,061.621",-0.08400000000000318,"$3,485.9",FHA,Wholesale
+Kind Lending,5.375%,6.064%,"$2,061.621",-0.47975,"$3,687.5",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.375%,6.064%,"$2,061.621",-0.47975,"$3,687.5",FHA,Wholesale
+TPO GO,5.375%,6.065%,"$2,061.621",-0.02400000000000091,"$3,702.1",FHA,Wholesale
+HomeBridge Wholesale,5.375%,6.076%,"$2,061.621",0.094,"$3,875.1",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.375%,6.083%,"$2,061.621",-0.416,"$3,976.8",FHA,Wholesale
+Loan United Wholesale,5.375%,6.088%,"$2,061.621",-0.43600000000000705,"$4,053.1",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.375%,6.142%,"$2,061.621",-0.125,"$4,907.8",FHA,Wholesale
+JMAC Lending Inc.,5.375%,6.290%,"$2,061.621",0.7747,"$7,196.4",FHA,Wholesale
+Open Mortgage,5.375%,6.390%,"$2,061.621",1.378,"$8,731.1",FHA,Wholesale
+Windsor Mortgage Solutions,5.375%,6.585%,"$2,061.621",2.308880000000002,"$11,671.4",FHA,Wholesale
+Loan Factory Direct - Rocket,5.375%,5.969%,"$2,093.027",-1.0679999999999978,"$1,468.6",VA,Wholesale
+Rocket Pro,5.375%,5.969%,"$2,093.027",-1.0679999999999978,"$1,468.6",VA,Wholesale
+NewRez LLC,5.375%,6.003%,"$2,093.027",-0.959,"$2,016.1",VA,Wholesale
+Click n' Close,5.375%,6.044%,"$2,093.027",-0.99827,"$2,668.8",VA,Wholesale
+Eleven Mortgage,5.375%,6.049%,"$2,093.027",-0.99723,"$2,748.9",VA,Wholesale
+Pennymac TPO,5.375%,6.050%,"$2,093.027",-0.952,"$2,762.4",VA,Wholesale
+Loan Factory Direct - PennyMac,5.375%,6.050%,"$2,093.027",-0.952,"$2,762.4",VA,Wholesale
+"VIP Mortgage, Inc.",5.375%,6.056%,"$2,093.027",-1.117999999999995,"$2,863.2",VA,Wholesale
+Loan United Wholesale,5.375%,6.093%,"$2,093.027",-0.8319999999999936,"$3,433.9",VA,Wholesale
+Sun West Mtg Co Wholesale,5.375%,6.109%,"$2,093.027",-0.73062,"$3,695.7",VA,Wholesale
+Plaza Home Mortgage Inc.,5.375%,6.112%,"$2,093.027",-0.46713,"$3,730.5",VA,Wholesale
+Jet Advantage Mortgage,5.375%,6.134%,"$2,093.027",0.1460000000000008,"$4,087.2",VA,Wholesale
+Forward Lending,5.375%,6.134%,"$2,093.027",0.1460000000000008,"$4,087.2",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.375%,6.161%,"$2,093.027",-0.216,"$4,508.2",VA,Wholesale
+AFR Wholesale,5.375%,6.168%,"$2,093.027",-0.14300000000000068,"$4,616.6",VA,Wholesale
+Kind Lending,5.375%,6.171%,"$2,093.027",-0.10725,"$4,659.9",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.375%,6.171%,"$2,093.027",-0.10725,"$4,659.9",VA,Wholesale
+Union Home Mortgage,5.375%,6.203%,"$2,093.027",-0.013999999999995794,"$5,158.9",VA,Wholesale
+The Loan Store LLC,5.375%,6.299%,"$2,093.027",0.5150000000000006,"$6,654.2",VA,Wholesale
+JMAC Lending Inc.,5.375%,6.396%,"$2,093.027",1.1193,"$8,150.3",VA,Wholesale
+Open Mortgage,5.375%,6.483%,"$2,093.027",1.628,"$9,464",VA,Wholesale
+Windsor Mortgage Solutions,5.375%,6.629%,"$2,093.027",2.508880000000005,"$11,674.3",VA,Wholesale
+Sun West Mtg Co Wholesale,5.375%,6.392%,"$1,731.903",0.99812,"$5,857",FHA,Wholesale
+CMG Financial,5.375%,6.417%,"$1,731.903",1.039,"$6,342.6",FHA,Wholesale
+Pennymac TPO,5.375%,6.456%,"$1,731.903",0.965,"$7,082.8",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.375%,6.456%,"$1,731.903",0.965,"$7,082.8",FHA,Wholesale
+Loan United Wholesale,5.375%,6.469%,"$1,731.903",0.347999999999999,"$7,319.3",FHA,Wholesale
+NewRez LLC,5.375%,6.478%,"$1,731.903",1.262,"$7,489.8",FHA,Wholesale
+NexBank,5.375%,6.489%,"$1,731.903",1.0957499999999953,"$7,695.2",FHA,Wholesale
+Open Mortgage,5.375%,6.496%,"$1,731.903",1.022,"$7,825.5",FHA,Wholesale
+Rocket Pro,5.375%,6.496%,"$1,731.903",1.2999999999999972,"$7,833.2",FHA,Wholesale
+Eleven Mortgage,5.375%,6.506%,"$1,731.903",3.3329,"$8,018.7",FHA,Wholesale
+AFR Wholesale,5.375%,6.535%,"$1,731.903",1.2644599999999997,"$8,554.3",FHA,Wholesale
+AD Mortgage,5.375%,6.535%,"$1,731.903",1.3840000000000003,"$8,555.6",FHA,Wholesale
+"VIP Mortgage, Inc.",5.375%,6.540%,"$1,731.903",1.1361899999999991,"$8,650.2",FHA,Wholesale
+Kind Lending,5.375%,6.541%,"$1,731.903",1.48012,"$8,673",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.375%,6.541%,"$1,731.903",1.48012,"$8,673",FHA,Wholesale
+Jet Advantage Mortgage,5.375%,6.559%,"$1,731.903",2.0859999999999985,"$9,005.9",FHA,Wholesale
+Forward Lending,5.375%,6.559%,"$1,731.903",2.0859999999999985,"$9,005.9",FHA,Wholesale
+HomeBridge Wholesale,5.375%,6.560%,"$1,731.903",1.621,"$9,031.3",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.375%,6.573%,"$1,731.903",1.21332,"$9,266.1",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.375%,6.136%,"$1,424.427",0.99812,"$5,857",FHA,Wholesale
+Power TPO,5.375%,6.141%,"$1,424.427",0.6770000000000067,"$5,994",FHA,Wholesale
+Loan United Wholesale,5.375%,6.143%,"$1,424.427",0.347999999999999,"$6,047.4",FHA,Wholesale
+AmWest Funding Corp,5.375%,6.146%,"$1,424.427",0.477,"$6,121.3",FHA,Wholesale
+CMG Financial,5.375%,6.155%,"$1,424.427",1.039,"$6,342.6",FHA,Wholesale
+NexBank,5.375%,6.173%,"$1,424.427",0.7462100000000049,"$6,806.1",FHA,Wholesale
+Pennymac TPO,5.375%,6.184%,"$1,424.427",0.965,"$7,082.8",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.375%,6.184%,"$1,424.427",0.965,"$7,082.8",FHA,Wholesale
+Rocket Pro,5.375%,6.188%,"$1,424.427",1.0430000000000064,"$7,179.4",FHA,Wholesale
+Open Mortgage,5.375%,6.189%,"$1,424.427",0.772,"$7,189.6",FHA,Wholesale
+AD Mortgage,5.375%,6.194%,"$1,424.427",0.9009999999999962,"$7,326.9",FHA,Wholesale
+NewRez LLC,5.375%,6.200%,"$1,424.427",1.262,"$7,489.8",FHA,Wholesale
+Eleven Mortgage,5.375%,6.204%,"$1,424.427",0.84562,"$7,567.6",FHA,Wholesale
+Jet Advantage Mortgage,5.375%,6.208%,"$1,424.427",1.561000000000007,"$7,670.4",FHA,Wholesale
+Forward Lending,5.375%,6.208%,"$1,424.427",1.561000000000007,"$7,670.4",FHA,Wholesale
+The Loan Store LLC,5.375%,6.208%,"$1,424.427",0.938999999999993,"$7,678",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.375%,6.211%,"$1,424.427",1.11625,"$7,747.4",FHA,Wholesale
+Kind Lending,5.375%,6.211%,"$1,424.427",1.11625,"$7,747.4",FHA,Wholesale
+HomeBridge Wholesale,5.375%,6.211%,"$1,424.427",1.621,"$7,759.4",FHA,Wholesale
+Orion Lending,5.375%,6.216%,"$1,424.427",1.792,"$7,876.4",FHA,Wholesale
+TPO GO,5.375%,6.217%,"$1,424.427",1.6290000000000049,"$7,907",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.375%,6.221%,"$1,424.427",1.21332,"$7,994.3",FHA,Wholesale
+AFR Wholesale,5.375%,6.227%,"$1,424.427",1.1029999999999944,"$8,143.6",FHA,Wholesale
+Click n' Close,5.375%,6.227%,"$1,424.427",1.11335,"$8,147",FHA,Wholesale
+JMAC Lending Inc.,5.375%,6.236%,"$1,424.427",1.36165,"$8,371.6",FHA,Wholesale
+"VIP Mortgage, Inc.",5.375%,6.247%,"$1,424.427",1.1361899999999991,"$8,650.2",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.375%,6.249%,"$1,424.427",1.438,"$8,692.9",FHA,Wholesale
+Windsor Mortgage Solutions,5.375%,6.262%,"$1,424.427",1.2662799999999947,"$9,019.3",FHA,Wholesale
+Union Home Mortgage,5.375%,6.386%,"$1,424.427",2.7180000000000035,"$12,076.1",FHA,Wholesale
+District Lending,5.375%,5.452%,"$2,027",0,"$1,250",Conventional,Retail
+PenFed Credit Union,5.375%,6.455%,"$2,027",0,"$6,370",FHA,Retail
+AimLoan.com,5.375%,5.485%,"$2,027",0.318,"$1,790",Conventional,Retail
+District Lending,5.375%,5.563%,"$1,400",1.601,"$5,252",Conventional,Retail
+District Lending,5.375%,5.566%,"$1,400",1.637,"$5,342",Conventional,Retail
+American VA Loans,5.375%,5.627%,"$1,400",1.575,"$7,158",VA,Retail
+"Tomo Mortgage, LLC.",5.375%,5.642%,"$2,027",1.749,"$4,372",Conventional,Retail
+District Lending,5.375%,5.683%,"$1,400",1.7,"$8,625",VA,Retail
+American VA Loans,5.375%,5.742%,"$1,703",1.8,"$7,720",VA,Retail
+District Lending,5.375%,5.816%,"$1,703",1.925,"$9,188",VA,Retail
+District Lending,5.375%,6.746%,"$1,400",1.618,"$9,670",FHA,Retail
+District Lending,5.375%,7.005%,"$1,703",1.874,"$10,310",FHA,Retail
+AimLoan.com,5.375%,5.666%,"$1,703",2.017,"$6,038",Conventional,Retail
+District Lending,5.375%,5.684%,"$1,703",2.065,"$6,412",Conventional,Retail
+"Tomo Mortgage, LLC.",5.375%,5.751%,"$1,400",2.973,"$10,558",VA,Retail
+First Federal Bank Mortgage Lenders,5.490%,5.778%,"$1,436",1.874,"$7,868",VA,Retail
+American VA Loans,5.490%,5.709%,"$1,418",1.184,"$6,180",VA,Retail
+District Lending,5.490%,5.765%,"$1,418",1.309,"$7,648",VA,Retail
+American VA Loans,5.490%,5.814%,"$1,719",1.427,"$6,788",VA,Retail
+District Lending,5.490%,6.820%,"$1,418",1.17,"$8,550",FHA,Retail
+Optimum First Mortgage,5.499%,5.751%,"$1,419.32",0.676,"$6,810",VA,Retail
+"SunnyHill Financial, Inc.",5.500%,5.720%,"$1,419.47",0.696,"$5,960",VA,Retail
+AimLoan.com,5.500%,5.561%,"$2,043",0,"$5,076",Conventional,Retail
+PenFed Credit Union,5.500%,5.753%,"$2,043",0,"$8,201",Conventional,Retail
+District Lending,5.500%,5.633%,"$1,419",0.977,"$10,215.5",Conventional,Retail
+Sun West Mtg Co Wholesale,5.500%,5.662%,"$2,042.709",-1.2822,"$2,607",Conventional,Wholesale
+AmWest Funding Corp,5.500%,5.673%,"$2,042.709",-1.459,"$2,790",Conventional,Wholesale
+NewRez LLC,5.500%,5.710%,"$2,042.709",-0.726,"$3,372.5",Conventional,Wholesale
+BluePoint Mortgage,5.500%,5.715%,"$2,042.709",-1.19,"$3,462.5",Conventional,Wholesale
+Provident Funding,5.500%,5.726%,"$2,042.709",-1.375,"$3,625",Conventional,Wholesale
+Click n' Close,5.500%,5.736%,"$2,042.709",-1.02733,"$3,794.2",Conventional,Wholesale
+Everstream Mortgage,5.500%,5.737%,"$2,042.709",0.36010000000000275,"$3,800.3",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.500%,5.742%,"$2,042.709",-0.9711900000000071,"$3,884.5",Conventional,Wholesale
+The Loan Store LLC,5.500%,5.744%,"$2,042.709",-1.156000000000006,"$3,922.5",Conventional,Wholesale
+New Wave Lending Group,5.500%,5.745%,"$2,042.709",-1,"$3,937.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.500%,5.745%,"$2,042.709",-1,"$3,937.5",Conventional,Wholesale
+Power TPO,5.500%,5.749%,"$2,042.709",-0.9770000000000039,"$3,995",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.500%,5.754%,"$2,042.709",-0.5460000000000065,"$4,072.5",Conventional,Wholesale
+Rocket Pro,5.500%,5.754%,"$2,042.709",-0.5460000000000065,"$4,072.5",Conventional,Wholesale
+AD Mortgage,5.500%,5.756%,"$2,042.709",-0.9309999999999974,"$4,110",Conventional,Wholesale
+Loan United Wholesale,5.500%,5.771%,"$2,042.709",-0.8340000000000032,"$4,352.5",Conventional,Wholesale
+Eleven Mortgage,5.500%,5.778%,"$2,042.709",0.327,"$4,455",Conventional,Wholesale
+Plaza Home Mortgage Inc.,5.500%,5.783%,"$2,042.709",-0.76271,"$4,530.7",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.500%,5.787%,"$2,042.709",-0.634,"$4,602.5",Conventional,Wholesale
+Nations Direct Mortgage,5.500%,5.789%,"$2,042.709",-0.524,"$4,627.5",Conventional,Wholesale
+AFR Wholesale,5.500%,5.796%,"$2,042.709",-0.722999999999999,"$4,745",Conventional,Wholesale
+NexBank,5.500%,5.797%,"$2,042.709",-0.6322799999999944,"$4,761.8",Conventional,Wholesale
+JMAC Lending Inc.,5.500%,5.805%,"$2,042.709",-0.61925,"$4,889.4",Conventional,Wholesale
+Kind Lending,5.500%,5.822%,"$2,042.709",-0.51785,"$5,142.9",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.500%,5.822%,"$2,042.709",-0.51785,"$5,142.9",Conventional,Wholesale
+Orion Lending,5.500%,5.823%,"$2,042.709",-0.506,"$5,172.5",Conventional,Wholesale
+Pennymac TPO,5.500%,5.830%,"$2,042.709",-0.596,"$5,272.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.500%,5.830%,"$2,042.709",-0.596,"$5,272.5",Conventional,Wholesale
+Open Mortgage,5.500%,5.837%,"$2,042.709",-0.047,"$5,382.5",Conventional,Wholesale
+Windsor Mortgage Solutions,5.500%,5.850%,"$2,042.709",-0.48664999999999736,"$5,595.9",Conventional,Wholesale
+TPO GO,5.500%,5.863%,"$2,042.709",-0.03100000000000591,"$5,797.5",Conventional,Wholesale
+HomeBridge Wholesale,5.500%,5.890%,"$2,042.709",-0.088,"$6,217.5",Conventional,Wholesale
+Union Home Mortgage,5.500%,5.900%,"$2,042.709",-0.027000000000001023,"$6,370",Conventional,Wholesale
+NewRez LLC,5.500%,5.987%,"$2,078.456",-1.497,$471.6,FHA,Wholesale
+Loan Factory Direct - PennyMac,5.500%,6.033%,"$2,078.456",-1.344,"$1,209.3",FHA,Wholesale
+Pennymac TPO,5.500%,6.033%,"$2,078.456",-1.344,"$1,209.3",FHA,Wholesale
+Rocket Pro,5.500%,6.044%,"$2,078.456",-1.2390000000000043,"$1,374.6",FHA,Wholesale
+AFR Wholesale,5.500%,6.060%,"$2,078.456",-1.4549999999999983,"$1,636.6",FHA,Wholesale
+Click n' Close,5.500%,6.067%,"$2,078.456",-1.36183,"$1,748.9",FHA,Wholesale
+Eleven Mortgage,5.500%,6.070%,"$2,078.456",-1.42473,"$1,792.4",FHA,Wholesale
+"VIP Mortgage, Inc.",5.500%,6.079%,"$2,078.456",-1.507000000000005,"$1,926.6",FHA,Wholesale
+AD Mortgage,5.500%,6.098%,"$2,078.456",-1.0999999999999943,"$2,236.9",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.500%,6.102%,"$2,078.456",-1.0274,"$2,294.5",FHA,Wholesale
+Kind Lending,5.500%,6.116%,"$2,078.456",-0.93975,"$2,517.4",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.500%,6.116%,"$2,078.456",-0.93975,"$2,517.4",FHA,Wholesale
+Jet Advantage Mortgage,5.500%,6.118%,"$2,078.456",-0.4539999999999935,"$2,544.7",FHA,Wholesale
+Forward Lending,5.500%,6.118%,"$2,078.456",-0.4539999999999935,"$2,544.7",FHA,Wholesale
+TPO GO,5.500%,6.128%,"$2,078.456",-0.4129999999999967,"$2,712.6",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.500%,6.134%,"$2,078.456",-0.881,"$2,794",FHA,Wholesale
+Loan United Wholesale,5.500%,6.150%,"$2,078.456",-0.8299999999999983,"$3,050.9",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.500%,6.163%,"$2,078.456",-0.77335,"$3,258.6",FHA,Wholesale
+HomeBridge Wholesale,5.500%,6.182%,"$2,078.456",-0.031,"$3,557.1",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.500%,6.208%,"$2,078.456",-0.5,"$3,953.9",FHA,Wholesale
+JMAC Lending Inc.,5.500%,6.336%,"$2,078.456",0.2821,"$5,943.4",FHA,Wholesale
+Open Mortgage,5.500%,6.446%,"$2,078.456",0.95,"$7,642.4",FHA,Wholesale
+AmWest Funding Corp,5.500%,6.538%,"$2,078.456",1.625,"$9,041.5",FHA,Wholesale
+Windsor Mortgage Solutions,5.500%,6.640%,"$2,078.456",1.8788700000000063,"$10,577.6",FHA,Wholesale
+Orion Lending,5.500%,6.719%,"$2,078.456",3.315,"$11,750.5",FHA,Wholesale
+NewRez LLC,5.500%,6.041%,"$2,110.118",-1.507,$600.9,VA,Wholesale
+Loan Factory Direct - Rocket,5.500%,6.057%,"$2,110.118",-1.308000000000007,$848.8,VA,Wholesale
+Rocket Pro,5.500%,6.057%,"$2,110.118",-1.308000000000007,$848.8,VA,Wholesale
+Click n' Close,5.500%,6.112%,"$2,110.118",-1.36183,"$1,729.9",VA,Wholesale
+Pennymac TPO,5.500%,6.117%,"$2,110.118",-1.322,"$1,806.8",VA,Wholesale
+Loan Factory Direct - PennyMac,5.500%,6.117%,"$2,110.118",-1.322,"$1,806.8",VA,Wholesale
+"VIP Mortgage, Inc.",5.500%,6.119%,"$2,110.118",-1.516999999999996,"$1,832.7",VA,Wholesale
+Eleven Mortgage,5.500%,6.155%,"$2,110.118",-1.12848,"$2,409.9",VA,Wholesale
+Plaza Home Mortgage Inc.,5.500%,6.165%,"$2,110.118",-0.9174,"$2,567.7",VA,Wholesale
+Loan United Wholesale,5.500%,6.199%,"$2,110.118",-0.9629999999999939,"$3,095.6",VA,Wholesale
+Jet Advantage Mortgage,5.500%,6.201%,"$2,110.118",-0.22400000000000375,"$3,131.7",VA,Wholesale
+Forward Lending,5.500%,6.201%,"$2,110.118",-0.22400000000000375,"$3,131.7",VA,Wholesale
+Kind Lending,5.500%,6.216%,"$2,110.118",-0.60514,"$3,374.1",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.500%,6.216%,"$2,110.118",-0.60514,"$3,374.1",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.500%,6.220%,"$2,110.118",-0.631,"$3,436.4",VA,Wholesale
+Sun West Mtg Co Wholesale,5.500%,6.230%,"$2,110.118",-0.77335,"$3,585.3",VA,Wholesale
+AFR Wholesale,5.500%,6.255%,"$2,110.118",-0.38800000000000523,"$3,983.9",VA,Wholesale
+Union Home Mortgage,5.500%,6.331%,"$2,110.118",-0.013999999999995794,"$5,158.9",VA,Wholesale
+The Loan Store LLC,5.500%,6.407%,"$2,110.118",0.39000000000000057,"$6,331.4",VA,Wholesale
+JMAC Lending Inc.,5.500%,6.463%,"$2,110.118",0.7494,"$7,195",VA,Wholesale
+Open Mortgage,5.500%,6.539%,"$2,110.118",1.2,"$8,358.7",VA,Wholesale
+Windsor Mortgage Solutions,5.500%,6.685%,"$2,110.118",2.078869999999995,"$10,563.8",VA,Wholesale
+Orion Lending,5.500%,6.794%,"$2,110.118",3.315,"$12,206.6",VA,Wholesale
+Sun West Mtg Co Wholesale,5.500%,6.479%,"$1,749.813",0.70188,"$5,103.4",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.500%,6.507%,"$1,749.813",0.395,"$5,632.9",FHA,Wholesale
+Pennymac TPO,5.500%,6.507%,"$1,749.813",0.395,"$5,632.9",FHA,Wholesale
+CMG Financial,5.500%,6.508%,"$1,749.813",0.767,"$5,650.7",FHA,Wholesale
+Loan United Wholesale,5.500%,6.515%,"$1,749.813",-0.2530000000000001,"$5,790.5",FHA,Wholesale
+NewRez LLC,5.500%,6.516%,"$1,749.813",0.6,"$5,805.8",FHA,Wholesale
+Eleven Mortgage,5.500%,6.536%,"$1,749.813",2.6135,"$6,188.7",FHA,Wholesale
+Open Mortgage,5.500%,6.558%,"$1,749.813",0.542,"$6,604.5",FHA,Wholesale
+NexBank,5.500%,6.567%,"$1,749.813",0.732600000000005,"$6,771.5",FHA,Wholesale
+Kind Lending,5.500%,6.585%,"$1,749.813",0.86225,"$7,101.2",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.500%,6.585%,"$1,749.813",0.86225,"$7,101.2",FHA,Wholesale
+"VIP Mortgage, Inc.",5.500%,6.586%,"$1,749.813",0.5361900000000048,"$7,123.9",FHA,Wholesale
+AFR Wholesale,5.500%,6.587%,"$1,749.813",0.7144600000000025,"$7,155.2",FHA,Wholesale
+AD Mortgage,5.500%,6.601%,"$1,749.813",0.9330000000000069,"$7,408.3",FHA,Wholesale
+Jet Advantage Mortgage,5.500%,6.618%,"$1,749.813",1.5849999999999937,"$7,731.4",FHA,Wholesale
+Forward Lending,5.500%,6.618%,"$1,749.813",1.5849999999999937,"$7,731.4",FHA,Wholesale
+HomeBridge Wholesale,5.500%,6.620%,"$1,749.813",1.121,"$7,759.4",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.500%,6.626%,"$1,749.813",0.66707,"$7,876.6",FHA,Wholesale
+Loan United Wholesale,5.500%,6.211%,"$1,444.313",-0.2530000000000001,"$4,518.6",FHA,Wholesale
+AmWest Funding Corp,5.500%,6.218%,"$1,444.313",-0.089,"$4,681.5",FHA,Wholesale
+Power TPO,5.500%,6.229%,"$1,444.313",0.277000000000001,"$4,976.5",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.500%,6.234%,"$1,444.313",0.70188,"$5,103.4",FHA,Wholesale
+NexBank,5.500%,6.253%,"$1,444.313",0.2629699999999957,"$5,576.8",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.500%,6.255%,"$1,444.313",0.395,"$5,632.9",FHA,Wholesale
+Pennymac TPO,5.500%,6.255%,"$1,444.313",0.395,"$5,632.9",FHA,Wholesale
+CMG Financial,5.500%,6.256%,"$1,444.313",0.767,"$5,650.7",FHA,Wholesale
+NewRez LLC,5.500%,6.262%,"$1,444.313",0.6,"$5,805.8",FHA,Wholesale
+AD Mortgage,5.500%,6.268%,"$1,444.313",0.3649999999999949,"$5,963.5",FHA,Wholesale
+Open Mortgage,5.500%,6.269%,"$1,444.313",0.292,"$5,968.6",FHA,Wholesale
+Kind Lending,5.500%,6.271%,"$1,444.313",0.44425,"$6,038",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.500%,6.271%,"$1,444.313",0.44425,"$6,038",FHA,Wholesale
+Eleven Mortgage,5.500%,6.271%,"$1,444.313",0.24563,"$6,041.4",FHA,Wholesale
+The Loan Store LLC,5.500%,6.285%,"$1,444.313",0.4339999999999975,"$6,393.4",FHA,Wholesale
+Jet Advantage Mortgage,5.500%,6.286%,"$1,444.313",1.0600000000000023,"$6,396",FHA,Wholesale
+Forward Lending,5.500%,6.286%,"$1,444.313",1.0600000000000023,"$6,396",FHA,Wholesale
+Orion Lending,5.500%,6.287%,"$1,444.313",1.225,"$6,434.1",FHA,Wholesale
+TPO GO,5.500%,6.287%,"$1,444.313",1.0520000000000067,"$6,439.2",FHA,Wholesale
+HomeBridge Wholesale,5.500%,6.289%,"$1,444.313",1.121,"$6,487.5",FHA,Wholesale
+AFR Wholesale,5.500%,6.293%,"$1,444.313",0.49200000000000443,"$6,589.3",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.500%,6.294%,"$1,444.313",0.66707,"$6,604.8",FHA,Wholesale
+JMAC Lending Inc.,5.500%,6.297%,"$1,444.313",0.70225,"$6,694.2",FHA,Wholesale
+Click n' Close,5.500%,6.303%,"$1,444.313",0.60137,"$6,844.6",FHA,Wholesale
+"VIP Mortgage, Inc.",5.500%,6.304%,"$1,444.313",0.4300000000000068,"$6,853.8",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.500%,6.312%,"$1,444.313",0.795,"$7,057.3",FHA,Wholesale
+Windsor Mortgage Solutions,5.500%,6.323%,"$1,444.313",0.6062799999999982,"$7,340.4",FHA,Wholesale
+Union Home Mortgage,5.500%,6.516%,"$1,444.313",2.7180000000000035,"$12,076.1",FHA,Wholesale
+Guaranteed Rate,5.500%,5.980%,"$2,042.71",0.842,"$11,543.1",Conventional,Retail
+Guaranteed Rate,5.500%,6.407%,"$2,109.08",0.854,"$15,079.12",FHA,Retail
+AimLoan.com,5.500%,5.561%,"$2,043",0,$995,Conventional,Retail
+PenFed Credit Union,5.500%,5.753%,"$2,043",0,"$4,120",VA,Retail
+District Lending,5.500%,5.633%,"$1,420",0.977,"$3,692",Conventional,Retail
+District Lending,5.500%,6.070%,"$2,714",0.873,"$6,558",VA,Retail
+District Lending,5.500%,6.878%,"$2,714",0.703,"$7,382",FHA,Retail
+District Lending,5.500%,5.661%,"$1,420",1.293,"$4,482",Conventional,Retail
+AimLoan.com,5.500%,5.722%,"$1,720",1.434,"$4,580",Conventional,Retail
+PenFed Credit Union,5.500%,6.872%,"$1,420",1.375,"$9,808",FHA,Retail
+District Lending,5.500%,5.750%,"$1,720",1.565,"$5,162",Conventional,Retail
+District Lending,5.500%,5.781%,"$1,420",2.625,"$7,812",Conventional,Retail
+Sage Home Loans,5.620%,5.829%,"$1,438.35",1.658,"$5,639",Conventional,Retail
+Optimum First Mortgage,5.624%,5.798%,"$1,438.98",0,"$4,715",VA,Retail
+Optimum First Mortgage,5.624%,5.859%,"$1,438.98",1.724,"$6,305",Conventional,Retail
+"Tomo Mortgage, LLC.",5.624%,5.917%,"$1,439",1.988,"$17,146",Conventional,Retail
+"Tomo Mortgage, LLC.",5.624%,5.916%,"$1,439",1.978,"$8,070",VA,Retail
+First Federal Bank Mortgage Lenders,5.625%,5.824%,"$1,458",0.909,"$5,425",VA,Retail
+Alliant Credit Union,5.625%,5.896%,"$1,439.14",1.66,"$7,275",VA,Retail
+Mutual of Omaha Mortgage,5.625%,6.360%,"$1,543.31",0.964,"$9,023",FHA,Retail
+Us Bank,5.625%,5.903%,"$2,059.33",0.913,"$6,104.62",Conventional,Retail
+District Lending,5.625%,5.758%,"$1,439",0.96,"$10,131",Conventional,Retail
+American VA Loans,5.625%,5.808%,"$1,439",0.768,"$11,141",Conventional,Retail
+District Lending,5.625%,5.837%,"$1,439",0.589,"$11,401.5",Conventional,Retail
+Sun West Mtg Co Wholesale,5.625%,5.739%,"$2,059.329",-1.5887,"$1,840.7",Conventional,Wholesale
+AmWest Funding Corp,5.625%,5.757%,"$2,059.329",-1.725,"$2,125",Conventional,Wholesale
+Provident Funding,5.625%,5.792%,"$2,059.329",-1.75,"$2,687.5",Conventional,Wholesale
+BluePoint Mortgage,5.625%,5.793%,"$2,059.329",-1.496,"$2,697.5",Conventional,Wholesale
+NewRez LLC,5.625%,5.793%,"$2,059.329",-0.995,"$2,700",Conventional,Wholesale
+New Wave Lending Group,5.625%,5.812%,"$2,059.329",-1.375,"$3,000",Conventional,Wholesale
+Click n' Close,5.625%,5.820%,"$2,059.329",-1.29698,"$3,120",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.625%,5.827%,"$2,059.329",-0.882000000000005,"$3,232.5",Conventional,Wholesale
+Rocket Pro,5.625%,5.827%,"$2,059.329",-0.882000000000005,"$3,232.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.625%,5.828%,"$2,059.329",-1.2207099999999969,"$3,260.7",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.625%,5.832%,"$2,059.329",-1.25,"$3,312.5",Conventional,Wholesale
+Power TPO,5.625%,5.834%,"$2,059.329",-1.2360000000000042,"$3,347.5",Conventional,Wholesale
+Everstream Mortgage,5.625%,5.834%,"$2,059.329",0.1792999999999978,"$3,348.2",Conventional,Wholesale
+AD Mortgage,5.625%,5.837%,"$2,059.329",-1.2180000000000035,"$3,392.5",Conventional,Wholesale
+The Loan Store LLC,5.625%,5.837%,"$2,059.329",-1.3640000000000043,"$3,402.5",Conventional,Wholesale
+Eleven Mortgage,5.625%,5.857%,"$2,059.329",0.032,"$3,717.5",Conventional,Wholesale
+Loan United Wholesale,5.625%,5.863%,"$2,059.329",-1.051000000000002,"$3,810",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,5.865%,"$2,059.329",-0.938,"$3,842.5",Conventional,Wholesale
+Nations Direct Mortgage,5.625%,5.875%,"$2,059.329",-0.775,"$4,000",Conventional,Wholesale
+Plaza Home Mortgage Inc.,5.625%,5.876%,"$2,059.329",-0.97174,"$4,008.1",Conventional,Wholesale
+AFR Wholesale,5.625%,5.877%,"$2,059.329",-1.0100000000000051,"$4,027.5",Conventional,Wholesale
+NexBank,5.625%,5.878%,"$2,059.329",-0.9158099999999934,"$4,053",Conventional,Wholesale
+JMAC Lending Inc.,5.625%,5.885%,"$2,059.329",-0.91425,"$4,151.9",Conventional,Wholesale
+Kind Lending,5.625%,5.893%,"$2,059.329",-0.86085,"$4,285.4",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,5.893%,"$2,059.329",-0.86085,"$4,285.4",Conventional,Wholesale
+Pennymac TPO,5.625%,5.901%,"$2,059.329",-0.944,"$4,402.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.625%,5.901%,"$2,059.329",-0.944,"$4,402.5",Conventional,Wholesale
+Windsor Mortgage Solutions,5.625%,5.923%,"$2,059.329",-0.8235499999999973,"$4,753.6",Conventional,Wholesale
+Orion Lending,5.625%,5.923%,"$2,059.329",-0.672,"$4,757.5",Conventional,Wholesale
+Open Mortgage,5.625%,5.924%,"$2,059.329",-0.29,"$4,775",Conventional,Wholesale
+TPO GO,5.625%,5.936%,"$2,059.329",-0.367999999999995,"$4,955",Conventional,Wholesale
+HomeBridge Wholesale,5.625%,5.967%,"$2,059.329",-0.395,"$5,450",Conventional,Wholesale
+Union Home Mortgage,5.625%,5.976%,"$2,059.329",-0.33899999999999864,"$5,590",Conventional,Wholesale
+NewRez LLC,5.625%,6.027%,"$2,095.368",-2.035,$-896.9,FHA,Wholesale
+AFR Wholesale,5.625%,6.107%,"$2,095.368",-1.945999999999998,$387.7,FHA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.114%,"$2,095.368",-1.626,$492,FHA,Wholesale
+Pennymac TPO,5.625%,6.114%,"$2,095.368",-1.626,$492,FHA,Wholesale
+Eleven Mortgage,5.625%,6.127%,"$2,095.368",-0.3451,$697.7,FHA,Wholesale
+Rocket Pro,5.625%,6.146%,"$2,095.368",-1.3859999999999957,"$1,000.7",FHA,Wholesale
+Click n' Close,5.625%,6.150%,"$2,095.368",-1.62703,"$1,074.3",FHA,Wholesale
+"VIP Mortgage, Inc.",5.625%,6.153%,"$2,095.368",-1.8269999999999982,"$1,112.6",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.169%,"$2,095.368",-1.39302,"$1,364.4",FHA,Wholesale
+Kind Lending,5.625%,6.169%,"$2,095.368",-1.39302,"$1,364.4",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.171%,"$2,095.368",-1.38198,"$1,392.5",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,6.185%,"$2,095.368",-1.343,"$1,618.7",FHA,Wholesale
+Jet Advantage Mortgage,5.625%,6.187%,"$2,095.368",-0.804000000000002,"$1,654.4",FHA,Wholesale
+Forward Lending,5.625%,6.187%,"$2,095.368",-0.804000000000002,"$1,654.4",FHA,Wholesale
+TPO GO,5.625%,6.191%,"$2,095.368",-0.8029999999999973,"$1,720.6",FHA,Wholesale
+New Wave Lending Group,5.625%,6.192%,"$2,095.368",-1.375,"$1,728.1",FHA,Wholesale
+Loan United Wholesale,5.625%,6.211%,"$2,095.368",-1.2319999999999993,"$2,028.3",FHA,Wholesale
+AD Mortgage,5.625%,6.226%,"$2,095.368",-1.0859999999999985,"$2,272.5",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.625%,6.273%,"$2,095.368",-0.875,"$3,000",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.307%,"$2,095.368",-0.6631,"$3,539",FHA,Wholesale
+JMAC Lending Inc.,5.625%,6.386%,"$2,095.368",-0.1801,"$4,767.7",FHA,Wholesale
+Open Mortgage,5.625%,6.509%,"$2,095.368",0.565,"$6,663",FHA,Wholesale
+AmWest Funding Corp,5.625%,6.580%,"$2,095.368",1.115,"$7,744.2",FHA,Wholesale
+Windsor Mortgage Solutions,5.625%,6.714%,"$2,095.368",1.558880000000002,"$9,763.6",FHA,Wholesale
+Orion Lending,5.625%,6.752%,"$2,095.368",2.756,"$10,328.6",FHA,Wholesale
+NewRez LLC,5.625%,6.125%,"$2,127.287",-2.045,$-86.1,VA,Wholesale
+Rocket Pro,5.625%,6.149%,"$2,127.287",-1.5190000000000055,$303.9,VA,Wholesale
+Loan Factory Direct - Rocket,5.625%,6.149%,"$2,127.287",-1.5190000000000055,$303.9,VA,Wholesale
+"VIP Mortgage, Inc.",5.625%,6.194%,"$2,127.287",-1.8370000000000033,"$1,006.3",VA,Wholesale
+Click n' Close,5.625%,6.196%,"$2,127.287",-1.62703,"$1,045",VA,Wholesale
+Pennymac TPO,5.625%,6.219%,"$2,127.287",-1.478,"$1,404",VA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.219%,"$2,127.287",-1.478,"$1,404",VA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.234%,"$2,127.287",-1.27198,"$1,652",VA,Wholesale
+Kind Lending,5.625%,6.242%,"$2,127.287",-1.22302,"$1,778.5",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.242%,"$2,127.287",-1.22302,"$1,778.5",VA,Wholesale
+Eleven Mortgage,5.625%,6.254%,"$2,127.287",-0.052,"$1,961.8",VA,Wholesale
+Jet Advantage Mortgage,5.625%,6.271%,"$2,127.287",-0.5739999999999981,"$2,227.8",VA,Wholesale
+Forward Lending,5.625%,6.271%,"$2,127.287",-0.5739999999999981,"$2,227.8",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,6.272%,"$2,127.287",-1.093,"$2,243.3",VA,Wholesale
+Loan United Wholesale,5.625%,6.306%,"$2,127.287",-1.0829999999999984,"$2,785.7",VA,Wholesale
+AFR Wholesale,5.625%,6.342%,"$2,127.287",-0.6340000000000003,"$3,348.6",VA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.376%,"$2,127.287",-0.6631,"$3,870",VA,Wholesale
+Union Home Mortgage,5.625%,6.459%,"$2,127.287",-0.013999999999995794,"$5,158.9",VA,Wholesale
+The Loan Store LLC,5.625%,6.514%,"$2,127.287",0.26500000000000057,"$6,008.6",VA,Wholesale
+JMAC Lending Inc.,5.625%,6.535%,"$2,127.287",0.413,"$6,326.3",VA,Wholesale
+Open Mortgage,5.625%,6.602%,"$2,127.287",0.815,"$7,364.4",VA,Wholesale
+Windsor Mortgage Solutions,5.625%,6.759%,"$2,127.287",1.7588800000000049,"$9,737.4",VA,Wholesale
+Orion Lending,5.625%,6.827%,"$2,127.287",2.756,"$10,763",VA,Wholesale
+AmWest Funding Corp,5.625%,5.841%,"$1,737.416",-0.833,"$4,355",Conventional,Wholesale
+Sun West Mtg Co Wholesale,5.625%,5.893%,"$1,737.416",-0.174,"$5,377.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.625%,5.901%,"$1,737.416",-0.3067099999999954,"$5,545.7",Conventional,Wholesale
+AFR Wholesale,5.625%,5.915%,"$1,737.416",-0.2909999999999968,"$5,825",Conventional,Wholesale
+The Loan Store LLC,5.625%,5.927%,"$1,737.416",-0.3020000000000067,"$6,057.5",Conventional,Wholesale
+AD Mortgage,5.625%,5.931%,"$1,737.416",-0.12099999999999511,"$6,135",Conventional,Wholesale
+NewRez LLC,5.625%,5.935%,"$1,737.416",0.416,"$6,220",Conventional,Wholesale
+Nations Direct Mortgage,5.625%,5.953%,"$1,737.416",0.249,"$6,560",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.625%,5.953%,"$1,737.416",0.45600000000000307,"$6,577.5",Conventional,Wholesale
+Rocket Pro,5.625%,5.953%,"$1,737.416",0.45600000000000307,"$6,577.5",Conventional,Wholesale
+BluePoint Mortgage,5.625%,5.960%,"$1,737.416",0.104,"$6,697.5",Conventional,Wholesale
+Kind Lending,5.625%,5.974%,"$1,737.416",0.218,"$6,982.5",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,5.974%,"$1,737.416",0.218,"$6,982.5",Conventional,Wholesale
+TPO GO,5.625%,5.975%,"$1,737.416",0.45000000000000284,"$7,000",Conventional,Wholesale
+NexBank,5.625%,6.001%,"$1,737.416",0.4732000000000056,"$7,500.5",Conventional,Wholesale
+Pennymac TPO,5.625%,6.006%,"$1,737.416",0.337,"$7,605",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.006%,"$1,737.416",0.337,"$7,605",Conventional,Wholesale
+Eleven Mortgage,5.625%,6.033%,"$1,737.416",2.4154,"$8,126",Conventional,Wholesale
+HomeBridge Wholesale,5.625%,6.037%,"$1,737.416",0.706,"$8,202.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,6.045%,"$1,737.416",0.873,"$8,370",Conventional,Wholesale
+JMAC Lending Inc.,5.625%,6.047%,"$1,737.416",0.78855,"$8,408.9",Conventional,Wholesale
+Provident Funding,5.625%,6.058%,"$1,737.416",0.625,"$8,625",Conventional,Wholesale
+Union Home Mortgage,5.625%,6.083%,"$1,737.416",1.0630000000000024,"$9,095",Conventional,Wholesale
+Open Mortgage,5.625%,6.275%,"$1,737.416",2.537,"$12,780",Conventional,Wholesale
+Windsor Mortgage Solutions,5.625%,6.284%,"$1,737.416",2.204350000000005,"$12,948.4",Conventional,Wholesale
+Loan United Wholesale,5.625%,6.341%,"$1,737.416",3.0289999999999964,"$14,010",Conventional,Wholesale
+NewRez LLC,5.625%,6.560%,"$1,767.821",-0.016,"$4,238.9",FHA,Wholesale
+Pennymac TPO,5.625%,6.563%,"$1,767.821",-0.136,"$4,282.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.563%,"$1,767.821",-0.136,"$4,282.1",FHA,Wholesale
+CMG Financial,5.625%,6.565%,"$1,767.821",0.251,"$4,338.1",FHA,Wholesale
+Loan United Wholesale,5.625%,6.567%,"$1,767.821",-0.8160000000000025,"$4,358.4",FHA,Wholesale
+Eleven Mortgage,5.625%,6.580%,"$1,767.821",1.992,"$4,607.7",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.593%,"$1,767.821",0.60938,"$4,868.1",FHA,Wholesale
+AD Mortgage,5.625%,6.600%,"$1,767.821",-0.015000000000000568,"$4,996.8",FHA,Wholesale
+Open Mortgage,5.625%,6.628%,"$1,767.821",0.119,"$5,528.5",FHA,Wholesale
+AFR Wholesale,5.625%,6.640%,"$1,767.821",0.1634600000000006,"$5,753.6",FHA,Wholesale
+NexBank,5.625%,6.647%,"$1,767.821",0.3821700000000021,"$5,880",FHA,Wholesale
+Kind Lending,5.625%,6.651%,"$1,767.821",0.40998,"$5,950.8",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.651%,"$1,767.821",0.40998,"$5,950.8",FHA,Wholesale
+Rocket Pro,5.625%,6.657%,"$1,767.821",0.6080000000000041,"$6,072.9",FHA,Wholesale
+"VIP Mortgage, Inc.",5.625%,6.660%,"$1,767.821",0.14619000000000426,"$6,131.9",FHA,Wholesale
+Jet Advantage Mortgage,5.625%,6.680%,"$1,767.821",1.1029999999999944,"$6,505.4",FHA,Wholesale
+Forward Lending,5.625%,6.680%,"$1,767.821",1.1029999999999944,"$6,505.4",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.687%,"$1,767.821",0.18332,"$6,646",FHA,Wholesale
+HomeBridge Wholesale,5.625%,6.737%,"$1,767.821",1.051,"$7,581.4",FHA,Wholesale
+Loan United Wholesale,5.625%,6.226%,"$1,794.751",-0.6149999999999949,"$3,994.3",VA,Wholesale
+NewRez LLC,5.625%,6.248%,"$1,794.751",-0.026,"$4,425.6",VA,Wholesale
+Pennymac TPO,5.625%,6.269%,"$1,794.751",-0.15,"$4,833.5",VA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.269%,"$1,794.751",-0.15,"$4,833.5",VA,Wholesale
+Eleven Mortgage,5.625%,6.294%,"$1,794.751",2.093,"$5,306.2",VA,Wholesale
+CMG Financial,5.625%,6.298%,"$1,794.751",0.501,"$5,391.4",VA,Wholesale
+Loan Factory Direct - Rocket,5.625%,6.321%,"$1,794.751",0.6269999999999953,"$5,845.9",VA,Wholesale
+Rocket Pro,5.625%,6.321%,"$1,794.751",0.6269999999999953,"$5,845.9",VA,Wholesale
+NexBank,5.625%,6.335%,"$1,794.751",0.45678999999999803,"$6,116.6",VA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.336%,"$1,794.751",0.60938,"$6,123.2",VA,Wholesale
+Open Mortgage,5.625%,6.340%,"$1,794.751",0.369,"$6,212.6",VA,Wholesale
+Kind Lending,5.625%,6.362%,"$1,794.751",0.65998,"$6,641.3",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.362%,"$1,794.751",0.65998,"$6,641.3",VA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.380%,"$1,794.751",0.29332,"$6,985.6",VA,Wholesale
+Jet Advantage Mortgage,5.625%,6.389%,"$1,794.751",1.3329999999999984,"$7,152.7",VA,Wholesale
+Forward Lending,5.625%,6.389%,"$1,794.751",1.3329999999999984,"$7,152.7",VA,Wholesale
+The Loan Store LLC,5.625%,6.430%,"$1,794.751",1.0150000000000006,"$7,945.4",VA,Wholesale
+AFR Wholesale,5.625%,6.513%,"$1,794.751",1.7579999999999956,"$9,525.9",VA,Wholesale
+Loan United Wholesale,5.625%,6.283%,"$1,464.326",-0.8160000000000025,"$3,086.5",FHA,Wholesale
+AmWest Funding Corp,5.625%,6.289%,"$1,464.326",-0.649,"$3,257",FHA,Wholesale
+Power TPO,5.625%,6.313%,"$1,464.326",-0.1670000000000016,"$3,847.1",FHA,Wholesale
+AD Mortgage,5.625%,6.317%,"$1,464.326",-0.42600000000000193,"$3,951.4",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.625%,6.317%,"$1,464.326",-0.5,"$3,953.9",FHA,Wholesale
+NewRez LLC,5.625%,6.328%,"$1,464.326",-0.016,"$4,238.9",FHA,Wholesale
+Pennymac TPO,5.625%,6.330%,"$1,464.326",-0.136,"$4,282.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.330%,"$1,464.326",-0.136,"$4,282.1",FHA,Wholesale
+CMG Financial,5.625%,6.332%,"$1,464.326",0.251,"$4,338.1",FHA,Wholesale
+NexBank,5.625%,6.335%,"$1,464.326",-0.19992999999999483,"$4,399.3",FHA,Wholesale
+Eleven Mortgage,5.625%,6.343%,"$1,464.326",1.992,"$4,607.7",FHA,Wholesale
+Rocket Pro,5.625%,6.351%,"$1,464.326",0.10999999999999943,"$4,806.1",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.353%,"$1,464.326",0.60938,"$4,868.1",FHA,Wholesale
+Open Mortgage,5.625%,6.354%,"$1,464.326",-0.131,"$4,892.6",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.356%,"$1,464.326",0.00825,"$4,928.9",FHA,Wholesale
+Kind Lending,5.625%,6.356%,"$1,464.326",0.00825,"$4,928.9",FHA,Wholesale
+TPO GO,5.625%,6.357%,"$1,464.326",0.4759999999999991,"$4,974",FHA,Wholesale
+Orion Lending,5.625%,6.359%,"$1,464.326",0.666,"$5,012.1",FHA,Wholesale
+AFR Wholesale,5.625%,6.360%,"$1,464.326",-0.12099999999999511,"$5,030",FHA,Wholesale
+JMAC Lending Inc.,5.625%,6.364%,"$1,464.326",0.09075,"$5,138.7",FHA,Wholesale
+Jet Advantage Mortgage,5.625%,6.365%,"$1,464.326",0.578000000000003,"$5,169.9",FHA,Wholesale
+Forward Lending,5.625%,6.365%,"$1,464.326",0.578000000000003,"$5,169.9",FHA,Wholesale
+"VIP Mortgage, Inc.",5.625%,6.367%,"$1,464.326",-0.21699999999999875,"$5,208",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.373%,"$1,464.326",0.18332,"$5,374.2",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,6.375%,"$1,464.326",0.148,"$5,411.5",FHA,Wholesale
+Click n' Close,5.625%,6.380%,"$1,464.326",0.08902,"$5,541.3",FHA,Wholesale
+The Loan Store LLC,5.625%,6.380%,"$1,464.326",0.09999999999999432,"$5,543.8",FHA,Wholesale
+Windsor Mortgage Solutions,5.625%,6.409%,"$1,464.326",0.18627999999999645,"$6,272",FHA,Wholesale
+HomeBridge Wholesale,5.625%,6.411%,"$1,464.326",1.051,"$6,309.5",FHA,Wholesale
+Union Home Mortgage,5.625%,6.646%,"$1,464.326",2.7180000000000035,"$12,076.1",FHA,Wholesale
+Loan United Wholesale,5.625%,6.074%,"$1,486.633",-0.6149999999999949,"$3,994.3",VA,Wholesale
+AmWest Funding Corp,5.625%,6.075%,"$1,486.633",-0.349,"$4,035.6",VA,Wholesale
+NewRez LLC,5.625%,6.090%,"$1,486.633",-0.026,"$4,425.6",VA,Wholesale
+NexBank,5.625%,6.102%,"$1,486.633",-0.08356000000000563,"$4,721.1",VA,Wholesale
+Pennymac TPO,5.625%,6.106%,"$1,486.633",-0.15,"$4,833.5",VA,Wholesale
+Loan Factory Direct - PennyMac,5.625%,6.106%,"$1,486.633",-0.15,"$4,833.5",VA,Wholesale
+"VIP Mortgage, Inc.",5.625%,6.112%,"$1,486.633",-0.29699999999999704,"$4,983.4",VA,Wholesale
+TPO GO,5.625%,6.117%,"$1,486.633",0.5259999999999962,"$5,133.2",VA,Wholesale
+AFR Wholesale,5.625%,6.118%,"$1,486.633",0.0589999999999975,"$5,138.3",VA,Wholesale
+Power TPO,5.625%,6.118%,"$1,486.633",-0.1670000000000016,"$5,151.2",VA,Wholesale
+Loan Factory Direct - Rocket,5.625%,6.123%,"$1,486.633",0.4099999999999966,"$5,285.5",VA,Wholesale
+Rocket Pro,5.625%,6.123%,"$1,486.633",0.4099999999999966,"$5,285.5",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.625%,6.123%,"$1,486.633",0.086,"$5,288.1",VA,Wholesale
+Eleven Mortgage,5.625%,6.124%,"$1,486.633",2.093,"$5,306.2",VA,Wholesale
+CMG Financial,5.625%,6.127%,"$1,486.633",0.501,"$5,391.4",VA,Wholesale
+Orion Lending,5.625%,6.131%,"$1,486.633",0.716,"$5,494.7",VA,Wholesale
+Jet Advantage Mortgage,5.625%,6.133%,"$1,486.633",0.7079999999999984,"$5,538.6",VA,Wholesale
+Forward Lending,5.625%,6.133%,"$1,486.633",0.7079999999999984,"$5,538.6",VA,Wholesale
+The Loan Store LLC,5.625%,6.134%,"$1,486.633",0.09099999999999397,"$5,559.2",VA,Wholesale
+Open Mortgage,5.625%,6.134%,"$1,486.633",0.119,"$5,567",VA,Wholesale
+Click n' Close,5.625%,6.136%,"$1,486.633",0.10074,"$5,610.3",VA,Wholesale
+Plaza Home Mortgage Inc.,5.625%,6.139%,"$1,486.633",0.29332,"$5,694.4",VA,Wholesale
+Kind Lending,5.625%,6.145%,"$1,486.633",0.34998,"$5,840.7",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.625%,6.145%,"$1,486.633",0.34998,"$5,840.7",VA,Wholesale
+Sun West Mtg Co Wholesale,5.625%,6.155%,"$1,486.633",0.60938,"$6,123.2",VA,Wholesale
+JMAC Lending Inc.,5.625%,6.168%,"$1,486.633",0.52692,"$6,459.1",VA,Wholesale
+Windsor Mortgage Solutions,5.625%,6.218%,"$1,486.633",0.9862799999999936,"$7,742.2",VA,Wholesale
+Union Home Mortgage,5.625%,6.395%,"$1,486.633",2.7180000000000035,"$12,214.3",VA,Wholesale
+Guaranteed Rate,5.625%,6.645%,"$1,567.88",1.834,"$17,581.7",FHA,Retail
+District Lending,5.625%,6.109%,"$2,729",0.47,"$5,550",VA,Retail
+District Lending,5.625%,6.890%,"$1,440",0.459,"$6,772",FHA,Retail
+District Lending,5.625%,6.917%,"$2,729",0.3,"$6,375",FHA,Retail
+District Lending,5.625%,5.758%,"$1,440",0.96,"$3,650",Conventional,Retail
+AimLoan.com,5.625%,5.783%,"$1,738",0.894,"$3,230",Conventional,Retail
+American VA Loans,5.625%,5.808%,"$1,440",0.768,"$5,140",VA,Retail
+District Lending,5.625%,5.837%,"$1,440",0.589,"$5,848",VA,Retail
+American VA Loans,5.625%,5.897%,"$1,738",0.985,"$5,682",VA,Retail
+District Lending,5.625%,5.955%,"$1,738",0.969,"$6,798",VA,Retail
+PenFed Credit Union,5.625%,6.951%,"$1,440",0.875,"$8,558",FHA,Retail
+District Lending,5.625%,5.811%,"$1,738",1.028,"$3,820",Conventional,Retail
+District Lending,5.625%,7.160%,"$1,738",1.099,"$8,372",FHA,Retail
+District Lending,5.625%,5.863%,"$1,440",2.125,"$6,562",Conventional,Retail
+AimLoan.com,5.625%,5.932%,"$1,440",2.991,"$8,472",Conventional,Retail
+First Federal Bank,5.625%,5.996%,"$1,440",2.857,"$10,268",VA,Retail
+"SunnyHill Financial, Inc.",5.750%,5.866%,"$1,458.93",0,"$3,124",VA,Retail
+Alliant Credit Union,5.750%,5.955%,"$1,458.93",0.944,"$5,485",VA,Retail
+Mutual of Omaha Mortgage,5.750%,6.002%,"$1,458.93",0.543,"$6,720.5",VA,Retail
+Sage Home Loans,5.750%,6.473%,"$1,588.63",1.684,"$8,658.68",FHA,Retail
+Sage Home Loans,5.750%,6.035%,"$1,477.17",1.762,"$7,585.06",VA,Retail
+Alliant Credit Union,5.750%,6.521%,"$1,563.1",1.806,"$9,840",FHA,Retail
+Chase Bank,5.750%,6.021%,"$2,667.696",1.051,"$4,322.5",Conventional,Retail
+Chase Bank,5.750%,6.556%,"$2,050.596",1.1079999999999999,"$4,465",Conventional,Retail
+Chase Bank,5.750%,6.448%,"$2,667.696",1.05,"$3,220",Conventional,Retail
+"Tomo Mortgage, LLC.",5.750%,5.876%,"$2,076",0.813,"$8,145.5",Conventional,Retail
+Empire of America,5.750%,5.965%,"$1,459",1.75,"$14,326",Conventional,Retail
+PenFed Credit Union,5.750%,6.026%,"$1,459",1.375,"$15,076.5",Conventional,Retail
+Sun West Mtg Co Wholesale,5.750%,5.816%,"$2,076.025",-1.9012,"$1,059.5",Conventional,Wholesale
+AmWest Funding Corp,5.750%,5.849%,"$2,076.025",-1.937,"$1,595",Conventional,Wholesale
+Provident Funding,5.750%,5.859%,"$2,076.025",-2.125,"$1,750",Conventional,Wholesale
+NewRez LLC,5.750%,5.886%,"$2,076.025",-1.205,"$2,175",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.750%,5.887%,"$2,076.025",-1.6452199999999948,"$2,199.5",Conventional,Wholesale
+BluePoint Mortgage,5.750%,5.889%,"$2,076.025",-1.684,"$2,227.5",Conventional,Wholesale
+Everstream Mortgage,5.750%,5.892%,"$2,076.025",-0.24960000000000093,"$2,276",Conventional,Wholesale
+The Loan Store LLC,5.750%,5.894%,"$2,076.025",-1.804000000000002,"$2,302.5",Conventional,Wholesale
+AD Mortgage,5.750%,5.898%,"$2,076.025",-1.6280000000000001,"$2,367.5",Conventional,Wholesale
+New Wave Lending Group,5.750%,5.898%,"$2,076.025",-1.625,"$2,375",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.750%,5.901%,"$2,076.025",-1.2069999999999936,"$2,420",Conventional,Wholesale
+Rocket Pro,5.750%,5.901%,"$2,076.025",-1.2069999999999936,"$2,420",Conventional,Wholesale
+Click n' Close,5.750%,5.912%,"$2,076.025",-1.50615,"$2,597.1",Conventional,Wholesale
+Power TPO,5.750%,5.917%,"$2,076.025",-1.5060000000000002,"$2,672.5",Conventional,Wholesale
+Plaza Home Mortgage Inc.,5.750%,5.931%,"$2,076.025",-1.41471,"$2,900.7",Conventional,Wholesale
+Nations Direct Mortgage,5.750%,5.934%,"$2,076.025",-1.196,"$2,947.5",Conventional,Wholesale
+Loan United Wholesale,5.750%,5.937%,"$2,076.025",-1.3810000000000002,"$2,985",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.750%,5.938%,"$2,076.025",-1.375,"$3,000",Conventional,Wholesale
+NexBank,5.750%,5.953%,"$2,076.025",-1.2402100000000047,"$3,242",Conventional,Wholesale
+AFR Wholesale,5.750%,5.955%,"$2,076.025",-1.3119999999999976,"$3,272.5",Conventional,Wholesale
+Eleven Mortgage,5.750%,5.955%,"$2,076.025",-0.145,"$3,275",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,5.961%,"$2,076.025",-1.127,"$3,370",Conventional,Wholesale
+JMAC Lending Inc.,5.750%,5.974%,"$2,076.025",-1.14295,"$3,580.1",Conventional,Wholesale
+Orion Lending,5.750%,5.978%,"$2,076.025",-1.122,"$3,632.5",Conventional,Wholesale
+Kind Lending,5.750%,5.980%,"$2,076.025",-1.10965,"$3,663.4",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,5.980%,"$2,076.025",-1.10965,"$3,663.4",Conventional,Wholesale
+Pennymac TPO,5.750%,5.982%,"$2,076.025",-1.228,"$3,692.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.750%,5.982%,"$2,076.025",-1.228,"$3,692.5",Conventional,Wholesale
+Open Mortgage,5.750%,5.982%,"$2,076.025",-0.72,"$3,700",Conventional,Wholesale
+TPO GO,5.750%,5.987%,"$2,076.025",-0.8389999999999986,"$3,777.5",Conventional,Wholesale
+Windsor Mortgage Solutions,5.750%,6.004%,"$2,076.025",-1.1090499999999963,"$4,039.9",Conventional,Wholesale
+Union Home Mortgage,5.750%,6.051%,"$2,076.025",-0.659000000000006,"$4,790",Conventional,Wholesale
+HomeBridge Wholesale,5.750%,6.074%,"$2,076.025",-0.52,"$5,137.5",Conventional,Wholesale
+NewRez LLC,5.750%,6.067%,"$2,112.356",-2.569,"$-2,255.3",FHA,Wholesale
+AFR Wholesale,5.750%,6.154%,"$2,112.356",-2.4380000000000024,$-863.9,FHA,Wholesale
+Rocket Pro,5.750%,6.214%,"$2,112.356",-1.7459999999999951,$84.9,FHA,Wholesale
+Jet Advantage Mortgage,5.750%,6.220%,"$2,112.356",-1.3840000000000003,$179,FHA,Wholesale
+Forward Lending,5.750%,6.220%,"$2,112.356",-1.3840000000000003,$179,FHA,Wholesale
+Eleven Mortgage,5.750%,6.228%,"$2,112.356",-2.00867,$307,FHA,Wholesale
+"VIP Mortgage, Inc.",5.750%,6.232%,"$2,112.356",-2.1170000000000044,$374.9,FHA,Wholesale
+Click n' Close,5.750%,6.247%,"$2,112.356",-1.80733,$615.7,FHA,Wholesale
+TPO GO,5.750%,6.255%,"$2,112.356",-1.1899999999999977,$736.1,FHA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.255%,"$2,112.356",-1.63953,$737.3,FHA,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.260%,"$2,112.356",-1.73509,$812.2,FHA,Wholesale
+Kind Lending,5.750%,6.261%,"$2,112.356",-1.59875,$841.1,FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.261%,"$2,112.356",-1.59875,$841.1,FHA,Wholesale
+AD Mortgage,5.750%,6.281%,"$2,112.356",-1.5259999999999962,"$1,153.2",FHA,Wholesale
+Loan United Wholesale,5.750%,6.282%,"$2,112.356",-1.573999999999998,"$1,158.3",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,6.287%,"$2,112.356",-1.491,"$1,242.3",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.295%,"$2,112.356",-1.282,"$1,367",FHA,Wholesale
+Pennymac TPO,5.750%,6.295%,"$2,112.356",-1.282,"$1,367",FHA,Wholesale
+New Wave Lending Group,5.750%,6.298%,"$2,112.356",-1.5,"$1,410.2",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.750%,6.338%,"$2,112.356",-1.25,"$2,046.1",FHA,Wholesale
+Open Mortgage,5.750%,6.574%,"$2,112.356",0.188,"$5,704",FHA,Wholesale
+AmWest Funding Corp,5.750%,6.579%,"$2,112.356",0.343,"$5,780.4",FHA,Wholesale
+JMAC Lending Inc.,5.750%,6.584%,"$2,112.356",0.2494,"$5,860.2",FHA,Wholesale
+Orion Lending,5.750%,6.773%,"$2,112.356",2.128,"$8,731.1",FHA,Wholesale
+Windsor Mortgage Solutions,5.750%,6.794%,"$2,112.356",1.2788699999999977,"$9,051.3",FHA,Wholesale
+Rocket Pro,5.750%,6.242%,"$2,144.534",-1.7309999999999945,$-243.6,VA,Wholesale
+Loan Factory Direct - Rocket,5.750%,6.242%,"$2,144.534",-1.7309999999999945,$-243.6,VA,Wholesale
+NewRez LLC,5.750%,6.252%,"$2,144.534",-2.579,$-86.1,VA,Wholesale
+"VIP Mortgage, Inc.",5.750%,6.273%,"$2,144.534",-2.1269999999999953,$257.4,VA,Wholesale
+Click n' Close,5.750%,6.294%,"$2,144.534",-1.80733,$579.4,VA,Wholesale
+Jet Advantage Mortgage,5.750%,6.303%,"$2,144.534",-1.1539999999999964,$730,VA,Wholesale
+Forward Lending,5.750%,6.303%,"$2,144.534",-1.1539999999999964,$730,VA,Wholesale
+Eleven Mortgage,5.750%,6.314%,"$2,144.534",-1.71242,$901.9,VA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.319%,"$2,144.534",-1.52953,$986.9,VA,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.327%,"$2,144.534",-1.73509,"$1,101.6",VA,Wholesale
+Pennymac TPO,5.750%,6.350%,"$2,144.534",-1.45,"$1,476.3",VA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.350%,"$2,144.534",-1.45,"$1,476.3",VA,Wholesale
+Loan United Wholesale,5.750%,6.366%,"$2,144.534",-1.4959999999999951,"$1,719.1",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,6.375%,"$2,144.534",-1.241,"$1,861.1",VA,Wholesale
+Kind Lending,5.750%,6.376%,"$2,144.534",-1.18427,"$1,878.5",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.376%,"$2,144.534",-1.18427,"$1,878.5",VA,Wholesale
+Union Home Mortgage,5.750%,6.390%,"$2,144.534",-1.2009999999999934,"$2,093.5",VA,Wholesale
+The Loan Store LLC,5.750%,6.514%,"$2,144.534",-0.5,"$4,032.9",VA,Wholesale
+AFR Wholesale,5.750%,6.593%,"$2,144.534",0.10299999999999443,"$5,251.9",VA,Wholesale
+Open Mortgage,5.750%,6.667%,"$2,144.534",0.438,"$6,390.8",VA,Wholesale
+JMAC Lending Inc.,5.750%,6.682%,"$2,144.534",0.5272,"$6,621.2",VA,Wholesale
+AmWest Funding Corp,5.750%,6.726%,"$2,144.534",0.91,"$7,287",VA,Wholesale
+Windsor Mortgage Solutions,5.750%,6.840%,"$2,144.534",1.4788800000000037,"$9,014.3",VA,Wholesale
+Orion Lending,5.750%,6.848%,"$2,144.534",2.128,"$9,141.2",VA,Wholesale
+AmWest Funding Corp,5.750%,5.886%,"$1,755.209",-1.478,"$2,742.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.750%,5.957%,"$1,755.209",-0.8642200000000031,"$4,151.9",Conventional,Wholesale
+Sun West Mtg Co Wholesale,5.750%,5.958%,"$1,755.209",-0.6537,"$4,178.3",Conventional,Wholesale
+Power TPO,5.750%,5.963%,"$1,755.209",-0.8659999999999997,"$4,272.5",Conventional,Wholesale
+AFR Wholesale,5.750%,5.978%,"$1,755.209",-0.7950000000000017,"$4,565",Conventional,Wholesale
+BluePoint Mortgage,5.750%,5.981%,"$1,755.209",-0.72,"$4,637.5",Conventional,Wholesale
+The Loan Store LLC,5.750%,5.985%,"$1,755.209",-0.840999999999994,"$4,710",Conventional,Wholesale
+AD Mortgage,5.750%,5.985%,"$1,755.209",-0.6899999999999977,"$4,712.5",Conventional,Wholesale
+New Wave Lending Group,5.750%,5.993%,"$1,755.209",-0.625,"$4,875",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.750%,5.997%,"$1,755.209",-0.20000000000000284,"$4,937.5",Conventional,Wholesale
+Rocket Pro,5.750%,5.997%,"$1,755.209",-0.20000000000000284,"$4,937.5",Conventional,Wholesale
+CMG Financial,5.750%,6.003%,"$1,755.209",-0.597,"$5,070",Conventional,Wholesale
+NewRez LLC,5.750%,6.006%,"$1,755.209",-0.025,"$5,117.5",Conventional,Wholesale
+Nations Direct Mortgage,5.750%,6.007%,"$1,755.209",-0.32,"$5,137.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.750%,6.025%,"$1,755.209",-0.375,"$5,500",Conventional,Wholesale
+Eleven Mortgage,5.750%,6.031%,"$1,755.209",1.525,"$5,617.5",Conventional,Wholesale
+TPO GO,5.750%,6.032%,"$1,755.209",-0.0969999999999942,"$5,632.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,6.040%,"$1,755.209",-0.158,"$5,792.5",Conventional,Wholesale
+NexBank,5.750%,6.044%,"$1,755.209",-0.17530999999999608,"$5,879.2",Conventional,Wholesale
+Kind Lending,5.750%,6.046%,"$1,755.209",-0.21088,"$5,910.3",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.046%,"$1,755.209",-0.21088,"$5,910.3",Conventional,Wholesale
+Pennymac TPO,5.750%,6.052%,"$1,755.209",-0.297,"$6,020",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.052%,"$1,755.209",-0.297,"$6,020",Conventional,Wholesale
+JMAC Lending Inc.,5.750%,6.079%,"$1,755.209",0.04875,"$6,559.4",Conventional,Wholesale
+Provident Funding,5.750%,6.089%,"$1,755.209",-0.125,"$6,750",Conventional,Wholesale
+Orion Lending,5.750%,6.089%,"$1,755.209",0.126,"$6,752.5",Conventional,Wholesale
+HomeBridge Wholesale,5.750%,6.098%,"$1,755.209",0.197,"$6,930",Conventional,Wholesale
+LoanStream Mortgage,5.750%,6.120%,"$1,755.209",0.6689999999999969,"$7,360",Conventional,Wholesale
+Jet Advantage Mortgage,5.750%,6.120%,"$1,755.209",0.6689999999999969,"$7,360",Conventional,Wholesale
+Forward Lending,5.750%,6.120%,"$1,755.209",0.6689999999999969,"$7,360",Conventional,Wholesale
+Union Home Mortgage,5.750%,6.136%,"$1,755.209",0.492999999999995,"$7,670",Conventional,Wholesale
+Windsor Mortgage Solutions,5.750%,6.326%,"$1,755.209",1.5512999999999977,"$11,315.7",Conventional,Wholesale
+Open Mortgage,5.750%,6.345%,"$1,755.209",2.093,"$11,670",Conventional,Wholesale
+Loan United Wholesale,5.750%,6.399%,"$1,755.209",2.5060000000000002,"$12,702.5",Conventional,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.574%,"$1,785.925",-0.48688,"$2,079.5",FHA,Wholesale
+CMG Financial,5.750%,6.594%,"$1,785.925",-0.481,"$2,476.1",FHA,Wholesale
+NewRez LLC,5.750%,6.611%,"$1,785.925",-0.582,"$2,799.1",FHA,Wholesale
+HomeBridge Wholesale,5.750%,6.624%,"$1,785.925",-0.731,"$3,048.4",FHA,Wholesale
+Loan United Wholesale,5.750%,6.631%,"$1,785.925",-1.2789999999999964,"$3,180.6",FHA,Wholesale
+Pennymac TPO,5.750%,6.646%,"$1,785.925",-0.458,"$3,463.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.646%,"$1,785.925",-0.458,"$3,463.1",FHA,Wholesale
+Eleven Mortgage,5.750%,6.650%,"$1,785.925",1.5698,"$3,533.8",FHA,Wholesale
+AD Mortgage,5.750%,6.665%,"$1,785.925",-0.47400000000000375,"$3,829.3",FHA,Wholesale
+NexBank,5.750%,6.668%,"$1,785.925",-0.4012699999999967,"$3,887.2",FHA,Wholesale
+Rocket Pro,5.750%,6.678%,"$1,785.925",-0.1740000000000066,"$4,083.7",FHA,Wholesale
+Open Mortgage,5.750%,6.686%,"$1,785.925",-0.395,"$4,221",FHA,Wholesale
+AFR Wholesale,5.750%,6.692%,"$1,785.925",-0.39054000000000144,"$4,344.4",FHA,Wholesale
+Jet Advantage Mortgage,5.750%,6.708%,"$1,785.925",0.3719999999999999,"$4,645.9",FHA,Wholesale
+Forward Lending,5.750%,6.708%,"$1,785.925",0.3719999999999999,"$4,645.9",FHA,Wholesale
+Kind Lending,5.750%,6.709%,"$1,785.925",-0.09775,"$4,659.2",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.709%,"$1,785.925",-0.09775,"$4,659.2",FHA,Wholesale
+"VIP Mortgage, Inc.",5.750%,6.745%,"$1,785.925",-0.16119000000000483,"$5,350",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.782%,"$1,785.925",-0.05353,"$6,043.5",FHA,Wholesale
+Loan United Wholesale,5.750%,6.287%,"$1,813.131",-1.1299999999999955,"$2,664.3",VA,Wholesale
+NewRez LLC,5.750%,6.302%,"$1,813.131",-0.592,"$2,963.9",VA,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.319%,"$1,813.131",-0.48688,"$3,292.1",VA,Wholesale
+CMG Financial,5.750%,6.329%,"$1,813.131",-0.231,"$3,501",VA,Wholesale
+NexBank,5.750%,6.354%,"$1,813.131",-0.3695900000000023,"$3,982.4",VA,Wholesale
+Pennymac TPO,5.750%,6.355%,"$1,813.131",-0.47,"$4,007.1",VA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.355%,"$1,813.131",-0.47,"$4,007.1",VA,Wholesale
+Loan Factory Direct - Rocket,5.750%,6.357%,"$1,813.131",-0.06999999999999318,"$4,045.9",VA,Wholesale
+Rocket Pro,5.750%,6.357%,"$1,813.131",-0.06999999999999318,"$4,045.9",VA,Wholesale
+Eleven Mortgage,5.750%,6.363%,"$1,813.131",1.6534,"$4,170.9",VA,Wholesale
+Open Mortgage,5.750%,6.400%,"$1,813.131",-0.145,"$4,885.2",VA,Wholesale
+Jet Advantage Mortgage,5.750%,6.420%,"$1,813.131",0.6020000000000039,"$5,264.9",VA,Wholesale
+Forward Lending,5.750%,6.420%,"$1,813.131",0.6020000000000039,"$5,264.9",VA,Wholesale
+Kind Lending,5.750%,6.445%,"$1,813.131",0.3147,"$5,749.6",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.445%,"$1,813.131",0.3147,"$5,749.6",VA,Wholesale
+The Loan Store LLC,5.750%,6.456%,"$1,813.131",0.25,"$5,969.8",VA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.477%,"$1,813.131",0.05647,"$6,373.9",VA,Wholesale
+AFR Wholesale,5.750%,6.744%,"$1,813.131",2.4950000000000045,"$11,429.2",VA,Wholesale
+HomeBridge Wholesale,5.750%,6.359%,"$1,484.463",-0.731,"$1,776.5",FHA,Wholesale
+Loan United Wholesale,5.750%,6.364%,"$1,484.463",-1.2789999999999964,"$1,908.7",FHA,Wholesale
+AmWest Funding Corp,5.750%,6.365%,"$1,484.463",-1.169,"$1,934.3",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.371%,"$1,484.463",-0.48688,"$2,079.5",FHA,Wholesale
+CMG Financial,5.750%,6.386%,"$1,484.463",-0.481,"$2,476.1",FHA,Wholesale
+AD Mortgage,5.750%,6.393%,"$1,484.463",-0.9339999999999975,"$2,659.1",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.750%,6.394%,"$1,484.463",-1,"$2,682",FHA,Wholesale
+NewRez LLC,5.750%,6.399%,"$1,484.463",-0.582,"$2,799.1",FHA,Wholesale
+Power TPO,5.750%,6.403%,"$1,484.463",-0.5400000000000063,"$2,898.3",FHA,Wholesale
+Jet Advantage Mortgage,5.750%,6.419%,"$1,484.463",-0.1530000000000058,"$3,310.4",FHA,Wholesale
+Forward Lending,5.750%,6.419%,"$1,484.463",-0.1530000000000058,"$3,310.4",FHA,Wholesale
+NexBank,5.750%,6.422%,"$1,484.463",-0.6021400000000057,"$3,376.2",FHA,Wholesale
+Kind Lending,5.750%,6.423%,"$1,484.463",-0.58775,"$3,412.8",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.423%,"$1,484.463",-0.58775,"$3,412.8",FHA,Wholesale
+Pennymac TPO,5.750%,6.425%,"$1,484.463",-0.458,"$3,463.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.425%,"$1,484.463",-0.458,"$3,463.1",FHA,Wholesale
+AFR Wholesale,5.750%,6.425%,"$1,484.463",-0.7360000000000042,"$3,465.6",FHA,Wholesale
+Eleven Mortgage,5.750%,6.428%,"$1,484.463",1.5698,"$3,533.8",FHA,Wholesale
+Open Mortgage,5.750%,6.430%,"$1,484.463",-0.645,"$3,585.1",FHA,Wholesale
+Rocket Pro,5.750%,6.430%,"$1,484.463",-0.36700000000000443,"$3,592.7",FHA,Wholesale
+TPO GO,5.750%,6.432%,"$1,484.463",-0.05299999999999727,"$3,628.4",FHA,Wholesale
+New Wave Lending Group,5.750%,6.432%,"$1,484.463",-0.625,"$3,636",FHA,Wholesale
+Orion Lending,5.750%,6.433%,"$1,484.463",0.131,"$3,651.2",FHA,Wholesale
+The Loan Store LLC,5.750%,6.439%,"$1,484.463",-0.5859999999999985,"$3,798.8",FHA,Wholesale
+"VIP Mortgage, Inc.",5.750%,6.440%,"$1,484.463",-0.7519999999999953,"$3,847.1",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,6.449%,"$1,484.463",-0.387,"$4,050.6",FHA,Wholesale
+JMAC Lending Inc.,5.750%,6.449%,"$1,484.463",-0.33145,"$4,064.8",FHA,Wholesale
+Click n' Close,5.750%,6.463%,"$1,484.463",-0.35731,"$4,406",FHA,Wholesale
+Windsor Mortgage Solutions,5.750%,6.476%,"$1,484.463",-0.41903000000000645,"$4,732.3",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.477%,"$1,484.463",-0.05353,"$4,771.7",FHA,Wholesale
+Union Home Mortgage,5.750%,6.570%,"$1,484.463",0.7489999999999952,"$7,067.5",FHA,Wholesale
+Loan United Wholesale,5.750%,6.152%,"$1,507.077",-1.1299999999999955,"$2,664.3",VA,Wholesale
+AmWest Funding Corp,5.750%,6.153%,"$1,507.077",-0.869,"$2,692.7",VA,Wholesale
+NewRez LLC,5.750%,6.163%,"$1,507.077",-0.592,"$2,963.9",VA,Wholesale
+Sun West Mtg Co Wholesale,5.750%,6.175%,"$1,507.077",-0.48688,"$3,292.1",VA,Wholesale
+CMG Financial,5.750%,6.183%,"$1,507.077",-0.231,"$3,501",VA,Wholesale
+NexBank,5.750%,6.184%,"$1,507.077",-0.551879999999997,"$3,511.7",VA,Wholesale
+AFR Wholesale,5.750%,6.185%,"$1,507.077",-0.5559999999999974,"$3,550",VA,Wholesale
+"VIP Mortgage, Inc.",5.750%,6.187%,"$1,507.077",-0.8319999999999936,"$3,601.8",VA,Wholesale
+Jet Advantage Mortgage,5.750%,6.189%,"$1,507.077",-0.022999999999996135,"$3,650.8",VA,Wholesale
+Forward Lending,5.750%,6.189%,"$1,507.077",-0.022999999999996135,"$3,650.8",VA,Wholesale
+TPO GO,5.750%,6.194%,"$1,507.077",-0.0030000000000001137,"$3,767.1",VA,Wholesale
+Eleven Mortgage,5.750%,6.195%,"$1,507.077",-0.58625,"$3,810.2",VA,Wholesale
+Loan Factory Direct - Rocket,5.750%,6.197%,"$1,507.077",-0.14499999999999602,"$3,852.2",VA,Wholesale
+Rocket Pro,5.750%,6.197%,"$1,507.077",-0.14499999999999602,"$3,852.2",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.750%,6.199%,"$1,507.077",-0.449,"$3,906.5",VA,Wholesale
+Pennymac TPO,5.750%,6.203%,"$1,507.077",-0.47,"$4,007.1",VA,Wholesale
+Loan Factory Direct - PennyMac,5.750%,6.203%,"$1,507.077",-0.47,"$4,007.1",VA,Wholesale
+Orion Lending,5.750%,6.207%,"$1,507.077",0.181,"$4,113",VA,Wholesale
+Power TPO,5.750%,6.210%,"$1,507.077",-0.5400000000000063,"$4,187.9",VA,Wholesale
+Open Mortgage,5.750%,6.212%,"$1,507.077",-0.395,"$4,239.6",VA,Wholesale
+The Loan Store LLC,5.750%,6.213%,"$1,507.077",-0.4069999999999965,"$4,273.1",VA,Wholesale
+Kind Lending,5.750%,6.219%,"$1,507.077",-0.1953,"$4,432.5",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.750%,6.219%,"$1,507.077",-0.1953,"$4,432.5",VA,Wholesale
+Click n' Close,5.750%,6.220%,"$1,507.077",-0.34559,"$4,457.6",VA,Wholesale
+Plaza Home Mortgage Inc.,5.750%,6.244%,"$1,507.077",0.05647,"$5,082.7",VA,Wholesale
+JMAC Lending Inc.,5.750%,6.257%,"$1,507.077",0.12215,"$5,413.8",VA,Wholesale
+Windsor Mortgage Solutions,5.750%,6.287%,"$1,507.077",0.3809700000000049,"$6,179",VA,Wholesale
+Union Home Mortgage,5.750%,6.324%,"$1,507.077",0.7489999999999952,"$7,129.4",VA,Wholesale
+District Lending,5.750%,6.977%,"$2,745",0,"$5,625",FHA,Retail
+AimLoan.com,5.750%,5.831%,"$1,756",0.266,"$1,660",Conventional,Retail
+District Lending,5.750%,5.857%,"$1,756",0.372,"$2,180",Conventional,Retail
+American VA Loans,5.750%,5.884%,"$1,459",0.213,"$3,752",VA,Retail
+American VA Loans,5.750%,5.938%,"$1,756",0.288,"$3,940",VA,Retail
+District Lending,5.750%,5.941%,"$1,459",0.338,"$5,220",VA,Retail
+District Lending,5.750%,6.015%,"$1,756",0.413,"$5,408",VA,Retail
+PenFed Credit Union,5.750%,7.041%,"$1,459",0.5,"$7,620",FHA,Retail
+District Lending,5.750%,7.200%,"$1,756",0.4,"$6,625",FHA,Retail
+"Tomo Mortgage, LLC.",5.750%,5.876%,"$2,077",0.813,"$2,032",Conventional,Retail
+PenFed Credit Union,5.750%,5.940%,"$1,756",0.75,"$3,870",Conventional,Retail
+District Lending,5.750%,5.921%,"$1,459",1.375,"$4,688",Conventional,Retail
+PenFed Credit Union,5.750%,6.026%,"$1,459",1.375,"$7,558",VA,Retail
+District Lending,5.750%,5.942%,"$1,459",1.599,"$5,248",Conventional,Retail
+AimLoan.com,5.750%,6.014%,"$1,459",2.496,"$7,235",Conventional,Retail
+"Tomo Mortgage, LLC.",5.750%,5.998%,"$1,459",2.713,"$6,782",Conventional,Retail
+"Tomo Mortgage, LLC.",5.750%,7.163%,"$1,459",2.713,"$11,158",FHA,Retail
+Optimum First Mortgage,5.874%,6.030%,"$1,478.68",0.868,"$4,165",Conventional,Retail
+Chase Bank,5.875%,6.570%,"$2,070.506",1.04,"$3,195",Conventional,Retail
+Chase Bank,5.875%,6.136%,"$2,070.506",0.8290000000000001,"$2,667.5",Conventional,Retail
+Us Bank,5.875%,6.534%,"$3,637.18",0.97,"$7,985.45",Conventional,Retail
+Us Bank,5.875%,6.080%,"$1,773.1",0.773,"$5,223.37",Conventional,Retail
+American VA Loans,5.875%,5.990%,"$1,479",0,"$7,301",Conventional,Retail
+District Lending,5.875%,6.036%,"$1,479",0,"$8,456",Conventional,Retail
+PenFed Credit Union,5.875%,6.119%,"$1,479",1,"$13,201",Conventional,Retail
+AimLoan.com,5.875%,6.086%,"$1,479",1.896,"$14,556",Conventional,Retail
+Sun West Mtg Co Wholesale,5.875%,5.891%,"$2,092.796",-2.2239,$252.8,Conventional,Wholesale
+Provident Funding,5.875%,5.926%,"$2,092.796",-2.5,$812.5,Conventional,Wholesale
+NewRez LLC,5.875%,5.929%,"$2,092.796",-1.729,$865,Conventional,Wholesale
+AmWest Funding Corp,5.875%,5.937%,"$2,092.796",-2.179,$990,Conventional,Wholesale
+Everstream Mortgage,5.875%,5.961%,"$2,092.796",-0.6126000000000005,"$1,368.5",Conventional,Wholesale
+BluePoint Mortgage,5.875%,5.964%,"$2,092.796",-2.006,"$1,422.5",Conventional,Wholesale
+New Wave Lending Group,5.875%,5.965%,"$2,092.796",-2,"$1,437.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.875%,5.974%,"$2,092.796",-1.8927400000000034,"$1,580.6",Conventional,Wholesale
+The Loan Store LLC,5.875%,5.977%,"$2,092.796",-2.070999999999998,"$1,635",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.875%,5.978%,"$2,092.796",-1.5190000000000055,"$1,640",Conventional,Wholesale
+Rocket Pro,5.875%,5.978%,"$2,092.796",-1.5190000000000055,"$1,640",Conventional,Wholesale
+AD Mortgage,5.875%,5.984%,"$2,092.796",-1.8760000000000048,"$1,747.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.875%,5.985%,"$2,092.796",-1.875,"$1,750",Conventional,Wholesale
+Click n' Close,5.875%,5.990%,"$2,092.796",-1.80759,"$1,843.5",Conventional,Wholesale
+Power TPO,5.875%,5.998%,"$2,092.796",-1.7909999999999968,"$1,960",Conventional,Wholesale
+Loan United Wholesale,5.875%,6.006%,"$2,092.796",-1.7399999999999949,"$2,087.5",Conventional,Wholesale
+Eleven Mortgage,5.875%,6.009%,"$2,092.796",-0.6,"$2,137.5",Conventional,Wholesale
+Plaza Home Mortgage Inc.,5.875%,6.014%,"$2,092.796",-1.68971,"$2,213.2",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.875%,6.015%,"$2,092.796",-1.58,"$2,237.5",Conventional,Wholesale
+Nations Direct Mortgage,5.875%,6.029%,"$2,092.796",-1.393,"$2,455",Conventional,Wholesale
+AFR Wholesale,5.875%,6.036%,"$2,092.796",-1.5949999999999989,"$2,565",Conventional,Wholesale
+JMAC Lending Inc.,5.875%,6.036%,"$2,092.796",-1.54625,"$2,571.9",Conventional,Wholesale
+NexBank,5.875%,6.038%,"$2,092.796",-1.5006099999999947,"$2,591",Conventional,Wholesale
+Kind Lending,5.875%,6.056%,"$2,092.796",-1.41875,"$2,890.6",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.056%,"$2,092.796",-1.41875,"$2,890.6",Conventional,Wholesale
+Pennymac TPO,5.875%,6.058%,"$2,092.796",-1.542,"$2,907.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.058%,"$2,092.796",-1.542,"$2,907.5",Conventional,Wholesale
+Orion Lending,5.875%,6.060%,"$2,092.796",-1.399,"$2,940",Conventional,Wholesale
+Open Mortgage,5.875%,6.067%,"$2,092.796",-0.98,"$3,050",Conventional,Wholesale
+TPO GO,5.875%,6.075%,"$2,092.796",-1.0789999999999935,"$3,177.5",Conventional,Wholesale
+CMG Financial,5.875%,6.086%,"$2,092.796",-1.285,"$3,350",Conventional,Wholesale
+Windsor Mortgage Solutions,5.875%,6.091%,"$2,092.796",-1.3530899999999946,"$3,429.8",Conventional,Wholesale
+Union Home Mortgage,5.875%,6.125%,"$2,092.796",-0.9890000000000043,"$3,965",Conventional,Wholesale
+HomeBridge Wholesale,5.875%,6.148%,"$2,092.796",-0.842,"$4,332.5",Conventional,Wholesale
+AmWest Funding Corp,5.875%,5.948%,"$1,773.096",-1.986,"$1,472.5",Conventional,Wholesale
+Sun West Mtg Co Wholesale,5.875%,6.017%,"$1,773.096",-1.1889,"$2,840.2",Conventional,Wholesale
+"VIP Mortgage, Inc.",5.875%,6.020%,"$1,773.096",-1.3597400000000022,"$2,913.1",Conventional,Wholesale
+Power TPO,5.875%,6.022%,"$1,773.096",-1.3930000000000007,"$2,955",Conventional,Wholesale
+AFR Wholesale,5.875%,6.039%,"$1,773.096",-1.3089999999999975,"$3,280",Conventional,Wholesale
+BluePoint Mortgage,5.875%,6.040%,"$1,773.096",-1.257,"$3,295",Conventional,Wholesale
+Click n' Close,5.875%,6.040%,"$1,773.096",-1.21141,"$3,309",Conventional,Wholesale
+The Loan Store LLC,5.875%,6.042%,"$1,773.096",-1.3850000000000051,"$3,350",Conventional,Wholesale
+AD Mortgage,5.875%,6.045%,"$1,773.096",-1.2109999999999985,"$3,410",Conventional,Wholesale
+New Wave Lending Group,5.875%,6.056%,"$1,773.096",-1.125,"$3,625",Conventional,Wholesale
+CMG Financial,5.875%,6.058%,"$1,773.096",-1.159,"$3,665",Conventional,Wholesale
+NewRez LLC,5.875%,6.058%,"$1,773.096",-0.604,"$3,670",Conventional,Wholesale
+Nations Direct Mortgage,5.875%,6.064%,"$1,773.096",-0.861,"$3,785",Conventional,Wholesale
+Loan Factory Direct - Rocket,5.875%,6.065%,"$1,773.096",-0.6560000000000059,"$3,797.5",Conventional,Wholesale
+Rocket Pro,5.875%,6.065%,"$1,773.096",-0.6560000000000059,"$3,797.5",Conventional,Wholesale
+TPO GO,5.875%,6.082%,"$1,773.096",-0.695999999999998,"$4,135",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.875%,6.088%,"$1,773.096",-0.875,"$4,250",Conventional,Wholesale
+Eleven Mortgage,5.875%,6.089%,"$1,773.096",0.987,"$4,272.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.875%,6.098%,"$1,773.096",-0.695,"$4,450",Conventional,Wholesale
+Kind Lending,5.875%,6.103%,"$1,773.096",-0.75827,"$4,541.8",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.103%,"$1,773.096",-0.75827,"$4,541.8",Conventional,Wholesale
+NexBank,5.875%,6.104%,"$1,773.096",-0.6996900000000039,"$4,568.3",Conventional,Wholesale
+Pennymac TPO,5.875%,6.117%,"$1,773.096",-0.772,"$4,832.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.117%,"$1,773.096",-0.772,"$4,832.5",Conventional,Wholesale
+Provident Funding,5.875%,6.135%,"$1,773.096",-0.75,"$5,187.5",Conventional,Wholesale
+JMAC Lending Inc.,5.875%,6.137%,"$1,773.096",-0.48925,"$5,214.4",Conventional,Wholesale
+Orion Lending,5.875%,6.147%,"$1,773.096",-0.409,"$5,415",Conventional,Wholesale
+HomeBridge Wholesale,5.875%,6.156%,"$1,773.096",-0.338,"$5,592.5",Conventional,Wholesale
+LoanStream Mortgage,5.875%,6.181%,"$1,773.096",0.15800000000000125,"$6,082.5",Conventional,Wholesale
+Jet Advantage Mortgage,5.875%,6.181%,"$1,773.096",0.15800000000000125,"$6,082.5",Conventional,Wholesale
+Forward Lending,5.875%,6.181%,"$1,773.096",0.15800000000000125,"$6,082.5",Conventional,Wholesale
+Union Home Mortgage,5.875%,6.193%,"$1,773.096",-0.04999999999999716,"$6,312.5",Conventional,Wholesale
+Windsor Mortgage Solutions,5.875%,6.362%,"$1,773.096",0.8511500000000041,"$9,565.4",Conventional,Wholesale
+Open Mortgage,5.875%,6.406%,"$1,773.096",1.591,"$10,415",Conventional,Wholesale
+Loan United Wholesale,5.875%,6.455%,"$1,773.096",1.9620000000000033,"$11,342.5",Conventional,Wholesale
+CMG Financial,5.875%,6.565%,"$1,804.125",-1.658,$-517.9,FHA,Wholesale
+Sun West Mtg Co Wholesale,5.875%,6.652%,"$1,804.125",-0.84563,"$1,166.9",FHA,Wholesale
+Everstream Mortgage,5.875%,6.661%,"$1,804.125",0.609800000000007,"$1,346.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.681%,"$1,804.125",-1.143,"$1,720.6",FHA,Wholesale
+Pennymac TPO,5.875%,6.681%,"$1,804.125",-1.143,"$1,720.6",FHA,Wholesale
+Loan United Wholesale,5.875%,6.706%,"$1,804.125",-1.6650000000000063,"$2,198.8",FHA,Wholesale
+NewRez LLC,5.875%,6.721%,"$1,804.125",-0.601,"$2,481.1",FHA,Wholesale
+AD Mortgage,5.875%,6.736%,"$1,804.125",-0.8910000000000053,"$2,768.5",FHA,Wholesale
+Eleven Mortgage,5.875%,6.737%,"$1,804.125",1.2808,"$2,798.6",FHA,Wholesale
+HomeBridge Wholesale,5.875%,6.746%,"$1,804.125",-0.763,"$2,967",FHA,Wholesale
+NexBank,5.875%,6.748%,"$1,804.125",-0.7524899999999946,"$2,993.8",FHA,Wholesale
+Open Mortgage,5.875%,6.751%,"$1,804.125",-0.85,"$3,063.6",FHA,Wholesale
+Rocket Pro,5.875%,6.767%,"$1,804.125",-0.45600000000000307,"$3,366.3",FHA,Wholesale
+Kind Lending,5.875%,6.767%,"$1,804.125",-0.60365,"$3,372.4",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.767%,"$1,804.125",-0.60365,"$3,372.4",FHA,Wholesale
+AFR Wholesale,5.875%,6.781%,"$1,804.125",-0.6677099999999996,"$3,639.3",FHA,Wholesale
+"VIP Mortgage, Inc.",5.875%,6.800%,"$1,804.125",-0.6981899999999968,"$3,984",FHA,Wholesale
+Jet Advantage Mortgage,5.875%,6.809%,"$1,804.125",0.17900000000000205,"$4,154.9",FHA,Wholesale
+Forward Lending,5.875%,6.809%,"$1,804.125",0.17900000000000205,"$4,154.9",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.875%,6.815%,"$1,804.125",-0.74728,"$4,278.8",FHA,Wholesale
+CMG Financial,5.875%,6.303%,"$1,831.608",-1.408,$461.4,VA,Wholesale
+Loan United Wholesale,5.875%,6.363%,"$1,831.608",-1.524000000000001,"$1,646.8",VA,Wholesale
+Everstream Mortgage,5.875%,6.398%,"$1,831.608",0.8491999999999962,"$2,352.3",VA,Wholesale
+Sun West Mtg Co Wholesale,5.875%,6.399%,"$1,831.608",-0.84563,"$2,365.7",VA,Wholesale
+NewRez LLC,5.875%,6.413%,"$1,831.608",-0.611,"$2,641",VA,Wholesale
+Pennymac TPO,5.875%,6.418%,"$1,831.608",-0.964,"$2,731.4",VA,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.418%,"$1,831.608",-0.964,"$2,731.4",VA,Wholesale
+Loan Factory Direct - Rocket,5.875%,6.433%,"$1,831.608",-0.46399999999999864,"$3,028.4",VA,Wholesale
+Rocket Pro,5.875%,6.433%,"$1,831.608",-0.46399999999999864,"$3,028.4",VA,Wholesale
+NexBank,5.875%,6.437%,"$1,831.608",-0.7080100000000016,"$3,108.5",VA,Wholesale
+Open Mortgage,5.875%,6.468%,"$1,831.608",-0.6,"$3,710.2",VA,Wholesale
+Eleven Mortgage,5.875%,6.472%,"$1,831.608",1.5051,"$3,787.9",VA,Wholesale
+Kind Lending,5.875%,6.491%,"$1,831.608",-0.30365,"$4,152.7",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.491%,"$1,831.608",-0.30365,"$4,152.7",VA,Wholesale
+Plaza Home Mortgage Inc.,5.875%,6.513%,"$1,831.608",-0.63728,"$4,582.3",VA,Wholesale
+Jet Advantage Mortgage,5.875%,6.539%,"$1,831.608",0.534000000000006,"$5,089.3",VA,Wholesale
+Forward Lending,5.875%,6.539%,"$1,831.608",0.534000000000006,"$5,089.3",VA,Wholesale
+The Loan Store LLC,5.875%,6.568%,"$1,831.608",0.125,"$5,647",VA,Wholesale
+AFR Wholesale,5.875%,6.577%,"$1,831.608",0.32200000000000273,"$5,817.5",VA,Wholesale
+CMG Financial,5.875%,6.396%,"$1,504.724",-1.658,$-517.9,FHA,Wholesale
+Loan United Wholesale,5.875%,6.452%,"$1,504.724",-1.6650000000000063,$926.9,FHA,Wholesale
+Power TPO,5.875%,6.461%,"$1,504.724",-1.225999999999999,"$1,153.3",FHA,Wholesale
+Sun West Mtg Co Wholesale,5.875%,6.462%,"$1,504.724",-0.84563,"$1,166.9",FHA,Wholesale
+Everstream Mortgage,5.875%,6.469%,"$1,504.724",0.609800000000007,"$1,346.1",FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",5.875%,6.471%,"$1,504.724",-1.5,"$1,410.2",FHA,Wholesale
+AmWest Funding Corp,5.875%,6.473%,"$1,504.724",-1.363,"$1,440.8",FHA,Wholesale
+AD Mortgage,5.875%,6.473%,"$1,504.724",-1.4080000000000013,"$1,453.4",FHA,Wholesale
+HomeBridge Wholesale,5.875%,6.483%,"$1,504.724",-0.763,"$1,695.1",FHA,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.484%,"$1,504.724",-1.143,"$1,720.6",FHA,Wholesale
+Pennymac TPO,5.875%,6.484%,"$1,504.724",-1.143,"$1,720.6",FHA,Wholesale
+NexBank,5.875%,6.503%,"$1,504.724",-1.0635599999999954,"$2,202.5",FHA,Wholesale
+Open Mortgage,5.875%,6.512%,"$1,504.724",-1.1,"$2,427.7",FHA,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.513%,"$1,504.724",-0.96675,"$2,448.7",FHA,Wholesale
+Kind Lending,5.875%,6.513%,"$1,504.724",-0.96675,"$2,448.7",FHA,Wholesale
+AFR Wholesale,5.875%,6.513%,"$1,504.724",-0.8299999999999983,"$2,450.6",FHA,Wholesale
+The Loan Store LLC,5.875%,6.513%,"$1,504.724",-1.108000000000004,"$2,470.9",FHA,Wholesale
+NewRez LLC,5.875%,6.514%,"$1,504.724",-0.601,"$2,481.1",FHA,Wholesale
+Rocket Pro,5.875%,6.514%,"$1,504.724",-0.8020000000000067,"$2,486.2",FHA,Wholesale
+Eleven Mortgage,5.875%,6.519%,"$1,504.724",-1.10125,"$2,615.3",FHA,Wholesale
+New Wave Lending Group,5.875%,6.522%,"$1,504.724",-1,"$2,682",FHA,Wholesale
+Jet Advantage Mortgage,5.875%,6.527%,"$1,504.724",-0.34600000000000364,"$2,819.5",FHA,Wholesale
+Forward Lending,5.875%,6.527%,"$1,504.724",-0.34600000000000364,"$2,819.5",FHA,Wholesale
+TPO GO,5.875%,6.528%,"$1,504.724",-0.367999999999995,"$2,827.1",FHA,Wholesale
+Orion Lending,5.875%,6.533%,"$1,504.724",-0.144,"$2,951.7",FHA,Wholesale
+Plaza Home Mortgage Inc.,5.875%,6.535%,"$1,504.724",-0.74728,"$3,007",FHA,Wholesale
+JMAC Lending Inc.,5.875%,6.545%,"$1,504.724",-0.64739,"$3,261.1",FHA,Wholesale
+Click n' Close,5.875%,6.546%,"$1,504.724",-0.8007,"$3,278.1",FHA,Wholesale
+"VIP Mortgage, Inc.",5.875%,6.547%,"$1,504.724",-0.9593700000000069,"$3,319.6",FHA,Wholesale
+Windsor Mortgage Solutions,5.875%,6.550%,"$1,504.724",-0.9490299999999934,"$3,384.1",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.875%,6.558%,"$1,504.724",-0.573,"$3,577.4",FHA,Wholesale
+Union Home Mortgage,5.875%,6.699%,"$1,504.724",0.7489999999999952,"$7,067.5",FHA,Wholesale
+CMG Financial,5.875%,6.196%,"$1,527.646",-1.408,$461.4,VA,Wholesale
+Loan United Wholesale,5.875%,6.241%,"$1,527.646",-1.524000000000001,"$1,646.8",VA,Wholesale
+AmWest Funding Corp,5.875%,6.261%,"$1,527.646",-1.063,"$2,191.7",VA,Wholesale
+Everstream Mortgage,5.875%,6.268%,"$1,527.646",0.8491999999999962,"$2,352.3",VA,Wholesale
+Sun West Mtg Co Wholesale,5.875%,6.268%,"$1,527.646",-0.84563,"$2,365.7",VA,Wholesale
+NexBank,5.875%,6.269%,"$1,527.646",-0.9903800000000018,"$2,379.2",VA,Wholesale
+Power TPO,5.875%,6.270%,"$1,527.646",-1.225999999999999,"$2,416.4",VA,Wholesale
+NewRez LLC,5.875%,6.279%,"$1,527.646",-0.611,"$2,641",VA,Wholesale
+Pennymac TPO,5.875%,6.282%,"$1,527.646",-0.964,"$2,731.4",VA,Wholesale
+Loan Factory Direct - PennyMac,5.875%,6.282%,"$1,527.646",-0.964,"$2,731.4",VA,Wholesale
+Eleven Mortgage,5.875%,6.285%,"$1,527.646",-0.98,"$2,793.4",VA,Wholesale
+Loan Factory Direct - Rocket,5.875%,6.286%,"$1,527.646",-0.5360000000000014,"$2,842.5",VA,Wholesale
+Rocket Pro,5.875%,6.286%,"$1,527.646",-0.5360000000000014,"$2,842.5",VA,Wholesale
+AFR Wholesale,5.875%,6.287%,"$1,527.646",-0.6500000000000057,"$2,865.7",VA,Wholesale
+The Loan Store LLC,5.875%,6.290%,"$1,527.646",-0.929000000000002,"$2,925.1",VA,Wholesale
+TPO GO,5.875%,6.291%,"$1,527.646",-0.31799999999999784,"$2,953.6",VA,Wholesale
+Open Mortgage,5.875%,6.295%,"$1,527.646",-0.85,"$3,064.6",VA,Wholesale
+Plaza Home Mortgage Inc.,5.875%,6.304%,"$1,527.646",-0.63728,"$3,291.1",VA,Wholesale
+Kind Lending,5.875%,6.306%,"$1,527.646",-0.61365,"$3,352.1",VA,Wholesale
+Loan Factory Direct - Kind Lending,5.875%,6.306%,"$1,527.646",-0.61365,"$3,352.1",VA,Wholesale
+Orion Lending,5.875%,6.308%,"$1,527.646",-0.094,"$3,402.8",VA,Wholesale
+Click n' Close,5.875%,6.309%,"$1,527.646",-0.7408,"$3,437",VA,Wholesale
+Jet Advantage Mortgage,5.875%,6.311%,"$1,527.646",-0.09099999999999397,"$3,475.2",VA,Wholesale
+Forward Lending,5.875%,6.311%,"$1,527.646",-0.09099999999999397,"$3,475.2",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",5.875%,6.313%,"$1,527.646",-0.591,"$3,539.7",VA,Wholesale
+"VIP Mortgage, Inc.",5.875%,6.314%,"$1,527.646",-0.8509999999999991,"$3,552.7",VA,Wholesale
+JMAC Lending Inc.,5.875%,6.341%,"$1,527.646",-0.32239,"$4,265.7",VA,Wholesale
+Windsor Mortgage Solutions,5.875%,6.362%,"$1,527.646",-0.14902999999999622,"$4,810.2",VA,Wholesale
+Union Home Mortgage,5.875%,6.453%,"$1,527.646",0.7489999999999952,"$7,129.4",VA,Wholesale
+Guaranteed Rate,5.875%,6.090%,"$2,092.8",-0.144,"$9,808.52",Conventional,Retail
+AimLoan.com,5.875%,5.924%,"$1,774",0,$995,Conventional,Retail
+District Lending,5.875%,5.937%,"$1,774",0,"$1,250",Conventional,Retail
+American VA Loans,5.875%,5.990%,"$1,479",0,"$3,220",VA,Retail
+American VA Loans,5.875%,6.029%,"$1,774",0,"$3,220",VA,Retail
+District Lending,5.875%,6.036%,"$1,479",0,"$4,375",VA,Retail
+District Lending,5.875%,7.092%,"$1,479",0,"$5,625",FHA,Retail
+District Lending,5.875%,5.954%,"$1,479",0.349,"$2,122",Conventional,Retail
+District Lending,5.875%,5.960%,"$1,479",0.417,"$2,292",Conventional,Retail
+PenFed Credit Union,5.875%,6.004%,"$1,774",0.25,"$2,620",Conventional,Retail
+District Lending,5.875%,5.990%,"$1,479",0.75,"$3,125",Conventional,Retail
+PenFed Credit Union,5.875%,6.119%,"$1,479",1,"$6,620",VA,Retail
+District Lending,5.875%,6.037%,"$1,479",1.253,"$4,382",Conventional,Retail
+AimLoan.com,5.875%,6.086%,"$1,479",1.896,"$5,735",Conventional,Retail
+First Federal Bank Mortgage Lenders,5.990%,6.106%,"$1,516",0,"$2,384",VA,Retail
+Sage Home Loans,5.990%,6.196%,"$1,515.99",0.915,"$5,441.09",VA,Retail
+Mutual of Omaha Mortgage,5.990%,6.251%,"$1,497.27",1.849,"$6,860.5",Conventional,Retail
+Chase Bank,5.990%,6.792%,"$2,088.936",0.9530000000000001,"$4,077.5",Conventional,Retail
+Us Bank,5.990%,6.357%,"$1,497.27",0.852,"$3,745.11",VA,Retail
+"Tomo Mortgage, LLC.",5.990%,6.171%,"$1,497",0.701,"$10,711.5",Conventional,Retail
+First Federal Bank,5.990%,6.271%,"$1,497",1.78,"$16,106",Conventional,Retail
+Guaranteed Rate,5.990%,6.732%,"$1,627.06",0.487,"$13,887.37",FHA,Retail
+District Lending,5.990%,6.206%,"$1,790",0,"$4,375",VA,Retail
+District Lending,5.990%,7.386%,"$1,790",0,"$5,625",FHA,Retail
+"Tomo Mortgage, LLC.",5.990%,6.170%,"$1,498",0.691,"$4,852",VA,Retail
+"Tomo Mortgage, LLC.",5.990%,6.133%,"$1,498",1.544,"$3,860",Conventional,Retail
+First Federal Bank,5.990%,6.259%,"$1,498",1.655,"$7,262",VA,Retail
+"Tomo Mortgage, LLC.",5.990%,7.296%,"$1,498",1.544,"$8,235",FHA,Retail
+Mutual of Omaha Mortgage,6.000%,6.605%,"$1,603.05",0,"$5,635.5",FHA,Retail
+Mutual of Omaha Mortgage,6.000%,6.170%,"$1,498.88",0,"$4,503",VA,Retail
+Sage Home Loans,6.000%,6.653%,"$1,629.28",0.957,"$6,809.37",FHA,Retail
+Alliant Credit Union,6.000%,6.669%,"$1,603.05",0.75,"$7,200",FHA,Retail
+Alliant Credit Union,6.000%,6.177%,"$1,498.88",1.489,"$4,672.5",Conventional,Retail
+Chase Bank,6.000%,6.489%,"$2,701.306",1.135,"$3,432.5",Conventional,Retail
+Us Bank,6.000%,6.681%,"$4,833.2",0.75,"$7,510.77",Conventional,Retail
+Us Bank,6.000%,6.598%,"$3,652.14",0.97,"$5,206.91",Conventional,Retail
+Us Bank,6.000%,6.473%,"$2,775.51",0.98,"$8,085.77",Conventional,Retail
+District Lending,6.000%,6.047%,"$1,499",0,"$5,331",Conventional,Retail
+Empire of America,6.000%,6.114%,"$1,499",0.625,"$8,701.5",Conventional,Retail
+Sun West Mtg Co Wholesale,6.000%,5.965%,"$2,109.642",-2.549,$-560,Conventional,Wholesale
+NewRez LLC,6.000%,6.014%,"$2,109.642",-1.983,$230,Conventional,Wholesale
+AmWest Funding Corp,6.000%,6.017%,"$2,109.642",-2.467,$270,Conventional,Wholesale
+Provident Funding,6.000%,6.031%,"$2,109.642",-2.625,$500,Conventional,Wholesale
+Everstream Mortgage,6.000%,6.033%,"$2,109.642",-0.9458000000000055,$535.5,Conventional,Wholesale
+BluePoint Mortgage,6.000%,6.038%,"$2,109.642",-2.331,$610,Conventional,Wholesale
+New Wave Lending Group,6.000%,6.051%,"$2,109.642",-2.25,$812.5,Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.000%,6.051%,"$2,109.642",-2.25,$812.5,Conventional,Wholesale
+"VIP Mortgage, Inc.",6.000%,6.053%,"$2,109.642",-2.1892500000000013,$839.4,Conventional,Wholesale
+The Loan Store LLC,6.000%,6.053%,"$2,109.642",-2.3859999999999957,$847.5,Conventional,Wholesale
+AD Mortgage,6.000%,6.063%,"$2,109.642",-2.173000000000002,"$1,005",Conventional,Wholesale
+Click n' Close,6.000%,6.069%,"$2,109.642",-2.10363,"$1,103.4",Conventional,Wholesale
+Power TPO,6.000%,6.077%,"$2,109.642",-2.0829999999999984,"$1,230",Conventional,Wholesale
+Eleven Mortgage,6.000%,6.082%,"$2,109.642",-0.933,"$1,305",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.000%,6.087%,"$2,109.642",-1.922,"$1,382.5",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.000%,6.089%,"$2,109.642",-2.00833,"$1,416.7",Conventional,Wholesale
+Loan United Wholesale,6.000%,6.099%,"$2,109.642",-1.9449999999999932,"$1,575",Conventional,Wholesale
+Nations Direct Mortgage,6.000%,6.107%,"$2,109.642",-1.693,"$1,705",Conventional,Wholesale
+JMAC Lending Inc.,6.000%,6.107%,"$2,109.642",-1.89195,"$1,707.6",Conventional,Wholesale
+AFR Wholesale,6.000%,6.113%,"$2,109.642",-1.9000000000000057,"$1,802.5",Conventional,Wholesale
+Pennymac TPO,6.000%,6.114%,"$2,109.642",-1.978,"$1,817.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.114%,"$2,109.642",-1.978,"$1,817.5",Conventional,Wholesale
+NexBank,6.000%,6.116%,"$2,109.642",-1.7995300000000043,"$1,843.7",Conventional,Wholesale
+Kind Lending,6.000%,6.127%,"$2,109.642",-1.76745,"$2,018.9",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.127%,"$2,109.642",-1.76745,"$2,018.9",Conventional,Wholesale
+Orion Lending,6.000%,6.133%,"$2,109.642",-1.727,"$2,120",Conventional,Wholesale
+Windsor Mortgage Solutions,6.000%,6.140%,"$2,109.642",-1.8336299999999994,"$2,228.4",Conventional,Wholesale
+Open Mortgage,6.000%,6.144%,"$2,109.642",-1.285,"$2,287.5",Conventional,Wholesale
+TPO GO,6.000%,6.150%,"$2,109.642",-1.3970000000000056,"$2,382.5",Conventional,Wholesale
+LoanStream Mortgage,6.000%,6.184%,"$2,109.642",-1.1089999999999947,"$2,915",Conventional,Wholesale
+Jet Advantage Mortgage,6.000%,6.184%,"$2,109.642",-1.1089999999999947,"$2,915",Conventional,Wholesale
+Forward Lending,6.000%,6.184%,"$2,109.642",-1.1089999999999947,"$2,915",Conventional,Wholesale
+CMG Financial,6.000%,6.194%,"$2,109.642",-1.393,"$3,080",Conventional,Wholesale
+Union Home Mortgage,6.000%,6.197%,"$2,109.642",-1.3250000000000028,"$3,125",Conventional,Wholesale
+HomeBridge Wholesale,6.000%,6.222%,"$2,109.642",-1.167,"$3,520",Conventional,Wholesale
+AmWest Funding Corp,6.000%,6.026%,"$1,791.078",-2.364,$527.5,Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.000%,6.079%,"$1,791.078",-1.694,"$1,577.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.000%,6.099%,"$1,791.078",-1.7312500000000028,"$1,984.4",Conventional,Wholesale
+Power TPO,6.000%,6.100%,"$1,791.078",-1.7710000000000008,"$2,010",Conventional,Wholesale
+BluePoint Mortgage,6.000%,6.103%,"$1,791.078",-1.749,"$2,065",Conventional,Wholesale
+Click n' Close,6.000%,6.105%,"$1,791.078",-1.69482,"$2,100.5",Conventional,Wholesale
+The Loan Store LLC,6.000%,6.116%,"$1,791.078",-1.7950000000000017,"$2,325",Conventional,Wholesale
+NewRez LLC,6.000%,6.117%,"$1,791.078",-1.133,"$2,347.5",Conventional,Wholesale
+New Wave Lending Group,6.000%,6.119%,"$1,791.078",-1.625,"$2,375",Conventional,Wholesale
+AD Mortgage,6.000%,6.122%,"$1,791.078",-1.5960000000000036,"$2,447.5",Conventional,Wholesale
+AFR Wholesale,6.000%,6.123%,"$1,791.078",-1.6400000000000006,"$2,452.5",Conventional,Wholesale
+CMG Financial,6.000%,6.130%,"$1,791.078",-1.587,"$2,595",Conventional,Wholesale
+Nations Direct Mortgage,6.000%,6.138%,"$1,791.078",-1.271,"$2,760",Conventional,Wholesale
+Eleven Mortgage,6.000%,6.154%,"$1,791.078",0.509,"$3,077.5",Conventional,Wholesale
+TPO GO,6.000%,6.160%,"$1,791.078",-1.0720000000000027,"$3,195",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.000%,6.163%,"$1,791.078",-1.174,"$3,252.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.000%,6.166%,"$1,791.078",-1.25,"$3,312.5",Conventional,Wholesale
+NexBank,6.000%,6.181%,"$1,791.078",-1.086500000000001,"$3,601.2",Conventional,Wholesale
+Kind Lending,6.000%,6.185%,"$1,791.078",-1.10375,"$3,678.1",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.185%,"$1,791.078",-1.10375,"$3,678.1",Conventional,Wholesale
+Pennymac TPO,6.000%,6.186%,"$1,791.078",-1.225,"$3,700",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.186%,"$1,791.078",-1.225,"$3,700",Conventional,Wholesale
+Orion Lending,6.000%,6.196%,"$1,791.078",-1.019,"$3,890",Conventional,Wholesale
+Provident Funding,6.000%,6.198%,"$1,791.078",-1.25,"$3,937.5",Conventional,Wholesale
+JMAC Lending Inc.,6.000%,6.202%,"$1,791.078",-0.96725,"$4,019.4",Conventional,Wholesale
+HomeBridge Wholesale,6.000%,6.218%,"$1,791.078",-0.843,"$4,330",Conventional,Wholesale
+LoanStream Mortgage,6.000%,6.246%,"$1,791.078",-0.32200000000000273,"$4,882.5",Conventional,Wholesale
+Jet Advantage Mortgage,6.000%,6.246%,"$1,791.078",-0.32200000000000273,"$4,882.5",Conventional,Wholesale
+Forward Lending,6.000%,6.246%,"$1,791.078",-0.32200000000000273,"$4,882.5",Conventional,Wholesale
+Union Home Mortgage,6.000%,6.264%,"$1,791.078",-0.4830000000000041,"$5,230",Conventional,Wholesale
+Windsor Mortgage Solutions,6.000%,6.421%,"$1,791.078",0.33150000000000546,"$8,266.3",Conventional,Wholesale
+Open Mortgage,6.000%,6.473%,"$1,791.078",1.128,"$9,257.5",Conventional,Wholesale
+Loan United Wholesale,6.000%,6.514%,"$1,791.078",1.4399999999999977,"$10,037.5",Conventional,Wholesale
+Everstream Mortgage,6.000%,6.690%,"$1,822.422",-0.12659999999999627,$-527.1,FHA,Wholesale
+Pennymac TPO,6.000%,6.734%,"$1,822.422",-1.689,$331.7,FHA,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.734%,"$1,822.422",-1.689,$331.7,FHA,Wholesale
+Sun West Mtg Co Wholesale,6.000%,6.738%,"$1,822.422",-1.14187,$413.4,FHA,Wholesale
+NewRez LLC,6.000%,6.762%,"$1,822.422",-1.236,$865.8,FHA,Wholesale
+Eleven Mortgage,6.000%,6.770%,"$1,822.422",0.5843,"$1,026.9",FHA,Wholesale
+Loan United Wholesale,6.000%,6.773%,"$1,822.422",-2.108000000000004,"$1,071.9",FHA,Wholesale
+AD Mortgage,6.000%,6.810%,"$1,822.422",-1.2780000000000058,"$1,784.1",FHA,Wholesale
+HomeBridge Wholesale,6.000%,6.811%,"$1,822.422",-1.223,"$1,796.9",FHA,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.820%,"$1,822.422",-1.15569,"$1,968.1",FHA,Wholesale
+Kind Lending,6.000%,6.820%,"$1,822.422",-1.15569,"$1,968.1",FHA,Wholesale
+Open Mortgage,6.000%,6.822%,"$1,822.422",-1.266,"$2,005.4",FHA,Wholesale
+NexBank,6.000%,6.828%,"$1,822.422",-1.0920399999999972,"$2,130",FHA,Wholesale
+AFR Wholesale,6.000%,6.834%,"$1,822.422",-1.2207099999999969,"$2,232.6",FHA,Wholesale
+Jet Advantage Mortgage,6.000%,6.855%,"$1,822.422",-0.4170000000000016,"$2,638.9",FHA,Wholesale
+Forward Lending,6.000%,6.855%,"$1,822.422",-0.4170000000000016,"$2,638.9",FHA,Wholesale
+"VIP Mortgage, Inc.",6.000%,6.855%,"$1,822.422",-1.226690000000005,"$2,639.6",FHA,Wholesale
+Plaza Home Mortgage Inc.,6.000%,6.868%,"$1,822.422",-1.29353,"$2,889.3",FHA,Wholesale
+Loan United Wholesale,6.000%,6.419%,"$1,850.183",-2.0619999999999976,$257.4,VA,Wholesale
+Everstream Mortgage,6.000%,6.436%,"$1,850.183",0.1629999999999967,$580.1,VA,Wholesale
+NewRez LLC,6.000%,6.457%,"$1,850.183",-1.246,"$1,001.1",VA,Wholesale
+Pennymac TPO,6.000%,6.469%,"$1,850.183",-1.54,"$1,243.8",VA,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.469%,"$1,850.183",-1.54,"$1,243.8",VA,Wholesale
+Sun West Mtg Co Wholesale,6.000%,6.488%,"$1,850.183",-1.14187,"$1,600.6",VA,Wholesale
+Eleven Mortgage,6.000%,6.517%,"$1,850.183",0.8789,"$2,170.8",VA,Wholesale
+NexBank,6.000%,6.521%,"$1,850.183",-1.0355600000000038,"$2,262.6",VA,Wholesale
+Open Mortgage,6.000%,6.540%,"$1,850.183",-1.016,"$2,635.9",VA,Wholesale
+Kind Lending,6.000%,6.568%,"$1,850.183",-0.68569,"$3,166.1",VA,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.568%,"$1,850.183",-0.68569,"$3,166.1",VA,Wholesale
+Plaza Home Mortgage Inc.,6.000%,6.568%,"$1,850.183",-1.18353,"$3,171.6",VA,Wholesale
+Jet Advantage Mortgage,6.000%,6.587%,"$1,850.183",-0.06199999999999761,"$3,550.1",VA,Wholesale
+Forward Lending,6.000%,6.587%,"$1,850.183",-0.06199999999999761,"$3,550.1",VA,Wholesale
+AFR Wholesale,6.000%,6.675%,"$1,850.183",0.10099999999999909,"$5,246.7",VA,Wholesale
+The Loan Store LLC,6.000%,6.679%,"$1,850.183",0,"$5,324.2",VA,Wholesale
+Everstream Mortgage,6.000%,6.522%,"$1,525.107",-0.12659999999999627,$-527.1,FHA,Wholesale
+Loan United Wholesale,6.000%,6.535%,"$1,525.107",-2.108000000000004,$-200,FHA,Wholesale
+AmWest Funding Corp,6.000%,6.549%,"$1,525.107",-1.869,$153.6,FHA,Wholesale
+Power TPO,6.000%,6.551%,"$1,525.107",-1.6029999999999944,$194.3,FHA,Wholesale
+Pennymac TPO,6.000%,6.556%,"$1,525.107",-1.689,$331.7,FHA,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.556%,"$1,525.107",-1.689,$331.7,FHA,Wholesale
+AD Mortgage,6.000%,6.557%,"$1,525.107",-1.8419999999999987,$349.4,FHA,Wholesale
+Sun West Mtg Co Wholesale,6.000%,6.559%,"$1,525.107",-1.14187,$413.4,FHA,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.000%,6.561%,"$1,525.107",-1.875,$456.3,FHA,Wholesale
+HomeBridge Wholesale,6.000%,6.564%,"$1,525.107",-1.223,$525,FHA,Wholesale
+NewRez LLC,6.000%,6.577%,"$1,525.107",-1.236,$865.8,FHA,Wholesale
+Kind Lending,6.000%,6.578%,"$1,525.107",-1.58375,$879.2,FHA,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.578%,"$1,525.107",-1.58375,$879.2,FHA,Wholesale
+AFR Wholesale,6.000%,6.578%,"$1,525.107",-1.4440000000000026,$888.7,FHA,Wholesale
+Eleven Mortgage,6.000%,6.583%,"$1,525.107",0.5843,"$1,026.9",FHA,Wholesale
+NexBank,6.000%,6.586%,"$1,525.107",-1.5042799999999943,"$1,081.4",FHA,Wholesale
+Jet Advantage Mortgage,6.000%,6.594%,"$1,525.107",-0.9419999999999931,"$1,303.4",FHA,Wholesale
+Forward Lending,6.000%,6.594%,"$1,525.107",-0.9419999999999931,"$1,303.4",FHA,Wholesale
+The Loan Store LLC,6.000%,6.596%,"$1,525.107",-1.5499999999999972,"$1,346.6",FHA,Wholesale
+Open Mortgage,6.000%,6.597%,"$1,525.107",-1.516,"$1,369.5",FHA,Wholesale
+New Wave Lending Group,6.000%,6.599%,"$1,525.107",-1.5,"$1,410.2",FHA,Wholesale
+TPO GO,6.000%,6.603%,"$1,525.107",-0.8850000000000051,"$1,512",FHA,Wholesale
+Plaza Home Mortgage Inc.,6.000%,6.607%,"$1,525.107",-1.29353,"$1,617.5",FHA,Wholesale
+Orion Lending,6.000%,6.609%,"$1,525.107",-0.65,"$1,664.6",FHA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.000%,6.610%,"$1,525.107",-1.312,"$1,697.6",FHA,Wholesale
+"VIP Mortgage, Inc.",6.000%,6.616%,"$1,525.107",-1.5373699999999957,"$1,849.3",FHA,Wholesale
+JMAC Lending Inc.,6.000%,6.617%,"$1,525.107",-1.19375,"$1,871.3",FHA,Wholesale
+Windsor Mortgage Solutions,6.000%,6.619%,"$1,525.107",-1.5290300000000059,"$1,908.7",FHA,Wholesale
+Click n' Close,6.000%,6.623%,"$1,525.107",-1.29871,"$2,011.3",FHA,Wholesale
+Union Home Mortgage,6.000%,6.828%,"$1,525.107",0.7489999999999952,"$7,067.5",FHA,Wholesale
+Loan United Wholesale,6.000%,6.315%,"$1,548.339",-2.0619999999999976,$257.4,VA,Wholesale
+Everstream Mortgage,6.000%,6.328%,"$1,548.339",0.1629999999999967,$580.1,VA,Wholesale
+AmWest Funding Corp,6.000%,6.339%,"$1,548.339",-1.569,$885,VA,Wholesale
+NewRez LLC,6.000%,6.344%,"$1,548.339",-1.246,"$1,001.1",VA,Wholesale
+Pennymac TPO,6.000%,6.353%,"$1,548.339",-1.54,"$1,243.8",VA,Wholesale
+Loan Factory Direct - PennyMac,6.000%,6.353%,"$1,548.339",-1.54,"$1,243.8",VA,Wholesale
+AFR Wholesale,6.000%,6.354%,"$1,548.339",-1.2639999999999958,"$1,280",VA,Wholesale
+NexBank,6.000%,6.355%,"$1,548.339",-1.4079200000000043,"$1,300.9",VA,Wholesale
+Power TPO,6.000%,6.361%,"$1,548.339",-1.6029999999999944,"$1,442.8",VA,Wholesale
+Sun West Mtg Co Wholesale,6.000%,6.367%,"$1,548.339",-1.14187,"$1,600.6",VA,Wholesale
+TPO GO,6.000%,6.367%,"$1,548.339",-0.8349999999999937,"$1,618.4",VA,Wholesale
+The Loan Store LLC,6.000%,6.374%,"$1,548.339",-1.3709999999999951,"$1,783.6",VA,Wholesale
+Eleven Mortgage,6.000%,6.374%,"$1,548.339",-1.3675,"$1,792.6",VA,Wholesale
+Plaza Home Mortgage Inc.,6.000%,6.377%,"$1,548.339",-1.18353,"$1,880.4",VA,Wholesale
+"VIP Mortgage, Inc.",6.000%,6.379%,"$1,548.339",-1.4860000000000042,"$1,912.8",VA,Wholesale
+Jet Advantage Mortgage,6.000%,6.380%,"$1,548.339",-0.6869999999999976,"$1,936",VA,Wholesale
+Forward Lending,6.000%,6.380%,"$1,548.339",-0.6869999999999976,"$1,936",VA,Wholesale
+Open Mortgage,6.000%,6.382%,"$1,548.339",-1.266,"$1,990.3",VA,Wholesale
+Orion Lending,6.000%,6.386%,"$1,548.339",-0.6,"$2,096.1",VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.000%,6.388%,"$1,548.339",-1.13,"$2,147.8",VA,Wholesale
+Click n' Close,6.000%,6.388%,"$1,548.339",-1.23882,"$2,150.8",VA,Wholesale
+Kind Lending,6.000%,6.396%,"$1,548.339",-0.99569,"$2,365.5",VA,Wholesale
+Loan Factory Direct - Kind Lending,6.000%,6.396%,"$1,548.339",-0.99569,"$2,365.5",VA,Wholesale
+JMAC Lending Inc.,6.000%,6.416%,"$1,548.339",-0.86235,"$2,871.3",VA,Wholesale
+Windsor Mortgage Solutions,6.000%,6.433%,"$1,548.339",-0.7290299999999945,"$3,312.4",VA,Wholesale
+Union Home Mortgage,6.000%,6.583%,"$1,548.339",0.7489999999999952,"$7,129.4",VA,Wholesale
+Guaranteed Rate,6.000%,6.636%,"$2,177.21",-0.365,"$13,874.08",FHA,Retail
+District Lending,6.000%,6.047%,"$1,499",0,"$1,250",Conventional,Retail
+PenFed Credit Union,6.000%,6.099%,"$1,792",0,"$1,995",Conventional,Retail
+District Lending,6.000%,6.385%,"$2,776",0,"$4,375",VA,Retail
+PenFed Credit Union,6.000%,7.240%,"$1,499",0,"$6,370",FHA,Retail
+District Lending,6.000%,6.070%,"$1,499",0.25,"$1,875",Conventional,Retail
+PenFed Credit Union,6.000%,6.199%,"$1,499",0.5,"$5,370",VA,Retail
+District Lending,6.000%,6.132%,"$1,499",0.918,"$3,545",Conventional,Retail
+AimLoan.com,6.000%,6.159%,"$1,499",1.316,"$4,285",Conventional,Retail
+PenFed Credit Union,6.000%,6.225%,"$1,499",1.625,"$6,058",Conventional,Retail
+Optimum First Mortgage,6.124%,6.170%,"$1,518.86",0,"$1,230",Conventional,Retail
+Alliant Credit Union,6.125%,6.209%,"$1,519.03",0,"$2,222.5",VA,Retail
+Alliant Credit Union,6.125%,6.247%,"$1,519.03",0.9,"$3,200",Conventional,Retail
+Us Bank,6.125%,6.555%,"$2,791.23",0.98,"$5,269.31",Conventional,Retail
+Us Bank,6.125%,6.979%,"$1,519.03",0.532,"$3,091.63",FHA,Retail
+"Tomo Mortgage, LLC.",6.125%,6.125%,"$2,127",0,"$4,081",Conventional,Retail
+District Lending,6.125%,6.172%,"$1,519",0,"$5,331",Conventional,Retail
+AimLoan.com,6.125%,6.236%,"$1,519",0.789,"$9,021.5",Conventional,Retail
+Sun West Mtg Co Wholesale,6.125%,6.038%,"$2,126.562",-2.8841,"$-1,397.8",Conventional,Wholesale
+NewRez LLC,6.125%,6.095%,"$2,126.562",-2.267,$-480,Conventional,Wholesale
+AmWest Funding Corp,6.125%,6.109%,"$2,126.562",-2.678,$-257.5,Conventional,Wholesale
+BluePoint Mortgage,6.125%,6.111%,"$2,126.562",-2.667,$-230,Conventional,Wholesale
+New Wave Lending Group,6.125%,6.137%,"$2,126.562",-2.5,$187.5,Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.125%,6.137%,"$2,126.562",-2.5,$187.5,Conventional,Wholesale
+Power TPO,6.125%,6.137%,"$2,126.562",-2.497,$195,Conventional,Wholesale
+"VIP Mortgage, Inc.",6.125%,6.141%,"$2,126.562",-2.424260000000004,$251.8,Conventional,Wholesale
+AD Mortgage,6.125%,6.143%,"$2,126.562",-2.4579999999999984,$292.5,Conventional,Wholesale
+Click n' Close,6.125%,6.149%,"$2,126.562",-2.38992,$387.7,Conventional,Wholesale
+The Loan Store LLC,6.125%,6.150%,"$2,126.562",-2.566999999999993,$395,Conventional,Wholesale
+Loan Factory Direct - Rocket,6.125%,6.158%,"$2,126.562",-1.9639999999999986,$527.5,Conventional,Wholesale
+Rocket Pro,6.125%,6.158%,"$2,126.562",-1.9639999999999986,$527.5,Conventional,Wholesale
+Everstream Mortgage,6.125%,6.161%,"$2,126.562",-0.9279999999999973,$580,Conventional,Wholesale
+Eleven Mortgage,6.125%,6.165%,"$2,126.562",-1.198,$642.5,Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.125%,6.168%,"$2,126.562",-2.199,$690,Conventional,Wholesale
+AFR Wholesale,6.125%,6.187%,"$2,126.562",-2.2249999999999943,$990,Conventional,Wholesale
+Nations Direct Mortgage,6.125%,6.188%,"$2,126.562",-1.971,"$1,010",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.125%,6.190%,"$2,126.562",-2.16312,"$1,029.7",Conventional,Wholesale
+NexBank,6.125%,6.192%,"$2,126.562",-2.1078799999999944,"$1,072.8",Conventional,Wholesale
+JMAC Lending Inc.,6.125%,6.193%,"$2,126.562",-2.14425,"$1,076.9",Conventional,Wholesale
+Kind Lending,6.125%,6.206%,"$2,126.562",-2.06005,"$1,287.4",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.125%,6.206%,"$2,126.562",-2.06005,"$1,287.4",Conventional,Wholesale
+Pennymac TPO,6.125%,6.225%,"$2,126.562",-2.072,"$1,582.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.125%,6.225%,"$2,126.562",-2.072,"$1,582.5",Conventional,Wholesale
+Orion Lending,6.125%,6.233%,"$2,126.562",-1.892,"$1,707.5",Conventional,Wholesale
+Open Mortgage,6.125%,6.241%,"$2,126.562",-1.466,"$1,835",Conventional,Wholesale
+TPO GO,6.125%,6.251%,"$2,126.562",-1.5529999999999973,"$1,992.5",Conventional,Wholesale
+LoanStream Mortgage,6.125%,6.260%,"$2,126.562",-1.4200000000000017,"$2,137.5",Conventional,Wholesale
+Jet Advantage Mortgage,6.125%,6.260%,"$2,126.562",-1.4200000000000017,"$2,137.5",Conventional,Wholesale
+Forward Lending,6.125%,6.260%,"$2,126.562",-1.4200000000000017,"$2,137.5",Conventional,Wholesale
+Windsor Mortgage Solutions,6.125%,6.261%,"$2,126.562",-1.8625499999999988,"$2,156.1",Conventional,Wholesale
+Union Home Mortgage,6.125%,6.268%,"$2,126.562",-1.668999999999997,"$2,265",Conventional,Wholesale
+CMG Financial,6.125%,6.273%,"$2,126.562",-1.685,"$2,350",Conventional,Wholesale
+HomeBridge Wholesale,6.125%,6.294%,"$2,126.562",-1.503,"$2,680",Conventional,Wholesale
+Loan United Wholesale,6.125%,6.619%,"$2,126.562",0.5060000000000002,"$7,702.5",Conventional,Wholesale
+AmWest Funding Corp,6.125%,6.101%,"$1,809.153",-2.767,$-480,Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.125%,6.146%,"$1,809.153",-2.157,$420,Conventional,Wholesale
+Click n' Close,6.125%,6.172%,"$1,809.153",-2.15734,$944.1,Conventional,Wholesale
+Power TPO,6.125%,6.175%,"$1,809.153",-2.1740000000000066,"$1,002.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.125%,6.175%,"$1,809.153",-2.1217599999999948,"$1,008.1",Conventional,Wholesale
+BluePoint Mortgage,6.125%,6.178%,"$1,809.153",-2.154,"$1,052.5",Conventional,Wholesale
+The Loan Store LLC,6.125%,6.186%,"$1,809.153",-2.239999999999995,"$1,212.5",Conventional,Wholesale
+NewRez LLC,6.125%,6.192%,"$1,809.153",-1.541,"$1,327.5",Conventional,Wholesale
+AD Mortgage,6.125%,6.197%,"$1,809.153",-2.004000000000005,"$1,427.5",Conventional,Wholesale
+CMG Financial,6.125%,6.197%,"$1,809.153",-2.052,"$1,432.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.125%,6.197%,"$1,809.153",-2,"$1,437.5",Conventional,Wholesale
+AFR Wholesale,6.125%,6.200%,"$1,809.153",-2.024000000000001,"$1,492.5",Conventional,Wholesale
+Nations Direct Mortgage,6.125%,6.208%,"$1,809.153",-1.712,"$1,657.5",Conventional,Wholesale
+New Wave Lending Group,6.125%,6.213%,"$1,809.153",-1.875,"$1,750",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.125%,6.222%,"$1,809.153",-1.4000000000000057,"$1,937.5",Conventional,Wholesale
+Rocket Pro,6.125%,6.222%,"$1,809.153",-1.4000000000000057,"$1,937.5",Conventional,Wholesale
+TPO GO,6.125%,6.229%,"$1,809.153",-1.519999999999996,"$2,075",Conventional,Wholesale
+Eleven Mortgage,6.125%,6.235%,"$1,809.153",0.15,"$2,180",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.125%,6.241%,"$1,809.153",-1.549,"$2,315",Conventional,Wholesale
+Kind Lending,6.125%,6.247%,"$1,809.153",-1.60735,"$2,419.1",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.125%,6.247%,"$1,809.153",-1.60735,"$2,419.1",Conventional,Wholesale
+NexBank,6.125%,6.250%,"$1,809.153",-1.5294200000000018,"$2,493.9",Conventional,Wholesale
+Pennymac TPO,6.125%,6.256%,"$1,809.153",-1.66,"$2,612.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.125%,6.256%,"$1,809.153",-1.66,"$2,612.5",Conventional,Wholesale
+Orion Lending,6.125%,6.263%,"$1,809.153",-1.478,"$2,742.5",Conventional,Wholesale
+Everstream Mortgage,6.125%,6.265%,"$1,809.153",-0.281400000000005,"$2,784",Conventional,Wholesale
+JMAC Lending Inc.,6.125%,6.282%,"$1,809.153",-1.32625,"$3,121.9",Conventional,Wholesale
+HomeBridge Wholesale,6.125%,6.285%,"$1,809.153",-1.306,"$3,172.5",Conventional,Wholesale
+Provident Funding,6.125%,6.292%,"$1,809.153",-1.5,"$3,312.5",Conventional,Wholesale
+LoanStream Mortgage,6.125%,6.316%,"$1,809.153",-0.7609999999999957,"$3,785",Conventional,Wholesale
+Jet Advantage Mortgage,6.125%,6.316%,"$1,809.153",-0.7609999999999957,"$3,785",Conventional,Wholesale
+Forward Lending,6.125%,6.316%,"$1,809.153",-0.7609999999999957,"$3,785",Conventional,Wholesale
+Union Home Mortgage,6.125%,6.319%,"$1,809.153",-1.0370000000000061,"$3,845",Conventional,Wholesale
+Windsor Mortgage Solutions,6.125%,6.488%,"$1,809.153",-0.12690000000000623,"$7,120.2",Conventional,Wholesale
+Open Mortgage,6.125%,6.545%,"$1,809.153",0.708,"$8,207.5",Conventional,Wholesale
+Loan United Wholesale,6.125%,6.580%,"$1,809.153",0.9719999999999942,"$8,867.5",Conventional,Wholesale
+Loan United Wholesale,6.125%,6.488%,"$1,868.855",-2.5120000000000005,$-904.7,VA,Wholesale
+Everstream Mortgage,6.125%,6.509%,"$1,868.855",-0.24500000000000455,$-473.5,VA,Wholesale
+NewRez LLC,6.125%,6.529%,"$1,868.855",-1.791,$-86.1,VA,Wholesale
+Loan Factory Direct - PennyMac,6.125%,6.551%,"$1,868.855",-1.888,$345.1,VA,Wholesale
+Pennymac TPO,6.125%,6.551%,"$1,868.855",-1.888,$345.1,VA,Wholesale
+Eleven Mortgage,6.125%,6.565%,"$1,868.855",0.281,$626.7,VA,Wholesale
+Loan Factory Direct - Rocket,6.125%,6.599%,"$1,868.855",-1.1359999999999957,"$1,293",VA,Wholesale
+Rocket Pro,6.125%,6.599%,"$1,868.855",-1.1359999999999957,"$1,293",VA,Wholesale
+Sun West Mtg Co Wholesale,6.125%,6.603%,"$1,868.855",-1.23437,"$1,361.7",VA,Wholesale
+Kind Lending,6.125%,6.607%,"$1,868.855",-1.35479,"$1,438.2",VA,Wholesale
+Loan Factory Direct - Kind Lending,6.125%,6.607%,"$1,868.855",-1.35479,"$1,438.2",VA,Wholesale
+NexBank,6.125%,6.607%,"$1,868.855",-1.3530099999999976,"$1,442.8",VA,Wholesale
+Open Mortgage,6.125%,6.621%,"$1,868.855",-1.37,"$1,721.7",VA,Wholesale
+Plaza Home Mortgage Inc.,6.125%,6.631%,"$1,868.855",-1.66728,"$1,922.3",VA,Wholesale
+Jet Advantage Mortgage,6.125%,6.637%,"$1,868.855",-0.6490000000000009,"$2,034.2",VA,Wholesale
+Forward Lending,6.125%,6.637%,"$1,868.855",-0.6490000000000009,"$2,034.2",VA,Wholesale
+AFR Wholesale,6.125%,6.773%,"$1,868.855",-0.1290000000000049,"$4,652.8",VA,Wholesale
+The Loan Store LLC,6.125%,6.791%,"$1,868.855",-0.125,"$5,001.4",VA,Wholesale
+Click n' Close,6.125%,6.250%,"$1,519.026",-0.50729,"$3,294.3",Conventional,Wholesale
+AD Mortgage,6.125%,6.285%,"$1,519.026",-0.6500000000000057,"$4,187.5",Conventional,Wholesale
+Loan United Wholesale,6.125%,6.288%,"$1,519.026",-0.8659999999999997,"$4,272.5",Conventional,Wholesale
+AmWest Funding Corp,6.125%,6.291%,"$1,519.026",-0.834,"$4,352.5",Conventional,Wholesale
+Eleven Mortgage,6.125%,6.297%,"$1,519.026",1.084,"$4,515",Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.125%,6.298%,"$1,519.026",-0.5073,"$4,544.3",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.125%,6.302%,"$1,519.026",-0.6686200000000042,"$4,640.9",Conventional,Wholesale
+NexBank,6.125%,6.308%,"$1,519.026",-0.19539000000000328,"$4,799",Conventional,Wholesale
+Provident Funding,6.125%,6.311%,"$1,519.026",-0.875,"$4,875",Conventional,Wholesale
+New Wave Lending Group,6.125%,6.311%,"$1,519.026",-0.625,"$4,875",Conventional,Wholesale
+NewRez LLC,6.125%,6.311%,"$1,519.026",0.05,"$4,875",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.125%,6.311%,"$1,519.026",-0.625,"$4,875",Conventional,Wholesale
+BluePoint Mortgage,6.125%,6.321%,"$1,519.026",-0.526,"$5,122.5",Conventional,Wholesale
+Power TPO,6.125%,6.322%,"$1,519.026",-0.5120000000000005,"$5,157.5",Conventional,Wholesale
+AFR Wholesale,6.125%,6.327%,"$1,519.026",-0.5060000000000002,"$5,287.5",Conventional,Wholesale
+Everstream Mortgage,6.125%,6.329%,"$1,519.026",0.5626000000000033,"$5,344",Conventional,Wholesale
+The Loan Store LLC,6.125%,6.330%,"$1,519.026",-0.41800000000000637,"$5,357.5",Conventional,Wholesale
+Pennymac TPO,6.125%,6.331%,"$1,519.026",-0.551,"$5,385",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.125%,6.331%,"$1,519.026",-0.551,"$5,385",Conventional,Wholesale
+LoanStream Mortgage,6.125%,6.339%,"$1,519.026",-0.03700000000000614,"$5,595",Conventional,Wholesale
+Jet Advantage Mortgage,6.125%,6.339%,"$1,519.026",-0.03700000000000614,"$5,595",Conventional,Wholesale
+Forward Lending,6.125%,6.339%,"$1,519.026",-0.03700000000000614,"$5,595",Conventional,Wholesale
+CMG Financial,6.125%,6.339%,"$1,519.026",-0.386,"$5,597.5",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.125%,6.342%,"$1,519.026",0.18999999999999773,"$5,662.5",Conventional,Wholesale
+Rocket Pro,6.125%,6.342%,"$1,519.026",0.18999999999999773,"$5,662.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.125%,6.345%,"$1,519.026",-0.181,"$5,735",Conventional,Wholesale
+JMAC Lending Inc.,6.125%,6.345%,"$1,519.026",-0.15155,"$5,746.1",Conventional,Wholesale
+Nations Direct Mortgage,6.125%,6.345%,"$1,519.026",-0.076,"$5,747.5",Conventional,Wholesale
+Kind Lending,6.125%,6.346%,"$1,519.026",-0.26865,"$5,765.9",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.125%,6.346%,"$1,519.026",-0.26865,"$5,765.9",Conventional,Wholesale
+HomeBridge Wholesale,6.125%,6.359%,"$1,519.026",-0.132,"$6,107.5",Conventional,Wholesale
+Windsor Mortgage Solutions,6.125%,6.361%,"$1,519.026",-0.2612699999999961,"$6,159.3",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.125%,6.372%,"$1,519.026",-0.00103,"$6,434.9",Conventional,Wholesale
+Orion Lending,6.125%,6.379%,"$1,519.026",0.073,"$6,620",Conventional,Wholesale
+TPO GO,6.125%,6.390%,"$1,519.026",0.4099999999999966,"$6,900",Conventional,Wholesale
+Open Mortgage,6.125%,6.448%,"$1,519.026",0.767,"$8,355",Conventional,Wholesale
+Union Home Mortgage,6.125%,6.452%,"$1,519.026",0.8169999999999931,"$8,480",Conventional,Wholesale
+Loan United Wholesale,6.125%,6.398%,"$1,569.154",-2.5120000000000005,$-904.7,VA,Wholesale
+Everstream Mortgage,6.125%,6.415%,"$1,569.154",-0.24500000000000455,$-473.5,VA,Wholesale
+AmWest Funding Corp,6.125%,6.418%,"$1,569.154",-2.064,$-393.4,VA,Wholesale
+AFR Wholesale,6.125%,6.421%,"$1,569.154",-1.8790000000000049,$-308.2,VA,Wholesale
+NewRez LLC,6.125%,6.430%,"$1,569.154",-1.791,$-86.1,VA,Wholesale
+NexBank,6.125%,6.444%,"$1,569.154",-1.8040600000000069,$277.9,VA,Wholesale
+TPO GO,6.125%,6.445%,"$1,569.154",-1.3349999999999937,$327.2,VA,Wholesale
+Power TPO,6.125%,6.446%,"$1,569.154",-2.0319999999999965,$334.9,VA,Wholesale
+Loan Factory Direct - PennyMac,6.125%,6.446%,"$1,569.154",-1.888,$345.1,VA,Wholesale
+Pennymac TPO,6.125%,6.446%,"$1,569.154",-1.888,$345.1,VA,Wholesale
+Jet Advantage Mortgage,6.125%,6.449%,"$1,569.154",-1.274000000000001,$420.1,VA,Wholesale
+Forward Lending,6.125%,6.449%,"$1,569.154",-1.274000000000001,$420.1,VA,Wholesale
+"VIP Mortgage, Inc.",6.125%,6.456%,"$1,569.154",-1.9909999999999997,$608.6,VA,Wholesale
+Eleven Mortgage,6.125%,6.457%,"$1,569.154",0.281,$626.7,VA,Wholesale
+Plaza Home Mortgage Inc.,6.125%,6.457%,"$1,569.154",-1.66728,$631.1,VA,Wholesale
+Kind Lending,6.125%,6.457%,"$1,569.154",-1.66479,$637.6,VA,Wholesale
+Loan Factory Direct - Kind Lending,6.125%,6.457%,"$1,569.154",-1.66479,$637.6,VA,Wholesale
+Orion Lending,6.125%,6.464%,"$1,569.154",-1.095,$817.8,VA,Wholesale
+Loan Factory Direct - Rocket,6.125%,6.465%,"$1,569.154",-1.316999999999993,$825.5,VA,Wholesale
+Rocket Pro,6.125%,6.465%,"$1,569.154",-1.316999999999993,$825.5,VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.125%,6.465%,"$1,569.154",-1.633,$848.8,VA,Wholesale
+Click n' Close,6.125%,6.468%,"$1,569.154",-1.72155,$904.2,VA,Wholesale
+Open Mortgage,6.125%,6.474%,"$1,569.154",-1.62,"$1,076",VA,Wholesale
+The Loan Store LLC,6.125%,6.476%,"$1,569.154",-1.632000000000005,"$1,109.6",VA,Wholesale
+Sun West Mtg Co Wholesale,6.125%,6.485%,"$1,569.154",-1.23437,"$1,361.7",VA,Wholesale
+JMAC Lending Inc.,6.125%,6.501%,"$1,569.154",-1.29345,"$1,758",VA,Wholesale
+Windsor Mortgage Solutions,6.125%,6.525%,"$1,569.154",-1.089029999999994,"$2,382.7",VA,Wholesale
+Union Home Mortgage,6.125%,6.712%,"$1,569.154",0.7489999999999952,"$7,129.4",VA,Wholesale
+Guaranteed Rate,6.125%,6.531%,"$1,519.03",1.345,"$13,115.71",Conventional,Retail
+Guaranteed Rate,6.125%,6.770%,"$1,649.21",-0.101,"$12,909.29",FHA,Retail
+"Tomo Mortgage, LLC.",6.125%,6.125%,"$2,127",0,N/A,Conventional,Retail
+District Lending,6.125%,6.172%,"$1,520",0,"$1,250",Conventional,Retail
+District Lending,6.125%,6.172%,"$1,520",0,"$1,250",Conventional,Retail
+AimLoan.com,6.125%,6.236%,"$1,520",0.789,"$2,968",Conventional,Retail
+PenFed Credit Union,6.125%,6.305%,"$1,520",1.125,"$4,808",Conventional,Retail
+Sage Home Loans,6.245%,6.379%,"$1,538.48",0.801,"$3,496.5",Conventional,Retail
+Sage Home Loans,6.250%,6.808%,"$1,670.4",0,"$4,375",FHA,Retail
+Alliant Credit Union,6.250%,6.847%,"$1,643.46",0,"$5,325",FHA,Retail
+Chase Bank,6.250%,6.691%,"$2,130.956",1.064,"$4,355",Conventional,Retail
+Empire of America,6.250%,6.307%,"$1,539",0,"$5,576",Conventional,Retail
+PenFed Credit Union,6.250%,6.405%,"$1,539",0,"$8,201",Conventional,Retail
+First Federal Bank,6.250%,6.457%,"$1,539",0.948,"$11,946",Conventional,Retail
+AmWest Funding Corp,6.250%,6.220%,"$1,827.321",-2.814,$-597.5,Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.250%,6.293%,"$1,827.321",-1.9823,$856.8,Conventional,Wholesale
+"VIP Mortgage, Inc.",6.250%,6.300%,"$1,827.321",-2.127279999999999,$994.3,Conventional,Wholesale
+Power TPO,6.250%,6.300%,"$1,827.321",-2.174999999999997,"$1,000",Conventional,Wholesale
+BluePoint Mortgage,6.250%,6.315%,"$1,827.321",-2.058,"$1,292.5",Conventional,Wholesale
+The Loan Store LLC,6.250%,6.316%,"$1,827.321",-2.200000000000003,"$1,312.5",Conventional,Wholesale
+AD Mortgage,6.250%,6.317%,"$1,827.321",-2.0400000000000063,"$1,337.5",Conventional,Wholesale
+Provident Funding,6.250%,6.322%,"$1,827.321",-2.25,"$1,437.5",Conventional,Wholesale
+New Wave Lending Group,6.250%,6.322%,"$1,827.321",-2,"$1,437.5",Conventional,Wholesale
+AFR Wholesale,6.250%,6.324%,"$1,827.321",-2.0349999999999966,"$1,465",Conventional,Wholesale
+CMG Financial,6.250%,6.329%,"$1,827.321",-1.998,"$1,567.5",Conventional,Wholesale
+Nations Direct Mortgage,6.250%,6.335%,"$1,827.321",-1.701,"$1,685",Conventional,Wholesale
+Click n' Close,6.250%,6.345%,"$1,827.321",-1.77872,"$1,890.7",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.250%,6.354%,"$1,827.321",-1.75,"$2,062.5",Conventional,Wholesale
+TPO GO,6.250%,6.354%,"$1,827.321",-1.5229999999999961,"$2,067.5",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.250%,6.368%,"$1,827.321",-1.2369999999999948,"$2,345",Conventional,Wholesale
+Rocket Pro,6.250%,6.368%,"$1,827.321",-1.2369999999999948,"$2,345",Conventional,Wholesale
+NexBank,6.250%,6.369%,"$1,827.321",-1.582499999999996,"$2,361.3",Conventional,Wholesale
+NewRez LLC,6.250%,6.372%,"$1,827.321",-1.105,"$2,417.5",Conventional,Wholesale
+Kind Lending,6.250%,6.377%,"$1,827.321",-1.5686,"$2,516",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.250%,6.377%,"$1,827.321",-1.5686,"$2,516",Conventional,Wholesale
+Eleven Mortgage,6.250%,6.380%,"$1,827.321",0.303,"$2,562.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.250%,6.386%,"$1,827.321",-1.398,"$2,692.5",Conventional,Wholesale
+Pennymac TPO,6.250%,6.401%,"$1,827.321",-1.509,"$2,990",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.250%,6.401%,"$1,827.321",-1.509,"$2,990",Conventional,Wholesale
+Orion Lending,6.250%,6.402%,"$1,827.321",-1.373,"$3,005",Conventional,Wholesale
+Everstream Mortgage,6.250%,6.408%,"$1,827.321",-0.14860000000000184,"$3,116",Conventional,Wholesale
+HomeBridge Wholesale,6.250%,6.426%,"$1,827.321",-1.186,"$3,472.5",Conventional,Wholesale
+JMAC Lending Inc.,6.250%,6.428%,"$1,827.321",-1.17325,"$3,504.4",Conventional,Wholesale
+LoanStream Mortgage,6.250%,6.457%,"$1,827.321",-0.6440000000000055,"$4,077.5",Conventional,Wholesale
+Jet Advantage Mortgage,6.250%,6.457%,"$1,827.321",-0.6440000000000055,"$4,077.5",Conventional,Wholesale
+Forward Lending,6.250%,6.457%,"$1,827.321",-0.6440000000000055,"$4,077.5",Conventional,Wholesale
+Union Home Mortgage,6.250%,6.478%,"$1,827.321",-0.784000000000006,"$4,477.5",Conventional,Wholesale
+Windsor Mortgage Solutions,6.250%,6.594%,"$1,827.321",-0.28865000000000407,"$6,715.9",Conventional,Wholesale
+Open Mortgage,6.250%,6.642%,"$1,827.321",0.476,"$7,627.5",Conventional,Wholesale
+Loan United Wholesale,6.250%,6.715%,"$1,827.321",1.034000000000006,"$9,022.5",Conventional,Wholesale
+Loan United Wholesale,6.250%,6.591%,"$1,887.622",-2.6899999999999977,"$-1,364.4",VA,Wholesale
+Everstream Mortgage,6.250%,6.605%,"$1,887.622",-0.4818000000000069,"$-1,085",VA,Wholesale
+Sun West Mtg Co Wholesale,6.250%,6.642%,"$1,887.622",-1.90094,$-359.7,VA,Wholesale
+Loan Factory Direct - PennyMac,6.250%,6.653%,"$1,887.622",-2.075,$-137.8,VA,Wholesale
+Pennymac TPO,6.250%,6.653%,"$1,887.622",-2.075,$-137.8,VA,Wholesale
+NewRez LLC,6.250%,6.656%,"$1,887.622",-2.341,$-86.1,VA,Wholesale
+NexBank,6.250%,6.692%,"$1,887.622",-1.6700900000000019,$623.9,VA,Wholesale
+Loan Factory Direct - Rocket,6.250%,6.697%,"$1,887.622",-1.358000000000004,$719.7,VA,Wholesale
+Rocket Pro,6.250%,6.697%,"$1,887.622",-1.358000000000004,$719.7,VA,Wholesale
+Eleven Mortgage,6.250%,6.704%,"$1,887.622",0.416,$853.8,VA,Wholesale
+Open Mortgage,6.250%,6.705%,"$1,887.622",-1.699,$872,VA,Wholesale
+Kind Lending,6.250%,6.728%,"$1,887.622",-1.40337,"$1,312.7",VA,Wholesale
+Loan Factory Direct - Kind Lending,6.250%,6.728%,"$1,887.622",-1.40337,"$1,312.7",VA,Wholesale
+Jet Advantage Mortgage,6.250%,6.738%,"$1,887.622",-0.8499999999999943,"$1,515.1",VA,Wholesale
+Forward Lending,6.250%,6.738%,"$1,887.622",-0.8499999999999943,"$1,515.1",VA,Wholesale
+Plaza Home Mortgage Inc.,6.250%,6.757%,"$1,887.622",-1.68037,"$1,888.5",VA,Wholesale
+AFR Wholesale,6.250%,7.000%,"$1,887.622",0.597999999999999,"$6,530.2",VA,Wholesale
+Click n' Close,6.250%,6.357%,"$1,539.293",-0.70271,"$2,805.7",Conventional,Wholesale
+Provident Funding,6.250%,6.365%,"$1,539.293",-1.625,"$3,000",Conventional,Wholesale
+Loan United Wholesale,6.250%,6.373%,"$1,539.293",-1.2920000000000016,"$3,207.5",Conventional,Wholesale
+AD Mortgage,6.250%,6.379%,"$1,539.293",-0.972999999999999,"$3,380",Conventional,Wholesale
+AmWest Funding Corp,6.250%,6.388%,"$1,539.293",-1.135,"$3,600",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.250%,6.389%,"$1,539.293",-1.0744399999999956,"$3,626.4",Conventional,Wholesale
+Eleven Mortgage,6.250%,6.394%,"$1,539.293",0.78,"$3,755",Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.250%,6.399%,"$1,539.293",-0.7708,"$3,885.5",Conventional,Wholesale
+Power TPO,6.250%,6.406%,"$1,539.293",-0.953000000000003,"$4,055",Conventional,Wholesale
+BluePoint Mortgage,6.250%,6.409%,"$1,539.293",-0.922,"$4,132.5",Conventional,Wholesale
+NexBank,6.250%,6.409%,"$1,539.293",-0.4525299999999959,"$4,156.2",Conventional,Wholesale
+NewRez LLC,6.250%,6.411%,"$1,539.293",-0.108,"$4,197.5",Conventional,Wholesale
+Everstream Mortgage,6.250%,6.411%,"$1,539.293",0.10519999999999641,"$4,200.5",Conventional,Wholesale
+Pennymac TPO,6.250%,6.412%,"$1,539.293",-1.015,"$4,225",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.250%,6.412%,"$1,539.293",-1.015,"$4,225",Conventional,Wholesale
+New Wave Lending Group,6.250%,6.413%,"$1,539.293",-0.875,"$4,250",Conventional,Wholesale
+Windsor Mortgage Solutions,6.250%,6.423%,"$1,539.293",-0.923019999999994,"$4,505",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.250%,6.423%,"$1,539.293",-0.26900000000000546,"$4,515",Conventional,Wholesale
+Rocket Pro,6.250%,6.423%,"$1,539.293",-0.26900000000000546,"$4,515",Conventional,Wholesale
+The Loan Store LLC,6.250%,6.425%,"$1,539.293",-0.6610000000000014,"$4,557.5",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.250%,6.425%,"$1,539.293",-0.75,"$4,562.5",Conventional,Wholesale
+LoanStream Mortgage,6.250%,6.431%,"$1,539.293",-0.394999999999996,"$4,700",Conventional,Wholesale
+Jet Advantage Mortgage,6.250%,6.431%,"$1,539.293",-0.394999999999996,"$4,700",Conventional,Wholesale
+Forward Lending,6.250%,6.431%,"$1,539.293",-0.394999999999996,"$4,700",Conventional,Wholesale
+AFR Wholesale,6.250%,6.431%,"$1,539.293",-0.7339999999999947,"$4,717.5",Conventional,Wholesale
+CMG Financial,6.250%,6.439%,"$1,539.293",-0.659,"$4,915",Conventional,Wholesale
+Nations Direct Mortgage,6.250%,6.441%,"$1,539.293",-0.393,"$4,955",Conventional,Wholesale
+JMAC Lending Inc.,6.250%,6.447%,"$1,539.293",-0.40665,"$5,108.4",Conventional,Wholesale
+Kind Lending,6.250%,6.447%,"$1,539.293",-0.52277,"$5,130.6",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.250%,6.447%,"$1,539.293",-0.52277,"$5,130.6",Conventional,Wholesale
+HomeBridge Wholesale,6.250%,6.453%,"$1,539.293",-0.466,"$5,272.5",Conventional,Wholesale
+Orion Lending,6.250%,6.459%,"$1,539.293",-0.4,"$5,437.5",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.250%,6.460%,"$1,539.293",-0.29,"$5,462.5",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.250%,6.471%,"$1,539.293",-0.28085,"$5,735.4",Conventional,Wholesale
+TPO GO,6.250%,6.488%,"$1,539.293",0.12000000000000455,"$6,175",Conventional,Wholesale
+Union Home Mortgage,6.250%,6.546%,"$1,539.293",0.480000000000004,"$7,637.5",Conventional,Wholesale
+Open Mortgage,6.250%,6.549%,"$1,539.293",0.51,"$7,712.5",Conventional,Wholesale
+AFR Wholesale,6.250%,6.488%,"$1,590.09",-2.4920000000000044,"$-1,891.3",VA,Wholesale
+AmWest Funding Corp,6.250%,6.501%,"$1,590.09",-2.513,"$-1,552.9",VA,Wholesale
+Loan United Wholesale,6.250%,6.508%,"$1,590.09",-2.6899999999999977,"$-1,364.4",VA,Wholesale
+Everstream Mortgage,6.250%,6.519%,"$1,590.09",-0.4818000000000069,"$-1,085",VA,Wholesale
+TPO GO,6.250%,6.525%,"$1,590.09",-1.816999999999993,$-917.6,VA,Wholesale
+Power TPO,6.250%,6.538%,"$1,590.09",-2.3829999999999956,$-571.6,VA,Wholesale
+Kind Lending,6.250%,6.540%,"$1,590.09",-2.11337,$-520.9,VA,Wholesale
+Loan Factory Direct - Kind Lending,6.250%,6.540%,"$1,590.09",-2.11337,$-520.9,VA,Wholesale
+Orion Lending,6.250%,6.542%,"$1,590.09",-1.597,$-478.7,VA,Wholesale
+Sun West Mtg Co Wholesale,6.250%,6.546%,"$1,590.09",-1.90094,$-359.7,VA,Wholesale
+Eleven Mortgage,6.250%,6.552%,"$1,590.09",-2.14562,$-216.9,VA,Wholesale
+NexBank,6.250%,6.554%,"$1,590.09",-1.9755300000000062,$-164.9,VA,Wholesale
+"VIP Mortgage, Inc.",6.250%,6.555%,"$1,590.09",-2.281000000000006,$-140.3,VA,Wholesale
+Loan Factory Direct - PennyMac,6.250%,6.555%,"$1,590.09",-2.075,$-137.8,VA,Wholesale
+Pennymac TPO,6.250%,6.555%,"$1,590.09",-2.075,$-137.8,VA,Wholesale
+Jet Advantage Mortgage,6.250%,6.556%,"$1,590.09",-1.4749999999999943,$-99,VA,Wholesale
+Forward Lending,6.250%,6.556%,"$1,590.09",-1.4749999999999943,$-99,VA,Wholesale
+NewRez LLC,6.250%,6.557%,"$1,590.09",-2.341,$-86.1,VA,Wholesale
+Rocket Pro,6.250%,6.558%,"$1,590.09",-1.6640000000000015,$-70.6,VA,Wholesale
+Loan Factory Direct - Rocket,6.250%,6.558%,"$1,590.09",-1.6640000000000015,$-70.6,VA,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.250%,6.564%,"$1,590.09",-1.923,$99.9,VA,Wholesale
+Open Mortgage,6.250%,6.569%,"$1,590.09",-1.949,$226.4,VA,Wholesale
+Plaza Home Mortgage Inc.,6.250%,6.583%,"$1,590.09",-1.68037,$597.3,VA,Wholesale
+Click n' Close,6.250%,6.589%,"$1,590.09",-1.78745,$734,VA,Wholesale
+The Loan Store LLC,6.250%,6.594%,"$1,590.09",-1.7199999999999989,$882.3,VA,Wholesale
+JMAC Lending Inc.,6.250%,6.607%,"$1,590.09",-1.50715,"$1,206.1",VA,Wholesale
+Windsor Mortgage Solutions,6.250%,6.625%,"$1,590.09",-1.369029999999995,"$1,659.6",VA,Wholesale
+Union Home Mortgage,6.250%,6.687%,"$1,590.09",-0.7510000000000048,"$3,255.6",VA,Wholesale
+PenFed Credit Union,6.250%,6.405%,"$1,540",0,"$4,120",VA,Retail
+District Lending,6.250%,6.318%,"$1,540",0.22,"$1,800",Conventional,Retail
+AimLoan.com,6.250%,6.329%,"$1,540",0.442,"$2,100",Conventional,Retail
+"Tomo Mortgage, LLC.",6.250%,6.310%,"$1,540",0.638,"$1,595",Conventional,Retail
+PenFed Credit Union,6.250%,6.408%,"$1,540",0.875,"$4,182",Conventional,Retail
+First Federal Bank,6.250%,6.449%,"$1,540",0.863,"$5,282",VA,Retail
+"Tomo Mortgage, LLC.",6.250%,7.469%,"$1,540",0.638,"$5,970",FHA,Retail
+Mutual of Omaha Mortgage,6.375%,6.511%,"$1,559.67",0.515,"$3,525.5",Conventional,Retail
+loanDepot ,6.375%,6.609%,"$1,559.67",1.731,"$6,017.5",Conventional,Retail
+Us Bank,6.375%,6.543%,"$1,559.67",0.879,"$5,092.26",Conventional,Retail
+AimLoan.com,6.375%,6.413%,"$1,560",0,"$5,076",Conventional,Retail
+Click n' Close,6.375%,6.433%,"$1,559.675",-1.22369,"$1,503.3",Conventional,Wholesale
+Loan United Wholesale,6.375%,6.448%,"$1,559.675",-1.816999999999993,"$1,895",Conventional,Wholesale
+Provident Funding,6.375%,6.454%,"$1,559.675",-2,"$2,062.5",Conventional,Wholesale
+AD Mortgage,6.375%,6.457%,"$1,559.675",-1.4699999999999989,"$2,137.5",Conventional,Wholesale
+AmWest Funding Corp,6.375%,6.459%,"$1,559.675",-1.704,"$2,177.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.375%,6.464%,"$1,559.675",-1.5992099999999994,"$2,314.5",Conventional,Wholesale
+Eleven Mortgage,6.375%,6.473%,"$1,559.675",0.294,"$2,540",Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.375%,6.474%,"$1,559.675",-1.2921,"$2,582.2",Conventional,Wholesale
+NexBank,6.375%,6.476%,"$1,559.675",-0.9375500000000017,"$2,631.1",Conventional,Wholesale
+NewRez LLC,6.375%,6.477%,"$1,559.675",-0.722,"$2,662.5",Conventional,Wholesale
+Power TPO,6.375%,6.480%,"$1,559.675",-1.4849999999999994,"$2,725",Conventional,Wholesale
+Everstream Mortgage,6.375%,6.486%,"$1,559.675",-0.41740000000000066,"$2,894",Conventional,Wholesale
+New Wave Lending Group,6.375%,6.491%,"$1,559.675",-1.375,"$3,000",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.375%,6.491%,"$1,559.675",-1.375,"$3,000",Conventional,Wholesale
+Pennymac TPO,6.375%,6.491%,"$1,559.675",-1.503,"$3,005",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.375%,6.491%,"$1,559.675",-1.503,"$3,005",Conventional,Wholesale
+LoanStream Mortgage,6.375%,6.494%,"$1,559.675",-1.0409999999999968,"$3,085",Conventional,Wholesale
+Jet Advantage Mortgage,6.375%,6.494%,"$1,559.675",-1.0409999999999968,"$3,085",Conventional,Wholesale
+Forward Lending,6.375%,6.494%,"$1,559.675",-1.0409999999999968,"$3,085",Conventional,Wholesale
+The Loan Store LLC,6.375%,6.496%,"$1,559.675",-1.2319999999999993,"$3,130",Conventional,Wholesale
+BluePoint Mortgage,6.375%,6.496%,"$1,559.675",-1.319,"$3,140",Conventional,Wholesale
+Windsor Mortgage Solutions,6.375%,6.502%,"$1,559.675",-1.408770000000004,"$3,290.6",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.375%,6.507%,"$1,559.675",-0.7099999999999937,"$3,412.5",Conventional,Wholesale
+Rocket Pro,6.375%,6.507%,"$1,559.675",-0.7099999999999937,"$3,412.5",Conventional,Wholesale
+AFR Wholesale,6.375%,6.510%,"$1,559.675",-1.2249999999999943,"$3,490",Conventional,Wholesale
+Nations Direct Mortgage,6.375%,6.516%,"$1,559.675",-0.917,"$3,645",Conventional,Wholesale
+CMG Financial,6.375%,6.517%,"$1,559.675",-1.152,"$3,682.5",Conventional,Wholesale
+Kind Lending,6.375%,6.521%,"$1,559.675",-1.06586,"$3,772.8",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.375%,6.521%,"$1,559.675",-1.06586,"$3,772.8",Conventional,Wholesale
+JMAC Lending Inc.,6.375%,6.523%,"$1,559.675",-0.91995,"$3,825.1",Conventional,Wholesale
+HomeBridge Wholesale,6.375%,6.528%,"$1,559.675",-0.987,"$3,970",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.375%,6.533%,"$1,559.675",-0.841,"$4,085",Conventional,Wholesale
+Orion Lending,6.375%,6.537%,"$1,559.675",-0.901,"$4,185",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.375%,6.540%,"$1,559.675",-0.87222,"$4,257",Conventional,Wholesale
+TPO GO,6.375%,6.566%,"$1,559.675",-0.3810000000000002,"$4,922.5",Conventional,Wholesale
+Open Mortgage,6.375%,6.620%,"$1,559.675",-0.057,"$6,295",Conventional,Wholesale
+Union Home Mortgage,6.375%,6.620%,"$1,559.675",-0.05299999999999727,"$6,305",Conventional,Wholesale
+Guaranteed Rate,6.375%,6.629%,"$1,559.67",0.555,"$11,159.8",Conventional,Retail
+AimLoan.com,6.375%,6.413%,"$1,560",0,$995,Conventional,Retail
+District Lending,6.375%,6.423%,"$1,560",0,"$1,250",Conventional,Retail
+PenFed Credit Union,6.375%,6.475%,"$1,560",0.25,"$2,620",Conventional,Retail
+Chase Bank,6.490%,6.652%,"$2,170.196",0.991,"$3,072.5",Conventional,Retail
+"Tomo Mortgage, LLC.",6.490%,6.490%,"$1,579",0,"$4,081",Conventional,Retail
+"Tomo Mortgage, LLC.",6.490%,6.490%,"$1,579",0,N/A,Conventional,Retail
+"Tomo Mortgage, LLC.",6.490%,6.610%,"$1,579",0,"$3,125",VA,Retail
+"Tomo Mortgage, LLC.",6.490%,7.644%,"$1,579",0,"$4,375",FHA,Retail
+Sage Home Loans,6.495%,6.534%,"$1,579.35",0,"$1,021.5",Conventional,Retail
+Sage Home Loans,6.500%,6.621%,"$1,599.92",0,"$3,125",VA,Retail
+Alliant Credit Union,6.500%,6.509%,"$1,580.17",0,$242.5,Conventional,Retail
+Chase Bank,6.500%,6.667%,"$2,171.836",1.032,"$4,275",Conventional,Retail
+Us Bank,6.500%,6.788%,"$2,177.77",0.93,"$10,513.41",Conventional,Retail
+Click n' Close,6.500%,6.512%,"$1,580.17",-1.69761,$318.5,Conventional,Wholesale
+Loan United Wholesale,6.500%,6.528%,"$1,580.17",-2.2890000000000015,$715,Conventional,Wholesale
+Provident Funding,6.500%,6.531%,"$1,580.17",-2.5,$812.5,Conventional,Wholesale
+AmWest Funding Corp,6.500%,6.537%,"$1,580.17",-2.194,$952.5,Conventional,Wholesale
+AD Mortgage,6.500%,6.540%,"$1,580.17",-1.9140000000000015,"$1,027.5",Conventional,Wholesale
+"VIP Mortgage, Inc.",6.500%,6.542%,"$1,580.17",-2.087469999999996,"$1,093.8",Conventional,Wholesale
+NewRez LLC,6.500%,6.547%,"$1,580.17",-1.304,"$1,207.5",Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.500%,6.554%,"$1,580.17",-1.7608,"$1,410.5",Conventional,Wholesale
+Eleven Mortgage,6.500%,6.557%,"$1,580.17",-0.132,"$1,475",Conventional,Wholesale
+NexBank,6.500%,6.558%,"$1,580.17",-1.3856799999999936,"$1,510.8",Conventional,Wholesale
+Power TPO,6.500%,6.560%,"$1,580.17",-1.9569999999999936,"$1,545",Conventional,Wholesale
+Everstream Mortgage,6.500%,6.565%,"$1,580.17",-0.8992999999999967,"$1,689.3",Conventional,Wholesale
+New Wave Lending Group,6.500%,6.568%,"$1,580.17",-1.875,"$1,750",Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.500%,6.568%,"$1,580.17",-1.875,"$1,750",Conventional,Wholesale
+LoanStream Mortgage,6.500%,6.574%,"$1,580.17",-1.5100000000000051,"$1,912.5",Conventional,Wholesale
+Jet Advantage Mortgage,6.500%,6.574%,"$1,580.17",-1.5100000000000051,"$1,912.5",Conventional,Wholesale
+Forward Lending,6.500%,6.574%,"$1,580.17",-1.5100000000000051,"$1,912.5",Conventional,Wholesale
+Pennymac TPO,6.500%,6.574%,"$1,580.17",-1.938,"$1,917.5",Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.500%,6.574%,"$1,580.17",-1.938,"$1,917.5",Conventional,Wholesale
+BluePoint Mortgage,6.500%,6.576%,"$1,580.17",-1.787,"$1,970",Conventional,Wholesale
+The Loan Store LLC,6.500%,6.578%,"$1,580.17",-1.6779999999999973,"$2,015",Conventional,Wholesale
+Windsor Mortgage Solutions,6.500%,6.584%,"$1,580.17",-1.8565200000000033,"$2,171.2",Conventional,Wholesale
+AFR Wholesale,6.500%,6.592%,"$1,580.17",-1.6710000000000065,"$2,375",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.500%,6.593%,"$1,580.17",-1.117999999999995,"$2,392.5",Conventional,Wholesale
+Rocket Pro,6.500%,6.593%,"$1,580.17",-1.117999999999995,"$2,392.5",Conventional,Wholesale
+CMG Financial,6.500%,6.599%,"$1,580.17",-1.608,"$2,542.5",Conventional,Wholesale
+Nations Direct Mortgage,6.500%,6.599%,"$1,580.17",-1.357,"$2,545",Conventional,Wholesale
+JMAC Lending Inc.,6.500%,6.602%,"$1,580.17",-1.40165,"$2,620.9",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.500%,6.607%,"$1,580.17",-1.367,"$2,770",Conventional,Wholesale
+HomeBridge Wholesale,6.500%,6.609%,"$1,580.17",-1.456,"$2,797.5",Conventional,Wholesale
+Kind Lending,6.500%,6.609%,"$1,580.17",-1.44904,"$2,814.9",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.500%,6.609%,"$1,580.17",-1.44904,"$2,814.9",Conventional,Wholesale
+Orion Lending,6.500%,6.618%,"$1,580.17",-1.364,"$3,027.5",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.500%,6.619%,"$1,580.17",-1.34442,"$3,076.5",Conventional,Wholesale
+TPO GO,6.500%,6.648%,"$1,580.17",-0.8329999999999984,"$3,792.5",Conventional,Wholesale
+Union Home Mortgage,6.500%,6.699%,"$1,580.17",-0.5370000000000061,"$5,095",Conventional,Wholesale
+Open Mortgage,6.500%,6.702%,"$1,580.17",-0.508,"$5,167.5",Conventional,Wholesale
+PenFed Credit Union,6.500%,6.577%,"$1,581",0,"$1,995",Conventional,Retail
+Guaranteed Rate,6.525%,6.659%,"$1,584.28",-0.071,"$9,644.07",Conventional,Retail
+Mutual of Omaha Mortgage,6.625%,6.669%,"$1,600.78",0,"$1,120.5",Conventional,Retail
+loanDepot ,6.625%,6.754%,"$1,600.78",0.644,"$3,300",Conventional,Retail
+Us Bank,6.625%,6.803%,"$1,600.78",0.95,"$8,393.92",Conventional,Retail
+First Federal Bank,6.625%,6.746%,"$1,601",0,"$7,206",Conventional,Retail
+Click n' Close,6.625%,6.595%,"$1,600.777",-2.13756,$-781.4,Conventional,Wholesale
+Loan United Wholesale,6.625%,6.609%,"$1,600.777",-2.7379999999999995,$-407.5,Conventional,Wholesale
+AD Mortgage,6.625%,6.620%,"$1,600.777",-2.3739999999999952,$-122.5,Conventional,Wholesale
+Eleven Mortgage,6.625%,6.622%,"$1,600.777",-0.753,$-77.5,Conventional,Wholesale
+"VIP Mortgage, Inc.",6.625%,6.622%,"$1,600.777",-2.5524800000000027,$-68.7,Conventional,Wholesale
+AmWest Funding Corp,6.625%,6.625%,"$1,600.777",-2.573,$5,Conventional,Wholesale
+The Loan Store LLC,6.625%,6.627%,"$1,600.777",-2.3289999999999935,$55,Conventional,Wholesale
+Provident Funding,6.625%,6.632%,"$1,600.777",-2.75,$187.5,Conventional,Wholesale
+NewRez LLC,6.625%,6.635%,"$1,600.777",-1.68,$267.5,Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.625%,6.637%,"$1,600.777",-2.2033,$304.2,Conventional,Wholesale
+Power TPO,6.625%,6.641%,"$1,600.777",-2.412000000000006,$407.5,Conventional,Wholesale
+NexBank,6.625%,6.641%,"$1,600.777",-1.8225599999999957,$418.6,Conventional,Wholesale
+Everstream Mortgage,6.625%,6.650%,"$1,600.777",-1.3158999999999992,$647.8,Conventional,Wholesale
+Pennymac TPO,6.625%,6.656%,"$1,600.777",-2.387,$795,Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.625%,6.656%,"$1,600.777",-2.387,$795,Conventional,Wholesale
+New Wave Lending Group,6.625%,6.657%,"$1,600.777",-2.25,$812.5,Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.625%,6.657%,"$1,600.777",-2.25,$812.5,Conventional,Wholesale
+BluePoint Mortgage,6.625%,6.659%,"$1,600.777",-2.23,$862.5,Conventional,Wholesale
+LoanStream Mortgage,6.625%,6.669%,"$1,600.777",-1.8269999999999982,"$1,120",Conventional,Wholesale
+Jet Advantage Mortgage,6.625%,6.669%,"$1,600.777",-1.8269999999999982,"$1,120",Conventional,Wholesale
+Forward Lending,6.625%,6.669%,"$1,600.777",-1.8269999999999982,"$1,120",Conventional,Wholesale
+Windsor Mortgage Solutions,6.625%,6.670%,"$1,600.777",-2.2672699999999963,"$1,144.3",Conventional,Wholesale
+AFR Wholesale,6.625%,6.670%,"$1,600.777",-2.1565099999999973,"$1,161.2",Conventional,Wholesale
+Nations Direct Mortgage,6.625%,6.675%,"$1,600.777",-1.856,"$1,297.5",Conventional,Wholesale
+Orion Lending,6.625%,6.677%,"$1,600.777",-2.042,"$1,332.5",Conventional,Wholesale
+CMG Financial,6.625%,6.683%,"$1,600.777",-2.027,"$1,495",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.625%,6.683%,"$1,600.777",-1.97428,"$1,501.8",Conventional,Wholesale
+JMAC Lending Inc.,6.625%,6.685%,"$1,600.777",-1.83665,"$1,533.4",Conventional,Wholesale
+Loan Factory Direct - Rocket,6.625%,6.687%,"$1,600.777",-1.4429999999999978,"$1,580",Conventional,Wholesale
+Rocket Pro,6.625%,6.687%,"$1,600.777",-1.4429999999999978,"$1,580",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.625%,6.689%,"$1,600.777",-1.817,"$1,645",Conventional,Wholesale
+HomeBridge Wholesale,6.625%,6.694%,"$1,600.777",-1.867,"$1,770",Conventional,Wholesale
+Kind Lending,6.625%,6.694%,"$1,600.777",-1.86488,"$1,775.3",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.625%,6.694%,"$1,600.777",-1.86488,"$1,775.3",Conventional,Wholesale
+TPO GO,6.625%,6.713%,"$1,600.777",-1.4500000000000028,"$2,250",Conventional,Wholesale
+Open Mortgage,6.625%,6.769%,"$1,600.777",-1.108,"$3,667.5",Conventional,Wholesale
+Union Home Mortgage,6.625%,6.780%,"$1,600.777",-0.992999999999995,"$3,955",Conventional,Wholesale
+First Federal Bank,6.625%,6.746%,"$1,601",0,"$3,125",VA,Retail
+Chase Bank,6.750%,7.073%,"$2,213.166",1.0739999999999998,"$4,380",Conventional,Retail
+Provident Funding,6.750%,6.709%,"$1,621.495",-3.25,"$-1,062.5",Conventional,Wholesale
+Loan United Wholesale,6.750%,6.709%,"$1,621.495",-2.9980000000000047,"$-1,057.5",Conventional,Wholesale
+Click n' Close,6.750%,6.712%,"$1,621.495",-2.21635,$-978.4,Conventional,Wholesale
+Power TPO,6.750%,6.720%,"$1,621.495",-2.8799999999999955,$-762.5,Conventional,Wholesale
+AmWest Funding Corp,6.750%,6.722%,"$1,621.495",-2.861,$-715,Conventional,Wholesale
+Eleven Mortgage,6.750%,6.723%,"$1,621.495",-0.996,$-685,Conventional,Wholesale
+"VIP Mortgage, Inc.",6.750%,6.728%,"$1,621.495",-2.7460499999999968,$-552.6,Conventional,Wholesale
+AD Mortgage,6.750%,6.729%,"$1,621.495",-2.5460000000000065,$-552.5,Conventional,Wholesale
+Everstream Mortgage,6.750%,6.729%,"$1,621.495",-1.7887000000000057,$-534.3,Conventional,Wholesale
+Pennymac TPO,6.750%,6.730%,"$1,621.495",-2.911,$-515,Conventional,Wholesale
+Loan Factory Direct - PennyMac,6.750%,6.730%,"$1,621.495",-2.911,$-515,Conventional,Wholesale
+The Loan Store LLC,6.750%,6.730%,"$1,621.495",-2.4549999999999983,$-505,Conventional,Wholesale
+Sun West Mtg Co Wholesale,6.750%,6.735%,"$1,621.495",-2.475,$-375,Conventional,Wholesale
+NexBank,6.750%,6.739%,"$1,621.495",-1.9823200000000014,$-293.3,Conventional,Wholesale
+NewRez LLC,6.750%,6.746%,"$1,621.495",-1.681,$-112.5,Conventional,Wholesale
+BluePoint Mortgage,6.750%,6.755%,"$1,621.495",-2.525,$125,Conventional,Wholesale
+Windsor Mortgage Solutions,6.750%,6.755%,"$1,621.495",-2.6736800000000045,$128.3,Conventional,Wholesale
+LoanStream Mortgage,6.750%,6.757%,"$1,621.495",-2.201999999999998,$182.5,Conventional,Wholesale
+Jet Advantage Mortgage,6.750%,6.757%,"$1,621.495",-2.201999999999998,$182.5,Conventional,Wholesale
+Forward Lending,6.750%,6.757%,"$1,621.495",-2.201999999999998,$182.5,Conventional,Wholesale
+New Wave Lending Group,6.750%,6.757%,"$1,621.495",-2.5,$187.5,Conventional,Wholesale
+"National Mortgage Service, Inc. (NMSI)",6.750%,6.770%,"$1,621.495",-2.375,$500,Conventional,Wholesale
+Loan Factory Direct - Rocket,6.750%,6.773%,"$1,621.495",-1.8379999999999939,$592.5,Conventional,Wholesale
+Rocket Pro,6.750%,6.773%,"$1,621.495",-1.8379999999999939,$592.5,Conventional,Wholesale
+CMG Financial,6.750%,6.783%,"$1,621.495",-2.287,$845,Conventional,Wholesale
+AFR Wholesale,6.750%,6.783%,"$1,621.495",-2.2789999999999964,$855,Conventional,Wholesale
+Orion Lending,6.750%,6.786%,"$1,621.495",-2.209,$915,Conventional,Wholesale
+Nations Direct Mortgage,6.750%,6.791%,"$1,621.495",-1.961,"$1,035",Conventional,Wholesale
+JMAC Lending Inc.,6.750%,6.791%,"$1,621.495",-2.03525,"$1,036.9",Conventional,Wholesale
+HomeBridge Wholesale,6.750%,6.794%,"$1,621.495",-2.131,"$1,110",Conventional,Wholesale
+Kind Lending,6.750%,6.795%,"$1,621.495",-2.11255,"$1,156.1",Conventional,Wholesale
+Loan Factory Direct - Kind Lending,6.750%,6.795%,"$1,621.495",-2.11255,"$1,156.1",Conventional,Wholesale
+Plaza Home Mortgage Inc.,6.750%,6.799%,"$1,621.495",-2.07718,"$1,244.6",Conventional,Wholesale
+"Paramount Residential Mortgage Group, Inc.",6.750%,6.807%,"$1,621.495",-1.892,"$1,457.5",Conventional,Wholesale
+TPO GO,6.750%,6.819%,"$1,621.495",-1.649000000000001,"$1,752.5",Conventional,Wholesale
+Union Home Mortgage,6.750%,6.868%,"$1,621.495",-1.3739999999999952,"$3,002.5",Conventional,Wholesale
+Open Mortgage,6.750%,6.884%,"$1,621.495",-1.216,"$3,397.5",Conventional,Wholesale
+Us Bank,6.875%,7.088%,"$1,919.53",0.775,"$9,154.95",Conventional,Retail
+loanDepot ,6.990%,7.038%,"$1,661.58",0,"$1,200",Conventional,Retail
+Chase Bank,7.000%,7.197%,"$2,254.926",1.072,"$4,375",Conventional,Retail
+Chase Bank,7.125%,7.256%,"$2,275.966",0.972,"$4,125",Conventional,Retail
+Us Bank,7.125%,7.165%,"$4,965.06",1,"$5,626.05",Conventional,Retail
+Us Bank,7.250%,9.126%,"$2,282.16",5.843,"$17,159.33",FHA,Retail
+Us Bank,7.250%,8.754%,"$2,282.16",5.718,"$16,756.77",VA,Retail
+PenFed Credit Union,7.375%,7.565%,"$2,300",0.375,"$2,932",Conventional,Retail
+PenFed Credit Union,7.500%,7.630%,"$2,318",0,"$1,995",Conventional,Retail
