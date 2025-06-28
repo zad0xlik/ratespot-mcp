@@ -1,4 +1,5 @@
 # RateSpot MCP Server
+[![smithery badge](https://smithery.ai/badge/@zad0xlik/ratespot-mcp)](https://smithery.ai/server/@zad0xlik/ratespot-mcp)
 
 A Model Context Protocol (MCP) server that provides access to RateSpot.io mortgage rate APIs. This server enables AI assistants to fetch real-time mortgage rates, compare loan products, calculate payments, and access comprehensive lending information.
 
@@ -21,6 +22,14 @@ The RateSpot MCP Server provides the following tools:
 - **prequalify-borrower**: Pre-qualify borrowers based on financial criteria
 
 ## Installation
+
+### Installing via Smithery
+
+To install RateSpot MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@zad0xlik/ratespot-mcp):
+
+```bash
+npx -y @smithery/cli install @zad0xlik/ratespot-mcp --client claude
+```
 
 ### Prerequisites
 - Node.js (v16 or higher)
