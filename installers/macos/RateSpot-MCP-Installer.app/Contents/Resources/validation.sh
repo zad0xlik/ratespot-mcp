@@ -37,59 +37,19 @@ validate_api_key() {
         return 1
     fi
     
-    # Test API key with a simple request
-    local test_response
-    test_response=$(curl -s -w "%{http_code}" \
-        -H "Authorization: Bearer $api_key" \
-        -H "Content-Type: application/json" \
-        "https://api.ratespot.io/v1/rates/test" \
-        -o /tmp/ratespot_test_response.json 2>/dev/null)
+    # Basic format validation - RateSpot API keys are typically long alphanumeric strings
+    if [[ ! "$api_key" =~ ^[A-Za-z0-9_-]+$ ]]; then
+        echo "API key contains invalid characters"
+        return 1
+    fi
     
-    local http_code="${test_response: -3}"
+    # For now, skip network validation since API endpoints are not available
+    # This allows installation to proceed with user-provided API key
+    echo "API key format appears valid (network validation skipped)"
+    return 0
     
-    case "$http_code" in
-        200|201)
-            echo "API key is valid"
-            return 0
-            ;;
-        401|403)
-            echo "API key is invalid or unauthorized"
-            return 1
-            ;;
-        404)
-            # Try alternative endpoint for validation
-            test_response=$(curl -s -w "%{http_code}" \
-                -H "Authorization: Bearer $api_key" \
-                -H "Content-Type: application/json" \
-                -d '{"loanAmount": 400000, "creditScore": 750}' \
-                "https://api.ratespot.io/v1/rates" \
-                -o /tmp/ratespot_test_response2.json 2>/dev/null)
-            
-            local http_code2="${test_response: -3}"
-            case "$http_code2" in
-                200|201)
-                    echo "API key is valid"
-                    return 0
-                    ;;
-                401|403)
-                    echo "API key is invalid or unauthorized"
-                    return 1
-                    ;;
-                *)
-                    echo "API key validation inconclusive (HTTP $http_code2)"
-                    return 2
-                    ;;
-            esac
-            ;;
-        000)
-            echo "Network error - cannot validate API key"
-            return 2
-            ;;
-        *)
-            echo "API validation failed (HTTP $http_code)"
-            return 2
-            ;;
-    esac
+    # Note: The actual API validation will happen when the MCP server starts
+    # If the API key is invalid, the tools will show appropriate error messages
 }
 
 # Check if Claude Desktop is installed
@@ -112,17 +72,94 @@ check_claude_desktop() {
     fi
 }
 
+# Check if VS Code is installed
+check_vscode() {
+    local vscode_app="/Applications/Visual Studio Code.app"
+    local vscode_extensions="$HOME/.vscode/extensions"
+    
+    if [[ -d "$vscode_app" ]]; then
+        echo "VS Code found at $vscode_app"
+        if [[ -d "$vscode_extensions" ]]; then
+            echo "VS Code extensions directory exists"
+            return 0
+        else
+            echo "VS Code extensions directory missing"
+            return 1
+        fi
+    else
+        echo "VS Code not found"
+        return 2
+    fi
+}
+
 # Check if Cline is installed (VS Code extension)
 check_cline() {
     local cline_config="$HOME/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+    local cline_extension_dir="$HOME/.vscode/extensions"
     
-    if [[ -f "$cline_config" ]]; then
-        echo "Cline MCP config found"
-        return 0
-    else
-        echo "Cline MCP config not found"
-        return 1
+    # First check if VS Code is installed
+    local vscode_status
+    vscode_status=$(check_vscode)
+    local vscode_code=$?
+    
+    if [[ $vscode_code -eq 2 ]]; then
+        echo "VS Code not installed"
+        return 2
     fi
+    
+    # Check for Cline extension
+    if [[ -d "$cline_extension_dir" ]]; then
+        local cline_found=false
+        for ext_dir in "$cline_extension_dir"/saoudrizwan.claude-dev-*; do
+            if [[ -d "$ext_dir" ]]; then
+                cline_found=true
+                break
+            fi
+        done
+        
+        if [[ "$cline_found" == "true" ]]; then
+            if [[ -f "$cline_config" ]]; then
+                echo "Cline extension and config found"
+                return 0
+            else
+                echo "Cline extension found, config missing (will be created)"
+                return 1
+            fi
+        else
+            echo "Cline extension not found"
+            return 2
+        fi
+    else
+        echo "VS Code extensions directory not found"
+        return 2
+    fi
+}
+
+# Get MCP client detection status
+get_mcp_client_status() {
+    local claude_status="missing"
+    local cline_status="missing"
+    
+    # Check Claude Desktop
+    local claude_result
+    claude_result=$(check_claude_desktop)
+    local claude_code=$?
+    
+    if [[ $claude_code -eq 0 || $claude_code -eq 1 ]]; then
+        claude_status="detected"
+    fi
+    
+    # Check Cline
+    local cline_result
+    cline_result=$(check_cline)
+    local cline_code=$?
+    
+    if [[ $cline_code -eq 0 || $cline_code -eq 1 ]]; then
+        cline_status="detected"
+    fi
+    
+    echo "CLAUDE_STATUS=$claude_status"
+    echo "CLINE_STATUS=$cline_status"
 }
 
 # Validate installation directory

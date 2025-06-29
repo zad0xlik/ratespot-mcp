@@ -102,3 +102,9 @@ logs
 # Temporary files
 tmp/
 temp/
+
+# CSV data files (keep existing examples, exclude new ones)
+*.csv
+
+# Runtime generated data files
+data/temp/

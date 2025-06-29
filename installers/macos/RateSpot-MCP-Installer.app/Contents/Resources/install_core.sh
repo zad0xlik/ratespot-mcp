@@ -140,27 +140,35 @@ print(json.dumps(config, indent=2))
     fi
 }
 
-# Configure Cline (if available)
+# Configure Cline (if selected)
 configure_cline() {
     local install_path="$1"
     local api_key="$2"
     
     local cline_config="$HOME/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
-    
-    if [[ ! -f "$cline_config" ]]; then
-        log "Cline config not found, skipping Cline configuration"
-        return 0
-    fi
+    local cline_config_dir="$(dirname "$cline_config")"
     
     log "Configuring Cline..."
     show_progress "Configuring Cline MCP settings..."
     
-    # Backup existing config
-    cp "$cline_config" "$cline_config.backup.$(date +%Y%m%d_%H%M%S)"
+    # Create config directory if it doesn't exist
+    if ! mkdir -p "$cline_config_dir"; then
+        log "ERROR: Failed to create Cline config directory"
+        return 1
+    fi
     
-    # Read existing config
-    local existing_config
-    existing_config=$(cat "$cline_config")
+    # Backup existing config if it exists
+    if [[ -f "$cline_config" ]]; then
+        log "Backing up existing Cline config..."
+        cp "$cline_config" "$cline_config.backup.$(date +%Y%m%d_%H%M%S)"
+        
+        # Read existing config
+        local existing_config
+        existing_config=$(cat "$cline_config")
+    else
+        log "Creating new Cline config file..."
+        local existing_config="{}"
+    fi
     
     # Create new config with RateSpot MCP server
     local new_config
@@ -193,6 +201,8 @@ print(json.dumps(config, indent=2))
     
     # Write the new config
     if echo "$new_config" > "$cline_config"; then
+        # Set proper permissions
+        chmod 600 "$cline_config"
         log "Cline configured successfully"
         return 0
     else
@@ -329,10 +339,14 @@ EOF
 perform_installation() {
     local install_path="$1"
     local api_key="$2"
+    local configure_claude="${CONFIGURE_CLAUDE:-true}"
+    local configure_cline="${CONFIGURE_CLINE:-false}"
     
     log "=== Starting RateSpot MCP Installation ==="
     log "Install path: $install_path"
     log "API key: [REDACTED]"
+    log "Configure Claude Desktop: $configure_claude"
+    log "Configure Cline: $configure_cline"
     
     # Step 1: Install MCP server
     if ! install_mcp_server "$install_path" "$api_key"; then
@@ -340,27 +354,58 @@ perform_installation() {
         return 1
     fi
     
-    # Step 2: Configure Claude Desktop
-    if ! configure_claude_desktop "$install_path" "$api_key"; then
-        log "ERROR: Claude Desktop configuration failed"
-        return 1
+    # Step 2: Configure selected MCP clients
+    local claude_result="skipped"
+    local cline_result="skipped"
+    
+    # Configure Claude Desktop if selected
+    if [[ "$configure_claude" == "true" ]]; then
+        log "Configuring Claude Desktop (user selected)"
+        if configure_claude_desktop "$install_path" "$api_key"; then
+            claude_result="success"
+            log "Claude Desktop configuration successful"
+        else
+            claude_result="failed"
+            log "ERROR: Claude Desktop configuration failed"
+            return 1
+        fi
+    else
+        log "Skipping Claude Desktop configuration (not selected)"
     fi
     
-    # Step 3: Configure Cline (optional)
-    configure_cline "$install_path" "$api_key"
+    # Configure Cline if selected
+    if [[ "$configure_cline" == "true" ]]; then
+        log "Configuring Cline (user selected)"
+        if configure_cline "$install_path" "$api_key"; then
+            cline_result="success"
+            log "Cline configuration successful"
+        else
+            cline_result="failed"
+            log "WARNING: Cline configuration failed (non-fatal)"
+            # Don't return error for Cline failure, just log it
+        fi
+    else
+        log "Skipping Cline configuration (not selected)"
+    fi
     
-    # Step 4: Run tests
+    # Step 3: Run tests
     local test_result
     run_post_install_tests "$install_path" "$api_key"
     test_result=$?
     
-    # Step 5: Create uninstaller
+    # Step 4: Create uninstaller
     create_uninstaller "$install_path"
     
-    # Step 6: Clean up
+    # Step 5: Clean up
     cleanup_temp_files
     
+    # Step 6: Store results for final summary
+    export CLAUDE_CONFIG_RESULT="$claude_result"
+    export CLINE_CONFIG_RESULT="$cline_result"
+    
     log "=== Installation completed ==="
+    log "Claude Desktop result: $claude_result"
+    log "Cline result: $cline_result"
     
     if [[ $test_result -eq 0 ]]; then
         log "All tests passed - installation successful"
