@@ -4,27 +4,34 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 
 ## 🚀 Quick Start (Recommended)
 
-### Step 1: Install Claude Desktop
-Download Claude Desktop: **[https://claude.ai/download](https://claude.ai/download)**
+### ⚡ One-Click Installation (macOS)
+Run this command in Terminal for automatic installation:
+```bash
+curl -fsSL https://raw.githubusercontent.com/zad0xlik/ratespot-mcp/main/installers/macos/quick-install.sh | bash
+```
 
-### Step 2: Get Your RateSpot API Key
-1. Sign up for free at **[https://app.ratespot.io](https://app.ratespot.io)**
-2. Get your API key from **[Account Settings](https://app.ratespot.io/account-settings)**
+This will automatically:
+- Install Node.js (if needed)
+- Guide you to install Claude Desktop (if needed)
+- Set up your RateSpot API key
+- Configure everything for you
 
-### Step 3: Install RateSpot MCP Server
-
-**For macOS Users:**
+### 🖱️ GUI Installation (macOS)
 1. Download `RateSpot-MCP-Installer.app` from the [installers/macos](installers/macos/) directory
 2. Double-click the installer
-3. Enter your RateSpot API key when prompted
-4. The installer will automatically configure Claude Desktop
+3. Follow the enhanced setup wizard with prerequisites check
+4. Enter your RateSpot API key when prompted
 
-**For Windows Users:**
+### 💻 Windows Installation
 1. Download and run `setup.bat` from the [installers/windows](installers/windows/) directory
 2. Follow the prompts to enter your API key
 
-### Step 4: Start Using
-Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,000 loan?"*
+### 🔑 Get Your RateSpot API Key
+1. Sign up for free at **[https://app.ratespot.io](https://app.ratespot.io)**
+2. Get your API key from **[Account Settings](https://app.ratespot.io/account-settings)**
+
+### 🎯 Start Using
+After installation, try asking Claude: *"What are current mortgage rates for a $400,000 loan?"*
 
 ## ✨ What You Can Do
 
