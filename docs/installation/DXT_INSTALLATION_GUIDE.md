@@ -27,7 +27,7 @@ Once RateSpot MCP is approved for the Claude Desktop Extension Directory:
 1. **Download** the DXT file:
    - [Download ratespot-mcp-2.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.0.0.dxt)
 
-2. **Drag and drop** the downloaded `.dxt` file into Claude Desktop
+2. **Double click** the downloaded `.dxt` file into Claude Desktop
    - Claude Desktop will show the installation dialog
    - You'll see the RateSpot MCP extension details
 
