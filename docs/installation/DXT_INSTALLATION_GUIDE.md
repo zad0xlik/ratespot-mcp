@@ -25,21 +25,19 @@ Once RateSpot MCP is approved for the Claude Desktop Extension Directory:
 ### Method 2: Download and Install
 
 1. **Download** the DXT file:
-   - [Download ratespot-mcp-1.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-1.0.0.dxt)
+   - [Download ratespot-mcp-2.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.0.0.dxt)
 
-2. **Double-click** the downloaded `.dxt` file
-   - Claude Desktop will open automatically
-   - You'll see the RateSpot MCP installation dialog
+2. **Drag and drop** the downloaded `.dxt` file into Claude Desktop
+   - Claude Desktop will show the installation dialog
+   - You'll see the RateSpot MCP extension details
 
-3. **Click Install**
-   - Review the extension details
-   - Click the "Install" button
+3. **Enter your API key**
+   - Paste your RateSpot API key when prompted
+   - The key is securely stored
 
-4. **Enter your API key**
-   - Paste your RateSpot API key in the secure field
-   - Click "Continue"
+4. **Done!** Start asking Claude about mortgage rates immediately
 
-5. **Done!** Start asking Claude about mortgage rates immediately
+> **Version 2.0.0 Update**: Includes streaming support for handling long-running requests and improved compatibility with Claude Desktop's timeout limitations.
 
 ## Getting Your RateSpot API Key
 
@@ -138,8 +136,10 @@ To remove RateSpot MCP:
 
 ## Technical Details
 
-- **Package Size**: 5.6MB (includes all dependencies)
-- **Unpacked Size**: 24.6MB
+- **Package Size**: 1.8MB (optimized with dxt pack)
+- **Unpacked Size**: 5.8MB
+- **Total Files**: 1,113 (includes all dependencies)
 - **Node.js Version**: Bundled (no external dependency)
 - **Platforms**: macOS, Windows
-- **Security**: API keys stored in OS keychain
+- **Security**: API keys stored securely
+- **Version**: 2.0.0 with streaming support
