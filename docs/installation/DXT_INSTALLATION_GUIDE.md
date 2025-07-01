@@ -97,17 +97,26 @@ Once installed, try these commands in Claude Desktop:
 
 ## Troubleshooting
 
+### "Some requirements are missing" Error
+If you see this error during installation:
+- **Claude Desktop Version**: Ensure you have Claude Desktop 0.7.0 or later
+- **Update Claude Desktop**: Download the latest version from [claude.ai/download](https://claude.ai/download)
+- **Restart after update**: Close and reopen Claude Desktop after updating
+
 ### Extension Won't Install
 - Ensure you have the latest version of Claude Desktop
 - Try restarting Claude Desktop and installing again
+- Check that you're double-clicking the `.dxt` file (not trying to open it with another app)
 
 ### API Key Issues
 - Verify your API key at [app.ratespot.io/account-settings](https://app.ratespot.io/account-settings)
 - Make sure you copied the entire key without extra spaces
+- The API key field is case-sensitive
 
 ### Extension Not Working
 - Check that the extension shows as "Active" in Claude Desktop settings
 - Try asking a simple question like "What are current mortgage rates?"
+- Restart Claude Desktop if the extension appears installed but isn't responding
 
 ## Updates
 
