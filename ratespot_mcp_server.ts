@@ -637,31 +637,93 @@ server.tool(
     creditScore: z.number().describe("Credit score (300-850)"),
     downPayment: z.number().describe("Down payment amount in dollars"),
     propertyValue: z.number().describe("Property value in dollars"),
-    zipCode: z.string().describe("ZIP code"),
+    zipCode: z.string().describe("ZIP code (single ZIP) or comma-separated ZIP codes for multi-location comparison"),
+    zipCodes: z.array(z.string()).optional().describe("Array of ZIP codes for multi-location comparison (alternative to comma-separated zipCode)"),
     propertyType: z.string().optional().default("single_family").describe("Property type"),
     occupancy: z.string().optional().default("primary").describe("Property use (primary, secondary, investment)"),
-    format: z.enum(["markdown", "csv", "pipe"]).optional().default("markdown").describe("Output format: 'markdown' for markdown table, 'csv' for CSV download, or 'pipe' for pipe-delimited format")
+    format: z.enum(["markdown", "csv", "pipe", "auto"]).optional().default("auto").describe("Output format: 'markdown' for markdown table, 'csv' for CSV download, 'pipe' for pipe-delimited format, or 'auto' for automatic selection based on data size")
   },
-  async ({ loanAmount, creditScore, downPayment, propertyValue, zipCode, propertyType, occupancy, format }) => {
+  async ({ loanAmount, creditScore, downPayment, propertyValue, zipCode, zipCodes, propertyType, occupancy, format }) => {
     try {
+      // Determine which ZIP codes to process
+      let zipCodesToProcess: string[] = [];
+      
+      if (zipCodes && zipCodes.length > 0) {
+        // Use the zipCodes array if provided
+        zipCodesToProcess = zipCodes;
+      } else if (zipCode) {
+        // Check if zipCode contains comma-separated values
+        if (zipCode.includes(',')) {
+          zipCodesToProcess = zipCode.split(',').map(zip => zip.trim());
+        } else {
+          zipCodesToProcess = [zipCode];
+        }
+      } else {
+        throw new Error("Either zipCode or zipCodes parameter is required");
+      }
+
+      // Auto-detect if we should use CSV format for multiple ZIP codes
+      let finalFormat = format;
+      let autoSelectedCSV = false;
+      
+      if (format === "auto") {
+        if (zipCodesToProcess.length > 1) {
+          finalFormat = "csv";
+          autoSelectedCSV = true;
+        } else {
+          finalFormat = "markdown";
+        }
+      } else if (zipCodesToProcess.length > 2 && format !== "csv") {
+        // Force CSV for more than 2 ZIP codes to prevent memory issues
+        finalFormat = "csv";
+        autoSelectedCSV = true;
+      }
+
       // Calculate down payment percentage
       const downPaymentPercent = Math.round((downPayment / propertyValue) * 100);
       const mortgageBalancePercent = 100 - downPaymentPercent;
 
-      const queryParams = {
-        purpose: "purchase",
-        zipcode: zipCode,
-        property_value: propertyValue,
-        down_payment: downPaymentPercent,
-        mortgage_balance: mortgageBalancePercent,
-        credit_score: creditScore,
-        fha: 1,
-        va: 1,
-        property_type: propertyType,
-        property_use: occupancy
-      };
+      // Process multiple ZIP codes if needed
+      let allResults: any[] = [];
+      let processedZipCodes: string[] = [];
 
-      const result = await makeRateSpotRequest(queryParams);
+      for (const currentZip of zipCodesToProcess) {
+        try {
+          const queryParams = {
+            purpose: "purchase",
+            zipcode: currentZip.trim(),
+            property_value: propertyValue,
+            down_payment: downPaymentPercent,
+            mortgage_balance: mortgageBalancePercent,
+            credit_score: creditScore,
+            fha: 1,
+            va: 1,
+            property_type: propertyType,
+            property_use: occupancy
+          };
+
+          const result = await makeRateSpotRequest(queryParams);
+          
+          // Add ZIP code info to each result for tracking
+          const resultsWithZip = result.map((event: any) => ({
+            ...event,
+            zipCode: currentZip.trim()
+          }));
+          
+          allResults = allResults.concat(resultsWithZip);
+          processedZipCodes.push(currentZip.trim());
+          
+          // Add a small delay between requests to be respectful to the API
+          if (zipCodesToProcess.length > 1 && currentZip !== zipCodesToProcess[zipCodesToProcess.length - 1]) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        } catch (error) {
+          console.error(`Error processing ZIP code ${currentZip}:`, error);
+          // Continue with other ZIP codes even if one fails
+        }
+      }
+
+      const result = allResults;
 
       // Create search parameters object for structured formats
       const searchParams = {
@@ -672,28 +734,48 @@ server.tool(
         loanType: undefined,
         propertyType: propertyType,
         occupancy: occupancy,
-        zipCode: zipCode,
+        zipCode: zipCodesToProcess.length === 1 ? zipCodesToProcess[0] : zipCodesToProcess.join(', '),
+        zipCodes: zipCodesToProcess,
+        processedZipCodes: processedZipCodes,
         loanTerm: undefined,
         rateType: undefined,
-        state: undefined
+        state: undefined,
+        multiZipRequest: zipCodesToProcess.length > 1,
+        autoSelectedCSV: autoSelectedCSV
       };
 
       // Format the response based on the requested format
       let formattedResponse: string;
-      if (format === "csv") {
+      if (finalFormat === "csv") {
         // Save CSV file and provide download link
         const csvData = formatMortgageProductsAsCSV(result);
         const fileInfo = await saveCSVFile(csvData, "loan_comparison", searchParams);
         
         formattedResponse = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
+        
+        // Add auto-selection message if applicable
+        if (autoSelectedCSV) {
+          if (zipCodesToProcess.length > 1) {
+            formattedResponse += `🤖 **Auto-Selected CSV Format:** Detected ${zipCodesToProcess.length} ZIP codes - automatically using CSV format to prevent memory issues\n`;
+            formattedResponse += `📍 **ZIP Codes Processed:** ${processedZipCodes.join(', ')}\n\n`;
+          } else {
+            formattedResponse += `🤖 **Auto-Selected CSV Format:** Large dataset detected - automatically using CSV format to prevent memory issues\n\n`;
+          }
+        }
+        
         formattedResponse += `📁 **File:** ${fileInfo.fileName}\n`;
         formattedResponse += `📍 **Location:** ${fileInfo.filePath}\n`;
         formattedResponse += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
         formattedResponse += `📊 **Summary:** Found ${result.filter(e => e.event === 'mortgage_product').length} loan products\n`;
         formattedResponse += `💰 **Loan Amount:** $${loanAmount.toLocaleString()}\n`;
         formattedResponse += `🏠 **Property Value:** $${propertyValue.toLocaleString()}\n`;
-        formattedResponse += `💵 **Down Payment:** $${downPayment.toLocaleString()} (${Math.round((downPayment / propertyValue) * 100)}%)\n\n`;
-        formattedResponse += `💡 **How to access:**\n`;
+        formattedResponse += `💵 **Down Payment:** $${downPayment.toLocaleString()} (${Math.round((downPayment / propertyValue) * 100)}%)\n`;
+        
+        if (zipCodesToProcess.length > 1) {
+          formattedResponse += `🗺️ **Locations:** ${zipCodesToProcess.length} ZIP codes (${processedZipCodes.length} successfully processed)\n`;
+        }
+        
+        formattedResponse += `\n💡 **How to access:**\n`;
         formattedResponse += `• Click the download link above\n`;
         formattedResponse += `• Or visit: http://localhost:3001/list to see all saved files\n`;
         formattedResponse += `• File is also available in the local 'data' folder\n`;

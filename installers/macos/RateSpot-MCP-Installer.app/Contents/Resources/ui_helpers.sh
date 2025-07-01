@@ -183,6 +183,123 @@ Please check your API key and try again.\" buttons {\"OK\"} default button \"OK\
     fi
 }
 
+# Show MCP client selection dialog
+show_mcp_client_selection() {
+    local claude_status="$1"
+    local cline_status="$2"
+    
+    local claude_text="Claude Desktop (recommended)"
+    local cline_text="Cline (VS Code extension)"
+    
+    # Add status indicators
+    if [[ "$claude_status" == "detected" ]]; then
+        claude_text="$claude_text - ✅ Detected"
+    elif [[ "$claude_status" == "missing" ]]; then
+        claude_text="$claude_text - ⚠️ Not found"
+    fi
+    
+    if [[ "$cline_status" == "detected" ]]; then
+        cline_text="$cline_text - ✅ Detected"
+    elif [[ "$cline_status" == "missing" ]]; then
+        cline_text="$cline_text - ⚠️ Not found"
+    fi
+    
+    # Create the dialog with multiple choice list
+    local result
+    result=$(osascript -e "
+    set clientChoices to {\"$claude_text\", \"$cline_text\"}
+    set defaultSelections to {true, false}
+    
+    set selectedItems to choose from list clientChoices with title \"Configure MCP Clients\" with prompt \"Select which applications to configure with RateSpot MCP:
+
+You can select multiple clients by holding Command while clicking.\" default items {item 1 of clientChoices} with multiple selections allowed
+    
+    if selectedItems is false then
+        return \"CANCELLED\"
+    else
+        set AppleScript's text item delimiters to \"|\"
+        return selectedItems as string
+    end if
+    ")
+    
+    if [[ "$result" == "CANCELLED" ]]; then
+        return 1
+    fi
+    
+    # Parse the results and return selection flags
+    local configure_claude=false
+    local configure_cline=false
+    
+    if echo "$result" | grep -q "Claude Desktop"; then
+        configure_claude=true
+    fi
+    
+    if echo "$result" | grep -q "Cline"; then
+        configure_cline=true
+    fi
+    
+    # Return the selections as environment variables
+    echo "CONFIGURE_CLAUDE=$configure_claude"
+    echo "CONFIGURE_CLINE=$configure_cline"
+    return 0
+}
+
+# Show configuration results summary
+show_configuration_summary() {
+    local claude_result="$1"
+    local cline_result="$2"
+    local install_path="$3"
+    
+    local summary="🎉 RateSpot MCP Server installed successfully!
+
+Installation location: $install_path
+
+Configuration Results:"
+    
+    if [[ "$claude_result" == "success" ]]; then
+        summary="$summary
+✅ Claude Desktop - Configured successfully"
+    elif [[ "$claude_result" == "skipped" ]]; then
+        summary="$summary
+⏭️ Claude Desktop - Skipped (not selected)"
+    elif [[ "$claude_result" == "failed" ]]; then
+        summary="$summary
+❌ Claude Desktop - Configuration failed"
+    fi
+    
+    if [[ "$cline_result" == "success" ]]; then
+        summary="$summary
+✅ Cline (VS Code) - Configured successfully"
+    elif [[ "$cline_result" == "skipped" ]]; then
+        summary="$summary
+⏭️ Cline (VS Code) - Skipped (not selected)"
+    elif [[ "$cline_result" == "failed" ]]; then
+        summary="$summary
+❌ Cline (VS Code) - Configuration failed"
+    fi
+    
+    summary="$summary
+
+Your RateSpot MCP server is ready to use!"
+    
+    local result
+    result=$(osascript -e "display dialog \"$summary\" buttons {\"Done\", \"Open Install Folder\", \"Test Installation\"} default button \"Done\" with title \"Installation Complete\" with icon note")
+    
+    local button_pressed=$(echo "$result" | sed 's/.*button returned:\([^,]*\).*/\1/')
+    
+    case "$button_pressed" in
+        "Open Install Folder")
+            open "$install_path"
+            ;;
+        "Test Installation")
+            return 2  # Special code for test
+            ;;
+        *)
+            return 0  # Done
+            ;;
+    esac
+}
+
 # Show retry dialog
 show_retry() {
     local message="$1"
