@@ -5,11 +5,15 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 
 ## 🚀 Super Simple Installation
 
+### Prerequisites
+1. **Claude Desktop**: Download and install from [claude.ai/download](https://claude.ai/download)
+2. **RateSpot API Key**: Get yours at [app.ratespot.io](https://app.ratespot.io)
+
 ### 🎯 Desktop Extension (DXT) - Easiest Method!
 **Just like installing a browser extension - no technical knowledge required!**
 
 1. **Download**: [ratespot-mcp-2.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.0.0.dxt)
-2. **Drag and drop** the downloaded file into Claude Desktop
+2. **Double Click** the downloaded file into Claude Desktop
 3. **Enter your RateSpot API key** when prompted
 4. **Done!** Start asking about mortgage rates immediately
 
@@ -47,13 +51,9 @@ To install RateSpot MCP Server for Claude Desktop automatically via [Smithery](h
 npx -y @smithery/cli install @zad0xlik/ratespot-mcp --client claude
 ```
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- RateSpot API key (get yours at [https://app.ratespot.io/account-settings](https://app.ratespot.io/account-settings) or create a free account at [https://app.ratespot.io](https://app.ratespot.io))
-
-### Step 4: Start Using
-Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,000 loan?"*
+### Start Using
+Ask Claude about mortgage rates! Try questions like:
+*"Can you get current mortgage rates for a $400,000 loan?"*
 
 
 ## ✨ What You Can Do
