@@ -32,11 +32,11 @@
   "tools": [
     {
       "name": "get-mortgage-rates",
-      "description": "Get current mortgage rates based on loan parameters like amount, credit score, down payment, and location"
+      "description": "Get current mortgage rates for a single location. For multiple ZIP codes, make separate calls for each location."
     },
     {
       "name": "compare-loan-products",
-      "description": "Compare different loan products (15-year vs 30-year, conventional vs FHA, etc.) for the same borrower profile"
+      "description": "Compare loan products across multiple ZIP codes. Each ZIP code requires a separate API call - the tool automatically handles this when multiple ZIP codes are provided."
     },
     {
       "name": "calculate-monthly-payment",

@@ -325,8 +325,8 @@ function formatMortgageProductsAsPipe(events: any[]): string {
   return output;
 }
 
-// Helper function to make API requests for RateSpot SSE API
-async function makeRateSpotRequest(params: any) {
+// Helper function to make API requests for RateSpot SSE API with timeout
+async function makeRateSpotRequest(params: any, timeoutMs: number = 15000) {
   try {
     const queryParams = new URLSearchParams();
     
@@ -347,13 +347,22 @@ async function makeRateSpotRequest(params: any) {
     console.error(`Making request to: ${url}`);
     console.error(`With parameters: ${JSON.stringify(params, null, 2)}`);
 
-    const response = await fetch(url, {
+    // Create timeout promise
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error(`Request timeout after ${timeoutMs}ms`)), timeoutMs);
+    });
+
+    // Create fetch promise
+    const fetchPromise = fetch(url, {
       method: 'GET',
       headers: {
         'Accept': 'text/event-stream',
         'Cache-Control': 'no-cache'
       }
     });
+
+    // Race between fetch and timeout
+    const response = await Promise.race([fetchPromise, timeoutPromise]) as Response;
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -362,8 +371,12 @@ async function makeRateSpotRequest(params: any) {
       throw new Error(`API request failed: ${response.status} ${response.statusText}\n${errorText}`);
     }
 
-    // Parse Server-Sent Events response
-    const text = await response.text();
+    // Parse Server-Sent Events response with timeout
+    const textPromise = response.text();
+    const text = await Promise.race([textPromise, timeoutPromise]) as string;
+    
+    console.error(`Received response (${text.length} characters)`);
+    
     const events = [];
     const lines = text.split('\n');
     
@@ -379,10 +392,12 @@ async function makeRateSpotRequest(params: any) {
           currentEvent = {};
         } catch (e) {
           // Skip malformed JSON
+          console.error(`Failed to parse JSON: ${line}`);
         }
       }
     }
     
+    console.error(`Parsed ${events.length} events`);
     return events;
   } catch (error) {
     console.error('Error in makeRateSpotRequest:', error);
@@ -630,6 +645,9 @@ server.tool(
 );
 
 // Compare Loan Products Tool
+// IMPORTANT: RateSpot API does NOT support multiple ZIP codes in a single request
+// This tool handles multi-ZIP comparisons by making separate API calls for each ZIP code
+// When users ask to compare "ZIP1 vs ZIP2", Claude should understand this requires multiple calls
 server.tool(
   "compare-loan-products",
   {
@@ -637,8 +655,8 @@ server.tool(
     creditScore: z.number().describe("Credit score (300-850)"),
     downPayment: z.number().describe("Down payment amount in dollars"),
     propertyValue: z.number().describe("Property value in dollars"),
-    zipCode: z.string().describe("ZIP code (single ZIP) or comma-separated ZIP codes for multi-location comparison"),
-    zipCodes: z.array(z.string()).optional().describe("Array of ZIP codes for multi-location comparison (alternative to comma-separated zipCode)"),
+    zipCode: z.string().describe("ZIP code (single ZIP) or comma-separated ZIP codes for multi-location comparison. NOTE: Each ZIP code requires a separate API call."),
+    zipCodes: z.array(z.string()).optional().describe("Array of ZIP codes for multi-location comparison (alternative to comma-separated zipCode). Each ZIP will be processed with a separate API call."),
     propertyType: z.string().optional().default("single_family").describe("Property type"),
     occupancy: z.string().optional().default("primary").describe("Property use (primary, secondary, investment)"),
     format: z.enum(["markdown", "csv", "pipe", "auto"]).optional().default("auto").describe("Output format: 'markdown' for markdown table, 'csv' for CSV download, 'pipe' for pipe-delimited format, or 'auto' for automatic selection based on data size")
