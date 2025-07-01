@@ -326,7 +326,7 @@ function formatMortgageProductsAsPipe(events: any[]): string {
 }
 
 // Helper function to make API requests for RateSpot SSE API with timeout
-async function makeRateSpotRequest(params: any, timeoutMs: number = 15000) {
+async function makeRateSpotRequest(params: any, timeoutMs: number = 30000) {
   try {
     const queryParams = new URLSearchParams();
     
@@ -346,10 +346,11 @@ async function makeRateSpotRequest(params: any, timeoutMs: number = 15000) {
 
     console.error(`Making request to: ${url}`);
     console.error(`With parameters: ${JSON.stringify(params, null, 2)}`);
+    console.error(`Timeout set to: ${timeoutMs}ms`);
 
     // Create timeout promise
     const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error(`Request timeout after ${timeoutMs}ms`)), timeoutMs);
+      setTimeout(() => reject(new Error(`Request timeout after ${timeoutMs}ms. The RateSpot API typically takes 15-25 seconds to respond.`)), timeoutMs);
     });
 
     // Create fetch promise
@@ -565,7 +566,6 @@ server.tool(
         zipcode: params.zipCode || "90210",
         property_value: propertyValue,
         down_payment: downPaymentPercent,
-        mortgage_balance: mortgageBalancePercent,
         credit_score: params.creditScore || 790,
       
         // These parameters are REQUIRED by the API
@@ -712,7 +712,6 @@ server.tool(
             zipcode: currentZip.trim(),
             property_value: propertyValue,
             down_payment: downPaymentPercent,
-            mortgage_balance: mortgageBalancePercent,
             credit_score: creditScore,
             fha: 1,
             va: 1,
