@@ -2,29 +2,36 @@
 
 Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Server.
 
-## 🚀 Quick Start (Recommended)
+## 🚀 Super Simple Installation
 
-### ⚡ One-Click Installation (macOS)
-Run this command in Terminal for automatic installation:
+### 🎯 Desktop Extension (DXT) - Easiest Method!
+**Just like installing a browser extension - no technical knowledge required!**
+
+1. **Download**: [ratespot-mcp-1.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-1.0.0.dxt)
+2. **Double-click** the downloaded file
+3. **Click "Install"** in Claude Desktop
+4. **Enter your RateSpot API key**
+5. **Done!** Start asking about mortgage rates immediately
+
+**No Node.js, no Terminal, no configuration files needed!**
+
+📖 **[Complete DXT Installation Guide](docs/installation/DXT_INSTALLATION_GUIDE.md)**
+
+---
+
+### Alternative Installation Methods
+
+#### ⚡ One-Click Terminal Installation (macOS)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/zad0xlik/ratespot-mcp/main/installers/macos/quick-install.sh | bash
 ```
 
-This will automatically:
-- Install Node.js (if needed)
-- Guide you to install Claude Desktop (if needed)
-- Set up your RateSpot API key
-- Configure everything for you
+#### 🖱️ GUI Installation (macOS)
+1. Download `RateSpot-MCP-Installer.app` from [installers/macos](installers/macos/)
+2. Double-click and follow the setup wizard
 
-### 🖱️ GUI Installation (macOS)
-1. Download `RateSpot-MCP-Installer.app` from the [installers/macos](installers/macos/) directory
-2. Double-click the installer
-3. Follow the enhanced setup wizard with prerequisites check
-4. Enter your RateSpot API key when prompted
-
-### 💻 Windows Installation
-1. Download and run `setup.bat` from the [installers/windows](installers/windows/) directory
-2. Follow the prompts to enter your API key
+#### 💻 Windows Installation
+1. Download and run `setup.bat` from [installers/windows](installers/windows/)
 
 ### 🔑 Get Your RateSpot API Key
 1. Sign up for free at **[https://app.ratespot.io](https://app.ratespot.io)**
