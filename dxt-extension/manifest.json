@@ -19,10 +19,10 @@
   "support": "https://github.com/zad0xlik/ratespot-mcp/issues",
   "server": {
     "type": "node",
-    "entry_point": "server/ratespot_mcp_server.js",
+    "entry_point": "server/ratespot_mcp_server_streaming.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/server/ratespot_mcp_server.js"],
+      "args": ["${__dirname}/server/ratespot_mcp_server_streaming.js"],
       "env": {
         "RATESPOT_API_KEY": "${user_config.api_key}",
         "NODE_ENV": "production"
@@ -32,7 +32,11 @@
   "tools": [
     {
       "name": "get-mortgage-rates",
-      "description": "Get current mortgage rates for a single location. For multiple ZIP codes, make separate calls for each location."
+      "description": "Get current mortgage rates with streaming support for faster initial response. Returns results progressively to avoid timeouts."
+    },
+    {
+      "name": "get-streaming-results",
+      "description": "Retrieve results from a streaming mortgage rate request using the session ID"
     },
     {
       "name": "compare-loan-products",
