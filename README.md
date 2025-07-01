@@ -1,4 +1,5 @@
 # RateSpot MCP Server
+[![smithery badge](https://smithery.ai/badge/@zad0xlik/ratespot-mcp)](https://smithery.ai/server/@zad0xlik/ratespot-mcp)
 
 Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Server.
 
@@ -37,8 +38,22 @@ curl -fsSL https://raw.githubusercontent.com/zad0xlik/ratespot-mcp/main/installe
 1. Sign up for free at **[https://app.ratespot.io](https://app.ratespot.io)**
 2. Get your API key from **[Account Settings](https://app.ratespot.io/account-settings)**
 
-### 🎯 Start Using
-After installation, try asking Claude: *"What are current mortgage rates for a $400,000 loan?"*
+### Installing via Smithery
+
+To install RateSpot MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@zad0xlik/ratespot-mcp):
+
+```bash
+npx -y @smithery/cli install @zad0xlik/ratespot-mcp --client claude
+```
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- RateSpot API key (get yours at [https://app.ratespot.io/account-settings](https://app.ratespot.io/account-settings) or create a free account at [https://app.ratespot.io](https://app.ratespot.io))
+
+### Step 4: Start Using
+Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,000 loan?"*
+
 
 ## ✨ What You Can Do
 
