@@ -3,6 +3,10 @@
 
 Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Server.
 
+<a href="https://glama.ai/mcp/servers/@zad0xlik/ratespot-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@zad0xlik/ratespot-mcp/badge" alt="RateSpot Server MCP server" />
+</a>
+
 ## 🚀 Super Simple Installation
 
 ### 🎯 Desktop Extension (DXT) - Easiest Method!
