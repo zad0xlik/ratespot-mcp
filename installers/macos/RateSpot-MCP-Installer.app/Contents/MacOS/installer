@@ -205,6 +205,39 @@ Do you want to continue with the installation anyway?" "Validation Inconclusive"
         esac
     done
     
+    # Step 5: MCP Client Selection
+    log "Getting MCP client selection from user"
+    show_progress "Detecting MCP clients..."
+    
+    # Get client detection status
+    local client_status
+    client_status=$(get_mcp_client_status)
+    eval "$client_status"  # Sets CLAUDE_STATUS and CLINE_STATUS
+    
+    log "Claude Desktop status: $CLAUDE_STATUS"
+    log "Cline status: $CLINE_STATUS"
+    
+    # Show client selection dialog
+    local selection_result
+    selection_result=$(show_mcp_client_selection "$CLAUDE_STATUS" "$CLINE_STATUS")
+    if [[ $? -ne 0 ]]; then
+        log "User cancelled at MCP client selection"
+        exit 0
+    fi
+    
+    # Parse selection results
+    eval "$selection_result"  # Sets CONFIGURE_CLAUDE and CONFIGURE_CLINE
+    
+    log "User selected - Claude Desktop: $CONFIGURE_CLAUDE, Cline: $CONFIGURE_CLINE"
+    
+    # Validate that at least one client is selected
+    if [[ "$CONFIGURE_CLAUDE" == "false" && "$CONFIGURE_CLINE" == "false" ]]; then
+        show_error "No MCP clients selected for configuration.
+
+Please select at least one client (Claude Desktop or Cline) to continue with the installation." "No Clients Selected"
+        exit 0
+    fi
+    
     # Step 5: Confirm installation
     log "Showing installation confirmation"
     if ! show_confirmation "Ready to install RateSpot MCP Server
@@ -236,8 +269,8 @@ Continue with installation?" "Confirm Installation"; then
         0)  # Success
             log "Installation completed successfully"
             
-            # Show final success dialog with options
-            show_final_success "$INSTALL_PATH"
+            # Show configuration summary with results
+            show_configuration_summary "$CLAUDE_CONFIG_RESULT" "$CLINE_CONFIG_RESULT" "$INSTALL_PATH"
             local final_choice=$?
             
             case $final_choice in

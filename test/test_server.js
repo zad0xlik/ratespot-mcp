@@ -11,7 +11,7 @@ const path = require('path');
 console.log('🧪 Testing RateSpot MCP Server...\n');
 
 // Test if the compiled server exists
-const serverPath = path.join(__dirname, 'ratespot_mcp_server.js');
+const serverPath = path.join(__dirname, '..', 'ratespot_mcp_server.js');
 const fs = require('fs');
 
 if (!fs.existsSync(serverPath)) {
