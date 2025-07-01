@@ -55,10 +55,71 @@ main() {
     
     # Step 1: Show welcome dialog
     log "Showing welcome dialog"
-    if ! show_welcome; then
-        log "User cancelled at welcome screen"
-        exit 0
-    fi
+    show_welcome
+    local welcome_result=$?
+    
+    case $welcome_result in
+        1)  # Cancel
+            log "User cancelled at welcome screen"
+            exit 0
+            ;;
+        2)  # Check Prerequisites requested
+            log "User requested prerequisites check"
+            
+            # Run individual checks for prerequisites dialog
+            local nodejs_status git_status network_status claude_status
+            
+            check_nodejs > /dev/null 2>&1
+            nodejs_status=$?
+            
+            check_git > /dev/null 2>&1
+            git_status=$?
+            
+            check_network > /dev/null 2>&1
+            network_status=$?
+            
+            check_claude_desktop > /dev/null 2>&1
+            claude_status=$?
+            
+            # Show prerequisites check dialog
+            show_prerequisites_check "$nodejs_status" "$claude_status" "$git_status" "$network_status"
+            local prereq_result=$?
+            
+            case $prereq_result in
+                1)  # Cancel
+                    log "User cancelled at prerequisites check"
+                    exit 0
+                    ;;
+                2)  # Node.js install requested
+                    log "User requested Node.js installation"
+                    show_success "Node.js download page opened.
+
+Please install Node.js and run this installer again." "Download Started"
+                    exit 0
+                    ;;
+                3)  # Claude Desktop install requested
+                    log "User requested Claude Desktop installation"
+                    show_success "Claude Desktop download page opened.
+
+Please install Claude Desktop and run this installer again." "Download Started"
+                    exit 0
+                    ;;
+                4)  # Both installs requested
+                    log "User requested both Node.js and Claude Desktop installation"
+                    show_success "Download pages opened for Node.js and Claude Desktop.
+
+Please install both applications and run this installer again." "Downloads Started"
+                    exit 0
+                    ;;
+                0)  # Continue with installation
+                    log "User chose to continue after prerequisites check"
+                    ;;
+            esac
+            ;;
+        0)  # Continue normally
+            log "User chose to continue without prerequisites check"
+            ;;
+    esac
     
     # Step 2: Run pre-installation checks
     log "Running pre-installation checks"

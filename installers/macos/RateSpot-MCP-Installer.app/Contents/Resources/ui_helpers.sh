@@ -3,18 +3,106 @@
 # UI Helper Functions for RateSpot MCP Installer
 # Uses native macOS dialogs via osascript
 
-# Show welcome dialog
+# Show enhanced welcome dialog with prerequisites check
 show_welcome() {
-    osascript -e 'display dialog "Welcome to RateSpot MCP Installer!
+    local result
+    result=$(osascript -e 'display dialog "Welcome to RateSpot MCP Installer!
 
 This installer will:
-• Check for Node.js (install if needed)
+• Check system requirements
 • Download the RateSpot MCP server
 • Configure Claude Desktop automatically
 • Set up your API key securely
 
-Click OK to continue." buttons {"Cancel", "OK"} default button "OK" with title "RateSpot MCP Installer" with icon note'
-    return $?
+Click \"Check Prerequisites\" to verify your system is ready, or \"Continue\" to proceed directly." buttons {"Cancel", "Continue", "Check Prerequisites"} default button "Check Prerequisites" with title "RateSpot MCP Installer" with icon note')
+    
+    local button_pressed=$(echo "$result" | sed 's/.*button returned:\([^,]*\).*/\1/')
+    
+    case "$button_pressed" in
+        "Check Prerequisites")
+            return 2  # Special code for prerequisites check
+            ;;
+        "Continue")
+            return 0  # Continue normally
+            ;;
+        *)
+            return 1  # Cancel
+            ;;
+    esac
+}
+
+# Show prerequisites check dialog
+show_prerequisites_check() {
+    local nodejs_status="$1"
+    local claude_status="$2"
+    local git_status="$3"
+    local network_status="$4"
+    
+    # Create status indicators
+    local nodejs_icon="❌"
+    local claude_icon="❌"
+    local git_icon="❌"
+    local network_icon="❌"
+    
+    [[ "$nodejs_status" == "0" ]] && nodejs_icon="✅"
+    [[ "$claude_status" == "0" || "$claude_status" == "1" ]] && claude_icon="✅"
+    [[ "$git_status" == "0" ]] && git_icon="✅"
+    [[ "$network_status" == "0" ]] && network_icon="✅"
+    
+    local message="System Prerequisites Check:
+
+$nodejs_icon Node.js (v16+) - Required for MCP server
+$claude_icon Claude Desktop - Target application
+$git_icon Git - Required for installation
+$network_icon Internet Connection - Required for download
+
+Missing requirements will be addressed during installation."
+    
+    # Determine which buttons to show based on missing prerequisites
+    local buttons="\"Continue\""
+    local needs_help=false
+    
+    if [[ "$nodejs_status" != "0" ]]; then
+        buttons="\"Cancel\", \"Install Node.js\", \"Continue\""
+        needs_help=true
+    fi
+    
+    if [[ "$claude_status" != "0" && "$claude_status" != "1" ]]; then
+        if [[ "$needs_help" == "true" ]]; then
+            buttons="\"Cancel\", \"Fix All\", \"Continue\""
+        else
+            buttons="\"Cancel\", \"Get Claude Desktop\", \"Continue\""
+        fi
+        needs_help=true
+    fi
+    
+    local result
+    result=$(osascript -e "display dialog \"$message\" buttons {$buttons} default button \"Continue\" with title \"Prerequisites Check\" with icon note")
+    
+    local button_pressed=$(echo "$result" | sed 's/.*button returned:\([^,]*\).*/\1/')
+    
+    case "$button_pressed" in
+        "Install Node.js")
+            open "https://nodejs.org/en/download/"
+            return 2  # Node.js install requested
+            ;;
+        "Get Claude Desktop")
+            open "https://claude.ai/download"
+            return 3  # Claude Desktop install requested
+            ;;
+        "Fix All")
+            open "https://nodejs.org/en/download/"
+            sleep 1
+            open "https://claude.ai/download"
+            return 4  # Both installs requested
+            ;;
+        "Continue")
+            return 0  # Continue with installation
+            ;;
+        *)
+            return 1  # Cancel
+            ;;
+    esac
 }
 
 # Show progress dialog (non-blocking)
@@ -244,7 +332,7 @@ You can select multiple clients by holding Command while clicking.\" default ite
     return 0
 }
 
-# Show configuration results summary
+# Show configuration results summary with welcome kit option
 show_configuration_summary() {
     local claude_result="$1"
     local cline_result="$2"
@@ -280,16 +368,18 @@ Configuration Results:"
     
     summary="$summary
 
-Your RateSpot MCP server is ready to use!"
+Your RateSpot MCP server is ready to use!
+A welcome guide with examples has been created."
     
     local result
-    result=$(osascript -e "display dialog \"$summary\" buttons {\"Done\", \"Open Install Folder\", \"Test Installation\"} default button \"Done\" with title \"Installation Complete\" with icon note")
+    result=$(osascript -e "display dialog \"$summary\" buttons {\"Done\", \"View Welcome Guide\", \"Test Installation\"} default button \"View Welcome Guide\" with title \"Installation Complete\" with icon note")
     
     local button_pressed=$(echo "$result" | sed 's/.*button returned:\([^,]*\).*/\1/')
     
     case "$button_pressed" in
-        "Open Install Folder")
-            open "$install_path"
+        "View Welcome Guide")
+            open "$install_path/welcome.html"
+            return 0
             ;;
         "Test Installation")
             return 2  # Special code for test

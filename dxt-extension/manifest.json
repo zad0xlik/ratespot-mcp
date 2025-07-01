@@ -1,0 +1,78 @@
+{
+  "dxt_version": "0.1",
+  "name": "ratespot-mcp",
+  "display_name": "RateSpot Mortgage Rates",
+  "version": "1.0.0",
+  "description": "Get real-time mortgage rates directly in Claude Desktop",
+  "long_description": "Access current mortgage rates, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive mortgage data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
+  "author": {
+    "name": "RateSpot",
+    "email": "support@ratespot.io",
+    "url": "https://ratespot.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zad0xlik/ratespot-mcp"
+  },
+  "homepage": "https://github.com/zad0xlik/ratespot-mcp",
+  "documentation": "https://github.com/zad0xlik/ratespot-mcp/blob/main/README.md",
+  "support": "https://github.com/zad0xlik/ratespot-mcp/issues",
+  "server": {
+    "type": "node",
+    "entry_point": "server/ratespot_mcp_server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/ratespot_mcp_server.js"],
+      "env": {
+        "RATESPOT_API_KEY": "${user_config.api_key}",
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get-mortgage-rates",
+      "description": "Get current mortgage rates based on loan parameters like amount, credit score, down payment, and location"
+    },
+    {
+      "name": "compare-loan-products",
+      "description": "Compare different loan products (15-year vs 30-year, conventional vs FHA, etc.) for the same borrower profile"
+    },
+    {
+      "name": "calculate-monthly-payment",
+      "description": "Calculate monthly mortgage payment including principal, interest, taxes, insurance, PMI, and HOA fees"
+    },
+    {
+      "name": "list-saved-files",
+      "description": "List previously saved mortgage rate comparison files"
+    },
+    {
+      "name": "analyze-csv-file",
+      "description": "Analyze saved mortgage rate data files for trends and insights"
+    },
+    {
+      "name": "compare-csv-files",
+      "description": "Compare multiple saved rate files to analyze market changes over time"
+    }
+  ],
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "RateSpot API Key",
+      "description": "Your RateSpot API key. Get a free key at app.ratespot.io/account-settings",
+      "sensitive": true,
+      "required": true,
+      "placeholder": "Enter your RateSpot API key..."
+    }
+  },
+  "keywords": ["mortgage", "rates", "real-estate", "finance", "loans", "housing", "homebuying"],
+  "icon": "icon.svg",
+  "license": "MIT",
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": ["darwin", "win32"],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  }
+}

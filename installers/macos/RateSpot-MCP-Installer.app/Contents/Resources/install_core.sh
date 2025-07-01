@@ -246,6 +246,147 @@ run_post_install_tests() {
     return 0
 }
 
+# Create welcome kit with usage examples
+create_welcome_kit() {
+    local install_path="$1"
+    
+    log "Creating welcome kit..."
+    
+    cat > "$install_path/welcome.html" << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RateSpot MCP - Welcome</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 { color: #fff; text-align: center; margin-bottom: 30px; }
+        h2 { color: #f0f0f0; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px; }
+        .example {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .example code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .status {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Welcome to RateSpot MCP!</h1>
+        
+        <div class="status">
+            <strong>✅ Installation Complete!</strong><br>
+            Your RateSpot MCP server is now ready to use with Claude Desktop.
+        </div>
+
+        <h2>🚀 Quick Start Examples</h2>
+        
+        <div class="example">
+            <strong>Get Current Mortgage Rates:</strong><br>
+            <code>"What are today's mortgage rates for a $400,000 loan with 20% down in California?"</code>
+        </div>
+
+        <div class="example">
+            <strong>Compare Loan Products:</strong><br>
+            <code>"Compare 15-year vs 30-year mortgages for a $500K loan with 750 credit score"</code>
+        </div>
+
+        <div class="example">
+            <strong>Calculate Monthly Payment:</strong><br>
+            <code>"Calculate monthly payment for $300K loan at 6.5% interest for 30 years"</code>
+        </div>
+
+        <div class="example">
+            <strong>Market Analysis:</strong><br>
+            <code>"Show me rate trends and help me understand if now is a good time to buy"</code>
+        </div>
+
+        <h2>🔧 Troubleshooting</h2>
+        <p>If you encounter any issues:</p>
+        <ul>
+            <li>Restart Claude Desktop to ensure the MCP server loads</li>
+            <li>Check that your RateSpot API key is valid at <a href="https://app.ratespot.io/account-settings" class="button">RateSpot Settings</a></li>
+            <li>View the installation log for detailed error messages</li>
+        </ul>
+
+        <h2>📚 Resources</h2>
+        <p>
+            <a href="https://app.ratespot.io" class="button">RateSpot Dashboard</a>
+            <a href="https://claude.ai" class="button">Claude Desktop</a>
+            <a href="#" onclick="showInstallPath()" class="button">Show Install Location</a>
+        </p>
+
+        <script>
+            function showInstallPath() {
+                alert('Installation Location:\n' + window.location.pathname.replace('/welcome.html', ''));
+            }
+        </script>
+    </div>
+</body>
+</html>
+EOF
+
+    log "Welcome kit created at: $install_path/welcome.html"
+}
+
+# Launch Claude Desktop if available
+launch_claude_desktop() {
+    log "Attempting to launch Claude Desktop..."
+    
+    if [[ -d "/Applications/Claude.app" ]]; then
+        log "Launching Claude Desktop..."
+        open -a "Claude" 2>/dev/null || log "Failed to launch Claude Desktop"
+        return 0
+    else
+        log "Claude Desktop not found, skipping launch"
+        return 1
+    fi
+}
+
 # Create uninstaller script
 create_uninstaller() {
     local install_path="$1"
@@ -393,13 +534,22 @@ perform_installation() {
     run_post_install_tests "$install_path" "$api_key"
     test_result=$?
     
-    # Step 4: Create uninstaller
+    # Step 4: Create welcome kit
+    create_welcome_kit "$install_path"
+    
+    # Step 5: Create uninstaller
     create_uninstaller "$install_path"
     
-    # Step 5: Clean up
+    # Step 6: Launch Claude Desktop if configured successfully
+    if [[ "$claude_result" == "success" ]]; then
+        log "Launching Claude Desktop..."
+        launch_claude_desktop
+    fi
+    
+    # Step 7: Clean up
     cleanup_temp_files
     
-    # Step 6: Store results for final summary
+    # Step 8: Store results for final summary
     export CLAUDE_CONFIG_RESULT="$claude_result"
     export CLINE_CONFIG_RESULT="$cline_result"
     

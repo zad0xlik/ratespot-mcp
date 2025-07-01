@@ -2,29 +2,43 @@
 
 Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Server.
 
-## 🚀 Quick Start (Recommended)
+## 🚀 Super Simple Installation
 
-### Step 1: Install Claude Desktop
-Download Claude Desktop: **[https://claude.ai/download](https://claude.ai/download)**
+### 🎯 Desktop Extension (DXT) - Easiest Method!
+**Just like installing a browser extension - no technical knowledge required!**
 
-### Step 2: Get Your RateSpot API Key
+1. **Download**: [ratespot-mcp-1.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-1.0.0.dxt)
+2. **Double-click** the downloaded file
+3. **Click "Install"** in Claude Desktop
+4. **Enter your RateSpot API key**
+5. **Done!** Start asking about mortgage rates immediately
+
+**No Node.js, no Terminal, no configuration files needed!**
+
+📖 **[Complete DXT Installation Guide](docs/installation/DXT_INSTALLATION_GUIDE.md)**
+
+---
+
+### Alternative Installation Methods
+
+#### ⚡ One-Click Terminal Installation (macOS)
+```bash
+curl -fsSL https://raw.githubusercontent.com/zad0xlik/ratespot-mcp/main/installers/macos/quick-install.sh | bash
+```
+
+#### 🖱️ GUI Installation (macOS)
+1. Download `RateSpot-MCP-Installer.app` from [installers/macos](installers/macos/)
+2. Double-click and follow the setup wizard
+
+#### 💻 Windows Installation
+1. Download and run `setup.bat` from [installers/windows](installers/windows/)
+
+### 🔑 Get Your RateSpot API Key
 1. Sign up for free at **[https://app.ratespot.io](https://app.ratespot.io)**
 2. Get your API key from **[Account Settings](https://app.ratespot.io/account-settings)**
 
-### Step 3: Install RateSpot MCP Server
-
-**For macOS Users:**
-1. Download `RateSpot-MCP-Installer.app` from the [installers/macos](installers/macos/) directory
-2. Double-click the installer
-3. Enter your RateSpot API key when prompted
-4. The installer will automatically configure Claude Desktop
-
-**For Windows Users:**
-1. Download and run `setup.bat` from the [installers/windows](installers/windows/) directory
-2. Follow the prompts to enter your API key
-
-### Step 4: Start Using
-Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,000 loan?"*
+### 🎯 Start Using
+After installation, try asking Claude: *"What are current mortgage rates for a $400,000 loan?"*
 
 ## ✨ What You Can Do
 
