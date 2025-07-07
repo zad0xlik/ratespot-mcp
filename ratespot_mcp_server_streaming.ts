@@ -7,6 +7,10 @@ import * as path from "path";
 import * as http from "http";
 import * as net from "net";
 import * as crypto from "crypto";
+import { FileServerManager } from './src/FileServerManager';
+
+// Initialize file server manager
+const fileServerManager = FileServerManager.getInstance();
 
 // Load environment variables
 dotenv.config();
@@ -43,11 +47,8 @@ try {
   process.exit(1);
 }
 
-// Simple HTTP server for file downloads
-let fileServer: http.Server | null = null;
-
-// Get port from environment or use default
-const FILE_SERVER_PORT = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
+// Initialize file server manager with default port from environment
+const defaultPort = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
 
 // Active streaming sessions storage
 interface StreamingSession {
@@ -99,106 +100,17 @@ async function saveCSVFile(csvData: string, fileType: string, searchParams?: any
   // Write file
   await fs.promises.writeFile(filePath, csvWithMetadata, 'utf8');
   
-  // Start file server if not already running
-  if (!fileServer) {
-    await startFileServer();
-  }
+  // Ensure file server is running
+  await fileServerManager.ensureServerRunning(DATA_DIR);
   
-  // Get the actual port the server is running on
-  const address = fileServer?.address();
-  if (!address) {
-    throw new Error('File server not running');
-  }
-  const port = typeof address === 'string' ? parseInt(address) : (address as net.AddressInfo).port;
-  if (!port) {
-    throw new Error('File server port not available');
-  }
-  console.error(`File server running on port ${port}`);
-  const downloadUrl = `http://localhost:${port}/download/${fileName}`;
+  // Get download URL
+  const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
   
   return {
     filePath,
     fileName,
     downloadUrl
   };
-}
-
-// Start HTTP server for file downloads
-async function startFileServer(initialPort: number = FILE_SERVER_PORT): Promise<void> {
-  if (fileServer) return;
-  
-  const tryPort = (port: number): Promise<number> => {
-    return new Promise((resolve, reject) => {
-      const server = http.createServer();
-      server.once('error', (err: any) => {
-        if (err.code === 'EADDRINUSE') {
-          console.error(`Port ${port} in use, trying ${port + 1}`);
-          resolve(tryPort(port + 1));
-        } else {
-          reject(err);
-        }
-      });
-      server.once('listening', () => {
-        server.close();
-        resolve(port);
-      });
-      server.listen(port);
-    });
-  };
-
-  const availablePort = await tryPort(initialPort);
-  console.error(`Starting file server on port ${availablePort}`);
-  
-  fileServer = http.createServer((req, res) => {
-    const url = new URL(req.url!, `http://localhost:${FILE_SERVER_PORT}`);
-    
-    if (url.pathname.startsWith('/download/')) {
-      const fileName = url.pathname.replace('/download/', '');
-      const filePath = path.join(DATA_DIR, fileName);
-      
-      if (fs.existsSync(filePath)) {
-        res.setHeader('Content-Type', 'text/csv');
-        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        
-        const fileStream = fs.createReadStream(filePath);
-        fileStream.pipe(res);
-      } else {
-        res.statusCode = 404;
-        res.end('File not found');
-      }
-    } else if (url.pathname === '/list') {
-      // List available files
-      try {
-        const files = fs.readdirSync(DATA_DIR)
-          .filter(file => file.endsWith('.csv'))
-          .map(file => {
-            const filePath = path.join(DATA_DIR, file);
-            const stats = fs.statSync(filePath);
-            return {
-              name: file,
-              size: stats.size,
-              created: stats.birthtime,
-              downloadUrl: `http://localhost:${FILE_SERVER_PORT}/download/${file}`
-            };
-          });
-        
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.end(JSON.stringify(files, null, 2));
-      } catch (error) {
-        res.statusCode = 500;
-        res.end('Error listing files');
-      }
-    } else {
-      res.statusCode = 404;
-      res.end('Not found');
-    }
-  });
-  
-  fileServer.listen(availablePort, () => {
-    console.error(`File server running on http://localhost:${availablePort}`);
-  });
 }
 
 // Create MCP server
@@ -989,12 +901,11 @@ server.tool(
         
         await fs.promises.writeFile(filePath, mapHtml, 'utf8');
         
-        // Start file server if not running
-        if (!fileServer) {
-          startFileServer();
-        }
+        // Ensure file server is running
+        await fileServerManager.ensureServerRunning(DATA_DIR);
         
-        const mapUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
+        // Get download URL
+        const mapUrl = await fileServerManager.getDownloadUrl(fileName);
         
         return {
           content: [{
@@ -1043,11 +954,24 @@ server.tool(
 // Start the server
 async function main() {
   const transport = new StdioServerTransport();
+  
+  // Handle cleanup on exit
+  const cleanup = async () => {
+    console.error('Shutting down servers...');
+    await fileServerManager.shutdown();
+    process.exit(0);
+  };
+
+  process.on('SIGINT', cleanup);
+  process.on('SIGTERM', cleanup);
+  process.on('exit', cleanup);
+
   await server.connect(transport);
   console.error("RateSpot MCP Server (Streaming) running on stdio");
 }
 
-main().catch((error) => {
+main().catch(async (error) => {
   console.error("Failed to start server:", error);
+  await fileServerManager.shutdown();
   process.exit(1);
 });
