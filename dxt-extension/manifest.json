@@ -2,9 +2,9 @@
   "dxt_version": "0.1",
   "name": "ratespot-mcp",
   "display_name": "RateSpot Mortgage Rates",
-  "version": "1.0.0",
-  "description": "Get real-time mortgage rates directly in Claude Desktop",
-  "long_description": "Access current mortgage rates, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive mortgage data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
+  "version": "2.0.1",
+  "description": "Get real-time mortgage rates and foreclosure listings directly in Claude Desktop",
+  "long_description": "Access current mortgage rates, foreclosure listings, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive real estate data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
   "author": {
     "name": "RateSpot",
     "email": "support@ratespot.io",
@@ -33,6 +33,10 @@
     {
       "name": "get-mortgage-rates",
       "description": "Get current mortgage rates with streaming support for faster initial response. Returns results progressively to avoid timeouts."
+    },
+    {
+      "name": "get-foreclosures",
+      "description": "Search for foreclosure listings by location with interactive map visualization support. Returns property details including price, status, and auction dates."
     },
     {
       "name": "get-streaming-results",
@@ -69,7 +73,7 @@
       "placeholder": "Enter your RateSpot API key..."
     }
   },
-  "keywords": ["mortgage", "rates", "real-estate", "finance", "loans", "housing", "homebuying"],
+  "keywords": ["mortgage", "rates", "real-estate", "finance", "loans", "housing", "homebuying", "foreclosures", "auctions"],
   "icon": "icon.svg",
   "license": "MIT",
   "compatibility": {

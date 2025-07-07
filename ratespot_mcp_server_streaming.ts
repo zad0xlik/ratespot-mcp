@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
 import * as http from "http";
+import * as net from "net";
 import * as crypto from "crypto";
 
 // Load environment variables
@@ -44,7 +45,9 @@ try {
 
 // Simple HTTP server for file downloads
 let fileServer: http.Server | null = null;
-const FILE_SERVER_PORT = 3001;
+
+// Get port from environment or use default
+const FILE_SERVER_PORT = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
 
 // Active streaming sessions storage
 interface StreamingSession {
@@ -66,12 +69,12 @@ setInterval(() => {
   const now = new Date();
   const maxAge = 30 * 60 * 1000; // 30 minutes
   
-  for (const [id, session] of activeStreams.entries()) {
+  Array.from(activeStreams.entries()).forEach(([id, session]) => {
     if (now.getTime() - session.lastAccessed.getTime() > maxAge) {
       console.error(`Cleaning up old streaming session: ${id}`);
       activeStreams.delete(id);
     }
-  }
+  });
 }, 5 * 60 * 1000);
 
 // Helper function to save CSV file
@@ -98,10 +101,20 @@ async function saveCSVFile(csvData: string, fileType: string, searchParams?: any
   
   // Start file server if not already running
   if (!fileServer) {
-    startFileServer();
+    await startFileServer();
   }
   
-  const downloadUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
+  // Get the actual port the server is running on
+  const address = fileServer?.address();
+  if (!address) {
+    throw new Error('File server not running');
+  }
+  const port = typeof address === 'string' ? parseInt(address) : (address as net.AddressInfo).port;
+  if (!port) {
+    throw new Error('File server port not available');
+  }
+  console.error(`File server running on port ${port}`);
+  const downloadUrl = `http://localhost:${port}/download/${fileName}`;
   
   return {
     filePath,
@@ -111,8 +124,30 @@ async function saveCSVFile(csvData: string, fileType: string, searchParams?: any
 }
 
 // Start HTTP server for file downloads
-function startFileServer(): void {
+async function startFileServer(initialPort: number = FILE_SERVER_PORT): Promise<void> {
   if (fileServer) return;
+  
+  const tryPort = (port: number): Promise<number> => {
+    return new Promise((resolve, reject) => {
+      const server = http.createServer();
+      server.once('error', (err: any) => {
+        if (err.code === 'EADDRINUSE') {
+          console.error(`Port ${port} in use, trying ${port + 1}`);
+          resolve(tryPort(port + 1));
+        } else {
+          reject(err);
+        }
+      });
+      server.once('listening', () => {
+        server.close();
+        resolve(port);
+      });
+      server.listen(port);
+    });
+  };
+
+  const availablePort = await tryPort(initialPort);
+  console.error(`Starting file server on port ${availablePort}`);
   
   fileServer = http.createServer((req, res) => {
     const url = new URL(req.url!, `http://localhost:${FILE_SERVER_PORT}`);
@@ -161,16 +196,117 @@ function startFileServer(): void {
     }
   });
   
-  fileServer.listen(FILE_SERVER_PORT, () => {
-    console.error(`File server running on http://localhost:${FILE_SERVER_PORT}`);
+  fileServer.listen(availablePort, () => {
+    console.error(`File server running on http://localhost:${availablePort}`);
   });
 }
 
 // Create MCP server
 const server = new McpServer({
   name: "RateSpot Mortgage Server (Streaming)",
-  version: "2.0.0"
+  version: "2.1.0"
 });
+
+// Helper function to format foreclosure listings as markdown
+function formatForeclosuresMarkdown(listings: any[]): string {
+  let markdown = "# Foreclosure Listings\n\n";
+  
+  if (listings.length === 0) {
+    return markdown + "No foreclosure listings found.";
+  }
+
+  markdown += `Found ${listings.length} foreclosure listings:\n\n`;
+  
+  for (const listing of listings) {
+    markdown += `## ${listing.address}\n`;
+    markdown += `**Price:** $${listing.price.toLocaleString()}\n`;
+    markdown += `**Status:** ${listing.status}\n`;
+    markdown += `**Property Type:** ${listing.propertyType}\n`;
+    markdown += `**Bedrooms:** ${listing.beds}\n`;
+    markdown += `**Bathrooms:** ${listing.baths}\n`;
+    markdown += `**Square Feet:** ${listing.sqft.toLocaleString()}\n`;
+    markdown += `**Auction Date:** ${listing.auctionDate || 'Not scheduled'}\n`;
+    markdown += `**Location:** [View on Map](https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(listing.address)})\n\n`;
+  }
+
+  return markdown;
+}
+
+// Helper function to format foreclosure listings as CSV
+function formatForeclosuresCSV(listings: any[]): string {
+  let csv = "Address,Price,Status,Property Type,Beds,Baths,Square Feet,Auction Date,Latitude,Longitude\n";
+  
+  for (const listing of listings) {
+    const row = [
+      escapeCSVField(listing.address),
+      escapeCSVField(listing.price),
+      escapeCSVField(listing.status),
+      escapeCSVField(listing.propertyType),
+      escapeCSVField(listing.beds),
+      escapeCSVField(listing.baths),
+      escapeCSVField(listing.sqft),
+      escapeCSVField(listing.auctionDate || ''),
+      escapeCSVField(listing.latitude),
+      escapeCSVField(listing.longitude)
+    ].join(',');
+    
+    csv += row + '\n';
+  }
+  
+  return csv;
+}
+
+// Helper function to generate map HTML
+function generateMapHTML(listings: any[]): string {
+  const center = listings[0] || { latitude: 37.7749, longitude: -122.4194 }; // Default to SF
+  
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Foreclosure Listings Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <style>
+    #map { height: 600px; width: 100%; }
+    .listing-popup { max-width: 300px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    const map = L.map('map').setView([${center.latitude}, ${center.longitude}], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    const listings = ${JSON.stringify(listings)};
+    const bounds = L.latLngBounds();
+    
+    listings.forEach(listing => {
+      const marker = L.marker([listing.latitude, listing.longitude])
+        .bindPopup(\`
+          <div class="listing-popup">
+            <h3>\${listing.address}</h3>
+            <p><strong>Price:</strong> $\${listing.price.toLocaleString()}</p>
+            <p><strong>Status:</strong> \${listing.status}</p>
+            <p><strong>Property:</strong> \${listing.propertyType}</p>
+            <p><strong>Specs:</strong> \${listing.beds} beds, \${listing.baths} baths, \${listing.sqft.toLocaleString()} sqft</p>
+            <p><strong>Auction:</strong> \${listing.auctionDate || 'Not scheduled'}</p>
+          </div>
+        \`);
+      marker.addTo(map);
+      bounds.extend([listing.latitude, listing.longitude]);
+    });
+    
+    map.fitBounds(bounds);
+  </script>
+</body>
+</html>
+`;
+}
 
 // Helper function to properly escape CSV fields according to RFC 4180
 function escapeCSVField(value: any): string {
@@ -808,6 +944,101 @@ async function makeRateSpotRequest(params: any, timeoutMs: number = 30000) {
     throw error;
   }
 }
+
+// Get Foreclosures Tool
+server.tool(
+  "get-foreclosures",
+  {
+    address: z.string().describe("ZIP code or full address to search around"),
+    radius: z.number().optional().default(5).describe("Search radius in miles"),
+    format: z.enum(["map", "list", "csv"]).optional().default("list").describe("Output format (map for interactive visualization)")
+  },
+  async (params) => {
+    try {
+      const queryParams = new URLSearchParams({
+        apikey: RATESPOT_API_KEY!,
+        address: params.address,
+        radius: params.radius.toString()
+      });
+
+      const url = `${RATESPOT_BASE_URL}/real_estate/foreclosure_listings?${queryParams.toString()}`;
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`API request failed: ${response.status} ${response.statusText}\n${errorText}`);
+      }
+
+      const data = await response.json();
+      const listings = data.listings || [];
+
+      if (params.format === "map") {
+        // Generate HTML with interactive map
+        const mapHtml = generateMapHTML(listings);
+        
+        // Save map file
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const fileName = `foreclosures_map_${timestamp}.html`;
+        const filePath = path.join(DATA_DIR, fileName);
+        
+        await fs.promises.writeFile(filePath, mapHtml, 'utf8');
+        
+        // Start file server if not running
+        if (!fileServer) {
+          startFileServer();
+        }
+        
+        const mapUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
+        
+        return {
+          content: [{
+            type: "text",
+            text: `# Foreclosure Listings Map\n\n` +
+                  `Found ${listings.length} foreclosure listings near ${params.address}\n\n` +
+                  `🗺️ [View Interactive Map](${mapUrl})\n\n` +
+                  `The map shows all listings with clickable markers for details.`
+          }]
+        };
+      } else if (params.format === "csv") {
+        const csvData = formatForeclosuresCSV(listings);
+        const fileInfo = await saveCSVFile(csvData, "foreclosures", { address: params.address, radius: params.radius });
+        
+        return {
+          content: [{
+            type: "text",
+            text: `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n` +
+                  `📁 **File:** ${fileInfo.fileName}\n` +
+                  `📍 **Location:** ${fileInfo.filePath}\n` +
+                  `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n` +
+                  `📊 **Summary:** Found ${listings.length} foreclosure listings near ${params.address}`
+          }]
+        };
+      } else {
+        // Default list format in markdown
+        return {
+          content: [{
+            type: "text",
+            text: formatForeclosuresMarkdown(listings)
+          }]
+        };
+      }
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error fetching foreclosure listings: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
 
 // Start the server
 async function main() {
