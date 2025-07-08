@@ -1,0 +1,1 @@
+{"errors": {"fha": "Missing required parameter in the query string", "va": "Missing required parameter in the query string", "property_type": "Missing required parameter in the query string", "property_use": "Missing required parameter in the query string", "zipcode": "Missing required parameter in the query string"}, "message": "Input payload validation failed"}

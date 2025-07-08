@@ -2,7 +2,7 @@
   "dxt_version": "0.1",
   "name": "ratespot-mcp",
   "display_name": "RateSpot Mortgage Rates",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Get real-time mortgage rates and foreclosure listings directly in Claude Desktop",
   "long_description": "Access current mortgage rates, foreclosure listings, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive real estate data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
   "author": {

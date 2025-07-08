@@ -43,11 +43,11 @@ dxt validate manifest.json
 
 # Pack the extension
 echo "📦 Packing extension..."
-dxt pack . ../ratespot-mcp-2.0.1.dxt
+dxt pack . ../ratespot-mcp-2.0.2.dxt
 
 # Move back to original directory
 cd - > /dev/null
-cp /tmp/dxt_clean_build/../ratespot-mcp-2.0.1.dxt ./ratespot-mcp-2.0.1.dxt
+cp /tmp/dxt_clean_build/../ratespot-mcp-2.0.2.dxt ./ratespot-mcp-2.0.2.dxt
 
 echo "✅ Clean DXT package created!"
 

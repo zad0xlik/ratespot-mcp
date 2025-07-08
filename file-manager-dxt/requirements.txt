@@ -1,0 +1,6 @@
+fastapi>=0.68.0
+uvicorn>=0.15.0
+python-magic>=0.4.24
+chardet>=4.0.0
+python-multipart>=0.0.5
+httpx>=0.28.0  # Required for FastAPI testing

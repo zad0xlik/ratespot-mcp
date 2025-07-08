@@ -1,0 +1,72 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "File management tools for analyzing and reading files",
+  "dxt_version": "1.0.0",
+  "author": {
+    "name": "RateSpot",
+    "email": "support@ratespot.io"
+  },
+  "tools": [
+    {
+      "name": "analyze_file",
+      "description": "Get detailed information about a file including size, type, encoding, and other metadata",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the file to analyze"
+          }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Read and return the contents of a text file with automatic encoding detection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the file to read"
+          }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "list_directory",
+      "description": "List contents of a directory with detailed information about each file",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the directory to list"
+          },
+          "recursive": {
+            "type": "boolean",
+            "description": "Whether to list files recursively",
+            "default": false
+          }
+        },
+        "required": ["path"]
+      }
+    }
+  ],
+  "server": {
+    "type": "python",
+    "command": "/Users/fedor/IdeaProjects/ratespot-mcp/venv_mcp_py/bin/python",
+    "args": ["/Users/fedor/IdeaProjects/ratespot-mcp/file-manager-dxt/src/server.py"],
+    "port": 8000,
+    "entry_point": "/Users/fedor/IdeaProjects/ratespot-mcp/file-manager-dxt/src/server.py",
+    "mcp_config": {
+      "python_version": "3.11",
+      "requirements": "requirements.txt",
+      "command": "/Users/fedor/IdeaProjects/ratespot-mcp/venv_mcp_py/bin/python",
+      "args": ["/Users/fedor/IdeaProjects/ratespot-mcp/file-manager-dxt/src/server.py"]
+    }
+  }
+}

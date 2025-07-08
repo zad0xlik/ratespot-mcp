@@ -1,7 +1,7 @@
-import * as http from 'http';
-import * as net from 'net';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as http from 'node:http';
+import * as net from 'node:net';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 
 export class FileServerManager {
   private static instance: FileServerManager | null = null;
