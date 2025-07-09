@@ -9,11 +9,11 @@ RUN npm install --ignore-scripts
 # copy source
 COPY . .
 
-# compile TypeScript to JS in root dir
-RUN npx tsc ratespot_mcp_server.ts --outDir .
+# compile TypeScript using project configuration
+RUN npx tsc
 
 # expose CSV file server port
 EXPOSE 3001
 
 # start MCP server
-CMD ["node", "ratespot_mcp_server.js"]
+CMD ["node", "dist/ratespot_mcp_server.js"]

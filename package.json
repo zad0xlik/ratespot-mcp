@@ -42,6 +42,7 @@
     "dotenv": "^16.0.0",
     "file-type-js": "^0.1.0",
     "iconv-lite": "^0.6.3",
+    "node-fetch": "^3.3.2",
     "zod": "^3.22.0"
   },
   "devDependencies": {
