@@ -12,7 +12,7 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 ### 🎯 Desktop Extension (DXT) - Easiest Method!
 **Just like installing a browser extension - no technical knowledge required!**
 
-1. **Download**: [ratespot-mcp-2.1.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.1.0.dxt)
+1. **Download**: [ratespot-mcp-2.0.3.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.0.3.dxt)
 2. **Double Click** the downloaded file into Claude Desktop
 3. **Enter your RateSpot API key** when prompted
 4. **Done!** Start asking about mortgage rates immediately
@@ -21,7 +21,7 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 
 📖 **[Complete DXT Installation Guide](docs/installation/DXT_INSTALLATION_GUIDE.md)**
 
-> **Note**: Version 2.1.0 adds foreclosure listings search with interactive map visualization, plus streaming support for handling long-running requests.
+> **Note**: Version 2.0.3 adds foreclosure listings search with interactive map visualization, streaming support for handling long-running requests, and exposes all CSV/file management tools in the streaming server.
 
 ---
 
@@ -135,7 +135,7 @@ If you installed manually or need to clean up files:
 
 3. **Remove DXT file (if installed via DXT)**
    ```bash
-   rm -f ~/Downloads/ratespot-mcp-2.1.0.dxt
+   rm -f ~/Downloads/ratespot-mcp-2.0.3.dxt
    ```
 
 4. **Remove DXT streaming server file**
