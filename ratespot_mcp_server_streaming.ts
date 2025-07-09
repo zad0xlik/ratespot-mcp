@@ -4,8 +4,11 @@ import { z } from "zod";
 import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
-import * as http from "http";
 import * as crypto from "crypto";
+import { FileServerManager } from './src/FileServerManager.js';
+
+// Initialize file server manager
+const fileServerManager = FileServerManager.getInstance();
 
 // Load environment variables
 dotenv.config();
@@ -20,11 +23,11 @@ if (!RATESPOT_API_KEY) {
 }
 
 // Create data directory if it doesn't exist
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = path.join(process.cwd(), 'data');
 
 // Add debugging information
 console.error(`Current working directory: ${process.cwd()}`);
-console.error(`Script directory: ${__dirname}`);
+console.error(`Script directory: ${process.cwd()}`);
 console.error(`Data directory will be: ${DATA_DIR}`);
 
 // Create directory with improved error handling
@@ -42,219 +45,79 @@ try {
   process.exit(1);
 }
 
-// Simple HTTP server for file downloads
-let fileServer: http.Server | null = null;
-const FILE_SERVER_PORT = 3001;
+// Initialize file server manager with default port from environment
+const defaultPort = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
 
-// Active streaming sessions storage
-interface StreamingSession {
+// Streaming session interfaces
+interface StreamSession {
   id: string;
-  status: 'processing' | 'partial' | 'complete' | 'error';
-  data: any[];
-  metadata: any;
-  createdAt: Date;
-  lastAccessed: Date;
-  error?: string;
-  totalExpected?: number;
-  receivedCount: number;
-}
-
-const activeStreams = new Map<string, StreamingSession>();
-
-// Clean up old sessions periodically (every 5 minutes)
-setInterval(() => {
-  const now = new Date();
-  const maxAge = 30 * 60 * 1000; // 30 minutes
-  
-  for (const [id, session] of activeStreams.entries()) {
-    if (now.getTime() - session.lastAccessed.getTime() > maxAge) {
-      console.error(`Cleaning up old streaming session: ${id}`);
-      activeStreams.delete(id);
-    }
-  }
-}, 5 * 60 * 1000);
-
-// Helper function to save CSV file
-async function saveCSVFile(csvData: string, fileType: string, searchParams?: any): Promise<{ filePath: string, fileName: string, downloadUrl: string }> {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').split('T');
-  const dateStr = timestamp[0];
-  const timeStr = timestamp[1].split('-')[0] + timestamp[1].split('-')[1];
-  
-  const fileName = `${fileType}_${dateStr}_${timeStr}.csv`;
-  const filePath = path.join(DATA_DIR, fileName);
-  
-  // Add metadata header to CSV
-  let csvWithMetadata = '';
-  if (searchParams) {
-    csvWithMetadata += `# Generated on: ${new Date().toISOString()}\n`;
-    csvWithMetadata += `# Search Parameters: ${JSON.stringify(searchParams)}\n`;
-    csvWithMetadata += `# File Type: ${fileType}\n`;
-    csvWithMetadata += '\n';
-  }
-  csvWithMetadata += csvData;
-  
-  // Write file
-  await fs.promises.writeFile(filePath, csvWithMetadata, 'utf8');
-  
-  // Start file server if not already running
-  if (!fileServer) {
-    startFileServer();
-  }
-  
-  const downloadUrl = `http://localhost:${FILE_SERVER_PORT}/download/${fileName}`;
-  
-  return {
-    filePath,
-    fileName,
-    downloadUrl
+  status: 'processing' | 'streaming' | 'complete' | 'error';
+  data: MortgageProduct[];
+  metadata: {
+    searchParams: any;
+    startTime: Date;
+    lastUpdate: Date;
+    totalProducts: number;
+    previousCount: number;
+    stableCount: number;
+    pollCount: number;
+    error?: string;
   };
 }
 
-// Start HTTP server for file downloads
-function startFileServer(): void {
-  if (fileServer) return;
-  
-  fileServer = http.createServer((req, res) => {
-    const url = new URL(req.url!, `http://localhost:${FILE_SERVER_PORT}`);
-    
-    if (url.pathname.startsWith('/download/')) {
-      const fileName = url.pathname.replace('/download/', '');
-      const filePath = path.join(DATA_DIR, fileName);
-      
-      if (fs.existsSync(filePath)) {
-        res.setHeader('Content-Type', 'text/csv');
-        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        
-        const fileStream = fs.createReadStream(filePath);
-        fileStream.pipe(res);
-      } else {
-        res.statusCode = 404;
-        res.end('File not found');
-      }
-    } else if (url.pathname === '/list') {
-      // List available files
-      try {
-        const files = fs.readdirSync(DATA_DIR)
-          .filter(file => file.endsWith('.csv'))
-          .map(file => {
-            const filePath = path.join(DATA_DIR, file);
-            const stats = fs.statSync(filePath);
-            return {
-              name: file,
-              size: stats.size,
-              created: stats.birthtime,
-              downloadUrl: `http://localhost:${FILE_SERVER_PORT}/download/${file}`
-            };
-          });
-        
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.end(JSON.stringify(files, null, 2));
-      } catch (error) {
-        res.statusCode = 500;
-        res.end('Error listing files');
-      }
-    } else {
-      res.statusCode = 404;
-      res.end('Not found');
-    }
-  });
-  
-  fileServer.listen(FILE_SERVER_PORT, () => {
-    console.error(`File server running on http://localhost:${FILE_SERVER_PORT}`);
-  });
+interface MortgageProduct {
+  lender: string;
+  rate: number;
+  apr: number;
+  payment: number;
+  points: number;
+  upfrontCosts: number;
+  loanType: string;
+  quoteType: string;
+  rateLockDays: number;
+  rateDesc?: string;
 }
 
-// Create MCP server
-const server = new McpServer({
-  name: "RateSpot Mortgage Server (Streaming)",
-  version: "2.0.0"
-});
+// Active streaming sessions
+const activeSessions = new Map<string, StreamSession>();
 
-// Helper function to properly escape CSV fields according to RFC 4180
-function escapeCSVField(value: any): string {
-  if (value === null || value === undefined) {
-    return '';
+// Helper function to process SSE data
+function processSSEData(data: string): MortgageProduct | null {
+  try {
+    const product = JSON.parse(data);
+    return {
+      lender: product.lender_name || '',
+      rate: parseFloat(product.rate) || 0,
+      apr: parseFloat(product.apr) || 0,
+      payment: parseFloat(product.mo_payment) || 0,
+      points: parseFloat(product.points) || 0,
+      upfrontCosts: parseFloat(product.upfront_costs) || 0,
+      loanType: product.loan_type || '',
+      quoteType: product.quote_type === 'ws' ? 'Wholesale' : 'Retail',
+      rateLockDays: parseInt(product.rate_lock_used) || 30,
+      rateDesc: product.rate_desc
+    };
+  } catch (error) {
+    console.error('Error parsing SSE data:', error);
+    return null;
   }
-  
-  const stringValue = String(value);
-  
-  // If the field contains comma, quote, or newline, it must be quoted
-  if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n') || stringValue.includes('\r')) {
-    // Escape internal quotes by doubling them, then wrap in quotes
-    return `"${stringValue.replace(/"/g, '""')}"`;
-  }
-  
-  return stringValue;
 }
 
-// Helper function to format mortgage products as CSV
-function formatMortgageProductsAsCSV(events: any[]): string {
-  // Filter to only mortgage product events
-  const mortgageProducts = events.filter(e => e.event === 'mortgage_product');
-  
-  if (mortgageProducts.length === 0) {
-    return "No mortgage products found.";
-  }
-
-  // Sort by rate (lowest first)
-  mortgageProducts.sort((a, b) => (a.data.rate || 999) - (b.data.rate || 999));
-  
-  // CSV header
-  let csv = "Lender Name,Rate (%),APR (%),Monthly Payment ($),Points,Upfront Costs ($),Loan Type,Quote Type,Rate Description,Rate Lock (days),Purchase Price ($),Down Payment ($),Mortgage Balance ($),Credit Score,ZIP Code\n";
-  
-  // Add rows with proper CSV escaping
-  for (const product of mortgageProducts) {
-    const data = product.data;
-    const row = [
-      escapeCSVField(data.lender_name || ''),
-      escapeCSVField(data.rate || ''),
-      escapeCSVField(data.apr || ''),
-      escapeCSVField(data.mo_payment || ''),
-      escapeCSVField(data.points || ''),
-      escapeCSVField(data.upfront_costs || ''),
-      escapeCSVField(data.loan_type || ''),
-      escapeCSVField(data.quote_type === 'ws' ? 'Wholesale' : 'Retail'),
-      escapeCSVField(data.rate_desc || ''),
-      escapeCSVField(data.rate_lock_used || ''),
-      escapeCSVField(data.purchase_price || ''),
-      escapeCSVField(data.down_payment || ''),
-      escapeCSVField(data.mortgage_balance || ''),
-      escapeCSVField(data.credit_score || ''),
-      escapeCSVField(data.zipcode || '')
-    ].join(',');
-    
-    csv += row + '\n';
-  }
-  
-  return csv;
-}
-
-// Helper function to make streaming API request
-async function makeRateSpotStreamingRequest(params: any, sessionId: string) {
-  const session = activeStreams.get(sessionId);
+// Helper function to stream mortgage rates
+async function streamMortgageRates(params: any, sessionId: string, isPolling: boolean = false): Promise<void> {
+  const session = activeSessions.get(sessionId);
   if (!session) {
     throw new Error('Invalid session ID');
   }
 
   try {
-    const queryParams = new URLSearchParams();
-    
-    // Add API key first
-    queryParams.append('apikey', RATESPOT_API_KEY!);
-    
-    // Add all parameters to the query string
-    for (const [key, value] of Object.entries(params)) {
-      if (value !== undefined && value !== null) {
-        const formattedValue = typeof value === 'number' ? value.toString() : String(value);
-        queryParams.append(key, formattedValue);
-      }
-    }
+    const queryString = new URLSearchParams({
+      apikey: RATESPOT_API_KEY!,
+      ...params,
+      offset: isPolling ? session.data.length.toString() : '0'
+    }).toString();
 
-    const url = `${RATESPOT_BASE_URL}/v1/mortgage_products?${queryParams.toString()}`;
-    console.error(`Making streaming request to: ${url}`);
-
+    const url = `${RATESPOT_BASE_URL}/v1/mortgage_products?${queryString}`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -264,11 +127,9 @@ async function makeRateSpotStreamingRequest(params: any, sessionId: string) {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`API request failed: ${response.status} ${response.statusText}\n${errorText}`);
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
     }
 
-    // Process the response in chunks
     const reader = response.body?.getReader();
     if (!reader) {
       throw new Error('No response body available');
@@ -276,174 +137,145 @@ async function makeRateSpotStreamingRequest(params: any, sessionId: string) {
 
     const decoder = new TextDecoder();
     let buffer = '';
-    let eventCount = 0;
+    let newProducts = 0;
 
     while (true) {
       const { done, value } = await reader.read();
       
       if (done) {
-        // Process any remaining buffer
         if (buffer.trim()) {
-          processEventBuffer(buffer, session);
+          newProducts += processBuffer(buffer, session);
         }
-        session.status = 'complete';
         break;
       }
 
-      // Decode chunk and add to buffer
       buffer += decoder.decode(value, { stream: true });
-      
-      // Process complete events in the buffer
       const lines = buffer.split('\n');
-      buffer = lines.pop() || ''; // Keep incomplete line in buffer
+      buffer = lines.pop() || '';
       
       for (const line of lines) {
-        if (line.startsWith('event:') || line.startsWith('data:')) {
-          processEventLine(line, session);
-          eventCount++;
-          
-          // Update session periodically
-          if (eventCount % 10 === 0) {
-            session.lastAccessed = new Date();
+        if (line.startsWith('data:')) {
+          const product = processSSEData(line.substring(5).trim());
+          if (product) {
+            // Check for duplicates before adding
+            const isDuplicate = session.data.some(p => 
+              p.lender === product.lender && 
+              p.rate === product.rate && 
+              p.apr === product.apr
+            );
+            
+            if (!isDuplicate) {
+              session.data.push(product);
+              session.metadata.totalProducts++;
+              session.metadata.lastUpdate = new Date();
+              session.status = 'streaming';
+              newProducts++;
+            }
           }
         }
       }
-      
-      // Mark as partial after receiving first chunk
-      if (session.status === 'processing' && eventCount > 0) {
-        session.status = 'partial';
-      }
     }
 
-    console.error(`Streaming complete. Received ${session.data.length} events`);
-    
+    // Only mark as complete if no new products were found during polling
+    if (isPolling && newProducts === 0) {
+      session.status = 'complete';
+      console.error(`No new products found after ${session.metadata.pollCount} polls. Marking as complete.`);
+    }
   } catch (error) {
     session.status = 'error';
-    session.error = error instanceof Error ? error.message : String(error);
+    session.metadata.error = error instanceof Error ? error.message : String(error);
     throw error;
   }
 }
 
-// Helper to process event buffer
-function processEventBuffer(buffer: string, session: StreamingSession) {
+// Helper function to process buffer
+function processBuffer(buffer: string, session: StreamSession): number {
   const lines = buffer.split('\n');
-  let currentEvent: any = {};
+  let newProducts = 0;
   
   for (const line of lines) {
-    if (line.startsWith('event:')) {
-      currentEvent.event = line.substring(6).trim();
-    } else if (line.startsWith('data:')) {
-      try {
-        currentEvent.data = JSON.parse(line.substring(5).trim());
-        session.data.push({ ...currentEvent });
-        session.receivedCount++;
-        currentEvent = {};
-      } catch (e) {
-        console.error(`Failed to parse JSON: ${line}`);
+    if (line.startsWith('data:')) {
+      const product = processSSEData(line.substring(5).trim());
+      if (product) {
+        // Check for duplicates before adding
+        const isDuplicate = session.data.some(p => 
+          p.lender === product.lender && 
+          p.rate === product.rate && 
+          p.apr === product.apr
+        );
+        
+        if (!isDuplicate) {
+          session.data.push(product);
+          session.metadata.totalProducts++;
+          session.metadata.lastUpdate = new Date();
+          newProducts++;
+        }
       }
     }
   }
+  
+  return newProducts;
 }
 
-// Helper to process a single event line
-function processEventLine(line: string, session: StreamingSession) {
-  if (!session.metadata.currentEvent) {
-    session.metadata.currentEvent = {};
-  }
+// Helper function to format results
+function formatResults(session: StreamSession, format: string = 'markdown'): string {
+  const products = session.data;
   
-  if (line.startsWith('event:')) {
-    session.metadata.currentEvent.event = line.substring(6).trim();
-  } else if (line.startsWith('data:')) {
-    try {
-      session.metadata.currentEvent.data = JSON.parse(line.substring(5).trim());
-      session.data.push({ ...session.metadata.currentEvent });
-      session.receivedCount++;
-      session.metadata.currentEvent = {};
-    } catch (e) {
-      console.error(`Failed to parse JSON: ${line}`);
+  // Sort by rate
+  products.sort((a, b) => a.rate - b.rate);
+  
+  if (format === 'markdown') {
+    let output = `# Mortgage Rate Results\n\n`;
+    output += `Found ${products.length} mortgage products\n\n`;
+    
+    output += `| Lender | Rate | APR | Payment | Points | Upfront Costs | Type | Quote |\n`;
+    output += `|---------|------|-----|---------|--------|---------------|------|--------|\n`;
+    
+    for (const product of products) {
+      output += `| ${product.lender} | ${product.rate.toFixed(3)}% | ${product.apr.toFixed(3)}% | $${product.payment.toLocaleString()} | ${product.points.toFixed(3)} | $${product.upfrontCosts.toLocaleString()} | ${product.loanType} | ${product.quoteType} |\n`;
     }
+    
+    return output;
+  } else if (format === 'csv') {
+    let output = 'Lender,Rate,APR,Payment,Points,Upfront_Costs,Loan_Type,Quote_Type\n';
+    
+    for (const product of products) {
+      output += `${escapeCSV(product.lender)},${product.rate}%,${product.apr}%,$${product.payment},${product.points},$${product.upfrontCosts},${product.loanType},${product.quoteType}\n`;
+    }
+    
+    return output;
+  } else {
+    return JSON.stringify(products, null, 2);
   }
 }
 
-// Helper function to parse mortgage results into structured format
-function parseMortgageResults(events: any[], searchParams: any): any {
-  // Filter to only mortgage product events
-  const mortgageProducts = events.filter(e => e.event === 'mortgage_product');
-  
-  if (mortgageProducts.length === 0) {
-    return {
-      rates: [],
-      best_rate: null,
-      total_products: 0,
-      search_params: searchParams
-    };
+// Helper function to escape CSV fields
+function escapeCSV(field: string): string {
+  if (field.includes(',') || field.includes('"') || field.includes('\n')) {
+    return `"${field.replace(/"/g, '""')}"`;
   }
+  return field;
+}
 
-  // Sort by rate (lowest first)
-  mortgageProducts.sort((a, b) => (a.data.rate || 999) - (b.data.rate || 999));
+// Clean up old sessions periodically
+setInterval(() => {
+  const now = new Date();
+  const maxAge = 30 * 60 * 1000; // 30 minutes
   
-  // Parse rates into structured format
-  const rates = mortgageProducts.map(product => {
-    const data = product.data;
-    return {
-      lender: data.lender_name || '',
-      rate: data.rate ? `${data.rate.toFixed(3)}%` : 'N/A',
-      apr: data.apr ? `${data.apr.toFixed(3)}%` : 'N/A',
-      payment: data.mo_payment ? `$${data.mo_payment.toLocaleString()}` : 'N/A',
-      points: data.points || 0,
-      upfront_costs: data.upfront_costs ? `$${data.upfront_costs.toLocaleString()}` : 'N/A',
-      loan_type: data.loan_type || '',
-      quote_type: data.quote_type === 'ws' ? 'Wholesale' : 'Retail',
-      rate_lock_days: data.rate_lock_used || 30,
-      raw_payment: data.mo_payment || 0,
-      raw_rate: data.rate || 0,
-      raw_apr: data.apr || 0,
-      raw_upfront: data.upfront_costs || 0
-    };
+  Array.from(activeSessions.entries()).forEach(([id, session]) => {
+    if (now.getTime() - session.metadata.lastUpdate.getTime() > maxAge) {
+      activeSessions.delete(id);
+    }
   });
+}, 5 * 60 * 1000);
 
-  const bestRate = rates.length > 0 ? rates[0] : null;
+// Create MCP server
+const server = new McpServer({
+  name: "RateSpot Mortgage Server (Streaming)",
+  version: "2.1.0"
+});
 
-  return {
-    rates: rates,
-    best_rate: bestRate,
-    total_products: rates.length,
-    search_params: searchParams
-  };
-}
-
-// Helper function to format as markdown table
-function formatMarkdownTable(data: any): string {
-  const rates = data.rates.slice(0, 20); // Top 20
-  
-  let table = "# Mortgage Rates Comparison\n\n";
-  table += `**Found ${data.total_products} mortgage products (showing top ${rates.length})**\n\n`;
-  
-  table += "| Lender | Rate | APR | Payment | Points | Upfront | Loan Type | Quote Type | Rate Lock |\n";
-  table += "|--------|------|-----|---------|--------|---------|-----------|------------|----------|\n";
-  
-  for (const rate of rates) {
-    table += `| ${rate.lender} | ${rate.rate} | ${rate.apr} | ${rate.payment} | ${rate.points} | ${rate.upfront_costs} | ${rate.loan_type} | ${rate.quote_type} | ${rate.rate_lock_days} days |\n`;
-  }
-  
-  if (data.best_rate) {
-    const best = data.best_rate;
-    table += `\n## Best Rate Details\n\n`;
-    table += `**Lender:** ${best.lender}\n`;
-    table += `**Rate:** ${best.rate}\n`;
-    table += `**APR:** ${best.apr}\n`;
-    table += `**Monthly Payment:** ${best.payment}\n`;
-    table += `**Points:** ${best.points}\n`;
-    table += `**Upfront Costs:** ${best.upfront_costs}\n`;
-    table += `**Loan Type:** ${best.loan_type}\n`;
-    table += `**Quote Type:** ${best.quote_type}\n`;
-    table += `**Rate Lock:** ${best.rate_lock_days} days\n`;
-  }
-  
-  return table;
-}
-
-// Get Mortgage Rates Tool - Now with streaming support
+// Get Mortgage Rates Tool
 server.tool(
   "get-mortgage-rates",
   {
@@ -458,8 +290,7 @@ server.tool(
     zipCode: z.string().optional().describe("ZIP code"),
     loanTerm: z.number().optional().describe("Loan term in years (15, 30, etc.)"),
     rateType: z.string().optional().describe("Rate type (fixed, arm)"),
-    format: z.enum(["structured", "markdown", "csv", "pipe"]).optional().default("markdown").describe("Output format"),
-    streaming: z.boolean().optional().default(true).describe("Use streaming mode for faster initial response")
+    format: z.enum(["structured", "markdown", "csv", "pipe"]).optional().default("markdown").describe("Output format")
   },
   async (params) => {
     try {
@@ -473,116 +304,59 @@ server.tool(
         property_value: propertyValue,
         down_payment: downPaymentPercent,
         credit_score: params.creditScore || 790,
-        fha: 1,
-        va: 1,
+        fha: params.loanType === 'fha' ? 1 : 0,
+        va: params.loanType === 'va' ? 1 : 0,
         property_type: params.propertyType || "single_family",
         property_use: params.occupancy || "primary"
       };
 
-      const searchParams = {
-        propertyValue: propertyValue,
-        downPayment: downPaymentAmount,
-        loanAmount: params.loanAmount,
-        creditScore: params.creditScore || 790,
-        loanType: params.loanType,
-        propertyType: params.propertyType || "single_family",
-        occupancy: params.occupancy || "primary",
-        zipCode: params.zipCode || "90210",
-        loanTerm: params.loanTerm,
-        rateType: params.rateType,
-        state: params.state
+      // Create new streaming session
+      const sessionId = crypto.randomBytes(16).toString('hex');
+      const session: StreamSession = {
+        id: sessionId,
+        status: 'processing',
+        data: [],
+        metadata: {
+          searchParams: params,
+          startTime: new Date(),
+          lastUpdate: new Date(),
+          totalProducts: 0,
+          previousCount: 0,
+          stableCount: 0,
+          pollCount: 0
+        }
       };
+      
+      activeSessions.set(sessionId, session);
 
-      if (params.streaming) {
-        // Create a new streaming session
-        const sessionId = crypto.randomBytes(16).toString('hex');
-        const session: StreamingSession = {
-          id: sessionId,
-          status: 'processing',
-          data: [],
-          metadata: { searchParams, queryParams },
-          createdAt: new Date(),
-          lastAccessed: new Date(),
-          receivedCount: 0
-        };
-        
-        activeStreams.set(sessionId, session);
-        
-        // Start the streaming request in the background
-        makeRateSpotStreamingRequest(queryParams, sessionId).catch(error => {
-          console.error('Streaming request error:', error);
-        });
-        
-        // Wait a short time for initial data (max 10 seconds)
-        const startTime = Date.now();
-        while (session.status === 'processing' && Date.now() - startTime < 10000) {
-          await new Promise(resolve => setTimeout(resolve, 100));
-        }
-        
-        // Return initial response with session ID
-        let response = `🔄 **STREAMING MODE ACTIVE**\n\n`;
-        response += `📊 **Session ID:** ${sessionId}\n`;
-        response += `⏱️ **Status:** ${session.status}\n`;
-        response += `📦 **Products Received:** ${session.receivedCount}\n\n`;
-        
-        if (session.data.length > 0) {
-          const structuredData = parseMortgageResults(session.data, searchParams);
-          response += `🏆 **Best Rate So Far:** ${structuredData.best_rate?.rate || 'N/A'} from ${structuredData.best_rate?.lender || 'N/A'}\n\n`;
-          
-          if (params.format === "markdown") {
-            response += formatMarkdownTable(structuredData);
-          }
-        }
-        
-        response += `\n💡 **To get more results:**\n`;
-        response += `• Use the 'get-streaming-results' tool with sessionId="${sessionId}"\n`;
-        response += `• The API is still fetching data in the background\n`;
-        response += `• Results will be available for 30 minutes\n`;
-        
-        return {
-          content: [{
-            type: "text",
-            text: response
-          }]
-        };
-        
-      } else {
-        // Original non-streaming implementation
-        const result = await makeRateSpotRequest(queryParams);
-        
-        // Format the response based on the requested format
-        let formattedResponse: string;
-        if (params.format === "structured") {
-          const structuredData = parseMortgageResults(result, searchParams);
-          formattedResponse = JSON.stringify(structuredData, null, 2);
-        } else if (params.format === "csv") {
-          const structuredData = parseMortgageResults(result, searchParams);
-          const csvData = formatStructuredCSV(structuredData);
-          const fileInfo = await saveCSVFile(csvData, "mortgage_rates", searchParams);
-          
-          formattedResponse = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
-          formattedResponse += `📁 **File:** ${fileInfo.fileName}\n`;
-          formattedResponse += `📍 **Location:** ${fileInfo.filePath}\n`;
-          formattedResponse += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
-          formattedResponse += `📊 **Summary:** Found ${structuredData.total_products} mortgage products\n`;
-          formattedResponse += `🏆 **Best Rate:** ${structuredData.best_rate?.rate || 'N/A'} from ${structuredData.best_rate?.lender || 'N/A'}\n`;
-        } else if (params.format === "pipe") {
-          const structuredData = parseMortgageResults(result, searchParams);
-          formattedResponse = "MORTGAGE RATES DATA (PIPE-DELIMITED FORMAT)\n";
-          formattedResponse += "Copy the data below and save as .txt file:\n\n";
-          formattedResponse += formatStructuredPipe(structuredData);
-        } else {
-          const structuredData = parseMortgageResults(result, searchParams);
-          formattedResponse = formatMarkdownTable(structuredData);
-        }
+      // Start streaming in background
+      streamMortgageRates(queryParams, sessionId).catch(error => {
+        console.error('Streaming error:', error);
+        session.status = 'error';
+        session.metadata.error = error instanceof Error ? error.message : String(error);
+      });
 
-        return {
-          content: [{
-            type: "text",
-            text: formattedResponse
-          }]
-        };
+      // Wait briefly for initial data
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      let response = `🔄 **Streaming Session Started**\n\n`;
+      response += `Session ID: ${sessionId}\n`;
+      response += `Status: ${session.status}\n`;
+      response += `Products received: ${session.data.length}\n\n`;
+
+      if (session.data.length > 0) {
+        response += formatResults(session, params.format);
       }
+
+      response += `\n💡 **Note:** More results are being fetched in the background.\n`;
+      response += `Use 'get-streaming-results' tool with sessionId="${sessionId}" to get updated results.\n`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
     } catch (error) {
       return {
         content: [{
@@ -595,74 +369,116 @@ server.tool(
   }
 );
 
-// New tool to get streaming results
+// Get Streaming Results Tool
 server.tool(
   "get-streaming-results",
   {
-    sessionId: z.string().describe("The session ID returned from a streaming request"),
-    format: z.enum(["status", "markdown", "csv", "structured"]).optional().default("status").describe("Format for the results")
+    sessionId: z.string().describe("Session ID from get-mortgage-rates"),
+    format: z.enum(["markdown", "csv", "json"]).optional().default("markdown").describe("Output format"),
+    pollInterval: z.number().optional().default(3000).describe("Polling interval in milliseconds"),
+    maxAttempts: z.number().optional().default(10).describe("Maximum number of polling attempts"),
+    stopOnStable: z.boolean().optional().default(true).describe("Stop polling when record count stabilizes")
   },
-  async ({ sessionId, format }) => {
+  async (params) => {
     try {
-      const session = activeStreams.get(sessionId);
+      const session = activeSessions.get(params.sessionId);
       
       if (!session) {
         return {
           content: [{
             type: "text",
-            text: `❌ **Session not found:** ${sessionId}\n\nThe session may have expired or the ID is incorrect.`
+            text: `Session ${params.sessionId} not found or expired`
           }],
           isError: true
         };
       }
-      
-      // Update last accessed time
-      session.lastAccessed = new Date();
-      
-      let response = `📊 **STREAMING SESSION STATUS**\n\n`;
-      response += `🆔 **Session ID:** ${sessionId}\n`;
-      response += `⏱️ **Status:** ${session.status}\n`;
-      response += `📦 **Products Received:** ${session.receivedCount}\n`;
-      response += `🕐 **Created:** ${session.createdAt.toLocaleString()}\n`;
-      response += `🕐 **Last Accessed:** ${session.lastAccessed.toLocaleString()}\n\n`;
-      
-      if (session.error) {
-        response += `❌ **Error:** ${session.error}\n\n`;
+
+      // Initialize polling metadata if not present
+      if (!session.metadata.pollCount) {
+        session.metadata.pollCount = 0;
+        session.metadata.previousCount = 0;
+        session.metadata.stableCount = 0;
       }
+
+      // Update polling metadata
+      session.metadata.pollCount++;
+      const currentCount = session.data.length;
+      const countChanged = currentCount !== session.metadata.previousCount;
       
-      if (session.data.length > 0) {
-        const structuredData = parseMortgageResults(session.data, session.metadata.searchParams);
-        
-        if (format === "status") {
-          response += `📊 **Summary:**\n`;
-          response += `• Total Products: ${structuredData.total_products}\n`;
-          response += `• Best Rate: ${structuredData.best_rate?.rate || 'N/A'} from ${structuredData.best_rate?.lender || 'N/A'}\n`;
-          response += `• Rate Range: ${structuredData.rates.length > 0 ? `${structuredData.rates[0].rate} - ${structuredData.rates[structuredData.rates.length - 1].rate}` : 'N/A'}\n\n`;
-          
-          if (session.status === 'partial') {
-            response += `⏳ **Note:** Data is still being fetched. Check again for more results.\n`;
-          } else if (session.status === 'complete') {
-            response += `✅ **Complete:** All data has been fetched.\n`;
-          }
-        } else if (format === "markdown") {
-          response += formatMarkdownTable(structuredData);
-        } else if (format === "csv") {
-          const csvData = formatStructuredCSV(structuredData);
-          const fileInfo = await saveCSVFile(csvData, "mortgage_rates_streaming", session.metadata.searchParams);
-          
-          response = `✅ **CSV FILE SAVED SUCCESSFULLY**\n\n`;
-          response += `📁 **File:** ${fileInfo.fileName}\n`;
-          response += `📍 **Location:** ${fileInfo.filePath}\n`;
-          response += `🔗 **Download Link:** ${fileInfo.downloadUrl}\n\n`;
-          response += `📊 **Summary:** Found ${structuredData.total_products} mortgage products\n`;
-          response += `🏆 **Best Rate:** ${structuredData.best_rate?.rate || 'N/A'} from ${structuredData.best_rate?.lender || 'N/A'}\n`;
-        } else if (format === "structured") {
-          response = JSON.stringify(structuredData, null, 2);
-        }
+      if (countChanged) {
+        session.metadata.stableCount = 0;
       } else {
-        response += `⏳ **No data yet.** The request is still being processed.\n`;
+        session.metadata.stableCount++;
       }
       
+      session.metadata.previousCount = currentCount;
+
+      // Check if we should continue polling
+      const shouldPoll = session.status === 'streaming' && 
+                        session.metadata.pollCount < params.maxAttempts &&
+                        (!params.stopOnStable || session.metadata.stableCount < 2);
+
+      if (shouldPoll) {
+        // Schedule next poll and wait for it
+        await new Promise(resolve => setTimeout(resolve, params.pollInterval));
+        
+        try {
+          // Fetch additional data with polling flag
+          const queryParams = session.metadata.searchParams;
+          await streamMortgageRates(queryParams, session.id, true);
+          
+          // Return early to trigger another poll if needed
+          return {
+            content: [{
+              type: "text",
+              text: `🔄 **Auto-polling (Attempt ${session.metadata.pollCount})**\n\n` +
+                    `Current products: ${session.data.length}\n` +
+                    `Previous count: ${session.metadata.previousCount}\n` +
+                    `Status: ${session.status}\n\n` +
+                    `⏳ Still receiving data. Polling will continue automatically...`
+            }]
+          };
+        } catch (error) {
+          console.error('Polling error:', error);
+          session.status = 'error';
+          session.metadata.error = error instanceof Error ? error.message : String(error);
+        }
+      }
+
+      let response = `📊 **Streaming Results**\n\n`;
+      response += `Status: ${session.status}\n`;
+      response += `Products: ${session.data.length} (Previous: ${session.metadata.previousCount})\n`;
+      response += `Poll Count: ${session.metadata.pollCount}\n`;
+      response += `Stable Count: ${session.metadata.stableCount}\n`;
+      response += `Last update: ${session.metadata.lastUpdate.toLocaleString()}\n\n`;
+
+      if (session.status === 'error') {
+        response += `❌ Error: ${session.metadata.error}\n\n`;
+      }
+
+      if (session.data.length > 0) {
+        if (params.format === 'csv') {
+          const csvData = formatResults(session, 'csv');
+          const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+          const fileName = `mortgage_rates_${timestamp}.csv`;
+          const filePath = path.join(DATA_DIR, fileName);
+          
+          await fs.promises.writeFile(filePath, csvData, 'utf8');
+          await fileServerManager.ensureServerRunning(DATA_DIR);
+          const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
+          
+          response += `✅ CSV file saved\n`;
+          response += `📁 File: ${fileName}\n`;
+          response += `🔗 Download: ${downloadUrl}\n`;
+        } else {
+          response += formatResults(session, params.format);
+        }
+      }
+
+      if (session.status === 'streaming') {
+        response += `\n⏳ Still receiving data. Check again for more results.\n`;
+      }
+
       return {
         content: [{
           type: "text",
@@ -673,7 +489,7 @@ server.tool(
       return {
         content: [{
           type: "text",
-          text: `Error getting streaming results: ${error instanceof Error ? error.message : String(error)}`
+          text: `Error getting results: ${error instanceof Error ? error.message : String(error)}`
         }],
         isError: true
       };
@@ -681,142 +497,281 @@ server.tool(
   }
 );
 
-// Helper function to format CSV from structured data
-function formatStructuredCSV(data: any): string {
-  const rates = data.rates;
-  
-  let csv = "Lender,Rate,APR,Payment,Points,Upfront_Costs,Loan_Type,Quote_Type\n";
-  
-  for (const rate of rates) {
-    const row = [
-      escapeCSVField(rate.lender),
-      escapeCSVField(rate.rate),
-      escapeCSVField(rate.apr),
-      escapeCSVField(rate.payment),
-      escapeCSVField(rate.points),
-      escapeCSVField(rate.upfront_costs),
-      escapeCSVField(rate.loan_type),
-      escapeCSVField(rate.quote_type)
-    ].join(',');
-    
-    csv += row + '\n';
-  }
-  
-  return csv;
-}
+// File Management Tools
+import { FileAnalyzer } from './src/FileAnalyzer.js';
 
-// Helper function to format pipe-delimited from structured data
-function formatStructuredPipe(data: any): string {
-  const rates = data.rates;
-  
-  let output = "Lender|Rate|APR|Payment|Points|Upfront_Costs|Loan_Type|Quote_Type\n";
-  
-  for (const rate of rates) {
-    const row = [
-      (rate.lender || '').replace(/\|/g, '-'),
-      rate.rate || '',
-      rate.apr || '',
-      rate.payment || '',
-      rate.points || '',
-      rate.upfront_costs || '',
-      (rate.loan_type || '').replace(/\|/g, '-'),
-      (rate.quote_type || '').replace(/\|/g, '-')
-    ].join('|');
-    
-    output += row + '\n';
-  }
-  
-  return output;
-}
-
-// Helper function to make API requests (non-streaming version for fallback)
-async function makeRateSpotRequest(params: any, timeoutMs: number = 30000) {
-  try {
-    const queryParams = new URLSearchParams();
-    
-    // Add API key first
-    queryParams.append('apikey', RATESPOT_API_KEY!);
-    
-    // Add all parameters to the query string
-    for (const [key, value] of Object.entries(params)) {
-      if (value !== undefined && value !== null) {
-        const formattedValue = typeof value === 'number' ? value.toString() : String(value);
-        queryParams.append(key, formattedValue);
+// Save Streaming Results Tool
+server.tool(
+  "save-streaming-results",
+  {
+    sessionId: z.string().describe("Session ID from get-mortgage-rates"),
+    format: z.enum(["csv", "json", "markdown"]).default("csv").describe("Output format"),
+    fileName: z.string().optional().describe("Optional custom filename (without extension)")
+  },
+  async (params) => {
+    try {
+      const session = activeSessions.get(params.sessionId);
+      
+      if (!session) {
+        return {
+          content: [{
+            type: "text",
+            text: `Session ${params.sessionId} not found or expired`
+          }],
+          isError: true
+        };
       }
-    }
 
-    const url = `${RATESPOT_BASE_URL}/v1/mortgage_products?${queryParams.toString()}`;
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const defaultName = `mortgage_rates_${timestamp}`;
+      const baseName = params.fileName || defaultName;
+      const extension = params.format === 'json' ? 'json' : 
+                       params.format === 'markdown' ? 'md' : 'csv';
+      const fileName = `${baseName}.${extension}`;
+      const filePath = path.join(DATA_DIR, fileName);
 
-    console.error(`Making request to: ${url}`);
-    console.error(`With parameters: ${JSON.stringify(params, null, 2)}`);
-    console.error(`Timeout set to: ${timeoutMs}ms`);
-
-    // Create timeout promise
-    const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error(`Request timeout after ${timeoutMs}ms. The RateSpot API typically takes 15-25 seconds to respond.`)), timeoutMs);
-    });
-
-    // Create fetch promise
-    const fetchPromise = fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'text/event-stream',
-        'Cache-Control': 'no-cache'
+      // Format the data
+      let content = '';
+      if (params.format === 'json') {
+        content = JSON.stringify({
+          metadata: session.metadata,
+          products: session.data
+        }, null, 2);
+      } else if (params.format === 'markdown') {
+        content = formatResults(session, 'markdown');
+      } else {
+        content = formatResults(session, 'csv');
       }
-    });
 
-    // Race between fetch and timeout
-    const response = await Promise.race([fetchPromise, timeoutPromise]) as Response;
+      // Save the file
+      await fs.promises.writeFile(filePath, content, 'utf8');
+      await fileServerManager.ensureServerRunning(DATA_DIR);
+      const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`API request failed: ${response.status} ${response.statusText}`);
-      console.error(`Error details: ${errorText}`);
-      throw new Error(`API request failed: ${response.status} ${response.statusText}\n${errorText}`);
+      let response = `✅ **Results Saved Successfully**\n\n`;
+      response += `📊 **Summary:**\n`;
+      response += `• Total Products: ${session.data.length}\n`;
+      response += `• Status: ${session.status}\n`;
+      response += `• Format: ${params.format.toUpperCase()}\n\n`;
+      response += `📁 **File Details:**\n`;
+      response += `• Name: ${fileName}\n`;
+      response += `• Size: ${Math.round(content.length / 1024)} KB\n`;
+      response += `• Path: ${filePath}\n`;
+      response += `• Download: ${downloadUrl}\n\n`;
+      response += `💡 Use 'list-saved-results' tool to see all saved files.`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error saving results: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
     }
+  }
+);
 
-    // Parse Server-Sent Events response with timeout
-    const textPromise = response.text();
-    const text = await Promise.race([textPromise, timeoutPromise]) as string;
-    
-    console.error(`Received response (${text.length} characters)`);
-    
-    const events = [];
-    const lines = text.split('\n');
-    
-    let currentEvent: any = {};
-    
-    for (const line of lines) {
-      if (line.startsWith('event:')) {
-        currentEvent.event = line.substring(6).trim();
-      } else if (line.startsWith('data:')) {
-        try {
-          currentEvent.data = JSON.parse(line.substring(5).trim());
-          events.push({ ...currentEvent });
-          currentEvent = {};
-        } catch (e) {
-          // Skip malformed JSON
-          console.error(`Failed to parse JSON: ${line}`);
+// List Saved Results Tool
+server.tool(
+  "list-saved-results",
+  {
+    format: z.enum(["all", "csv", "json", "markdown"]).default("all").describe("Filter by file format"),
+    sortBy: z.enum(["date", "name", "size"]).default("date").describe("Sort results by"),
+    limit: z.number().optional().describe("Maximum number of files to list")
+  },
+  async (params) => {
+    try {
+      const files = fs.readdirSync(DATA_DIR)
+        .filter(file => {
+          if (params.format === 'all') return true;
+          const ext = path.extname(file).toLowerCase();
+          return (params.format === 'csv' && ext === '.csv') ||
+                 (params.format === 'json' && ext === '.json') ||
+                 (params.format === 'markdown' && ext === '.md');
+        })
+        .map(file => {
+          const filePath = path.join(DATA_DIR, file);
+          const stats = fs.statSync(filePath);
+          return {
+            name: file,
+            path: filePath,
+            size: stats.size,
+            created: stats.birthtime,
+            format: path.extname(file).slice(1).toLowerCase()
+          };
+        })
+        .sort((a, b) => {
+          if (params.sortBy === 'date') return b.created.getTime() - a.created.getTime();
+          if (params.sortBy === 'name') return a.name.localeCompare(b.name);
+          return b.size - a.size;
+        });
+
+      const limitedFiles = params.limit ? files.slice(0, params.limit) : files;
+
+      let response = `📁 **Saved Results Files**\n\n`;
+      response += `Found ${files.length} files`;
+      if (params.format !== 'all') response += ` in ${params.format.toUpperCase()} format`;
+      response += `\n\n`;
+
+      for (const file of limitedFiles) {
+        response += `📄 **${file.name}**\n`;
+        response += `• Size: ${Math.round(file.size / 1024)} KB\n`;
+        response += `• Created: ${file.created.toLocaleString()}\n`;
+        response += `• Format: ${file.format.toUpperCase()}\n`;
+        const downloadUrl = await fileServerManager.getDownloadUrl(file.name);
+        response += `• Download: ${downloadUrl}\n\n`;
+      }
+
+      if (params.limit && files.length > params.limit) {
+        response += `_Showing ${params.limit} of ${files.length} files. Adjust 'limit' parameter to see more._\n\n`;
+      }
+
+      response += `💡 **Tips:**\n`;
+      response += `• Use 'save-streaming-results' to save new results\n`;
+      response += `• Files are stored in: ${DATA_DIR}\n`;
+      response += `• File server running at: http://localhost:${defaultPort}\n`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing saved results: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "analyze-file",
+  {
+    path: z.string().describe("Path to the file to analyze")
+  },
+  async (params) => {
+    try {
+      const info = await FileAnalyzer.getFileInfo(params.path);
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(info, null, 2)
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error analyzing file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "read-file",
+  {
+    path: z.string().describe("Path to the file to read")
+  },
+  async (params) => {
+    try {
+      const result = await FileAnalyzer.readFile(params.path);
+      return {
+        content: [{
+          type: "text",
+          text: result.content
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error reading file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "list-directory",
+  {
+    path: z.string().describe("Path to the directory to list"),
+    recursive: z.boolean().optional().default(false).describe("Whether to list files recursively")
+  },
+  async (params) => {
+    try {
+      const files: ReturnType<typeof FileAnalyzer.getFileInfo>[] = [];
+      const listFiles = (dir: string) => {
+        const entries = fs.readdirSync(dir);
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry);
+          const stats = fs.statSync(fullPath);
+          if (stats.isFile()) {
+            files.push(FileAnalyzer.getFileInfo(fullPath));
+          } else if (stats.isDirectory() && params.recursive) {
+            listFiles(fullPath);
+          }
         }
-      }
+      };
+
+      listFiles(params.path);
+      const fileInfos = files;
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(fileInfos, null, 2)
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing directory: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
     }
-    
-    console.error(`Parsed ${events.length} events`);
-    return events;
-  } catch (error) {
-    console.error('Error in makeRateSpotRequest:', error);
-    throw error;
   }
-}
+);
 
 // Start the server
 async function main() {
   const transport = new StdioServerTransport();
+  
+  // Handle cleanup on exit
+  const cleanup = async () => {
+    console.error('Shutting down servers...');
+    await fileServerManager.shutdown();
+    process.exit(0);
+  };
+
+  process.on('SIGINT', cleanup);
+  process.on('SIGTERM', cleanup);
+  process.on('exit', cleanup);
+
   await server.connect(transport);
   console.error("RateSpot MCP Server (Streaming) running on stdio");
 }
 
-main().catch((error) => {
+main().catch(async (error) => {
   console.error("Failed to start server:", error);
+  await fileServerManager.shutdown();
   process.exit(1);
 });

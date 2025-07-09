@@ -5,11 +5,15 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 
 ## 🚀 Super Simple Installation
 
+### Prerequisites
+1. **Claude Desktop**: Download and install from [claude.ai/download](https://claude.ai/download)
+2. **RateSpot API Key**: Get yours at [app.ratespot.io](https://app.ratespot.io)
+
 ### 🎯 Desktop Extension (DXT) - Easiest Method!
 **Just like installing a browser extension - no technical knowledge required!**
 
-1. **Download**: [ratespot-mcp-2.0.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.0.0.dxt)
-2. **Drag and drop** the downloaded file into Claude Desktop
+1. **Download**: [ratespot-mcp-2.1.0.dxt](https://github.com/zad0xlik/ratespot-mcp/releases/latest/download/ratespot-mcp-2.1.0.dxt)
+2. **Double Click** the downloaded file into Claude Desktop
 3. **Enter your RateSpot API key** when prompted
 4. **Done!** Start asking about mortgage rates immediately
 
@@ -17,7 +21,7 @@ Get real-time mortgage rates directly in Claude Desktop with the RateSpot MCP Se
 
 📖 **[Complete DXT Installation Guide](docs/installation/DXT_INSTALLATION_GUIDE.md)**
 
-> **Note**: Version 2.0.0 includes streaming support for handling long-running requests and improved compatibility with Claude Desktop's timeout limitations.
+> **Note**: Version 2.1.0 adds foreclosure listings search with interactive map visualization, plus streaming support for handling long-running requests.
 
 ---
 
@@ -47,13 +51,9 @@ To install RateSpot MCP Server for Claude Desktop automatically via [Smithery](h
 npx -y @smithery/cli install @zad0xlik/ratespot-mcp --client claude
 ```
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- RateSpot API key (get yours at [https://app.ratespot.io/account-settings](https://app.ratespot.io/account-settings) or create a free account at [https://app.ratespot.io](https://app.ratespot.io))
-
-### Step 4: Start Using
-Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,000 loan?"*
+### Start Using
+Ask Claude about mortgage rates! Try questions like:
+*"Can you get current mortgage rates for a $400,000 loan?"*
 
 
 ## ✨ What You Can Do
@@ -61,6 +61,8 @@ Restart Claude Desktop and ask: *"Can you get current mortgage rates for a $400,
 Once installed, you can ask Claude to:
 
 - **Get Current Rates**: "What are today's mortgage rates for a $500K loan?"
+- **Search Foreclosures**: "Show me foreclosure listings within 10 miles of 94949"
+- **View Property Maps**: "Display foreclosures on an interactive map"
 - **Compare Loan Products**: "Compare 15-year vs 30-year mortgages for my situation"
 - **Calculate Payments**: "Calculate monthly payment for $400K at 6.5% interest"
 - **Analyze Market Trends**: "Show me rate trends for the past 30 days"
@@ -107,6 +109,60 @@ If you prefer to install manually or need to customize the setup:
 
 5. **Configure Claude Desktop**
    - See [installers/manual/CLAUDE_DESKTOP_INSTALLATION.md](installers/manual/CLAUDE_DESKTOP_INSTALLATION.md) for detailed instructions
+
+## 🗑️ Uninstallation
+
+### Uninstall from Claude Desktop
+1. Open Claude Desktop
+2. Click on the settings icon (⚙️)
+3. Go to "Extensions"
+4. Find "RateSpot MCP" in the list
+5. Click "Remove" or the trash icon
+6. Restart Claude Desktop
+
+### Manual Uninstallation
+If you installed manually or need to clean up files:
+
+1. **Remove MCP configuration**
+   ```bash
+   rm -rf ~/.config/claude/mcp/ratespot-mcp
+   ```
+
+2. **Remove from Claude Desktop settings**
+   ```bash
+   rm -rf "~/Library/Application Support/Claude/mcp/ratespot-mcp"
+   ```
+
+3. **Remove DXT file (if installed via DXT)**
+   ```bash
+   rm -f ~/Downloads/ratespot-mcp-2.1.0.dxt
+   ```
+
+4. **Remove DXT streaming server file**
+   ```bash
+   rm -f "/Users/[username]/Library/Application Support/Claude/Claude Extensions/local.dxt.ratespot.ratespot-mcp/server/ratespot_mcp_server_streaming.js"
+   ```
+
+5. **Clean up data directory**
+   ```bash
+   rm -rf ~/.local/share/claude/mcp/ratespot-mcp
+   ```
+
+6. **Update Claude Desktop config file**
+   ```bash
+   # Config file location: ${HOME}/Library/Application Support/Claude/claude_desktop_config.json
+   # Open the file in your preferred editor and remove the ratespot-mcp entry from the extensions section
+   ```
+
+7. **Check and kill any running server processes**
+   ```bash
+   # Check if anything is running on port 3001
+   lsof -i :3001
+   # If a process is found, kill it using its PID
+   kill $(lsof -t -i:3001)
+   ```
+
+After uninstallation, restart Claude Desktop to ensure all changes take effect.
 
 ## 🆘 Need Help?
 

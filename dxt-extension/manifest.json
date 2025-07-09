@@ -2,9 +2,9 @@
   "dxt_version": "0.1",
   "name": "ratespot-mcp",
   "display_name": "RateSpot Mortgage Rates",
-  "version": "1.0.0",
-  "description": "Get real-time mortgage rates directly in Claude Desktop",
-  "long_description": "Access current mortgage rates, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive mortgage data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
+  "version": "2.0.2",
+  "description": "Get real-time mortgage rates and foreclosure listings directly in Claude Desktop",
+  "long_description": "Access current mortgage rates, foreclosure listings, compare loan products, calculate monthly payments, and analyze market trends—all powered by RateSpot's comprehensive real estate data. Perfect for homebuyers, real estate professionals, and mortgage brokers.",
   "author": {
     "name": "RateSpot",
     "email": "support@ratespot.io",
@@ -32,31 +32,277 @@
   "tools": [
     {
       "name": "get-mortgage-rates",
-      "description": "Get current mortgage rates with streaming support for faster initial response. Returns results progressively to avoid timeouts."
+      "description": "Get current mortgage rates with streaming support for faster initial response. Returns results progressively to avoid timeouts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "loanAmount": {
+            "type": "number",
+            "description": "Loan amount in dollars"
+          },
+          "creditScore": {
+            "type": "number",
+            "description": "Credit score (300-850)"
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "ZIP code"
+          }
+        },
+        "required": ["zipCode"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get-foreclosures",
+      "description": "Search for foreclosure listings by location with interactive map visualization support. Returns property details including price, status, and auction dates.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "Location to search (city, state, or ZIP code)"
+          },
+          "radius": {
+            "type": "number",
+            "description": "Search radius in miles",
+            "default": 10
+          },
+          "maxPrice": {
+            "type": "number",
+            "description": "Maximum price in dollars"
+          }
+        },
+        "required": ["location"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "get-streaming-results",
-      "description": "Retrieve results from a streaming mortgage rate request using the session ID"
+      "description": "Retrieve results from a streaming mortgage rate request using the session ID",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "description": "Session ID from get-mortgage-rates"
+          },
+          "format": {
+            "type": "string",
+            "enum": ["status", "markdown", "csv", "structured"],
+            "default": "markdown",
+            "description": "Output format"
+          }
+        },
+        "required": ["sessionId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "compare-loan-products",
-      "description": "Compare loan products across multiple ZIP codes. Each ZIP code requires a separate API call - the tool automatically handles this when multiple ZIP codes are provided."
+      "description": "Compare loan products across multiple ZIP codes. Each ZIP code requires a separate API call - the tool automatically handles this when multiple ZIP codes are provided.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "zipCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of ZIP codes to compare"
+          },
+          "loanAmount": {
+            "type": "number",
+            "description": "Loan amount in dollars"
+          },
+          "loanType": {
+            "type": "string",
+            "enum": ["conventional", "fha", "va", "usda"],
+            "description": "Type of loan"
+          }
+        },
+        "required": ["zipCodes", "loanAmount"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "calculate-monthly-payment",
-      "description": "Calculate monthly mortgage payment including principal, interest, taxes, insurance, PMI, and HOA fees"
+      "description": "Calculate monthly mortgage payment including principal, interest, taxes, insurance, PMI, and HOA fees",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "loanAmount": {
+            "type": "number",
+            "description": "Loan amount in dollars"
+          },
+          "interestRate": {
+            "type": "number",
+            "description": "Annual interest rate (percentage)"
+          },
+          "loanTerm": {
+            "type": "number",
+            "description": "Loan term in years",
+            "default": 30
+          },
+          "propertyTax": {
+            "type": "number",
+            "description": "Annual property tax in dollars"
+          },
+          "insurance": {
+            "type": "number",
+            "description": "Annual insurance premium in dollars"
+          },
+          "pmi": {
+            "type": "number",
+            "description": "Monthly PMI payment in dollars",
+            "default": 0
+          },
+          "hoa": {
+            "type": "number",
+            "description": "Monthly HOA fees in dollars",
+            "default": 0
+          }
+        },
+        "required": ["loanAmount", "interestRate"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "list-saved-files",
-      "description": "List previously saved mortgage rate comparison files"
+      "description": "List saved files with optional file type filter",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileType": {
+            "type": "string",
+            "description": "Filter by file type (mortgage_rates, loan_comparison, payment_calculation)"
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "analyze-csv-file",
-      "description": "Analyze saved mortgage rate data files for trends and insights"
+      "description": "Analyze a CSV file and return summary statistics",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the CSV file to analyze"
+          }
+        },
+        "required": ["fileName"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     },
     {
       "name": "compare-csv-files",
-      "description": "Compare multiple saved rate files to analyze market changes over time"
+      "description": "Compare two CSV files and return differences",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "file1": {
+            "type": "string",
+            "description": "Name of the first CSV file to compare"
+          },
+          "file2": {
+            "type": "string",
+            "description": "Name of the second CSV file to compare"
+          }
+        },
+        "required": ["file1", "file2"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "read-csv-file",
+      "description": "Read the contents of a CSV file",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the CSV file to read"
+          }
+        },
+        "required": ["fileName"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "copy-csv-to-desktop",
+      "description": "Copy a CSV file to the user's Desktop",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the CSV file to copy"
+          }
+        },
+        "required": ["fileName"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get-download-link",
+      "description": "Get a download link for a CSV file",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the CSV file to get download link for"
+          }
+        },
+        "required": ["fileName"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "delete-csv-file",
+      "description": "Delete a CSV file",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of the CSV file to delete"
+          }
+        },
+        "required": ["fileName"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "get-file-summary",
+      "description": "Get a summary of a CSV file or all files",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Name of specific CSV file to summarize, or leave empty for all files"
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
     }
   ],
   "user_config": {
@@ -69,7 +315,7 @@
       "placeholder": "Enter your RateSpot API key..."
     }
   },
-  "keywords": ["mortgage", "rates", "real-estate", "finance", "loans", "housing", "homebuying"],
+  "keywords": ["mortgage", "rates", "real-estate", "finance", "loans", "housing", "homebuying", "foreclosures", "auctions"],
   "icon": "icon.svg",
   "license": "MIT",
   "compatibility": {

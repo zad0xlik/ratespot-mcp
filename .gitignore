@@ -11,6 +11,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# Virtual environments
+venv_mcp_py/
+
 # Compiled JavaScript
 *.js
 *.js.map

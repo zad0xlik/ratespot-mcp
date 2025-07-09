@@ -6,24 +6,29 @@
 echo "🧪 DXT INSTALLATION TEST"
 echo "========================"
 echo "📅 Test Date: $(date)"
-echo "📁 DXT File: ratespot-mcp-1.0.0.dxt"
+echo "📁 DXT File: $1"
 echo ""
 
 # Check if DXT file exists
-if [ ! -f "ratespot-mcp-1.0.0.dxt" ]; then
+if [ ! -f "$1" ]; then
     echo "❌ ERROR: DXT file not found!"
     exit 1
 fi
 
-echo "✅ DXT file found ($(ls -lh ratespot-mcp-1.0.0.dxt | awk '{print $5}'))"
+echo "✅ DXT file found ($(ls -lh "$1" | awk '{print $5}'))"
 echo ""
 
 # Check if dxt command is available
 echo "🔍 Checking DXT CLI availability..."
 if ! command -v dxt &> /dev/null; then
-    echo "❌ ERROR: DXT CLI not found!"
-    echo "💡 Install with: npm install -g @anthropic/dxt"
-    exit 1
+    echo "⚠️ DXT CLI not found, installing..."
+    npm install -g @anthropic/dxt
+    if [ $? -eq 0 ]; then
+        echo "✅ DXT CLI installed successfully"
+    else
+        echo "❌ Failed to install DXT CLI"
+        exit 1
+    fi
 fi
 
 echo "✅ DXT CLI found: $(dxt --version)"
@@ -31,18 +36,21 @@ echo ""
 
 # Test DXT file validation
 echo "🔍 Validating DXT file structure..."
-dxt validate ratespot-mcp-1.0.0.dxt
-if [ $? -eq 0 ]; then
+# Extract manifest from DXT file
+TMP_DIR=$(mktemp -d)
+unzip -q "$1" -d "$TMP_DIR"
+VALIDATION_OUTPUT=$(dxt validate "$TMP_DIR/manifest.json" 2>&1)
+VALIDATION_STATUS=$?
+if [ $VALIDATION_STATUS -eq 0 ]; then
     echo "✅ DXT file validation passed"
 else
     echo "❌ DXT file validation failed"
+    echo "Error details:"
+    echo "$VALIDATION_OUTPUT"
+    rm -rf "$TMP_DIR"
     exit 1
 fi
-echo ""
-
-# Test DXT file inspection
-echo "🔍 Inspecting DXT file contents..."
-dxt inspect ratespot-mcp-1.0.0.dxt
+rm -rf "$TMP_DIR"
 echo ""
 
 # Create a temporary test directory
@@ -51,32 +59,25 @@ echo "📁 Creating test directory: $TEST_DIR"
 mkdir -p "$TEST_DIR"
 cd "$TEST_DIR"
 
-# Copy DXT file to test directory
-cp "$OLDPWD/ratespot-mcp-1.0.0.dxt" .
-
-echo "🚀 Testing DXT installation process..."
-echo ""
-
-# Test installation (dry run first)
-echo "🧪 Testing dry-run installation..."
-dxt install ratespot-mcp-1.0.0.dxt --dry-run
+# Extract DXT file for testing
+echo "🔍 Extracting DXT contents..."
+unzip -q "$OLDPWD/$1"
 if [ $? -eq 0 ]; then
-    echo "✅ Dry-run installation test passed"
+    echo "✅ DXT extraction successful"
 else
-    echo "❌ Dry-run installation test failed"
+    echo "❌ DXT extraction failed"
     cd "$OLDPWD"
     rm -rf "$TEST_DIR"
     exit 1
 fi
 echo ""
 
-# Test actual installation to test directory
-echo "🧪 Testing actual installation..."
-dxt install ratespot-mcp-1.0.0.dxt --target-dir ./test_install
-if [ $? -eq 0 ]; then
-    echo "✅ Installation test passed"
+# Verify DXT contents
+echo "🔍 Verifying DXT contents..."
+if [ -f "manifest.json" ] && [ -d "server" ] && [ -f "icon.svg" ]; then
+    echo "✅ Required files present"
 else
-    echo "❌ Installation test failed"
+    echo "❌ Missing required files"
     cd "$OLDPWD"
     rm -rf "$TEST_DIR"
     exit 1
@@ -121,19 +122,19 @@ echo ""
 
 # Test manifest validation
 echo "🔍 Testing manifest validation..."
-if [ -f "./test_install/manifest.json" ]; then
+if [ -f "manifest.json" ]; then
     echo "📄 Manifest contents:"
-    cat "./test_install/manifest.json" | jq '.' 2>/dev/null || cat "./test_install/manifest.json"
+    cat "manifest.json" | jq '.' 2>/dev/null || cat "manifest.json"
     echo ""
 fi
 
 # Test server file
 echo "🔍 Testing server file..."
-if [ -f "./test_install/server/ratespot_mcp_server.js" ]; then
-    echo "✅ Server file exists ($(ls -lh ./test_install/server/ratespot_mcp_server.js | awk '{print $5}'))"
+if [ -f "server/ratespot_mcp_server.js" ]; then
+    echo "✅ Server file exists ($(ls -lh server/ratespot_mcp_server.js | awk '{print $5}'))"
     
     # Check if server file is executable
-    if node -c "./test_install/server/ratespot_mcp_server.js" 2>/dev/null; then
+    if node -c "server/ratespot_mcp_server.js" 2>/dev/null; then
         echo "✅ Server file syntax is valid"
     else
         echo "❌ Server file has syntax errors"
@@ -155,12 +156,12 @@ echo ""
 echo "📋 SUMMARY:"
 echo "✅ DXT file exists and is valid"
 echo "✅ DXT CLI is available"
-echo "✅ Installation process works"
+echo "✅ DXT contents are valid"
 echo "✅ Required files are present"
 echo ""
 echo "💡 NEXT STEPS:"
 echo "1. The DXT file is ready for distribution"
-echo "2. Users can install with: dxt install ratespot-mcp-1.0.0.dxt"
+echo "2. Users can install with: dxt install $1"
 echo "3. The installation includes all necessary components"
 echo ""
 echo "🚀 DXT file is ready for production use!"

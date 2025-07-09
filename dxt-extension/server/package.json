@@ -1,7 +1,7 @@
 {
   "name": "ratespot-mcp-server",
-  "version": "1.0.0",
-  "description": "Model Context Protocol (MCP) server for RateSpot.io mortgage rate APIs",
+  "version": "2.0.2",
+  "description": "Model Context Protocol (MCP) server for RateSpot.io mortgage rates and foreclosure listings",
   "main": "ratespot_mcp_server.js",
   "repository": {
     "type": "git",
@@ -25,6 +25,8 @@
     "rates",
     "lending",
     "real-estate",
+    "foreclosures",
+    "auctions",
     "finance",
     "claude",
     "anthropic",
