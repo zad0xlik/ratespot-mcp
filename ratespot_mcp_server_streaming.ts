@@ -23,12 +23,11 @@ if (!RATESPOT_API_KEY) {
 }
 
 // Create data directory if it doesn't exist
-const __dirname = new URL('.', import.meta.url).pathname;
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = path.join(process.cwd(), 'data');
 
 // Add debugging information
 console.error(`Current working directory: ${process.cwd()}`);
-console.error(`Script directory: ${__dirname}`);
+console.error(`Script directory: ${process.cwd()}`);
 console.error(`Data directory will be: ${DATA_DIR}`);
 
 // Create directory with improved error handling
@@ -263,11 +262,11 @@ setInterval(() => {
   const now = new Date();
   const maxAge = 30 * 60 * 1000; // 30 minutes
   
-  for (const [id, session] of activeSessions.entries()) {
+  Array.from(activeSessions.entries()).forEach(([id, session]) => {
     if (now.getTime() - session.metadata.lastUpdate.getTime() > maxAge) {
       activeSessions.delete(id);
     }
-  }
+  });
 }, 5 * 60 * 1000);
 
 // Create MCP server
@@ -491,6 +490,260 @@ server.tool(
         content: [{
           type: "text",
           text: `Error getting results: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// File Management Tools
+import { FileAnalyzer } from './src/FileAnalyzer.js';
+
+// Save Streaming Results Tool
+server.tool(
+  "save-streaming-results",
+  {
+    sessionId: z.string().describe("Session ID from get-mortgage-rates"),
+    format: z.enum(["csv", "json", "markdown"]).default("csv").describe("Output format"),
+    fileName: z.string().optional().describe("Optional custom filename (without extension)")
+  },
+  async (params) => {
+    try {
+      const session = activeSessions.get(params.sessionId);
+      
+      if (!session) {
+        return {
+          content: [{
+            type: "text",
+            text: `Session ${params.sessionId} not found or expired`
+          }],
+          isError: true
+        };
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const defaultName = `mortgage_rates_${timestamp}`;
+      const baseName = params.fileName || defaultName;
+      const extension = params.format === 'json' ? 'json' : 
+                       params.format === 'markdown' ? 'md' : 'csv';
+      const fileName = `${baseName}.${extension}`;
+      const filePath = path.join(DATA_DIR, fileName);
+
+      // Format the data
+      let content = '';
+      if (params.format === 'json') {
+        content = JSON.stringify({
+          metadata: session.metadata,
+          products: session.data
+        }, null, 2);
+      } else if (params.format === 'markdown') {
+        content = formatResults(session, 'markdown');
+      } else {
+        content = formatResults(session, 'csv');
+      }
+
+      // Save the file
+      await fs.promises.writeFile(filePath, content, 'utf8');
+      await fileServerManager.ensureServerRunning(DATA_DIR);
+      const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
+
+      let response = `✅ **Results Saved Successfully**\n\n`;
+      response += `📊 **Summary:**\n`;
+      response += `• Total Products: ${session.data.length}\n`;
+      response += `• Status: ${session.status}\n`;
+      response += `• Format: ${params.format.toUpperCase()}\n\n`;
+      response += `📁 **File Details:**\n`;
+      response += `• Name: ${fileName}\n`;
+      response += `• Size: ${Math.round(content.length / 1024)} KB\n`;
+      response += `• Path: ${filePath}\n`;
+      response += `• Download: ${downloadUrl}\n\n`;
+      response += `💡 Use 'list-saved-results' tool to see all saved files.`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error saving results: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+// List Saved Results Tool
+server.tool(
+  "list-saved-results",
+  {
+    format: z.enum(["all", "csv", "json", "markdown"]).default("all").describe("Filter by file format"),
+    sortBy: z.enum(["date", "name", "size"]).default("date").describe("Sort results by"),
+    limit: z.number().optional().describe("Maximum number of files to list")
+  },
+  async (params) => {
+    try {
+      const files = fs.readdirSync(DATA_DIR)
+        .filter(file => {
+          if (params.format === 'all') return true;
+          const ext = path.extname(file).toLowerCase();
+          return (params.format === 'csv' && ext === '.csv') ||
+                 (params.format === 'json' && ext === '.json') ||
+                 (params.format === 'markdown' && ext === '.md');
+        })
+        .map(file => {
+          const filePath = path.join(DATA_DIR, file);
+          const stats = fs.statSync(filePath);
+          return {
+            name: file,
+            path: filePath,
+            size: stats.size,
+            created: stats.birthtime,
+            format: path.extname(file).slice(1).toLowerCase()
+          };
+        })
+        .sort((a, b) => {
+          if (params.sortBy === 'date') return b.created.getTime() - a.created.getTime();
+          if (params.sortBy === 'name') return a.name.localeCompare(b.name);
+          return b.size - a.size;
+        });
+
+      const limitedFiles = params.limit ? files.slice(0, params.limit) : files;
+
+      let response = `📁 **Saved Results Files**\n\n`;
+      response += `Found ${files.length} files`;
+      if (params.format !== 'all') response += ` in ${params.format.toUpperCase()} format`;
+      response += `\n\n`;
+
+      for (const file of limitedFiles) {
+        response += `📄 **${file.name}**\n`;
+        response += `• Size: ${Math.round(file.size / 1024)} KB\n`;
+        response += `• Created: ${file.created.toLocaleString()}\n`;
+        response += `• Format: ${file.format.toUpperCase()}\n`;
+        const downloadUrl = await fileServerManager.getDownloadUrl(file.name);
+        response += `• Download: ${downloadUrl}\n\n`;
+      }
+
+      if (params.limit && files.length > params.limit) {
+        response += `_Showing ${params.limit} of ${files.length} files. Adjust 'limit' parameter to see more._\n\n`;
+      }
+
+      response += `💡 **Tips:**\n`;
+      response += `• Use 'save-streaming-results' to save new results\n`;
+      response += `• Files are stored in: ${DATA_DIR}\n`;
+      response += `• File server running at: http://localhost:${defaultPort}\n`;
+
+      return {
+        content: [{
+          type: "text",
+          text: response
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing saved results: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "analyze-file",
+  {
+    path: z.string().describe("Path to the file to analyze")
+  },
+  async (params) => {
+    try {
+      const info = await FileAnalyzer.getFileInfo(params.path);
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(info, null, 2)
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error analyzing file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "read-file",
+  {
+    path: z.string().describe("Path to the file to read")
+  },
+  async (params) => {
+    try {
+      const result = await FileAnalyzer.readFile(params.path);
+      return {
+        content: [{
+          type: "text",
+          text: result.content
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error reading file: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  }
+);
+
+server.tool(
+  "list-directory",
+  {
+    path: z.string().describe("Path to the directory to list"),
+    recursive: z.boolean().optional().default(false).describe("Whether to list files recursively")
+  },
+  async (params) => {
+    try {
+      const files: ReturnType<typeof FileAnalyzer.getFileInfo>[] = [];
+      const listFiles = (dir: string) => {
+        const entries = fs.readdirSync(dir);
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry);
+          const stats = fs.statSync(fullPath);
+          if (stats.isFile()) {
+            files.push(FileAnalyzer.getFileInfo(fullPath));
+          } else if (stats.isDirectory() && params.recursive) {
+            listFiles(fullPath);
+          }
+        }
+      };
+
+      listFiles(params.path);
+      const fileInfos = files;
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(fileInfos, null, 2)
+        }]
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing directory: ${error instanceof Error ? error.message : String(error)}`
         }],
         isError: true
       };

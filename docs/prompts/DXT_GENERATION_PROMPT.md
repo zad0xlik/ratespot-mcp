@@ -11,7 +11,7 @@ This guide outlines the strict process for generating DXT packages for RateSpot 
    - Follow semantic versioning (MAJOR.MINOR.PATCH)
 
 2. **Manifest Validation**
-   - Ensure manifest.json is UTF-8 encoded without BOM
+   - Ensure manifest.json is UTF-8 encoded
    - Validate all required fields are present
    - Check tool definitions are complete and accurate
 
@@ -24,6 +24,7 @@ This guide outlines the strict process for generating DXT packages for RateSpot 
 ### 1. Clean Build Environment
 ```bash
 # Clean up any existing build artifacts
+rm -rf dist
 rm -rf /tmp/dxt_clean_build
 mkdir -p /tmp/dxt_clean_build
 
@@ -32,21 +33,17 @@ cp -r dxt-extension/* /tmp/dxt_clean_build/
 ```
 
 ### 2. Manifest Preparation
-```python
-# Use Python for consistent JSON handling
-import json
-import codecs
+```typescript
+import * as fs from 'fs';
 
-def clean_and_validate_json():
-    # Read with UTF-8-BOM encoding to handle any BOM characters
-    with codecs.open('manifest.json', 'r', encoding='utf-8-sig') as f:
-        content = f.read()
-        # Parse to validate JSON
-        data = json.loads(content)
-    
-    # Write with explicit UTF-8 encoding without BOM
-    with open('manifest.json', 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+function cleanAndValidateJson(filePath: string): void {
+  // Read and parse JSON to validate
+  const content = fs.readFileSync(filePath, 'utf8');
+  const data = JSON.parse(content);
+  
+  // Write back with consistent formatting
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
 ```
 
 ### 3. Pre-Pack Validation
@@ -72,8 +69,8 @@ rm -rf /tmp/dxt_clean_build
 ## Important Notes
 
 ### JSON Handling
-- Always use UTF-8 encoding without BOM
-- Use Python's json module for consistent handling
+- Always use UTF-8 encoding
+- Use Node.js fs module for consistent handling
 - Validate JSON structure before and after modifications
 
 ### Version Management
@@ -87,54 +84,139 @@ ratespot-mcp-[VERSION].dxt/
 ├── manifest.json
 ├── icon.svg
 ├── server/
-│   ├── ratespot_mcp_server.js
+│   ├── ratespot_mcp_server_streaming.js
+│   ├── src/
+│   │   ├── FileAnalyzer.js
+│   │   └── FileServerManager.js
 │   └── package.json
 └── node_modules/
 ```
 
-### Adding New Tools
+### Tool Schema Requirements
 
-1. **Tool Definition**
+Each tool in the manifest.json must include:
+1. **name**: Unique identifier for the tool
+2. **description**: Clear description of what the tool does
+3. **inputSchema**: JSON Schema defining the tool's input parameters
+4. **outputSchema** (optional): JSON Schema defining the tool's output format
+
+Example tool definition:
+```json
+{
+  "name": "get-mortgage-rates",
+  "description": "Get current mortgage rates with streaming support",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "zipCode": {
+        "type": "string",
+        "description": "ZIP code to search"
+      },
+      "loanAmount": {
+        "type": "number",
+        "description": "Loan amount in dollars"
+      }
+    },
+    "required": ["zipCode"]
+  }
+}
+```
+
+### Common Issues
+1. **Invalid Tool Schema**
+   - Missing required fields (name, description, inputSchema)
+   - Invalid JSON Schema syntax
+   - Incorrect property types
+
+2. **Manifest Validation Errors**
+   - BOM characters in manifest.json
+   - Invalid UTF-8 encoding
+   - Malformed JSON structure
+
+3. **Solutions**
+   - Use UTF-8 encoding without BOM
+   - Validate JSON Schema syntax
+   - Test tool definitions with sample inputs
+   - Use JSON Schema validators during development
+
+### Available Tools
+
+1. **Mortgage Rate Tools**
+   - get-mortgage-rates: Get current mortgage rates
+   - get-streaming-results: Get streaming rate updates
+
+2. **File Management Tools**
+   - analyze_file: Get detailed file information
    ```json
    {
-     "name": "tool-name",
-     "description": "Clear, concise description",
+     "name": "analyze_file",
+     "description": "Get detailed file information including MIME type, encoding, and metadata",
      "inputSchema": {
        "type": "object",
        "properties": {
-         // Tool parameters
-       }
+         "path": {
+           "type": "string",
+           "description": "Path to the file to analyze"
+         }
+       },
+       "required": ["path"]
      }
    }
    ```
 
-2. **Implementation Requirements**
-   - Add tool definition to manifest.json
-   - Implement tool in server code
-   - Add tests for new tool
-   - Update documentation
+   - read_file: Read file contents with encoding detection
+   ```json
+   {
+     "name": "read_file",
+     "description": "Read file contents with automatic encoding detection",
+     "inputSchema": {
+       "type": "object",
+       "properties": {
+         "path": {
+           "type": "string",
+           "description": "Path to the file to read"
+         }
+       },
+       "required": ["path"]
+     }
+   }
+   ```
 
-3. **Validation Steps**
-   - Verify tool schema is valid
-   - Test tool functionality
-   - Check error handling
-   - Validate documentation
+   - list_directory: List files with detailed information
+   ```json
+   {
+     "name": "list_directory",
+     "description": "List files with detailed information, optionally recursive",
+     "inputSchema": {
+       "type": "object",
+       "properties": {
+         "path": {
+           "type": "string",
+           "description": "Path to the directory to list"
+         },
+         "recursive": {
+           "type": "boolean",
+           "description": "Whether to list files recursively",
+           "default": false
+         }
+       },
+       "required": ["path"]
+     }
+   }
+   ```
 
-## Common Issues and Solutions
+### Implementation Requirements
+- Add tool definition to manifest.json
+- Implement tool in server code
+- Add tests for new tool
+- Update documentation
 
-### JSON Validation Errors
-- **Issue**: "Unexpected token 'P'" error
-- **Solution**: Skip post-pack validation, rely on pre-pack validation only
-- **Prevention**: Use clean_and_validate_json() function before packing
-
-### Port Conflicts
-- **Solution**: Implement automatic port selection
-- **Code**: Use port conflict detection in server code
+### Port Handling
 ```typescript
-function startFileServer(initialPort: number): void {
+async function findAvailablePort(startPort: number = 3001): Promise<number> {
   const tryPort = (port: number): Promise<number> => {
     return new Promise((resolve, reject) => {
-      const server = http.createServer();
+      const server = createServer();
       server.once('error', (err: any) => {
         if (err.code === 'EADDRINUSE') {
           resolve(tryPort(port + 1));
@@ -150,9 +232,7 @@ function startFileServer(initialPort: number): void {
     });
   };
 
-  tryPort(initialPort).then(availablePort => {
-    // Create and start server on available port
-  });
+  return tryPort(startPort);
 }
 ```
 
@@ -162,7 +242,7 @@ function startFileServer(initialPort: number): void {
    - Verify manifest validation
    - Test all tools
    - Check port conflict handling
-   - Validate file downloads
+   - Validate file operations
 
 2. **Installation Testing**
    - Fresh installation
@@ -193,8 +273,8 @@ When adding new tools or making significant changes:
    - CHANGELOG.md updated
 
 2. **Build Process**
+   - Run `npm run build`
    - Follow generation steps exactly
-   - No post-pack validation
    - Archive build artifacts
 
 3. **Distribution**
@@ -208,13 +288,14 @@ If issues occur during generation:
 
 1. **Clean Build Environment**
    ```bash
+   rm -rf dist
    rm -rf /tmp/dxt_clean_build
    rm -f ratespot-mcp-*.dxt
    ```
 
 2. **Verify JSON**
    ```bash
-   python3 -c "import json; json.load(open('manifest.json'))"
+   node -e "JSON.parse(require('fs').readFileSync('manifest.json'))"
    ```
 
 3. **Check Permissions**

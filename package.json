@@ -9,10 +9,10 @@
     "url": "https://github.com/zad0xlik/ratespot-mcp.git"
   },
   "scripts": {
-    "build": "tsc ratespot_mcp_server.ts",
-    "start": "node ratespot_mcp_server.js",
-    "dev": "tsc ratespot_mcp_server.ts && node ratespot_mcp_server.js",
-    "clean": "rm -f ratespot_mcp_server.js",
+    "build": "tsc",
+    "start": "node dist/ratespot_mcp_server_streaming.js",
+    "dev": "tsc && node dist/ratespot_mcp_server_streaming.js",
+    "clean": "rm -rf dist",
     "prebuild": "npm run clean",
     "check": "tsc --noEmit --skipLibCheck ratespot_mcp_server.ts",
     "test": "node test/test_server.js",
@@ -39,11 +39,13 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "zod": "^3.22.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "file-type-js": "^0.1.0",
+    "iconv-lite": "^0.6.3",
+    "zod": "^3.22.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   }
 }
