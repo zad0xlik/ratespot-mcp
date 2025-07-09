@@ -15,4 +15,4 @@ RUN npx tsc --project tsconfig.json
 EXPOSE 3001
 
 # start MCP server
-CMD ["node", "dist/ratespot_mcp_server.js"]
+CMD ["node", "dist/ratespot_mcp_server_streaming.js"]

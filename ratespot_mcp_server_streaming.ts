@@ -7,46 +7,51 @@ import * as path from "path";
 import * as crypto from "crypto";
 import { FileServerManager } from './src/FileServerManager.js';
 
-// Initialize file server manager
-const fileServerManager = FileServerManager.getInstance();
+// Constants
+const RATESPOT_BASE_URL = "https://api.ratespot.io";
+const DATA_DIR = path.join(process.cwd(), 'data');
+const DEFAULT_PORT = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
+
+// Initialize managers lazily
+let fileServerManager: ReturnType<typeof FileServerManager.getInstance> | null = null;
+let apiKey: string | null = null;
 
 // Load environment variables
 dotenv.config();
 
-// Environment variable for API key
-const RATESPOT_API_KEY = process.env.RATESPOT_API_KEY;
-const RATESPOT_BASE_URL = "https://api.ratespot.io";
-
-if (!RATESPOT_API_KEY) {
-  console.error("RATESPOT_API_KEY environment variable is required");
-  process.exit(1);
-}
-
-// Create data directory if it doesn't exist
-const DATA_DIR = path.join(process.cwd(), 'data');
-
-// Add debugging information
-console.error(`Current working directory: ${process.cwd()}`);
-console.error(`Script directory: ${process.cwd()}`);
-console.error(`Data directory will be: ${DATA_DIR}`);
-
-// Create directory with improved error handling
-try {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-    console.error(`Created data directory: ${DATA_DIR}`);
-  } else {
-    console.error(`Data directory already exists: ${DATA_DIR}`);
+// Helper function to validate and get API key
+function getApiKey(): string {
+  if (!apiKey) {
+    const envApiKey = process.env.RATESPOT_API_KEY;
+    if (!envApiKey) {
+      throw new Error("RATESPOT_API_KEY environment variable is required");
+    }
+    apiKey = envApiKey;
   }
-} catch (error) {
-  console.error(`Failed to create data directory: ${error instanceof Error ? error.message : String(error)}`);
-  console.error(`Attempted path: ${DATA_DIR}`);
-  console.error(`This error suggests a permissions issue or invalid path.`);
-  process.exit(1);
+  return apiKey;
 }
 
-// Initialize file server manager with default port from environment
-const defaultPort = process.env.FILE_SERVER_PORT ? parseInt(process.env.FILE_SERVER_PORT) : 3001;
+// Helper function to get file server manager
+async function getFileServerManager() {
+  if (!fileServerManager) {
+    fileServerManager = FileServerManager.getInstance();
+    await ensureDataDirectory();
+  }
+  return fileServerManager;
+}
+
+// Helper function to ensure data directory exists
+async function ensureDataDirectory() {
+
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+      console.error(`Created data directory: ${DATA_DIR}`);
+    }
+  } catch (error) {
+    throw new Error(`Failed to create data directory: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
 
 // Streaming session interfaces
 interface StreamSession {
@@ -111,8 +116,8 @@ async function streamMortgageRates(params: any, sessionId: string, isPolling: bo
   }
 
   try {
-    const queryString = new URLSearchParams({
-      apikey: RATESPOT_API_KEY!,
+      const queryString = new URLSearchParams({
+      apikey: getApiKey(),
       ...params,
       offset: isPolling ? session.data.length.toString() : '0'
     }).toString();
@@ -464,8 +469,9 @@ server.tool(
           const filePath = path.join(DATA_DIR, fileName);
           
           await fs.promises.writeFile(filePath, csvData, 'utf8');
-          await fileServerManager.ensureServerRunning(DATA_DIR);
-          const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
+          const manager = await getFileServerManager();
+          await manager.ensureServerRunning(DATA_DIR);
+          const downloadUrl = await manager.getDownloadUrl(fileName);
           
           response += `✅ CSV file saved\n`;
           response += `📁 File: ${fileName}\n`;
@@ -545,8 +551,9 @@ server.tool(
 
       // Save the file
       await fs.promises.writeFile(filePath, content, 'utf8');
-      await fileServerManager.ensureServerRunning(DATA_DIR);
-      const downloadUrl = await fileServerManager.getDownloadUrl(fileName);
+      const manager = await getFileServerManager();
+      await manager.ensureServerRunning(DATA_DIR);
+      const downloadUrl = await manager.getDownloadUrl(fileName);
 
       let response = `✅ **Results Saved Successfully**\n\n`;
       response += `📊 **Summary:**\n`;
@@ -625,7 +632,8 @@ server.tool(
         response += `• Size: ${Math.round(file.size / 1024)} KB\n`;
         response += `• Created: ${file.created.toLocaleString()}\n`;
         response += `• Format: ${file.format.toUpperCase()}\n`;
-        const downloadUrl = await fileServerManager.getDownloadUrl(file.name);
+        const manager = await getFileServerManager();
+        const downloadUrl = await manager.getDownloadUrl(file.name);
         response += `• Download: ${downloadUrl}\n\n`;
       }
 
@@ -636,7 +644,7 @@ server.tool(
       response += `💡 **Tips:**\n`;
       response += `• Use 'save-streaming-results' to save new results\n`;
       response += `• Files are stored in: ${DATA_DIR}\n`;
-      response += `• File server running at: http://localhost:${defaultPort}\n`;
+      response += `• File server running at: http://localhost:${DEFAULT_PORT}\n`;
 
       return {
         content: [{
@@ -758,7 +766,9 @@ async function main() {
   // Handle cleanup on exit
   const cleanup = async () => {
     console.error('Shutting down servers...');
-    await fileServerManager.shutdown();
+    if (fileServerManager) {
+      await fileServerManager.shutdown();
+    }
     process.exit(0);
   };
 
@@ -772,6 +782,8 @@ async function main() {
 
 main().catch(async (error) => {
   console.error("Failed to start server:", error);
-  await fileServerManager.shutdown();
+  if (fileServerManager) {
+    await fileServerManager.shutdown();
+  }
   process.exit(1);
 });
